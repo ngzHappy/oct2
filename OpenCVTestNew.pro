@@ -42,3 +42,7 @@ SUBDIRS += first_image_show
 simple_pca.file = $$PWD/opencv_data/simple_pca/simple_pca.pro
 simple_pca.depends += core_utility
 SUBDIRS += simple_pca
+
+opencv_pca.file = $$PWD/opencv_data/opencv_pca/opencv_pca.pro
+opencv_pca.depends += core_utility
+SUBDIRS += opencv_pca

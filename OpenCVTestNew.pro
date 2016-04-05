@@ -62,3 +62,11 @@ SUBDIRS += opencv_size
 opencv_scalar.file = $$PWD/opencv_data/opencv_scalar/opencv_scalar.pro
 opencv_scalar.depends += core_utility
 SUBDIRS += opencv_scalar
+
+opencv_blur.file = $$PWD/opencv_imgproc/opencv_blur/opencv_blur.pro
+opencv_blur.depends += core_utility
+SUBDIRS += opencv_blur
+
+opencv_pyrDown.file = $$PWD/opencv_imgproc/opencv_pyrDown/opencv_pyrDown.pro
+opencv_pyrDown.depends += core_utility
+SUBDIRS += opencv_pyrDown

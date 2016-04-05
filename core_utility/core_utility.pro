@@ -67,6 +67,10 @@ DISTFILES += $$PWD/../Images/000006.jpg
 DISTFILES += $$PWD/../Images/000007.jpg
 DISTFILES += $$PWD/../Images/000004.png
 DISTFILES += $$PWD/../Images/000005.png
+DISTFILES += $$PWD/../Images/000006.jpg
+DISTFILES += $$PWD/../Images/000007.jpg
+DISTFILES += $$PWD/../Images/000008.jpg
+DISTFILES += $$PWD/../Images/000009.pbm
 
 RESOURCES += imageResource.qrc
 

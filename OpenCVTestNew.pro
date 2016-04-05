@@ -74,3 +74,7 @@ SUBDIRS += opencv_pyrDown
 opencv_canny.file = $$PWD/opencv_imgproc/opencv_canny/opencv_canny.pro
 opencv_canny.depends += core_utility
 SUBDIRS += opencv_canny
+
+opencv_draw.file = $$PWD/opencv_imgproc/opencv_draw/opencv_draw.pro
+opencv_draw.depends += core_utility
+SUBDIRS += opencv_draw

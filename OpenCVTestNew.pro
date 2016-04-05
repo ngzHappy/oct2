@@ -46,3 +46,19 @@ SUBDIRS += simple_pca
 opencv_pca.file = $$PWD/opencv_data/opencv_pca/opencv_pca.pro
 opencv_pca.depends += core_utility
 SUBDIRS += opencv_pca
+
+opencv_rect.file = $$PWD/opencv_data/opencv_rect/opencv_rect.pro
+opencv_rect.depends += core_utility
+SUBDIRS += opencv_rect
+
+opencv_point.file = $$PWD/opencv_data/opencv_point/opencv_point.pro
+opencv_point.depends += core_utility
+SUBDIRS += opencv_point
+
+opencv_size.file = $$PWD/opencv_data/opencv_size/opencv_size.pro
+opencv_size.depends += core_utility
+SUBDIRS += opencv_size
+
+opencv_scalar.file = $$PWD/opencv_data/opencv_scalar/opencv_scalar.pro
+opencv_scalar.depends += core_utility
+SUBDIRS += opencv_scalar

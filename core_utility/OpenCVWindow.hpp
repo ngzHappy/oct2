@@ -22,6 +22,8 @@ public:
     OpenCVHistItem * insertHist(QList<qreal> data_) { return scene_->insertHist(std::move(data_)); }
     virtual OpenCVImageItem * insertImage(QImage i) { return scene_->insertImage(std::move(i)); }
     OpenCVScatterItem * insertScatter(QList<QPointF> data_) { return scene_->insertScatter(std::move(data_)); }
+    template<typename _U_>
+    OpenCVScatterItem * insertScatter(std::initializer_list<_U_> &&);
     void setImageAlg(const OpenCVImageItem::AlgFunctionType &);
 protected:
     void resizeEvent(QResizeEvent *event) override;
@@ -30,6 +32,11 @@ protected:
 template<typename B,typename E>
 OpenCVHistItem * OpenCVWindow::insertHist(B b,E e) {
     return scene_->insertHist<B,E>(b,e);
+}
+
+template<typename _U_>
+OpenCVScatterItem * OpenCVWindow::insertScatter(std::initializer_list<_U_> && o) {
+    return insertScatter(o.begin(),o.end());
 }
 
 template<typename B,typename E>

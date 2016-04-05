@@ -35,6 +35,16 @@
 using namespace std::chrono_literals;/*s ns ms*/
 
 /***********************************/
+//标准库字符串相关
+/***********************************/
+#include <regex>
+#include <string>
+#include <sstream>
+#include <fstream>
+#include <iostream>
+using namespace std::string_literals;/*s*/
+
+/***********************************/
 //protect public 切换宏
 /***********************************/
 #if !defined(MACRO_PROTECTED)

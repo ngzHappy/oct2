@@ -89,8 +89,9 @@ extern void run(OpenCVWindow * window) {
             <<cv::format(diff,cv::Formatter::FMT_MATLAB)<<std::endl;
         QFile outPutFile ( qApp->applicationDirPath() + "/simple_pca_data.m");
         outPutFile.open(QFile::Text|QFile::WriteOnly);
-        const std::string data__=data_diff.str();
-        outPutFile.write(data__.c_str(),data__.size());
+        const auto data__= readAll(data_diff) ;
+        outPutFile.write(data__.first,data__.second);
+        outPutFile.write("\n");
         /*MATLAB 使用 princomp进行主成分分析*/
     }
 

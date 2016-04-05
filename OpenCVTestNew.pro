@@ -70,3 +70,7 @@ SUBDIRS += opencv_blur
 opencv_pyrDown.file = $$PWD/opencv_imgproc/opencv_pyrDown/opencv_pyrDown.pro
 opencv_pyrDown.depends += core_utility
 SUBDIRS += opencv_pyrDown
+
+opencv_canny.file = $$PWD/opencv_imgproc/opencv_canny/opencv_canny.pro
+opencv_canny.depends += core_utility
+SUBDIRS += opencv_canny

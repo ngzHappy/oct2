@@ -5,7 +5,7 @@
 extern void run(OpenCVWindow * window) {
 
     intptr_t count_=0;
-    /*从配置文件中获得输入图片*/
+    /*从配置文件中获得输入图片文件名*/
     const auto images_names=
         CoreUtility::getConfigurationFile().getInputImagesNames("images:000001");
     /*进行变换*/
@@ -15,8 +15,8 @@ extern void run(OpenCVWindow * window) {
         window->insertImage(OpenCVUtility::tryRead(mat))
             ->setWindowTitle(u8"第%1幅原始图片"_qs.arg(count_));
         cv::Mat ans;
-        cv::blur(mat,ans,{3,3});
-        cv::Canny(ans,ans,100,200);
+        cv::blur(mat,ans,{3,3});/*平滑滤波*/
+        cv::Canny(ans,ans,100,200);/*canny 边缘检测*/
         window->insertImage(OpenCVUtility::tryRead(ans))
             ->setWindowTitle(u8"第%1幅图片"_qs.arg(count_));
     }

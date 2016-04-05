@@ -32,6 +32,7 @@ LIBS += -L$$OUTPWD -lcore_utility
 }
 
 DISTFILES += $$PWD/first_window.lua
+DISTFILES += $$PWD/first_window.PNG
 
 !win32 {
     QMAKE_LFLAGS += -Wl,-rpath .

@@ -33,6 +33,7 @@ LIBS += -L$$OUTPWD -lcore_utility
 }
 
 DISTFILES += $$PWD/simple_pca.lua
+DISTFILES += $$PWD/simple_pca.PNG
 
 !win32 {
     QMAKE_LFLAGS += -Wl,-rpath .

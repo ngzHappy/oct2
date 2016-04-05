@@ -106,8 +106,9 @@ void OpenCVImageItem::_tryResize() {
 }
 
 void OpenCVImageItem::setImage(QImage i) {
-    image_=std::move(i);
-    image_input_=image_;
+    image_input_=std::move(i);
+    image_input_.detach();/*获得独立备份*/
+    image_=image_input_ ;
 
     if (alg_) {
         auto & fun_=*alg_;

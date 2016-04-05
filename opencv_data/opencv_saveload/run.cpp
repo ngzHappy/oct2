@@ -4,37 +4,44 @@
 
 extern void run(OpenCVWindow * window) {
 
-    cv::String test;
-    cv::Mat testm;
-    test<< cv::format( testm,cv::Formatter::FMT_DEFAULT);
-
-    /*测试图片显示*/
+    /*格式化输出*/
     {
-        intptr_t count_=0;
-        const auto images_names=
-            CoreUtility::getConfigurationFile().getInputImagesNames("images:000001");
+        cv::Mat mat(1,2,CV_32FC1);
+        mat.at<float>(0,1)=1;mat.at<float>(0,0)=5;
+        std::cout<<cv::format(mat,cv::Formatter::FMT_PYTHON)<<std::endl;
+    }
 
-        for (const auto & image_name:images_names) {
-            window->insertImage(QImage(image_name))
-                ->setWindowTitle(u8"第%1幅图片"_qs.arg(++count_));
+    /*数据XML保存读入*/
+    {
+        const QByteArray fileName=QDir::cleanPath(qApp->applicationDirPath()).toLocal8Bit()+"/core_mat_saveload_test.xml";
+        QImage image0("images:000000");
+        window->insertImage(image0)->setWindowTitle(u8R"(原始图片)"_qs);
+
+        auto imageMat=OpenCVUtility::tryRead(image0);
+        {
+            /*提高亮度*/
+            imageMat*=1.3;
+            /*保存图片*/
+            {
+                cv::FileStorage file(
+                    cv::String(fileName.constData(),fileName.size()),
+                    cv::FileStorage::WRITE
+                    );
+                file<<"images_000000"<<imageMat;
+            }
+            /*重新载入图片*/
+            {
+                cv::FileStorage file(
+                    cv::String(fileName.constData(),fileName.size()),
+                    cv::FileStorage::READ
+                    );
+                file["images_000000"]>>imageMat;
+            }
         }
+
+        window->insertImage(OpenCVUtility::tryRead(imageMat))\
+            ->setWindowTitle(u8R"(读入图片)"_qs);
     }
-    /*测试柱状图*/
-    window->insertHist({ 1,2,3,4,5 })->setWindowTitle(u8"柱状图"_qs);
-    /*测试散点图*/
-    auto scatter=window->insertScatter({ {0,0},{1,1},{2,2} });
-    scatter->setCentrePointPaint(
-        std::shared_ptr< std::function<void(QPainter *)> >(
-        new std::function<void(QPainter *)>{
-        [](QPainter * painter) {
-        painter->setBrush(Qt::transparent);
-        painter->setPen(QPen(QColor(0,0,0),1));
-        painter->drawRect(QRect{-10,-10,20,20});
-    }
-    }
-        )
-        );
-    scatter->setWindowTitle(u8"散点图"_qs);
 
 }
 

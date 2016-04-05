@@ -33,4 +33,5 @@ LIBS += -L$$OUTPWD -lcore_utility
 }
 
 DISTFILES += $$PWD/opencv_pca.lua
+DISTFILES += $$PWD/opencv_pca.PNG
 

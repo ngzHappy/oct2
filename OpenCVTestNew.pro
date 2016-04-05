@@ -78,3 +78,7 @@ SUBDIRS += opencv_canny
 opencv_draw.file = $$PWD/opencv_imgproc/opencv_draw/opencv_draw.pro
 opencv_draw.depends += core_utility
 SUBDIRS += opencv_draw
+
+opencv_saveload.file = $$PWD/opencv_data/opencv_saveload/opencv_saveload.pro
+opencv_saveload.depends += core_utility
+SUBDIRS += opencv_saveload

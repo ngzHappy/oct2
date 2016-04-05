@@ -8,15 +8,14 @@ extern void run(OpenCVWindow * ) {
     cv::Mat matrix(100,1,CV_32FC1);
     {
         intptr_t count_=0;
-        matrix.forEach<std::float_t>([&count_](
-            std::float_t &value,
-            const int * const
-            ) {
-            value=++count_;
-        });
+        for( auto pos=matrix.begin<float>();
+             pos!=matrix.end<float>();
+             ++pos){
+            *pos=++count_;
+        }
     }
 
     std::cout<<matrix<<std::endl;
-    
+
 }
 

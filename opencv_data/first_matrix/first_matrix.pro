@@ -33,6 +33,7 @@ LIBS += -L$$OUTPWD -lcore_utility
 }
 
 DISTFILES += $$PWD/first_matrix.lua
+DISTFILES += $$PWD/first_matrix.PNG
 
 !win32 {
     QMAKE_LFLAGS += -Wl,-rpath .

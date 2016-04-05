@@ -312,6 +312,7 @@ QImage OpenCVUtility::read(const cv::Mat & v){
                 return QImage(
                     tmp.data,
                     tmp.cols,tmp.rows,
+                    tmp.step,
                     QImage::Format_Grayscale8,
                     OpenCVUtility::getHandleQImage(),
                     new cv::Mat( tmp )
@@ -323,6 +324,7 @@ QImage OpenCVUtility::read(const cv::Mat & v){
                 return QImage(
                     tmp.data,
                     tmp.cols,tmp.rows,
+                    tmp.step,
                     QImage::Format_RGB888,
                     OpenCVUtility::getHandleQImage(),
                     new cv::Mat( tmp )
@@ -334,6 +336,7 @@ QImage OpenCVUtility::read(const cv::Mat & v){
                 return QImage(
                     tmp.data,
                     tmp.cols,tmp.rows,
+                    tmp.step,
                     QImage::Format_RGBA8888,
                     OpenCVUtility::getHandleQImage(),
                     new cv::Mat( tmp )
@@ -350,6 +353,7 @@ QImage OpenCVUtility::read(const cv::Mat & v){
             return QImage(
                         tmp.data,
                         tmp.cols,tmp.rows,
+                        tmp.step,
                         QImage::Format_Grayscale8,
                         OpenCVUtility::getHandleQImage(),
                         new cv::Mat( tmp )
@@ -361,6 +365,7 @@ QImage OpenCVUtility::read(const cv::Mat & v){
         return QImage(
                     tmp.data,
                     tmp.cols,tmp.rows,
+                    tmp.step,
                     QImage::Format_RGB888,
                     OpenCVUtility::getHandleQImage(),
                     new cv::Mat( tmp )
@@ -371,6 +376,7 @@ QImage OpenCVUtility::read(const cv::Mat & v){
         return QImage(
                     tmp.data,
                     tmp.cols,tmp.rows,
+                    tmp.step,
                     QImage::Format_RGBA8888,
                     OpenCVUtility::getHandleQImage(),
                     new cv::Mat( tmp )

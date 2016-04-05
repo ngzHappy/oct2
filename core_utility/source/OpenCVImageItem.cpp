@@ -3,6 +3,7 @@
 #include <QtWidgets/qfiledialog.h>
 #include <QtWidgets/qgraphicsview.h>
 #include <QtCore/qdebug.h>
+#include <private/qimage_p.h>
 #include <algorithm>
 
 namespace {
@@ -107,7 +108,15 @@ void OpenCVImageItem::_tryResize() {
 
 void OpenCVImageItem::setImage(QImage i) {
     image_input_=std::move(i);
-    image_input_.detach();/*获得独立备份*/
+    {
+        QImageData * ptr_=image_input_.data_ptr();
+        if (ptr_&&(ptr_->cleanupFunction)) {
+            image_input_=image_input_.copy();/*获得独立备份*/
+        }
+        else {
+            image_input_.detach();/*获得独立备份*/
+        }
+    }
     image_=image_input_ ;
 
     if (alg_) {

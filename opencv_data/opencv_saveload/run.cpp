@@ -4,6 +4,10 @@
 
 extern void run(OpenCVWindow * window) {
 
+    cv::String test;
+    cv::Mat testm;
+    test<< cv::format( testm,cv::Formatter::FMT_DEFAULT);
+
     /*测试图片显示*/
     {
         intptr_t count_=0;

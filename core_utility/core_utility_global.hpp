@@ -44,6 +44,31 @@ using namespace std::chrono_literals;/*s ns ms*/
 #include <iostream>
 using namespace std::string_literals;/*s*/
 
+template<typename _t_STD_STRINGSTREAM_>
+inline std::pair<const char *,std::streamoff>
+readAll(const _t_STD_STRINGSTREAM_ & data__) {
+    _t_STD_STRINGSTREAM_ & data_=const_cast<_t_STD_STRINGSTREAM_ &>(data__);
+    std::pair<const char *,std::streamoff> ans_{ nullptr,0 };
+    typedef decltype(data_.rdbuf()) ReaderBuffer___;
+    typedef std::remove_reference_t<ReaderBuffer___> ReaderBuffer__;
+    typedef std::remove_pointer_t<ReaderBuffer__> ReaderBuffer_;
+    typedef std::remove_cv_t<ReaderBuffer_> _ReaderBuffer;
+    class RBUF : public _ReaderBuffer {
+    public:
+        using _ReaderBuffer::egptr;
+        using _ReaderBuffer::gptr;
+        using _ReaderBuffer::eback;
+    };
+    const auto read_pos_=data_.tellg();
+    RBUF * rbuf_=reinterpret_cast<RBUF *>(data_.rdbuf());
+    if (rbuf_==nullptr) { return ans_; }
+    ans_.first=rbuf_->eback();
+    data_.seekg(0,std::ios::end);
+    ans_.second = data_.tellg();
+    data_.seekg(read_pos_);
+    return ans_;
+}
+
 /***********************************/
 //protect public 切换宏
 /***********************************/

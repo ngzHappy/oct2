@@ -292,6 +292,26 @@ OpenCVUtility::HandleQImage OpenCVUtility::getHandleQImage(){
     return &handle_qimage_;
 }
 
+cv::Mat OpenCVUtility::read(QImage && v) {
+    const QImage value_(std::move(v));
+    return read(value_);
+}
+
+QImage OpenCVUtility::read(cv::Mat && v) {
+    const cv::Mat value_(std::move(v));
+    return read(value_);
+}
+
+QImage OpenCVUtility::getInnerQImage(cv::Mat && v) {
+    const cv::Mat value_(std::move(v));
+    return getInnerQImage(value_);
+}
+
+cv::Mat OpenCVUtility::getInnerOpenCVMat(QImage && v) {
+    const QImage value_(std::move(v));
+    return getInnerOpenCVMat(value_);
+}
+
 cv::Mat OpenCVUtility::getInnerOpenCVMat(const QImage & image_){
     QImage::DataPtr data_ = const_cast<QImage &>(image_).data_ptr();
     if(data_){
@@ -395,6 +415,11 @@ QImage OpenCVUtility::getInnerQImage(const cv::Mat & v) {
     return QImage();
 }
 
+cv::Mat OpenCVUtility::tryRead(QImage && v) {
+    const QImage image_(std::move(v));
+    return tryRead( image_ );
+}
+
 cv::Mat OpenCVUtility::tryRead(const QImage & v) {
     if (v.width()<=0) { return cv::Mat(); }
     if (v.height()<=0) { return cv::Mat(); }
@@ -403,6 +428,11 @@ cv::Mat OpenCVUtility::tryRead(const QImage & v) {
         return read( v );
     }
     return std::move(ans_);
+}
+
+QImage OpenCVUtility::tryRead(cv::Mat && v) {
+    const cv::Mat value_(std::move(v));
+    return tryRead( value_ );
 }
 
 QImage OpenCVUtility::tryRead(const cv::Mat & v) {

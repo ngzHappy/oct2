@@ -98,3 +98,7 @@ SUBDIRS += opencv_roi
 opencv_fft.file = $$PWD/opencv_imgproc/opencv_fft/opencv_fft.pro
 opencv_fft.depends += core_utility
 SUBDIRS += opencv_fft
+
+opencv_stitcher.file = $$PWD/opencv_tool/opencv_stitcher/opencv_stitcher.pro
+opencv_stitcher.depends += core_utility
+SUBDIRS += opencv_stitcher

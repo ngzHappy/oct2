@@ -29,6 +29,12 @@ public:
     static QImage tryRead(const cv::Mat &);
     static QImage getInnerQImage(const cv::Mat &);
     static cv::Mat getInnerOpenCVMat(const QImage &);
+    static cv::Mat read(QImage &&);
+    static QImage read(cv::Mat &&);
+    static cv::Mat tryRead(QImage &&);
+    static QImage tryRead(cv::Mat &&);
+    static QImage getInnerQImage(cv::Mat &&);
+    static cv::Mat getInnerOpenCVMat(QImage &&);
     static cv::MatAllocator * getReaderAllocator();
 };
 

@@ -38,5 +38,6 @@ public:
 #include "OpenCvStyle.hpp"
 #include "OpenCVHistItem.hpp"
 #include "OpenCVScatterItem.hpp"
+#include "OpenCVLineSeriesItem.hpp"
 
 #endif // OPENCVUTILITY_HPP

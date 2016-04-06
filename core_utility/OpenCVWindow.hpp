@@ -15,15 +15,15 @@ public:
     explicit OpenCVWindow(QWidget * parent=nullptr);
     virtual ~OpenCVWindow();
 
-    template<typename B,typename E>
-    OpenCVHistItem * insertHist(B,E);
-    template<typename B,typename E>
-    OpenCVScatterItem * insertScatter(B,E);
-    OpenCVHistItem * insertHist(QList<qreal> data_) { return scene_->insertHist(std::move(data_)); }
+    template<typename B,typename E>OpenCVHistItem * insertHist(B,E);
+    template<typename B,typename E>OpenCVScatterItem * insertScatter(B,E);
+    template<typename B,typename E>OpenCVLineSeriesItem * insertLineSeries(B,E);
+    virtual OpenCVHistItem * insertHist(QList<qreal> data_) { return scene_->insertHist(std::move(data_)); }
     virtual OpenCVImageItem * insertImage(QImage i) { return scene_->insertImage(std::move(i)); }
-    OpenCVScatterItem * insertScatter(QList<QPointF> data_) { return scene_->insertScatter(std::move(data_)); }
-    template<typename _U_>
-    OpenCVScatterItem * insertScatter(std::initializer_list<_U_> &&);
+    virtual OpenCVScatterItem * insertScatter(QList<QPointF> data_) { return scene_->insertScatter(std::move(data_)); }
+    virtual OpenCVLineSeriesItem * insertLineSeries(QList<QPointF> data_) { return scene_->insertLineSeries(std::move(data_)); }
+    template<typename _U_>OpenCVScatterItem * insertScatter(std::initializer_list<_U_> &&);
+    template<typename _U_>OpenCVLineSeriesItem * insertLineSeries(std::initializer_list<_U_> &&);
     void setImageAlg(const OpenCVImageItem::AlgFunctionType &);
 protected:
     void resizeEvent(QResizeEvent *event) override;
@@ -39,6 +39,11 @@ OpenCVScatterItem * OpenCVWindow::insertScatter(std::initializer_list<_U_> && o)
     return insertScatter(o.begin(),o.end());
 }
 
+template<typename _U_>OpenCVLineSeriesItem * 
+OpenCVWindow::insertLineSeries(std::initializer_list<_U_> && o) {
+    return insertLineSeries(o.begin(),o.end());
+}
+
 template<typename B,typename E>
 OpenCVScatterItem * OpenCVWindow::insertScatter(B b,E e) {
     QList<QPointF> data_;
@@ -46,6 +51,15 @@ OpenCVScatterItem * OpenCVWindow::insertScatter(B b,E e) {
         data_.push_back({ getX(b) ,getY(b)});
     }
     return insertScatter(std::move(data_));
+}
+
+template<typename B,typename E>
+OpenCVLineSeriesItem * OpenCVWindow::insertLineSeries(B b,E e) {
+    QList<QPointF> data_;
+    for (;b!=e;++b) {
+        data_.push_back({ getX(b) ,getY(b)});
+    }
+    return insertLineSeries(std::move(data_));
 }
 
 #endif // OPENCVWINDOW_HPP

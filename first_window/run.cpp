@@ -30,5 +30,7 @@ extern void run(OpenCVWindow * window) {
         )
         );
     scatter->setWindowTitle(u8"散点图"_qs);
-
+    /*测试折线图*/
+    auto line_serie=window->insertLineSeries({ {0,0},{1,1},{2,2},{2,0},{0,0} });
+    line_serie->setWindowTitle(u8"折线图"_qs);
 }

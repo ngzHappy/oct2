@@ -7,6 +7,7 @@
 #include "OpenCVImageItem.hpp"
 #include "OpenCVHistItem.hpp"
 #include "OpenCVScatterItem.hpp"
+#include "OpenCVLineSeriesItem.hpp"
 #include "core_utility_global.hpp"
 
 class CORE_UTILITYSHARED_EXPORT OpenCVScene : public QGraphicsScene {
@@ -20,6 +21,7 @@ public:
     OpenCVImageItem * insertImage(QImage);
     OpenCVHistItem * insertHist(QList<qreal>);
     OpenCVScatterItem * insertScatter(QList<QPointF>);
+    OpenCVLineSeriesItem * insertLineSeries(QList<QPointF>);
     template<typename B,typename E>
     OpenCVHistItem * insertHist(B,E);
 protected:

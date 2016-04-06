@@ -65,6 +65,13 @@ OpenCVImageItem * OpenCVScene::insertImage(QImage image_) {
     return i;
 }
 
+OpenCVLineSeriesItem * OpenCVScene::insertLineSeries(QList<QPointF> data_) {
+    OpenCVLineSeriesItem * i=new OpenCVLineSeriesItem;
+    i->setData(std::move(data_));
+    addItem(i);
+    return i;
+}
+
 OpenCVScatterItem * OpenCVScene::insertScatter(QList<QPointF> data_) {
     OpenCVScatterItem * i=new OpenCVScatterItem;
     i->setData(std::move(data_));

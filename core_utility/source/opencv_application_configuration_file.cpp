@@ -144,7 +144,7 @@ QByteArray OpenCVApplicationConfigurationFile::getLocalTextCodecName(const QByte
 }
 
 OpenCVApplicationConfigurationFile::OpenCVApplicationConfigurationFile(
-    QByteArray _a_arg ,
+    const QByteArray _a_arg ,
     const char * _a_build_path,
     const char * _a_lua_file_name) {
     if (L_) { L__=L_.get(); }

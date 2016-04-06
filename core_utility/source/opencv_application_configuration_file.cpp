@@ -50,14 +50,15 @@ void init(
     if (_a_build_path) { _v_build_path=_a_build_path; }
     if ((_a_argc>=1)&&(_a_argv)) {
         std::string application_path(_a_argv[0]);
-        if (application_path.empty()) { return; }
+        if (application_path.empty()) { std::cout<<"app empty"<<std::endl; return; }
         {
             const auto last_=application_path.find_last_of("/\\");
-            if (last_==std::string::npos) { return; }
+            if (last_==std::string::npos) { std::cout<<"application path :"<<application_path
+                                                    <<" can not find / \\ "<<std::endl;return; }
             application_path=std::string(
                 application_path.begin(),
                 application_path.begin()+last_);
-            if (application_path.empty()) { return; }
+            if (application_path.empty()) { std::cout<<"app empty ??"<<std::endl;return; }
         }
         std::string file_name_=_a_lua_file_name;
         {
@@ -143,13 +144,13 @@ QByteArray OpenCVApplicationConfigurationFile::getLocalTextCodecName(const QByte
 }
 
 OpenCVApplicationConfigurationFile::OpenCVApplicationConfigurationFile(
-    int _a_argc,
-    char ** _a_argv,
+    QByteArray _a_arg ,
     const char * _a_build_path,
     const char * _a_lua_file_name) {
     if (L_) { L__=L_.get(); }
     else {
-        __private::init(this,_a_argc,_a_argv,_a_build_path,_a_lua_file_name);
+        char * _a_argv[]{ const_cast<char *>( _a_arg.constData() )};
+        __private::init(this,1,_a_argv,_a_build_path,_a_lua_file_name);
     }
 }
 

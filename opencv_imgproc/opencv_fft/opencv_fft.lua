@@ -1,7 +1,7 @@
 ﻿--[[lua--]]
 application={
         input_images={
-                "images:000000",
+                "images:000010",
         }
 }
 

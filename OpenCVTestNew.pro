@@ -94,3 +94,7 @@ SUBDIRS += opencv_pyrUp
 opencv_roi.file = $$PWD/opencv_imgproc/opencv_roi/opencv_roi.pro
 opencv_roi.depends += core_utility
 SUBDIRS += opencv_roi
+
+opencv_fft.file = $$PWD/opencv_imgproc/opencv_fft/opencv_fft.pro
+opencv_fft.depends += core_utility
+SUBDIRS += opencv_fft

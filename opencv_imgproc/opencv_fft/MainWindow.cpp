@@ -1,4 +1,4 @@
-﻿const char *_MainWindow_cpp = u8R"=_____=(/*MainWindow.cpp*/
+﻿/*MainWindow.cpp*/
 #include "MainWindow.hpp"
 #include "OpenCVWindowDetail.hpp"
 #include <QtWidgets/qboxlayout.h>
@@ -54,4 +54,3 @@ MainWindow::~MainWindow() {
 
 }
 
-)=_____=";

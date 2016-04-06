@@ -42,6 +42,7 @@ SOURCES += $$PWD/source/OpenCVUtility.cpp
 SOURCES += $$PWD/source/OpenCVMatProxyAllocator.cpp
 
 HEADERS += $$PWD/private/_core_utility_prebuild.hpp
+HEADERS += $$PWD/private/_msvc_core_utility_prebuild.hpp
 HEADERS += $$PWD/core_utility.hpp
 HEADERS += $$PWD/OpenCVMatProxyAllocator.hpp
 HEADERS += $$PWD/getxy.hpp
@@ -85,5 +86,8 @@ RESOURCES += imageResource.qrc
 }
 
 CONFIG += precompile_header
-PRECOMPILED_HEADER  = $$PWD/private/_core_utility_prebuild.hpp
-
+win32-msvc*{
+PRECOMPILED_HEADER  += $$PWD/private/_msvc_core_utility_prebuild.hpp
+}else{
+PRECOMPILED_HEADER  += $$PWD/private/_core_utility_prebuild.hpp
+}

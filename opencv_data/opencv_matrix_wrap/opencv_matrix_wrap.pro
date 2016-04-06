@@ -10,7 +10,6 @@ CONFIG += c++14
 TARGET = opencv_matrix_wrap
 CONFIG += console
 
-
 TEMPLATE = app
 
 SOURCES += $$PWD/main.cpp
@@ -20,6 +19,8 @@ SOURCES += $$PWD/run.cpp
 
 HEADERS += $$PWD/MainWindow.hpp
 HEADERS += $$PWD/OpenCVWindowDetail.hpp
+HEADERS += $$PWD/private/pre_build.hpp
+HEADERS += $$PWD/private/msvc_pre_build.hpp
 
 DEFINES += BUILD_PATH_=\\\"$$PWD\\\"
 
@@ -38,3 +39,9 @@ DISTFILES += $$PWD/opencv_matrix_wrap.lua
     QMAKE_LFLAGS += -Wl,-rpath .
 }
 
+CONFIG += precompile_header
+win32-msvc*{
+PRECOMPILED_HEADER  += $$PWD/private/msvc_pre_build.hpp
+}else{
+PRECOMPILED_HEADER  += $$PWD/private/pre_build.hpp
+}

@@ -32,7 +32,9 @@ int main(int argc,char ** argv) {
         /*全局配置文件*/
         const QByteArray lua_file_name_=parser.value("lua").toLocal8Bit();
         OpenCVApplicationConfigurationFile configure(
-                    argc,argv,BUILD_PATH_,lua_file_name_.constData());
+            app.applicationFilePath().toLocal8Bit(),
+            BUILD_PATH_,
+            lua_file_name_.constData());
 
     }
 

@@ -10,7 +10,7 @@ MACRO_PROTECTED:
     OpenCVApplicationConfigurationFile(lua_State *_L):L__(_L){}
 public:
     OpenCVApplicationConfigurationFile(
-        QByteArray /*argv*/,
+        const QByteArray /*argv*/,
         const char * /*buildpath*/,
         const char * /*lua file name like abc.lua*/);
     ~OpenCVApplicationConfigurationFile();

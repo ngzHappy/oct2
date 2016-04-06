@@ -409,9 +409,17 @@ QImage OpenCVUtility::tryRead(const cv::Mat & v) {
     if (v.rows<=0) { return QImage(); }
     if (v.cols<=0) { return QImage(); }
     QImage ans_=getInnerQImage( v );
+    
     if (ans_.width()<=0||ans_.height()<=0) {
         return read( v );
     }
+
+    /*roi*/
+    if ((ans_.width()!=v.cols)||
+        (ans_.height()!=v.rows)) {
+        return read( v );
+    }
+
     return std::move(ans_);
 }
 

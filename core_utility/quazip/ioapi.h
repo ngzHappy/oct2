@@ -44,7 +44,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <QtZlib/zlib.h>
+#include "3rd/zlib/zlib.h"
 
 #if defined(USE_FILE32API)
 #define fopen64 fopen

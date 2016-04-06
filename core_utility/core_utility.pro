@@ -63,6 +63,7 @@ HEADERS += $$PWD/OpenCVUserDataAllocator.hpp
 include($$PWD/core_utility.pri)
 include($$PWD/opencv3.pri)
 include($$PWD/quazip/quazip.pri)
+include($$PWD/quazip/zlib.pri)
 include($$PWD/lua/lua.pri)
 DESTDIR = $$OUTPWD
 

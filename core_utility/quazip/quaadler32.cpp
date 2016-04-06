@@ -25,7 +25,7 @@ see quazip/(un)zip.h files for details. Basically it's the zlib license.
 
 #include "quaadler32.h"
 
-#include <QtZlib/zlib.h>
+#include "3rd/zlib/zlib.h"
 
 QuaAdler32::QuaAdler32()
 {

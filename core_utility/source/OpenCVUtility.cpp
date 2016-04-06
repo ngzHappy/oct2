@@ -217,12 +217,15 @@ cv::Mat OpenCVUtility::read(const QImage & image__) {
     image_ = image_.convertToFormat(format_);
     format_ = image_.format();
 
+    /*创建数据的独立副本*/
+    //image_.detach();
+
     if ( format_ == QImage::Format_RGB888 ) {
         cv::Mat xmat_(
             image_.height(),
             image_.width(),
             CV_8UC3,
-            image_.bits(),
+            const_cast<uchar *>(image_.constBits()),
             image_.bytesPerLine()
             );
         assert( xmat_.u == nullptr );
@@ -241,7 +244,7 @@ cv::Mat OpenCVUtility::read(const QImage & image__) {
             image_.height(),
             image_.width(),
             CV_8UC4,
-            image_.bits(),
+            const_cast<uchar *>(image_.constBits()),
             image_.bytesPerLine()
             );
         assert( xmat_.u == nullptr );
@@ -261,7 +264,7 @@ cv::Mat OpenCVUtility::read(const QImage & image__) {
                 image_.height(),
                 image_.width(),
                 CV_8UC1,
-                image_.bits(),
+                const_cast<uchar *>(image_.constBits()),
                 image_.bytesPerLine()
                 );
             assert( xmat_.u == nullptr );
@@ -439,7 +442,7 @@ QImage OpenCVUtility::tryRead(const cv::Mat & v) {
     if (v.rows<=0) { return QImage(); }
     if (v.cols<=0) { return QImage(); }
     QImage ans_=getInnerQImage( v );
-    
+
     if (ans_.width()<=0||ans_.height()<=0) {
         return read( v );
     }

@@ -2,6 +2,7 @@
 //_replace_$$PWD/../core_utility/core_utility.pri_replace_
 //_replace_$$PWD/../core_utility/opencv3.pri_replace_
 //_replace_$$PWD/first_window.lua_replace_
+//$$PWD/_replace_run.cpp_replace_
 
 const char *_pro = u8R"=_____=(##pro
 
@@ -21,7 +22,7 @@ TEMPLATE = app
 SOURCES += $$PWD/main.cpp
 SOURCES += $$PWD/MainWindow.cpp
 SOURCES += $$PWD/OpenCVWindowDetail.cpp
-SOURCES += $$PWD/run.cpp
+SOURCES += $$PWD/_replace_run.cpp_replace_
 
 HEADERS += $$PWD/MainWindow.hpp
 HEADERS += $$PWD/OpenCVWindowDetail.hpp

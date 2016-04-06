@@ -123,6 +123,14 @@ void write_pro(const ArgvPack & pack) {
                 ( pack.projectName() )
                 );
         } 
+        { 
+            const std::string replace_text_("$$PWD/_replace_run.cpp_replace_");
+            about_to_write_.replace(
+                about_to_write_.find(replace_text_),
+                replace_text_.size(),
+                (pack.projectName()+"_run.cpp")
+                );
+        }
         {
             const std::string replace_text_("_replace_$$PWD/../core_utility/core_utility.pri_replace_");
             if (pack.outDirpath().empty()) {
@@ -301,7 +309,7 @@ void write_run_cpp(const ArgvPack & pack) {
     else {
         fileName_=sudirs_project_dir_+"/"+pack.outDirpath()+"/"+pack.projectName()+"/";
     }
-    fileName_+=("run.cpp");
+    fileName_+=(pack.projectName()+"_run.cpp");
     std::ofstream ofs(fileName_,std::ios::out|std::ios::binary);
     if (ofs.is_open()==false) {
         error("error create file :"+fileName_);

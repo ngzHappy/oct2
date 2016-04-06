@@ -5,9 +5,9 @@
 #if defined(__cplusplus)
 #include <core_utility_global.hpp>
 
-#if defined(QT_CORE_LIB)
-#include <QtCore/QtCore>
-#endif/*~QtCore*/
+//#if defined(QT_CORE_LIB)
+//#include <QtCore/QtCore>
+//#endif/*~QtCore*/
 
 #endif/*~__cplusplus*/
 

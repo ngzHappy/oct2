@@ -6,9 +6,7 @@
 #include <core_utility_global.hpp>
 #endif/*~__cplusplus*/
 
-#if defined(QT_CORE_LIB)
-#include <QtCore/QtCore>
-#endif/*~QtCore*/
+
 
 #endif/*~__PRE_v_BUILD__HPP__0x00*/
 

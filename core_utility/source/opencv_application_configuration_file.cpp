@@ -1,4 +1,5 @@
-﻿#define MACRO_PROTECTED public
+﻿#undef MACRO_PROTECTED
+#define MACRO_PROTECTED public
 #define LUA_LIB
 
 #include "../opencv_application_configuration_file.hpp"

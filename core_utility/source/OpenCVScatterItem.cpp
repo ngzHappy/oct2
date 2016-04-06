@@ -1,4 +1,5 @@
-﻿#define MACRO_PROTECTED public
+﻿#undef MACRO_PROTECTED
+#define MACRO_PROTECTED public
 #include "OpenCVScatterItem.hpp"
 #include <memory>
 
@@ -38,7 +39,10 @@ private:
     }
 };
 
-void _OpenCVScatterItem_init( OpenCVScatterItem * this_) {
+}
+}
+
+void OpenCVScatterItem::_OpenCVScatterItem_init( OpenCVScatterItem * this_) {
     if (this_->data_.size()<=0) {
         this_->chart_=nullptr;
         this_->series_=nullptr;
@@ -58,7 +62,7 @@ void _OpenCVScatterItem_init( OpenCVScatterItem * this_) {
     this_->chart_->setBackgroundVisible(false);
     /*设置坐标系*/
     this_->chart_->createDefaultAxes();
-    Range range_(this_->data_);
+    __private::Range range_(this_->data_);
     this_->chart_->axisX()->setRange( range_.minX,range_.maxX );
     this_->chart_->axisY()->setRange( range_.minY,range_.maxY );
     this_->cen_point_=range_.centrePoint;
@@ -66,8 +70,7 @@ void _OpenCVScatterItem_init( OpenCVScatterItem * this_) {
     this_->setColor(this_->color());
 }
 
-}
-}
+
 
 void OpenCVScatterItem::renderTo(QImage & i) {
     if (chart_) {
@@ -122,7 +125,7 @@ void OpenCVScatterItem::_p_setData(_t_DATA__t__ &&_data__){
         layout_->setSpacing(0);
         this->setLayout(layout_);
     }
-    __private::_OpenCVScatterItem_init(this);
+    _OpenCVScatterItem_init(this);
 }
 
 void OpenCVScatterItem::setData(const QList<QPointF>&_data__){
@@ -164,9 +167,9 @@ void OpenCVScatterItem::paint(
             cen_position_=chart_->mapToItem(this,cen_position_);
             painter->save();
             painter->translate(cen_position_);
-            const auto len_ =std::sqrt( 
+            const auto len_ =std::sqrt(
                 d_cen_position_.x()*d_cen_position_.x()+
-                d_cen_position_.y()*d_cen_position_.y() 
+                d_cen_position_.y()*d_cen_position_.y()
                 )/1.50;
             painter->scale( std::abs(d_cen_position_.x()/len_),std::abs(d_cen_position_.y()/len_) );
             (*cen_paint_)(painter);

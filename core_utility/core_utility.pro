@@ -41,6 +41,7 @@ SOURCES += $$PWD/source/OpenCVLineSeriesItem.cpp
 SOURCES += $$PWD/source/OpenCVUtility.cpp
 SOURCES += $$PWD/source/OpenCVMatProxyAllocator.cpp
 
+HEADERS += $$PWD/private/_core_utility_prebuild.hpp
 HEADERS += $$PWD/core_utility.hpp
 HEADERS += $$PWD/OpenCVMatProxyAllocator.hpp
 HEADERS += $$PWD/getxy.hpp
@@ -82,4 +83,7 @@ RESOURCES += imageResource.qrc
 !win32 {
     QMAKE_LFLAGS += -Wl,-rpath .
 }
+
+CONFIG += precompile_header
+PRECOMPILED_HEADER  = $$PWD/private/_core_utility_prebuild.hpp
 

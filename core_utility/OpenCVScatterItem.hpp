@@ -9,6 +9,7 @@ class CORE_UTILITYSHARED_EXPORT OpenCVScatterItem : public OpenCVItem {
     Q_OBJECT
 private:
     typedef OpenCVItem P;
+    static void _OpenCVScatterItem_init( OpenCVScatterItem * );
 MACRO_PROTECTED:
     QList<QPointF> data_;
     QGraphicsLinearLayout * layout_=nullptr;

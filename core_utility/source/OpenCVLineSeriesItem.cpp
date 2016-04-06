@@ -1,4 +1,5 @@
-﻿#define MACRO_PROTECTED public
+﻿#undef MACRO_PROTECTED
+#define MACRO_PROTECTED public
 #include "OpenCVLineSeriesItem.hpp"
 #include <memory>
 
@@ -38,7 +39,10 @@ private:
     }
 };
 
-void _OpenCVLineSeriesItem_init( OpenCVLineSeriesItem * this_) {
+}
+}
+
+void OpenCVLineSeriesItem::_OpenCVLineSeriesItem_init( OpenCVLineSeriesItem * this_) {
     if (this_->data_.size()<=0) {
         this_->chart_=nullptr;
         this_->series_=nullptr;
@@ -58,7 +62,7 @@ void _OpenCVLineSeriesItem_init( OpenCVLineSeriesItem * this_) {
     this_->chart_->setBackgroundVisible(false);
     /*设置坐标系*/
     this_->chart_->createDefaultAxes();
-    Range range_(this_->data_);
+    __private::Range range_(this_->data_);
     this_->chart_->axisX()->setRange( range_.minX,range_.maxX );
     this_->chart_->axisY()->setRange( range_.minY,range_.maxY );
     this_->cen_point_=range_.centrePoint;
@@ -68,8 +72,7 @@ void _OpenCVLineSeriesItem_init( OpenCVLineSeriesItem * this_) {
     this_->series_->setPointsVisible(true);
 }
 
-}
-}
+
 
 void OpenCVLineSeriesItem::renderTo(QImage & i) {
     if (chart_) {
@@ -124,7 +127,7 @@ void OpenCVLineSeriesItem::_p_setData(_t_DATA__t__ &&_data__){
         layout_->setSpacing(0);
         this->setLayout(layout_);
     }
-    __private::_OpenCVLineSeriesItem_init(this);
+    _OpenCVLineSeriesItem_init(this);
 }
 
 void OpenCVLineSeriesItem::setData(const QList<QPointF>&_data__){
@@ -166,9 +169,9 @@ void OpenCVLineSeriesItem::paint(
             cen_position_=chart_->mapToItem(this,cen_position_);
             painter->save();
             painter->translate(cen_position_);
-            const auto len_ =std::sqrt( 
+            const auto len_ =std::sqrt(
                 d_cen_position_.x()*d_cen_position_.x()+
-                d_cen_position_.y()*d_cen_position_.y() 
+                d_cen_position_.y()*d_cen_position_.y()
                 )/1.50;
             painter->scale( std::abs(d_cen_position_.x()/len_),std::abs(d_cen_position_.y()/len_) );
             (*cen_paint_)(painter);

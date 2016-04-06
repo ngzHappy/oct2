@@ -1,5 +1,5 @@
-﻿#ifndef OPENCVUTILITY_HPP
-#define OPENCVUTILITY_HPP() 1
+﻿#ifndef OPENCVUTILITY_0x00_HPP
+#define OPENCVUTILITY_0x00_HPP() 1
 
 #include <opencv2/opencv.hpp>
 #include "core_utility.hpp"
@@ -39,5 +39,6 @@ public:
 #include "OpenCVHistItem.hpp"
 #include "OpenCVScatterItem.hpp"
 #include "OpenCVLineSeriesItem.hpp"
+#include "OpenCVUserDataAllocator.hpp"
 
 #endif // OPENCVUTILITY_HPP

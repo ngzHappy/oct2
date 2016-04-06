@@ -1,5 +1,5 @@
 ﻿#ifndef OPENCVSCATTERITEM_HPP
-#define OPENCVSCATTERITEM_HPP
+#define OPENCVSCATTERITEM_HPP() 1
 
 #include "OpenCVItem.hpp"
 #include <QtCore/qlist.h>

@@ -82,3 +82,7 @@ SUBDIRS += opencv_draw
 opencv_saveload.file = $$PWD/opencv_data/opencv_saveload/opencv_saveload.pro
 opencv_saveload.depends += core_utility
 SUBDIRS += opencv_saveload
+
+opencv_matrix_wrap.file = $$PWD/opencv_data/opencv_matrix_wrap/opencv_matrix_wrap.pro
+opencv_matrix_wrap.depends += core_utility
+SUBDIRS += opencv_matrix_wrap

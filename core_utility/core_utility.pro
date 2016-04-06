@@ -39,8 +39,10 @@ SOURCES += $$PWD/source/OpenCVStyle.cpp
 SOURCES += $$PWD/source/OpenCVScatterItem.cpp
 SOURCES += $$PWD/source/OpenCVLineSeriesItem.cpp
 SOURCES += $$PWD/source/OpenCVUtility.cpp
+SOURCES += $$PWD/source/OpenCVMatProxyAllocator.cpp
 
 HEADERS += $$PWD/core_utility.hpp
+HEADERS += $$PWD/OpenCVMatProxyAllocator.hpp
 HEADERS += $$PWD/getxy.hpp
 HEADERS += $$PWD/core_utility_global.hpp
 HEADERS += $$PWD/opencv_application_configuration_file.hpp
@@ -54,6 +56,7 @@ HEADERS += $$PWD/OpenCVStyle.hpp
 HEADERS += $$PWD/OpenCVScatterItem.hpp
 HEADERS += $$PWD/OpenCVLineSeriesItem.hpp
 HEADERS += $$PWD/OpenCVUtility.hpp
+HEADERS += $$PWD/OpenCVUserDataAllocator.hpp
 
 include($$PWD/core_utility.pri)
 include($$PWD/opencv3.pri)

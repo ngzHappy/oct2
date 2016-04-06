@@ -38,3 +38,12 @@ DISTFILES += $$PWD/opencv_size.lua
     QMAKE_LFLAGS += -Wl,-rpath .
 }
 
+HEADERS += $$PWD/private/pre_build.hpp
+HEADERS += $$PWD/private/msvc_pre_build.hpp
+CONFIG += precompile_header
+win32-msvc*{
+PRECOMPILED_HEADER  += $$PWD/private/msvc_pre_build.hpp
+}else{
+PRECOMPILED_HEADER  += $$PWD/private/pre_build.hpp
+}
+

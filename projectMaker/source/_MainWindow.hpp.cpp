@@ -3,7 +3,9 @@
 #define MAIINWINDOW_HPP
 
 #include <QtWidgets/qmainwindow.h>
-#include <core_utility.hpp>
+#if !defined(MACRO_PROTECTED)
+#define MACRO_PROTECTED protected
+#endif
 class OpenCVWindow;
 
 class MainWindow : public QMainWindow {

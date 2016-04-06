@@ -13,6 +13,8 @@ extern const char *_MainWindow_hpp_cpp;
 extern const char *_OpenCVWindowDetail_cpp;
 extern const char *_OpenCVWindowDetail_hpp_cpp;
 extern const char *_run_cpp;
+extern const char * _msvc_pre_build_hpp_cpp;
+extern const char * _pre_build_hpp_cpp;
 
 namespace {
 
@@ -42,6 +44,39 @@ std::string _get_sudirs_project_dir_(const ArgvPack & pack) {
 
 const char bom[3]{char(0x00ef),char(0x00bb),char(0x00bf)};
 inline void write_bom(std::ofstream & ofs) {ofs.write(bom,3);}
+
+inline void write_pre_build(const ArgvPack & pack) {
+    std::string sudirs_project_dir_=_get_sudirs_project_dir_(pack);
+    std::string fileName_;
+    if (pack.outDirpath().empty()) {
+        fileName_=sudirs_project_dir_+"/"+pack.projectName()+"/private/";
+    }
+    else {
+        fileName_=sudirs_project_dir_+"/"+pack.outDirpath()+"/"+pack.projectName()+"/private/";
+    }
+
+    {
+        const std::string fileName=fileName_+"pre_build.hpp";
+        std::ofstream ofs(fileName,std::ios::out|std::ios::binary);
+        if (ofs.is_open()==false) {
+            error("error create file :"+fileName);
+            throw -1;
+        }
+        write_bom(ofs);
+        ofs<<_pre_build_hpp_cpp;
+    }
+
+    {
+        const std::string fileName=fileName_+"msvc_pre_build.hpp";
+        std::ofstream ofs(fileName,std::ios::out|std::ios::binary);
+        if (ofs.is_open()==false) {
+            error("error create file :"+fileName);
+            throw -1;
+        }
+        write_bom(ofs);
+        ofs<<_msvc_pre_build_hpp_cpp;
+    }
+}
 
 void write_lua(const ArgvPack & pack) {
     std::string sudirs_project_dir_=_get_sudirs_project_dir_(pack);
@@ -306,12 +341,14 @@ int tryMakeDir(const ArgvPack & pack) {
     std::string output_project_name;
     if (pack.outDirpath().empty()) {
         try_make_dirs.push_back(sudirs_project_dir_+"/"+pack.projectName());
+        try_make_dirs.push_back(sudirs_project_dir_+"/"+pack.projectName()+"/private");
         output_project_name=sudirs_project_dir_+"/"+pack.projectName()
             +"/"+pack.projectName()+".pro";
     }
     else {
         try_make_dirs.push_back(sudirs_project_dir_+"/"+pack.outDirpath());
         try_make_dirs.push_back(sudirs_project_dir_+"/"+pack.outDirpath()+"/"+pack.projectName());
+        try_make_dirs.push_back(sudirs_project_dir_+"/"+pack.outDirpath()+"/"+pack.projectName()+"/private");
         output_project_name=sudirs_project_dir_+"/"+pack.outDirpath()+"/"+pack.projectName()
             +"/"+pack.projectName()+".pro";
     }
@@ -377,6 +414,7 @@ int run( ArgvPack pack ){
         write_OpenCVWindowDetail_cpp(pack);
         write_OpenCVWindowDetail_hpp_cpp(pack);
         write_run_cpp(pack);
+        write_pre_build(pack);
     }
     catch (const int & errorCode) {
         return errorCode;

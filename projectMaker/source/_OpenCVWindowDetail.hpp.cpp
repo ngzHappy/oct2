@@ -2,7 +2,7 @@
 #ifndef OPENCVWINDOWDETAIL_HPP
 #define OPENCVWINDOWDETAIL_HPP
 
-#include <OpenCVUtility.hpp>
+#include <OpenCVWindow.hpp>
 
 class OpenCVWindowDetail : public OpenCVWindow
 {

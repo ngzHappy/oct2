@@ -86,3 +86,7 @@ SUBDIRS += opencv_saveload
 opencv_matrix_wrap.file = $$PWD/opencv_data/opencv_matrix_wrap/opencv_matrix_wrap.pro
 opencv_matrix_wrap.depends += core_utility
 SUBDIRS += opencv_matrix_wrap
+
+opencv_pyrUp.file = $$PWD/opencv_imgproc/opencv_pyrUp/opencv_pyrUp.pro
+opencv_pyrUp.depends += core_utility
+SUBDIRS += opencv_pyrUp

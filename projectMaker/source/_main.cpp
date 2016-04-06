@@ -3,7 +3,10 @@
 
 const char *_main_cpp = u8R"=_____=(/*main.cpp*/
 #include "MainWindow.hpp"
-#include <OpenCVUtility.hpp>
+#include <QtWidgets/qapplication.h>
+#include <QtCore/qcommandlineparser.h>
+#include <QtCore/qcommandlineoption.h>
+#include <QtCore/qtextcodec.h>
 #include <opencv_application_configuration_file.hpp>
 #include <iostream>
 

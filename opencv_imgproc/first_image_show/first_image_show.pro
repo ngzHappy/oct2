@@ -38,3 +38,4 @@ DISTFILES += $$PWD/first_image_show.PNG
 !win32 {
     QMAKE_LFLAGS += -Wl,-rpath .
 }
+

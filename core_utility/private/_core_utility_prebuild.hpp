@@ -1,7 +1,7 @@
-﻿#if !defined(__CORE__PRE__BUILD__HPP__XX)
-#define __CORE__PRE__BUILD__HPP__XX
+﻿#if !defined(__CORE__PRE__BUILD__HPP__XX__)
+#define __CORE__PRE__BUILD__HPP__XX__() 1
 
-#ifdef __cplusplus
+#if defined(__cplusplus)
 #include <ratio>
 #include <ctime>
 #include <cmath>
@@ -24,9 +24,19 @@
 #include <sstream>
 #include <fstream>
 #include <iostream>
-#include <QtCore>
-#include <QtWidgets>
-#include <QtGui>
-#endif
 
-#endif
+#if defined(QT_CORE_LIB)
+#include <QtCore/QtCore>
+#endif/*~QtCore*/
+
+#if defined(QT_WIDGETS_LIB)
+#include <QtWidgets/QtWidgets>
+#endif/*~QtWidgets*/
+
+#if defined(QT_GUI_LIB)
+#include <QtGui/QtGui>
+#endif/*~QT_GUI_LIB*/
+
+#endif/*~__cplusplus*/
+
+#endif/*~__CORE__PRE__BUILD__HPP__XX*/

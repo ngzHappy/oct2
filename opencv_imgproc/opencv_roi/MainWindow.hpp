@@ -1,4 +1,4 @@
-﻿const char *_MainWindow_hpp_cpp = u8R"=_____=(/*MainWiindow.hpp*/
+﻿/*MainWiindow.hpp*/
 #ifndef MAIINWINDOW_HPP
 #define MAIINWINDOW_HPP
 
@@ -7,7 +7,6 @@
 #define MACRO_PROTECTED protected
 #endif
 class OpenCVWindow;
-
 class MainWindow : public QMainWindow {
     Q_OBJECT
 MACRO_PROTECTED:
@@ -26,6 +25,4 @@ public slots:
 };
 
 #endif // MAIINWINDOW_HPP
-
-)=_____=";
 

@@ -90,3 +90,7 @@ SUBDIRS += opencv_matrix_wrap
 opencv_pyrUp.file = $$PWD/opencv_imgproc/opencv_pyrUp/opencv_pyrUp.pro
 opencv_pyrUp.depends += core_utility
 SUBDIRS += opencv_pyrUp
+
+opencv_roi.file = $$PWD/opencv_imgproc/opencv_roi/opencv_roi.pro
+opencv_roi.depends += core_utility
+SUBDIRS += opencv_roi

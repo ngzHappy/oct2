@@ -122,3 +122,11 @@ SUBDIRS += opencv_approxPolyDP
 gzip_simple_test.file = $$PWD/gzip_simple_test/gzip_simple_test.pro
 gzip_simple_test.depends += core_utility
 SUBDIRS += gzip_simple_test
+
+opencv_boundRect.file = $$PWD/opencv_point_algorithm/opencv_boundRect/opencv_boundRect.pro
+opencv_boundRect.depends += core_utility
+SUBDIRS += opencv_boundRect
+
+opencv_convexHull.file = $$PWD/opencv_point_algorithm/opencv_convexHull/opencv_convexHull.pro
+opencv_convexHull.depends += core_utility
+SUBDIRS += opencv_convexHull

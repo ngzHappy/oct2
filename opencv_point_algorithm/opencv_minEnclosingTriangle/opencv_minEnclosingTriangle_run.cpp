@@ -16,12 +16,15 @@ genRandPoint() {
         rand_begin_:
         const double x_=std::sin(double(std::rand()))*0.707;
         const double y_=std::cos(double(std::rand()))*0.707;
-        if (cv::pointPolygonTest(test_triangle,cv::Point2f(x_,y_),false)<0) {
-            goto rand_begin_;
-        }
-        ans.emplace_back(
+        cv::Point2f a_point_(
             static_cast<float>(x_+y_),
             static_cast<float>(x_-y_));
+        if (cv::pointPolygonTest(
+            test_triangle,
+            a_point_,false)<0) {
+            goto rand_begin_;
+        }
+        ans.emplace_back(a_point_.x,a_point_.y);
     }
     return std::move(ans);
 }

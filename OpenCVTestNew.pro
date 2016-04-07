@@ -134,3 +134,7 @@ SUBDIRS += opencv_convexHull
 opencv_simple_test.file = $$PWD/opencv_simple_test/opencv_simple_test.pro
 opencv_simple_test.depends += core_utility
 SUBDIRS += opencv_simple_test
+
+opencv_findContours.file = $$PWD/opencv_imgproc/opencv_findContours/opencv_findContours.pro
+opencv_findContours.depends += core_utility
+SUBDIRS += opencv_findContours

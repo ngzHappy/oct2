@@ -18,6 +18,7 @@ LIBS += -lopencv_ts310d
 LIBS += -lopencv_video310d
 LIBS += -lopencv_videoio310d
 LIBS += -lopencv_videostab310d
+LIBS += -lopencv_highgui310d
 }else{
 LIBS += -lopencv_calib3d310
 LIBS += -lopencv_core310
@@ -35,6 +36,7 @@ LIBS += -lopencv_ts310
 LIBS += -lopencv_video310
 LIBS += -lopencv_videoio310
 LIBS += -lopencv_videostab310
+LIBS += -lopencv_highgui310
 }
 
 }
@@ -58,6 +60,7 @@ LIBS += -lopencv_ts310d
 LIBS += -lopencv_video310d
 LIBS += -lopencv_videoio310d
 LIBS += -lopencv_videostab310d
+LIBS += -lopencv_highgui310d
 }else{
 LIBS += -lopencv_calib3d310
 LIBS += -lopencv_core310
@@ -75,6 +78,7 @@ LIBS += -lopencv_ts310
 LIBS += -lopencv_video310
 LIBS += -lopencv_videoio310
 LIBS += -lopencv_videostab310
+LIBS += -lopencv_highgui310
 }
 
 }

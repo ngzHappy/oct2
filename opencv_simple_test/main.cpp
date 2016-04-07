@@ -1,59 +1,87 @@
-﻿/*main.cpp*/
-#include "MainWindow.hpp"
-#include <QtWidgets/qapplication.h>
-#include <QtCore/qcommandlineparser.h>
-#include <QtCore/qcommandlineoption.h>
-#include <QtCore/qtextcodec.h>
-#include <opencv_application_configuration_file.hpp>
-#include <iostream>
+#include "opencv2/core.hpp"
+#include "opencv2/core/utility.hpp"
+#include "opencv2/imgproc.hpp"
+#include "opencv2/imgcodecs.hpp"
+#include "opencv2/highgui.hpp"
 
-extern void run(OpenCVWindow * window) ;
+#include <stdio.h>
 
-/*命令行解析器*/
-class CommandLineParser : public QCommandLineParser {
-public:
-    CommandLineParser() {
-        this->addVersionOption();
-        this->addHelpOption();
-        this->addOption(QCommandLineOption("lua","lua configure file",QString(),
-            "opencv_simple_test.lua"));
-    }
-};
+using namespace cv;
+using namespace std;
 
-int main(int argc,char ** argv) {
-    /*设置本地编码*/
-    QTextCodec::setCodecForLocale(QTextCodec::codecForName(LOCAL_CODEC_));
-
-    /*初始化应用程序*/
-    QApplication app(argc,argv);
-
-    {
-        /*解析命令行*/
-        CommandLineParser parser;
-        parser.process(app);
-
-        /*全局配置文件*/
-        const QByteArray lua_file_name_=parser.value("lua").toLocal8Bit();
-        OpenCVApplicationConfigurationFile configure(
-                    app.applicationFilePath().toLocal8Bit(),
-                    BUILD_PATH_,lua_file_name_.constData());
-
-    }
-
-    /*设置图片搜索目录*/
-    {
-        QDir::addSearchPath("images",app.applicationDirPath()+"/Images");
-        QDir::addSearchPath("images",BUILD_PATH_);
-        QDir::addSearchPath("images",QDir::cleanPath(BUILD_PATH_"/../Images"));
-    }
-
-    MainWindow * window=new MainWindow;
-    window->setAttribute(Qt::WA_DeleteOnClose);
-    run(window->getOpenCVWindow());
-    std::cout.flush();
-    window->show();
-
-    return app.exec();
-
+static void help()
+{
+    printf("\nThis program demonstrated the use of the discrete Fourier transform (dft)\n"
+           "The dft of an image is taken and it's power spectrum is displayed.\n"
+           "Usage:\n"
+            "./dft [image_name -- default ../data/lena.jpg]\n");
 }
 
+const char* keys =
+{
+    "{help h||}{@image|../data/lena.jpg|input image file}"
+};
+
+int main(int argc, const char ** argv)
+{
+    help();
+    CommandLineParser parser(argc, argv, keys);
+    if (parser.has("help"))
+    {
+        help();
+        return 0;
+    }
+    string filename = parser.get<string>(0);
+    Mat img = imread(filename, IMREAD_GRAYSCALE);
+    if( img.empty() )
+    {
+        help();
+        printf("Cannot read image file: %s\n", filename.c_str());
+        return -1;
+    }
+    int M = getOptimalDFTSize( img.rows );
+    int N = getOptimalDFTSize( img.cols );
+    Mat padded;
+    copyMakeBorder(img, padded, 0, M - img.rows, 0, N - img.cols, BORDER_CONSTANT, Scalar::all(0));
+
+    Mat planes[] = {Mat_<float>(padded), Mat::zeros(padded.size(), CV_32F)};
+    Mat complexImg;
+    merge(planes, 2, complexImg);
+
+    dft(complexImg, complexImg);
+
+    // compute log(1 + sqrt(Re(DFT(img))**2 + Im(DFT(img))**2))
+    split(complexImg, planes);
+    magnitude(planes[0], planes[1], planes[0]);
+    Mat mag = planes[0];
+    mag += Scalar::all(1);
+    log(mag, mag);
+
+    // crop the spectrum, if it has an odd number of rows or columns
+    mag = mag(Rect(0, 0, mag.cols & -2, mag.rows & -2));
+
+    int cx = mag.cols/2;
+    int cy = mag.rows/2;
+
+    // rearrange the quadrants of Fourier image
+    // so that the origin is at the image center
+    Mat tmp;
+    Mat q0(mag, Rect(0, 0, cx, cy));
+    Mat q1(mag, Rect(cx, 0, cx, cy));
+    Mat q2(mag, Rect(0, cy, cx, cy));
+    Mat q3(mag, Rect(cx, cy, cx, cy));
+
+    q0.copyTo(tmp);
+    q3.copyTo(q0);
+    tmp.copyTo(q3);
+
+    q1.copyTo(tmp);
+    q2.copyTo(q1);
+    tmp.copyTo(q2);
+
+    normalize(mag, mag, 0, 1, NORM_MINMAX);
+
+    imshow("spectrum magnitude", mag);
+    waitKey();
+    return 0;
+}

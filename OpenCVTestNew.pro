@@ -118,3 +118,7 @@ SUBDIRS += opencv_minEnclosingTriangle
 opencv_approxPolyDP.file = $$PWD/opencv_point_algorithm/opencv_approxPolyDP/opencv_approxPolyDP.pro
 opencv_approxPolyDP.depends += core_utility
 SUBDIRS += opencv_approxPolyDP
+
+gzip_simple_test.file = $$PWD/gzip_simple_test/gzip_simple_test.pro
+gzip_simple_test.depends += core_utility
+SUBDIRS += gzip_simple_test

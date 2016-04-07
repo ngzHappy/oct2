@@ -16,7 +16,7 @@ TEMPLATE = app
 SOURCES += $$PWD/main.cpp
 SOURCES += $$PWD/MainWindow.cpp
 SOURCES += $$PWD/OpenCVWindowDetail.cpp
-SOURCES += $$PWD/run.cpp
+SOURCES += $$PWD/opencv_pyrUp_run.cpp
 
 HEADERS += $$PWD/MainWindow.hpp
 HEADERS += $$PWD/OpenCVWindowDetail.hpp

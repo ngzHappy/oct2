@@ -114,3 +114,7 @@ SUBDIRS += opencv_minEnclosingCircle
 opencv_minEnclosingTriangle.file = $$PWD/opencv_point_algorithm/opencv_minEnclosingTriangle/opencv_minEnclosingTriangle.pro
 opencv_minEnclosingTriangle.depends += core_utility
 SUBDIRS += opencv_minEnclosingTriangle
+
+opencv_approxPolyDP.file = $$PWD/opencv_point_algorithm/opencv_approxPolyDP/opencv_approxPolyDP.pro
+opencv_approxPolyDP.depends += core_utility
+SUBDIRS += opencv_approxPolyDP

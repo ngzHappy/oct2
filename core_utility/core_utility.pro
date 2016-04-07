@@ -71,6 +71,15 @@ include($$PWD/lua/lua.pri)
 DESTDIR = $$OUTPWD
 
 DISTFILES += $$PWD/../Images/000000.jpg
+DISTFILES += $$PWD/../Images/000010.jpg
+DISTFILES += $$PWD/../Images/010000.jpg
+DISTFILES += $$PWD/../Images/010001.jpg
+DISTFILES += $$PWD/../Images/010002.jpg
+DISTFILES += $$PWD/../Images/020000.jpg
+DISTFILES += $$PWD/../Images/020001.jpg
+DISTFILES += $$PWD/../Images/020002.jpg
+DISTFILES += $$PWD/../Images/020003.jpg
+DISTFILES += $$PWD/../Images/020004.jpg
 DISTFILES += $$PWD/../Images/000001.jpg
 DISTFILES += $$PWD/../Images/000002.jpg
 DISTFILES += $$PWD/../Images/000003.jpg

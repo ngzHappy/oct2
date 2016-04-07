@@ -29,7 +29,6 @@ quazip/(un)zip.h files for details, basically it's zlib license.
 #include <QStringList>
 #include <QTextCodec>
 struct zlib_filefunc_def_s;
-typedef struct zlib_filefunc_def_s zlib_filefunc_def;
 #include "quazip_global.h"
 #include "quazipfileinfo.h"
 
@@ -188,7 +187,7 @@ class QUAZIP_EXPORT QuaZip {
      * In short: just forget about the \a ioApi argument and you'll be
      * fine.
      **/
-    bool open(Mode mode, zlib_filefunc_def *ioApi =NULL);
+    bool open(Mode mode, zlib_filefunc_def_s *ioApi =nullptr);
     /// Closes ZIP file.
     /** Call getZipError() to determine if the close was successful.
      *

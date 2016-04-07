@@ -28,10 +28,8 @@ quazip/(un)zip.h files for details, basically it's zlib license.
 #include <QString>
 #include <QStringList>
 #include <QTextCodec>
-
-#include "zip.h"
-#include "unzip.h"
-
+struct zlib_filefunc_def_s;
+typedef struct zlib_filefunc_def_s zlib_filefunc_def;
 #include "quazip_global.h"
 #include "quazipfileinfo.h"
 
@@ -407,13 +405,13 @@ class QUAZIP_EXPORT QuaZip {
      * file in the ZIP archive - then change it back or you may
      * experience some strange behavior or even crashes.
      **/
-    unzFile getUnzFile();
+    void * getUnzFile();
     /// Returns \c zipFile handle.
     /** You can use this handle to directly call ZIP part of the
      * ZIP/UNZIP package functions (see zip.h). Warnings about the
      * getUnzFile() function also apply to this function.
      **/
-    zipFile getZipFile();
+    void * getZipFile();
     /// Changes the data descriptor writing mode.
     /**
       According to the ZIP format specification, a file inside archive

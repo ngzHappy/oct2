@@ -30,7 +30,7 @@
 #  define adler32               z_adler32
 #  define adler32_combine       z_adler32_combine
 #  define adler32_combine64     z_adler32_combine64
-#  define compress              z_compress
+#  define compress              z_compress 
 #  define compress2             z_compress2
 #  define compressBound         z_compressBound
 #  define crc32                 z_crc32
@@ -206,23 +206,7 @@
 #  define NO_DUMMY_DECL
 #endif
 
-/* Maximum value for memLevel in deflateInit2 */
-#ifndef MAX_MEM_LEVEL
-#  ifdef MAXSEG_64K
-#    define MAX_MEM_LEVEL 8
-#  else
-#    define MAX_MEM_LEVEL 9
-#  endif
-#endif
-
-/* Maximum value for windowBits in deflateInit2 and inflateInit2.
- * WARNING: reducing MAX_WBITS makes minigzip unable to extract .gz files
- * created by gzip. (Files created by minigzip can still be extracted by
- * gzip.)
- */
-#ifndef MAX_WBITS
-#  define MAX_WBITS   15 /* 32K LZ77 window */
-#endif
+#include "zlib_macro_data.h"
 
 /* The memory requirements for deflate are (in bytes):
             (1 << (windowBits+2)) +  (1 << (memLevel+9))

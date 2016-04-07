@@ -1,20 +1,21 @@
+
 wince: DEFINES += NO_ERRNO_H
 INCLUDEPATH += $$PWD/3rd/zlib
-SOURCES+= \
-    $$PWD/3rd/zlib/zlib_adler32.c \
-    $$PWD/3rd/zlib/zlib_compress.c \
-    $$PWD/3rd/zlib/zlib_crc32.c \
-    $$PWD/3rd/zlib/zlib_deflate.c \
-    $$PWD/3rd/zlib/zlib_gzclose.c \
-    $$PWD/3rd/zlib/zlib_gzlib.c \
-    $$PWD/3rd/zlib/zlib_gzread.c \
-    $$PWD/3rd/zlib/zlib_gzwrite.c \
-    $$PWD/3rd/zlib/zlib_infback.c \
-    $$PWD/3rd/zlib/zlib_inffast.c \
-    $$PWD/3rd/zlib/zlib_inflate.c \
-    $$PWD/3rd/zlib/zlib_inftrees.c \
-    $$PWD/3rd/zlib/zlib_trees.c \
-    $$PWD/3rd/zlib/zlib_uncompr.c \
-    $$PWD/3rd/zlib/zlib_zutil.c
+
+SOURCES += $$PWD/3rd/zlib/zlib_adler32.c
+SOURCES += $$PWD/3rd/zlib/zlib_compress.c
+SOURCES += $$PWD/3rd/zlib/zlib_crc32.c
+SOURCES += $$PWD/3rd/zlib/zlib_deflate.c
+SOURCES += $$PWD/3rd/zlib/zlib_gzclose.c
+SOURCES += $$PWD/3rd/zlib/zlib_gzlib.c
+SOURCES += $$PWD/3rd/zlib/zlib_gzread.c
+SOURCES += $$PWD/3rd/zlib/zlib_gzwrite.c
+SOURCES += $$PWD/3rd/zlib/zlib_infback.c
+SOURCES += $$PWD/3rd/zlib/zlib_inffast.c
+SOURCES += $$PWD/3rd/zlib/zlib_inflate.c
+SOURCES += $$PWD/3rd/zlib/zlib_inftrees.c
+SOURCES += $$PWD/3rd/zlib/zlib_trees.c
+SOURCES += $$PWD/3rd/zlib/zlib_uncompr.c
+SOURCES += $$PWD/3rd/zlib/zlib_zutil.c
 
 

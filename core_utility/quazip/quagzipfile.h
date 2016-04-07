@@ -28,8 +28,6 @@ see quazip/(un)zip.h files for details. Basically it's the zlib license.
 #include <QIODevice>
 #include "quazip_global.h"
 
-#include "3rd/zlib/zlib.h"
-
 class QuaGzipFilePrivate;
 
 /// GZIP file

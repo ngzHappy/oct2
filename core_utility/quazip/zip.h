@@ -87,14 +87,7 @@ typedef voidp zipFile;
 #define ZIP_SEQUENTIAL 0x2u
 #define ZIP_DEFAULT_FLAGS (ZIP_AUTO_CLOSE | ZIP_WRITE_DATA_DESCRIPTOR)
 
-#ifndef DEF_MEM_LEVEL
-#  if MAX_MEM_LEVEL >= 8
-#    define DEF_MEM_LEVEL 8
-#  else
-#    define DEF_MEM_LEVEL  MAX_MEM_LEVEL
-#  endif
-#endif
-/* default memLevel */
+#include "3rd/zlib/zlib_macro_data.h"
 
 /* tm_zip contain date/time info */
 typedef struct tm_zip_s

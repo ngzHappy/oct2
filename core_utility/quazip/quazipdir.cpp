@@ -23,6 +23,8 @@ see quazip/(un)zip.h files for details. Basically it's the zlib license.
 */
 
 #include "quazipdir.h"
+#include "zip.h"
+#include "unzip.h"
 
 #include <QSet>
 #include <QSharedData>

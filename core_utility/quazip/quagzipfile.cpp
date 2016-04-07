@@ -21,7 +21,7 @@ See COPYING file for the full LGPL text.
 Original ZIP package is copyrighted by Gilles Vollant and contributors,
 see quazip/(un)zip.h files for details. Basically it's the zlib license.
 */
-
+#include "3rd/zlib/zlib.h"
 #include <QFile>
 
 #include "quagzipfile.h"

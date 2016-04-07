@@ -27,6 +27,7 @@ quazip/(un)zip.h files for details, basically it's zlib license.
 
 #include <QIODevice>
 
+#include "3rd/zlib/zlib_macro_data.h"
 #include "quazip_global.h"
 #include "quazip.h"
 #include "quazipnewinfo.h"

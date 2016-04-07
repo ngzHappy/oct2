@@ -29,14 +29,6 @@
 #include <QtCore/QtCore>
 #endif/*~QtCore*/
 
-#if defined(QT_WIDGETS_LIB)
-#include <QtWidgets/QtWidgets>
-#endif/*~QtWidgets*/
-
-#if defined(QT_GUI_LIB)
-#include <QtGui/QtGui>
-#endif/*~QT_GUI_LIB*/
-
 #endif/*~__cplusplus*/
 
 #endif/*~__CORE__PRE__BUILD__HPP__XX*/

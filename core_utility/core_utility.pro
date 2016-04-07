@@ -71,6 +71,25 @@ include($$PWD/lua/lua.pri)
 DESTDIR = $$OUTPWD
 
 DISTFILES += $$PWD/../Images/000000.jpg
+DISTFILES += $$PWD/../Images/030000.png
+DISTFILES += $$PWD/../Images/030001.png
+DISTFILES += $$PWD/../Images/030002.png
+DISTFILES += $$PWD/../Images/030003.png
+DISTFILES += $$PWD/../Images/030004.png
+DISTFILES += $$PWD/../Images/030005.png
+DISTFILES += $$PWD/../Images/030006.png
+DISTFILES += $$PWD/../Images/030007.png
+DISTFILES += $$PWD/../Images/030008.png
+DISTFILES += $$PWD/../Images/030009.png
+DISTFILES += $$PWD/../Images/030010.png
+DISTFILES += $$PWD/../Images/030011.png
+DISTFILES += $$PWD/../Images/030012.png
+DISTFILES += $$PWD/../Images/030013.png
+DISTFILES += $$PWD/../Images/030014.png
+DISTFILES += $$PWD/../Images/030015.png
+DISTFILES += $$PWD/../Images/030016.png
+DISTFILES += $$PWD/../Images/030017.png
+DISTFILES += $$PWD/../Images/030018.png
 DISTFILES += $$PWD/../Images/000010.jpg
 DISTFILES += $$PWD/../Images/010000.jpg
 DISTFILES += $$PWD/../Images/010001.jpg

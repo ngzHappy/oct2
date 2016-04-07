@@ -130,3 +130,7 @@ SUBDIRS += opencv_boundRect
 opencv_convexHull.file = $$PWD/opencv_point_algorithm/opencv_convexHull/opencv_convexHull.pro
 opencv_convexHull.depends += core_utility
 SUBDIRS += opencv_convexHull
+
+opencv_simple_test.file = $$PWD/opencv_simple_test/opencv_simple_test.pro
+opencv_simple_test.depends += core_utility
+SUBDIRS += opencv_simple_test

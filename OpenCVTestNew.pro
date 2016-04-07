@@ -106,3 +106,11 @@ SUBDIRS += opencv_stitcher
 opencv_minAreaRect.file = $$PWD/opencv_point_algorithm/opencv_minAreaRect/opencv_minAreaRect.pro
 opencv_minAreaRect.depends += core_utility
 SUBDIRS += opencv_minAreaRect
+
+opencv_minEnclosingCircle.file = $$PWD/opencv_point_algorithm/opencv_minEnclosingCircle/opencv_minEnclosingCircle.pro
+opencv_minEnclosingCircle.depends += core_utility
+SUBDIRS += opencv_minEnclosingCircle
+
+opencv_minEnclosingTriangle.file = $$PWD/opencv_point_algorithm/opencv_minEnclosingTriangle/opencv_minEnclosingTriangle.pro
+opencv_minEnclosingTriangle.depends += core_utility
+SUBDIRS += opencv_minEnclosingTriangle

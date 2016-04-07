@@ -39,7 +39,7 @@ extern void run(OpenCVWindow * window) {
         <<points_[2]<<std::endl
         <<points_[3]<<std::endl;
 
-    /*绘制边框*/
+    /*绘制外接矩形*/
     QtCharts::QLineSeries * series_=new QtCharts::QLineSeries;
     series_->append({points_[0].x,points_[0].y});
     series_->append({points_[1].x,points_[1].y});

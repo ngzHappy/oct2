@@ -7,7 +7,7 @@ QT += charts
 
 CONFIG += c++14
 
-TARGET = simple_pca
+TARGET = opencv_minEnclosingCircle
 CONFIG += console
 
 
@@ -16,7 +16,7 @@ TEMPLATE = app
 SOURCES += $$PWD/main.cpp
 SOURCES += $$PWD/MainWindow.cpp
 SOURCES += $$PWD/OpenCVWindowDetail.cpp
-SOURCES += $$PWD/simple_pca_run.cpp
+SOURCES += opencv_minEnclosingCircle_run.cpp
 
 HEADERS += $$PWD/MainWindow.hpp
 HEADERS += $$PWD/OpenCVWindowDetail.hpp
@@ -32,8 +32,7 @@ LIBS += -L$$OUTPWD -lcore_utilityd
 LIBS += -L$$OUTPWD -lcore_utility
 }
 
-DISTFILES += $$PWD/simple_pca.lua
-DISTFILES += $$PWD/simple_pca.PNG
+DISTFILES += $$PWD/opencv_minEnclosingCircle.lua
 
 !win32 {
     QMAKE_LFLAGS += -Wl,-rpath .

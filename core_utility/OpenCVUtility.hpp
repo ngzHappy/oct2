@@ -1,6 +1,10 @@
 ﻿#ifndef OPENCVUTILITY_0x00_HPP
 #define OPENCVUTILITY_0x00_HPP() 1
 
+#if !defined(MACRO_PROTECTED)
+#define MACRO_PROTECTED protected
+#endif
+
 #include <opencv2/opencv.hpp>
 #include "core_utility.hpp"
 #include <QtCore/qobject.h>

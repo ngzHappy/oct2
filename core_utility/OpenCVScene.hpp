@@ -1,6 +1,10 @@
 ﻿#ifndef OPENCVSCENE_HPP
 #define OPENCVSCENE_HPP() 1
 
+#if !defined(MACRO_PROTECTED)
+#define MACRO_PROTECTED protected
+#endif
+
 #include <QtWidgets/qgraphicsscene.h>
 #include <QtCore/qpointer.h>
 #include <QtWidgets/qgraphicsitem.h>

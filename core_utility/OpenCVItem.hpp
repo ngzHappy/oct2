@@ -1,6 +1,10 @@
 ﻿#ifndef OPENCVITEM_HPP
 #define OPENCVITEM_HPP() 1
 
+#if !defined(MACRO_PROTECTED)
+#define MACRO_PROTECTED protected
+#endif
+
 #include <QtWidgets/qgraphicsitem.h>
 #include <QtWidgets/qgraphicswidget.h>
 #include <QtCore/qpointer.h>

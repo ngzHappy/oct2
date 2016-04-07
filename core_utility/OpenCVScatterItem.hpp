@@ -1,6 +1,10 @@
 ﻿#ifndef OPENCVSCATTERITEM_HPP
 #define OPENCVSCATTERITEM_HPP() 1
 
+#if !defined(MACRO_PROTECTED)
+#define MACRO_PROTECTED protected
+#endif
+
 #include "OpenCVItem.hpp"
 #include <QtCore/qlist.h>
 #include <QtCharts>

@@ -1,6 +1,10 @@
 ﻿#ifndef OPENCVSTYLE_HPP
 #define OPENCVSTYLE_HPP() 1
 
+#if !defined(MACRO_PROTECTED)
+#define MACRO_PROTECTED protected
+#endif
+
 #include <QtWidgets/qproxystyle.h>
 #include "core_utility_global.hpp"
 

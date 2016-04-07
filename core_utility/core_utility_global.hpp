@@ -70,13 +70,6 @@ readAll(const _t_STD_STRINGSTREAM_ & data__) {
 }
 
 /***********************************/
-//protect public 切换宏
-/***********************************/
-#if !defined(MACRO_PROTECTED)
-#define MACRO_PROTECTED protected
-#endif
-
-/***********************************/
 //基本数据类型定义
 /***********************************/
 

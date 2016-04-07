@@ -1,6 +1,10 @@
 ﻿#ifndef OPENCVMATPROXYALLOCATOR_HPP
 #define OPENCVMATPROXYALLOCATOR_HPP() 1
 
+#if !defined(MACRO_PROTECTED)
+#define MACRO_PROTECTED protected
+#endif
+
 #include "OpenCVUtility.hpp"
 
 namespace _OPENCV_StdMatAllocator {

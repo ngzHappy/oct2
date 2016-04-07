@@ -60,6 +60,9 @@ HEADERS += $$PWD/OpenCVLineSeriesItem.hpp
 HEADERS += $$PWD/OpenCVUtility.hpp
 HEADERS += $$PWD/OpenCVUserDataAllocator.hpp
 
+HEADERS += $$PWD/quazip/GZipCompressor.hpp
+SOURCES += $$PWD/quazip/GZipCompressor.cpp
+
 include($$PWD/core_utility.pri)
 include($$PWD/opencv3.pri)
 include($$PWD/quazip/quazip.pri)

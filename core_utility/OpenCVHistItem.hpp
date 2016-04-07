@@ -1,6 +1,10 @@
 ﻿#ifndef OPENCVHISTITEM_HPP
 #define OPENCVHISTITEM_HPP() 1
 
+#if !defined(MACRO_PROTECTED)
+#define MACRO_PROTECTED protected
+#endif
+
 #include "OpenCVItem.hpp"
 #include <QtCharts>
 

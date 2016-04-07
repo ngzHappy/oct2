@@ -1,11 +1,19 @@
 ﻿#ifndef CORE_UTILITY_HPP
 #define CORE_UTILITY_HPP
 
+/***********************************/
+//protect public 切换宏
+/***********************************/
+#if !defined(MACRO_PROTECTED)
+#define MACRO_PROTECTED protected
+#endif
+
 #include "core_utility_global.hpp"
 #include "quazip/quazip.h"
 #include "quazip/quazipdir.h"
 #include "quazip/quazipfile.h"
 #include "quazip/quazipfileinfo.h"
+#include "quazip/GZipCompressor.hpp"
 #include "lua/lua.hpp"
 #include "ReadOnly.hpp"
 #include "getxy.hpp"

@@ -1,6 +1,10 @@
 ﻿#ifndef OPENCVWINDOW_HPP
 #define OPENCVWINDOW_HPP() 1
 
+#if !defined(MACRO_PROTECTED)
+#define MACRO_PROTECTED protected
+#endif
+
 #include <QtWidgets/qgraphicsview.h>
 #include "OpenCVScene.hpp"
 #include "core_utility_global.hpp"

@@ -1,6 +1,10 @@
 ﻿#ifndef xOPENCVIMAGEITEM_HPP
 #define xOPENCVIMAGEITEM_HPP() 1
 
+#if !defined(MACRO_PROTECTED)
+#define MACRO_PROTECTED protected
+#endif
+
 #include <functional>
 #include <memory>
 #include <QtGui/qimage.h>

@@ -170,7 +170,7 @@ class QUAZIP_EXPORT QuaZipFile: public QIODevice {
      * zip.close();
      * \endcode
      **/
-    QuaZipFile(QuaZip *zip, QObject *parent =NULL);
+    QuaZipFile(QuaZip *zip, QObject *parent =nullptr);
     /// Destroys a QuaZipFile instance.
     /** Closes file if open, destructs internal QuaZip object (if it
      * exists and \em is internal, of course).
@@ -297,7 +297,7 @@ class QUAZIP_EXPORT QuaZipFile: public QIODevice {
      * it is NULL then this function behaves just like open(OpenMode).
      **/
     inline bool open(OpenMode mode, const char *password)
-    {return open(mode, NULL, NULL, false, password);}
+    {return open(mode, nullptr, nullptr, false, password);}
     /// Opens a file for reading.
     /** \overload
      * Argument \a password specifies a password to decrypt the file.

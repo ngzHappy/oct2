@@ -4,7 +4,9 @@
 
 extern void run(OpenCVWindow *  ) {
 
-    gzip::QCompressor::compress()
+    QByteArray data_("abcdefg");
+    compress_data_ = gzip::QCompressor::compressData(data_);
+    qDebug()<< gzip::QCompressor::decompressData(compress_data_);
 
 }
 

@@ -78,7 +78,12 @@ void OpenCVImageItem::saveImage() {
     }
 
     {
-        const QString saveFileName_=QFileDialog::getSaveFileName();
+        const QString saveFileName_=
+            QFileDialog::getSaveFileName(nullptr,
+                trUtf8(u8"设置保存文件名"),
+                QString(),
+                u8"Images (*.png *.jpg)"_qs
+                );
         if (saveFileName_.isEmpty()) { return; }
         image_.save(saveFileName_);
     }

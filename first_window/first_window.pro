@@ -14,7 +14,7 @@ TEMPLATE = app
 SOURCES += main.cpp \
     MainWindow.cpp \
     OpenCVWindowDetail.cpp \
-    run.cpp
+    first_window_run.cpp
 
 HEADERS += \
     MainWindow.hpp \

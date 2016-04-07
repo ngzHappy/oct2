@@ -12,12 +12,12 @@ extern void run(OpenCVWindow * window) {
     for (const auto & image_name:images_names) {
         ++count_;
         cv::Mat mat=OpenCVUtility::tryRead(QImage(image_name));
-        window->insertImage(OpenCVUtility::tryRead(mat))
+        window->insertImage(OpenCVUtility::tryRead(mat) )
             ->setWindowTitle(u8"第%1幅原始图片"_qs.arg(count_));
         cv::Mat ans;
         cv::blur(mat,ans,{3,3});/*平滑滤波*/
         cv::Canny(ans,ans,100,200);/*canny 边缘检测*/
-        window->insertImage(OpenCVUtility::tryRead(ans))
+        window->insertImage(OpenCVUtility::tryRead(ans) )
             ->setWindowTitle(u8"第%1幅图片"_qs.arg(count_));
     }
 

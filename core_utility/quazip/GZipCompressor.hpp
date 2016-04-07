@@ -24,14 +24,14 @@ private:
         return ans ;
     }
 public:
-    static bool compress(QByteArray input, QByteArray &output, int level = -1){
+    static bool compressData(QByteArray input, QByteArray &output, int level = -1){
         return gzipCompress(std::move(input),output,level);
     }
-    static bool decompress(QByteArray input, QByteArray &output){
+    static bool decompressData(QByteArray input, QByteArray &output){
         return gzipDecompress(std::move(input),output);
     }
     template<typename T>
-    static QByteArray decompress(T && input){
+    static QByteArray decompressData(T && input){
         return gzipDecompress(std::forward<T>(input));
     }
 

@@ -22,14 +22,14 @@ genRandPoint() {
     static const double half_pi_=pi_()/2;
     static const double step_=pi2_()/6;
     static const std::vector<cv::Point2f> test_data_{
-        {(to_float(half_pi_)),std::pow(to_float(half_pi_),2)},
-        {(to_float(half_pi_+0.03)),std::pow(to_float(half_pi_+0.03),2)},
-        {(to_float(half_pi_+step_)),std::pow(to_float(half_pi_+step_),2)},
-        {(to_float(half_pi_+step_*2)),std::pow(to_float(half_pi_+step_*2),2)},
-        {(to_float(half_pi_+step_*3)),std::pow(to_float(half_pi_+step_*3),2)},
-        {(to_float(half_pi_+step_*4)),std::pow(to_float(half_pi_+step_*4),2)},
-        {(to_float(half_pi_+step_*4+0.3)),std::pow(to_float(half_pi_+step_*4+0.3),2)},
-        {(to_float(half_pi_+step_*5)),std::pow(to_float(half_pi_+step_*5),2)},
+        {(to_float(half_pi_)),to_float(std::pow(half_pi_,2))},
+        {(to_float(half_pi_+0.03)),to_float(std::pow(half_pi_+0.03,2))},
+        {(to_float(half_pi_+step_)),to_float(std::pow(half_pi_+step_,2))},
+        {(to_float(half_pi_+step_*2)),to_float(std::pow(half_pi_+step_*2,2))},
+        {(to_float(half_pi_+step_*3)),to_float(std::pow(half_pi_+step_*3,2))},
+        {(to_float(half_pi_+step_*4)),to_float(std::pow(half_pi_+step_*4,2))},
+        {(to_float(half_pi_+step_*4+0.3)),to_float(std::pow(half_pi_+step_*4+0.3,2))},
+        {(to_float(half_pi_+step_*5)),to_float(std::pow(half_pi_+step_*5,2))},
     };
 
     return test_data_;

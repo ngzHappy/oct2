@@ -18,6 +18,8 @@ public:
     OpenCVHistItem(QGraphicsItem * /**/=nullptr);
     ~OpenCVHistItem();
 
+    QtCharts::QChart * getChart() const { return chart_; }
+
     void setColor(const QColor &);
     const QColor & getColor()const { return color_; }
 

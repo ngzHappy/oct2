@@ -102,3 +102,7 @@ SUBDIRS += opencv_fft
 opencv_stitcher.file = $$PWD/opencv_tool/opencv_stitcher/opencv_stitcher.pro
 opencv_stitcher.depends += core_utility
 SUBDIRS += opencv_stitcher
+
+opencv_minAreaRect.file = $$PWD/opencv_point_algorithm/opencv_minAreaRect/opencv_minAreaRect.pro
+opencv_minAreaRect.depends += core_utility
+SUBDIRS += opencv_minAreaRect

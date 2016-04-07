@@ -23,6 +23,7 @@ public:
     ~OpenCVScatterItem();
 
     void renderTo(QImage &) override;
+    QtCharts::QChart * getChart() const { return chart_; }
     QtCharts::QScatterSeries * getScatterSeries()const { return series_; }
 public:
     void setData(const QList<QPointF>& /*data*/);

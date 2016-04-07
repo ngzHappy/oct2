@@ -23,13 +23,13 @@ public:
     ~OpenCVLineSeriesItem();
 
     void renderTo(QImage &) override;
-
+    QtCharts::QChart * getChart() const { return chart_; }
+    QtCharts::QLineSeries * getLineSeries() const { return series_; }
 public:
     void setData(const QList<QPointF>& /*data*/);
     void setData(QList<QPointF>&& /*data*/);
     const QList<QPointF> & getData() const;
     const QList<QPointF> & data() const { return getData(); }
-    QtCharts::QLineSeries * getLineSeries() const { return series_; }
 private: template<typename _t_DATA_t__>
     void _p_setData(_t_DATA_t__ && /*data*/);
 public:

@@ -20,7 +20,7 @@ public:
     ~OpenCVChartImage();
 
     void renderTo(QImage &) override;
-    void saveImage();
+    void setGridLineVisible(const bool=true,const bool=true);
 public:
     void setChartImage(const QImage& /*chartImage*/);
     void setChartImage(QImage&& /*chartImage*/);
@@ -42,6 +42,8 @@ public:
         QList<QPointF> _v_(_a_);
         return insertLine(std::move(_v_),_close_);
     }
+public slots:
+    void saveImage();
 };
 
 template<typename B,typename E>

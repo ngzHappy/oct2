@@ -138,3 +138,7 @@ SUBDIRS += opencv_simple_test
 opencv_findContours.file = $$PWD/opencv_imgproc/opencv_findContours/opencv_findContours.pro
 opencv_findContours.depends += core_utility
 SUBDIRS += opencv_findContours
+
+opencv_delaunay.file = $$PWD/opencv_point_algorithm/opencv_delaunay/opencv_delaunay.pro
+opencv_delaunay.depends += core_utility
+SUBDIRS += opencv_delaunay

@@ -13,6 +13,14 @@ OpenCVChartImage::OpenCVChartImage(QGraphicsItem * _a_p)
 
 }
 
+void OpenCVChartImage::setGridLineVisible(const bool _a_xv,const bool _a_yv) {
+    if (chart_==nullptr) { return; }
+    if (chart_->axisX(series_)==nullptr) { return; }
+    if (chart_->axisY(series_)==nullptr) { return; }
+    chart_->axisX(series_)->setGridLineVisible(_a_xv);
+    chart_->axisY(series_)->setGridLineVisible(_a_yv);
+}
+
 const QImage & OpenCVChartImage::getChartImage() const {
     return chart_image_;
 }

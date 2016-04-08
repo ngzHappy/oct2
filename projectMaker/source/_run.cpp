@@ -2,7 +2,7 @@
 #include <OpenCVUtility.hpp>
 #include <opencv_application_configuration_file.hpp>
 #include <QtCore/qdebug.h>
-#include <QtCharts>
+//#include <QtCharts>
 
 extern void run(OpenCVWindow * window) {
 

@@ -1,5 +1,6 @@
 ﻿#include <QtWidgets/qapplication.h>
 #include <QtWidgets/qwidget.h>
+#include <QtCore/qtextstream.h>
 #include <core_utility.hpp>
 
 int main(int argc, char *argv[])

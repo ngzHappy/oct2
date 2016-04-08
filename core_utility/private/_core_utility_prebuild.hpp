@@ -29,6 +29,17 @@
 #include <QtCore/QtCore>
 #endif/*~QtCore*/
 
+#if defined(QT_GUI_LIB)
+#include <QtGui/qimage.h>
+#include <QtGui/qpixmap.h>
+#include <QtGui/qpainter.h>
+#endif
+
+#if defined(QT_WIDGETS_LIB)
+#include <QtWidgets/qwidget.h>
+#include <QtWidgets/qgraphicswidget.h>
+#endif
+
 #endif/*~__cplusplus*/
 
 #endif/*~__CORE__PRE__BUILD__HPP__XX*/

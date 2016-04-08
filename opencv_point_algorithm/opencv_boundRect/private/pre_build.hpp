@@ -5,9 +5,12 @@
 #if defined(__cplusplus)
 #include <core_utility_global.hpp>
 
-//#if defined(QT_CORE_LIB)
-//#include <QtCore/QtCore>
-//#endif/*~QtCore*/
+#if defined(QT_CORE_LIB)
+#include <QtCore/qstring.h>
+#include <QtCore/qbytearray.h>
+#include <QtCore/qdir.h>
+#include <QtCore/qtextcodec.h>
+#endif
 
 #endif/*~__cplusplus*/
 

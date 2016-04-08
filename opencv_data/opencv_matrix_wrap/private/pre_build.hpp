@@ -9,6 +9,12 @@
 #include <type_traits>
 
 #include <opencv2/opencv.hpp>
+#if defined(QT_CORE_LIB)
+#include <QtCore/qstring.h>
+#include <QtCore/qbytearray.h>
+#include <QtCore/qdir.h>
+#include <QtCore/qtextcodec.h>
+#endif
 
 #endif/*~__cplusplus*/
 

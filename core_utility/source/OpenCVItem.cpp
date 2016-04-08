@@ -19,7 +19,7 @@ class OpenCVItemStyle :public OpenCVStyle {
 public:
     static std::atomic<int> icon_index;
     static const QIcon getTitleBarIcon() {
-        
+        /*通过此函数调整随机数*/
         auto icon_function_ =[](int rand_flag_) {
             enum { R_=128,R_0_=R_/4,R_1_=2*R_/4,R_2_=3*R_/4 };
             QImage image_(R_,R_,QImage::Format_RGBA8888);
@@ -120,7 +120,7 @@ public:
             ans_[9]=icon_function_(9);
             ans_[10]=icon_function_(10);
             ans_[11]=icon_function_(11);
-            return bool(rand());
+            return (rand()==8);
         }();
         ++icon_index;
         if (icon_index>11) { icon_index=0; }

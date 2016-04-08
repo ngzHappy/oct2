@@ -18,6 +18,9 @@ MACRO_PROTECTED:
 public:
     explicit OpenCVChartImage(QGraphicsItem * /**/=nullptr);
     ~OpenCVChartImage();
+
+    void renderTo(QImage &) override;
+    void saveImage();
 public:
     void setChartImage(const QImage& /*chartImage*/);
     void setChartImage(QImage&& /*chartImage*/);

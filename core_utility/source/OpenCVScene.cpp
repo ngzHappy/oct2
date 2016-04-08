@@ -24,17 +24,39 @@ void OpenCVScene::contextMenuEvent(
     const QPoint pos_=contextMenuEvent->screenPos();
     QGraphicsItem * item_=this->itemAt(contextMenuEvent->scenePos(),QTransform());
     if (item_==nullptr) { return; }
-    OpenCVImageItem * imageItem_=dynamic_cast<OpenCVImageItem *>(item_);
-    if (imageItem_==nullptr) {
-        imageItem_=dynamic_cast<OpenCVImageItem *>(item_->parentItem());
+
+    bool _v_isOK=false;
+
+    {
+        OpenCVImageItem * imageItem_=dynamic_cast<OpenCVImageItem *>(item_);
+        if (imageItem_==nullptr) {
+            imageItem_=dynamic_cast<OpenCVImageItem *>(item_->parentItem());
+        }
+
+        if (imageItem_) {
+            _v_isOK=true;
+            QMenu menu_;
+            QAction * action_=menu_.addAction(trUtf8(u8R"(保存)"));
+            connect(action_,&QAction::triggered,
+                imageItem_,[imageItem_](bool) {imageItem_->saveImage(); });
+            menu_.exec(pos_);
+        }
     }
 
-    if (imageItem_) {
-        QMenu menu_;
-        QAction * action_=menu_.addAction(trUtf8(u8R"(保存)"));
-        connect(action_,&QAction::triggered,
-            imageItem_,[imageItem_](bool) {imageItem_->saveImage(); });
-        menu_.exec(pos_);
+    if (false==_v_isOK) {
+        OpenCVChartImage * imageItem_=dynamic_cast<OpenCVChartImage *>(item_);
+        if (imageItem_==nullptr) {
+            imageItem_=dynamic_cast<OpenCVChartImage *>(item_->parentItem());
+        }
+
+        if (imageItem_) {
+            _v_isOK=true;
+            QMenu menu_;
+            QAction * action_=menu_.addAction(trUtf8(u8R"(保存)"));
+            connect(action_,&QAction::triggered,
+                imageItem_,[imageItem_](bool) {imageItem_->saveImage(); });
+            menu_.exec(pos_);
+        }
     }
 
 }

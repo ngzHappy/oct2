@@ -1,6 +1,7 @@
 ﻿#define MACRO_PROTECTED public
 #include <QtGui/qimage.h>
 #include <private/qimage_p.h>
+#include <QtWidgets/qfiledialog.h>
 #include "../OpenCVChartImage.hpp"
 #include "../OpenCVUtility.hpp"
 #include <cassert>
@@ -150,6 +151,30 @@ void OpenCVChartImage::paint(
         chart_image_about_paint_
         );
 
+}
+
+void OpenCVChartImage::saveImage() {
+
+    {
+        const QGraphicsScene * sc__=this->scene();
+        if (sc__==nullptr) { return; }
+    }
+
+    {
+        const QString saveFileName_=
+            QFileDialog::getSaveFileName(nullptr,
+                trUtf8(u8"设置保存文件名"),
+                QString(),
+                u8"Images (*.png *.jpg)"_qs
+                );
+        if (saveFileName_.isEmpty()) { return; }
+        chart_image_.save(saveFileName_);
+    }
+
+}
+
+void OpenCVChartImage::renderTo(QImage & o){
+    o=chart_image_;
 }
 
 void OpenCVChartImage::setChartImage(const QImage&_chartImage_) {

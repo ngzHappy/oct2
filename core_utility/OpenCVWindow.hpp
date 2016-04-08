@@ -24,6 +24,7 @@ public:
     template<typename B,typename E>OpenCVLineSeriesItem * insertLineSeries(B,E);
     virtual OpenCVHistItem * insertHist(QList<qreal> data_) { return scene_->insertHist(std::move(data_)); }
     virtual OpenCVImageItem * insertImage(QImage i) { return scene_->insertImage(std::move(i)); }
+    virtual OpenCVChartImage * insertChartImage(QImage i) { return scene_->insertChartImage(std::move(i)); }
     virtual OpenCVScatterItem * insertScatter(QList<QPointF> data_) { return scene_->insertScatter(std::move(data_)); }
     virtual OpenCVLineSeriesItem * insertLineSeries(QList<QPointF> data_) { return scene_->insertLineSeries(std::move(data_)); }
     template<typename _U_>OpenCVScatterItem * insertScatter(std::initializer_list<_U_> &&);

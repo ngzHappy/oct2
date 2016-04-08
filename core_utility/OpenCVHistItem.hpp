@@ -10,7 +10,7 @@
 
 class CORE_UTILITYSHARED_EXPORT OpenCVHistItem : public OpenCVItem {
     Q_OBJECT
-private:
+MACRO_PROTECTED:
     typedef OpenCVItem P;
     QGraphicsLayout * layout_=nullptr;
     QtCharts::QChart * chart_=nullptr;

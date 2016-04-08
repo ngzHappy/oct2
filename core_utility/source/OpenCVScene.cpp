@@ -47,7 +47,23 @@ void OpenCVScene::setImageAlg(const OpenCVImageItem::AlgFunctionType & a) {
     }
 }
 
+OpenCVChartImage * OpenCVScene::insertChartImage(QImage image_) {
+    _p_private__insert_image(image_);
+    OpenCVChartImage * i=new OpenCVChartImage;
+    i->setChartImage(std::move(image_));
+    addItem(i);
+    return i;
+}
+
 OpenCVImageItem * OpenCVScene::insertImage(QImage image_) {
+    _p_private__insert_image(image_);
+    OpenCVImageItem * i=new OpenCVImageItem;
+    i->setImage(std::move(image_));
+    addItem(i);
+    return i;
+}
+
+void OpenCVScene::_p_private__insert_image(QImage &image_) {
     if ((image_.width()<=0)||(image_.height()<=0)) {
         image_=QImage(512,512,QImage::Format_ARGB32);
         image_.fill(QColor(0,0,0,0));
@@ -59,10 +75,6 @@ OpenCVImageItem * OpenCVScene::insertImage(QImage image_) {
         painter_.setBrush(QColor(255,5,0));
         painter_.drawText(55,200,"NULL IMAGE");
     }
-    OpenCVImageItem * i=new OpenCVImageItem;
-    i->setImage(std::move(image_));
-    addItem(i);
-    return i;
 }
 
 OpenCVLineSeriesItem * OpenCVScene::insertLineSeries(QList<QPointF> data_) {

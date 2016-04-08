@@ -49,6 +49,7 @@ public:
 #include "OpenCVHistItem.hpp"
 #include "OpenCVScatterItem.hpp"
 #include "OpenCVLineSeriesItem.hpp"
+#include "OpenCVChartImage.hpp"
 #include "OpenCVUserDataAllocator.hpp"
 
 #endif // OPENCVUTILITY_HPP

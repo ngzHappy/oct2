@@ -21,16 +21,18 @@ void draw(
     QList<QPointF> data_;
     data_.reserve(ans[0].size());
     for (const auto & i:ans[0]) {
-        data_.push_back(QPointF(i.x,height_-i.y));
+        data_.push_back(QPointF(i.x,i.y));
     }
 
     auto * item_=window->insertLineSeries(data_);
-    item_->getLineSeries()->append(ans[0].begin()->x,
-        height_-(ans[0].begin()->y));
+    item_->getLineSeries()->append(
+        (ans[0].begin()->x),
+        (ans[0].begin()->y));
 
     /*设置坐标系大小与图片一致*/
     item_->getChart()->axisX()->setRange(0,width_);
     item_->getChart()->axisY()->setRange(0,height_);
+    item_->getChart()->axisY()->setReverse(true);
 
     item_->resize(width_*1.3,height_*1.3);
 
@@ -40,12 +42,9 @@ void draw(
         if (pos_->empty()) { continue; }
         data_.clear();
         for (const auto & i:*(pos_)) {
-            data_.push_back(QPointF(i.x,height_-i.y));
+            data_.push_back(QPointF(i.x,i.y));
         }
-        data_.push_back(
-            QPointF(pos_->begin()->x,
-            height_-pos_->begin()->y)
-            );
+        data_.push_back(QPointF(pos_->begin()->x,pos_->begin()->y));
         QtCharts::QLineSeries * series=new QtCharts::QLineSeries;
         series->append(data_);
         item_->getChart()->addSeries(series);

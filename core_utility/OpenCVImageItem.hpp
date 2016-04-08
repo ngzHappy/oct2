@@ -39,6 +39,8 @@ signals:
 protected:
     void _tryResize();
     void paint(QPainter *painter,const QStyleOptionGraphicsItem *option,QWidget *widget) override;
+private:
+    void _p_private__set_image();
 };
 
 #endif // OPENCVIMAGEITEM_HPP

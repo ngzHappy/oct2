@@ -28,6 +28,7 @@ DEFINES += LUA_USE_LINUX
 }
 
 SOURCES += $$PWD/source/core_utility.cpp
+SOURCES += $$PWD/source/OpenCVChartImage.cpp
 SOURCES += $$PWD/source/lua_utility.cpp
 SOURCES += $$PWD/source/opencv_application_configuration_file.cpp
 SOURCES += $$PWD/source/OpenCVHistItem.cpp
@@ -42,6 +43,7 @@ SOURCES += $$PWD/source/OpenCVUtility.cpp
 SOURCES += $$PWD/source/OpenCVMatProxyAllocator.cpp
 
 HEADERS += $$PWD/private/_core_utility_prebuild.hpp
+HEADERS += $$PWD/OpenCVChartImage.hpp
 HEADERS += $$PWD/private/_msvc_core_utility_prebuild.hpp
 HEADERS += $$PWD/core_utility.hpp
 HEADERS += $$PWD/OpenCVMatProxyAllocator.hpp

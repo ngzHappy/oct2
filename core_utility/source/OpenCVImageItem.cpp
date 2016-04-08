@@ -114,27 +114,7 @@ void OpenCVImageItem::_tryResize() {
 
 void OpenCVImageItem::setImage(QImage i) {
     image_input_=std::move(i);
-    {
-        QImageData * ptr_=image_input_.data_ptr();
-        if ((ptr_)&&(ptr_->cleanupFunction)) {
-            bool need_copy_=true;
-            if ( ptr_->cleanupFunction==OpenCVUtility::getHandleQImage() ) {
-                if (ptr_->cleanupInfo) {
-                    cv::Mat * mat_ = reinterpret_cast<cv::Mat *>(ptr_->cleanupInfo);
-                    if (mat_->u) {
-                        need_copy_=false;/*此处已经完成是否拷贝的决策*/
-                        if (mat_->u->refcount != 1) { 
-                            image_input_=image_input_.copy();
-                        }
-                    }
-                }
-            }
-            if (need_copy_) {image_input_=image_input_.copy();}
-        }
-        else {
-            image_input_.detach();/*获得独立备份*/
-        }
-    }
+    _p_private__set_image();
     image_=image_input_ ;
 
     if (alg_) {
@@ -146,3 +126,28 @@ void OpenCVImageItem::setImage(QImage i) {
     imageChanged();
     update();
 }
+
+void OpenCVImageItem::_p_private__set_image() {
+    {
+        QImageData * ptr_=image_input_.data_ptr();
+        if ((ptr_)&&(ptr_->cleanupFunction)) {
+            bool need_copy_=true;
+            if (ptr_->cleanupFunction==OpenCVUtility::getHandleQImage()) {
+                if (ptr_->cleanupInfo) {
+                    cv::Mat * mat_=reinterpret_cast<cv::Mat *>(ptr_->cleanupInfo);
+                    if (mat_->u) {
+                        need_copy_=false;/*此处已经完成是否拷贝的决策*/
+                        if (mat_->u->refcount!=1) {
+                            image_input_=image_input_.copy();
+                        }
+                    }
+                }
+            }
+            if (need_copy_) { image_input_=image_input_.copy(); }
+        }
+        else {
+            image_input_.detach();/*获得独立备份*/
+        }
+    }
+}
+

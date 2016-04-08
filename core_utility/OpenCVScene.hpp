@@ -12,6 +12,7 @@
 #include "OpenCVHistItem.hpp"
 #include "OpenCVScatterItem.hpp"
 #include "OpenCVLineSeriesItem.hpp"
+#include "OpenCVChartImage.hpp"
 #include "core_utility_global.hpp"
 
 class CORE_UTILITYSHARED_EXPORT OpenCVScene : public QGraphicsScene {
@@ -26,11 +27,13 @@ public:
     OpenCVHistItem * insertHist(QList<qreal>);
     OpenCVScatterItem * insertScatter(QList<QPointF>);
     OpenCVLineSeriesItem * insertLineSeries(QList<QPointF>);
+    OpenCVChartImage * insertChartImage(QImage);
     template<typename B,typename E>
     OpenCVHistItem * insertHist(B,E);
 protected:
     virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent *contextMenuEvent) override;
-
+private:
+    void _p_private__insert_image(QImage &image_);
 };
 
 template<typename B,typename E>

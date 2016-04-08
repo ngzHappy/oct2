@@ -20,6 +20,8 @@ extern void run(OpenCVWindow * window) {
                 ->setWindowTitle(u8"第%1幅图片"_qs.arg(count_));
         }
     }
-
+    /*显示chart image*/
+    window->insertChartImage(QImage("images:000000"))
+        ->setWindowTitle(u8"测试带坐标系图片"_qs);
 }
 

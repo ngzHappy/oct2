@@ -21,8 +21,8 @@ extern void run(OpenCVWindow * window) {
     cv::Mat ans;
     stitcher->stitch(images_,ans);
 
-    window->insertImage(OpenCVUtility::tryRead(std::move(ans)))
-        ->setWindowTitle(u8"全景图"_qs);
-
+    auto * item=window->insertChartImage(OpenCVUtility::tryRead(std::move(ans)));
+    item->setWindowTitle(u8"全景图"_qs);
+    item->setGridLineVisible(false,false);
 }
 

@@ -43,8 +43,15 @@ extern void run(OpenCVWindow * window) {
     auto * item =
         window->insertScatter(points.begin(),points.end());
 
-    cv::Subdiv2D delanunay(cv::Rect(1,1,2,2));
+    /*创建三角形剖分器*/
+    std::shared_ptr<cv::Subdiv2D> delanunay_ =
+        std::make_shared<cv::Subdiv2D>(cv::Rect(1,1,2,2));
+    auto & delanunay=*delanunay_;
+
+    /*插入点*/
     delanunay.insert(points);
+
+    /*获得结果*/
     std::vector< cv::Vec6f > ans;
     delanunay.getTriangleList(ans);
 
@@ -69,6 +76,7 @@ extern void run(OpenCVWindow * window) {
             item_->setPointsVisible(true);
         }
     }
+
     item->setWindowTitle(u8"三角形剖分"_qs);
 }
 

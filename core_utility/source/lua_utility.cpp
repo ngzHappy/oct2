@@ -4,6 +4,10 @@
 #include "../lua/lstate.h"
 #include <QtCore/qdebug.h>
 
+#include "../quazip/quazip.h"
+#include "../quazip/quazipfileinfo.h"
+#include "../quazip/quazipfile.h"
+
 #include <sstream>
 #include <iostream>
 
@@ -30,7 +34,7 @@ std::shared_ptr<lua_State> createLuaState() {
     LuaUtility::loadModule(L);
 
     return std::shared_ptr<lua_State>(L,[](lua_State * L_) {
-        if (L_==nullptr) { return ; }
+        if (L_==nullptr) { return; }
         --(L_->userCount);
         if (L_->userCount<=0) { lua_close(L_); }
     });
@@ -602,6 +606,128 @@ int LuaUtility::tableToString(lua_State * L) {
     }
 
     return 1;
+}
+
+namespace {
+template<typename _QIODevice_>
+void _p_loadFile_read(
+    _QIODevice_ & zFile,
+    luaL_Buffer & _v_buffer
+    ) {
+    enum { SIZE_=1024*4 };
+    std::unique_ptr<char,void(*)(char *)> __data
+        (new char[SIZE_],[](char * _d) {delete[] _d; });
+    __data.get()[0]=0; __data.get()[1]=0; __data.get()[2]=0;
+    auto size__=zFile.read(__data.get(),SIZE_);
+    /*-bom :0xEF0xBB0xBF*/
+    if (
+        (__data.get()[0])==char(0x00ef)&&
+        (__data.get()[1])==char(0x00bb)&&
+        (__data.get()[2])==char(0x00bf)&&
+        size__>3
+        ) {
+        luaL_addlstring(&_v_buffer,__data.get()+3,size__-3);
+    }
+    else {
+        luaL_addlstring(&_v_buffer,__data.get(),size__);
+    }
+
+    while ((size__=zFile.read(__data.get(),SIZE_))>0) {
+        luaL_addlstring(&_v_buffer,__data.get(),size__);
+    }
+}
+
+}
+
+template<typename _T_,typename _U_>
+inline int LuaUtility::_p_loadFile(
+    lua_State * L,
+    _T_ && _a_fileName_,
+    _U_ && _a_zip_file_name_
+    ) {
+    const QString _a_fileName=_a_fileName_.trimmed();
+    const QString _a_zip_file_name=_a_zip_file_name_.trimmed();
+
+    if (_a_fileName.isEmpty()) { return 0; }
+
+    auto _v__buffer
+        =std::shared_ptr<luaL_Buffer>(
+            new luaL_Buffer,
+            [L](luaL_Buffer * _buffer_) {
+        luaL_pushresult(_buffer_);
+        delete _buffer_;
+    }
+    );
+    auto & _v_buffer=*_v__buffer;
+
+    luaL_buffinit(L,&_v_buffer);
+
+    if (_a_fileName.endsWith(".zip",Qt::CaseInsensitive)) {
+        QuaZip zip_file_(_a_fileName);
+        if (zip_file_.open(QuaZip::mdUnzip)) {
+            if (zip_file_.setCurrentFile(_a_zip_file_name)) {
+                QuaZipFile zFile(&zip_file_);
+                if (zFile.open(QIODevice::ReadOnly)) {
+                    _p_loadFile_read(zFile,_v_buffer);
+                }
+                else {
+                    qDebug().noquote()<<"can not open zipfile"<<_a_zip_file_name;
+                }
+            }
+            else {
+                qDebug().noquote()<<"can not find zipfile"<<_a_zip_file_name;
+            }
+        }
+        else {
+            qDebug().noquote()<<"can not open file"<<_a_fileName;
+        }
+
+    }
+    else {
+        QFile file_(_a_fileName);
+        if (file_.open(QIODevice::ReadOnly)) {
+            _p_loadFile_read(file_,_v_buffer);
+        }
+        else {
+            qDebug().noquote()<<"can not open file"<<_a_fileName;
+        }
+    }
+
+    return 1;
+}
+
+int LuaUtility::loadFile(
+    lua_State * const L,
+    const QString & a,
+    const QString & b
+    ) {
+    if (L)return _p_loadFile(L,a,b);
+    return 0;
+}
+
+int LuaUtility::loadFile(
+    lua_State * const L,
+    QString && _a_fileName,
+    QString && b
+    ) {
+    if (L)return _p_loadFile(L,std::move(_a_fileName),std::move(b));
+    return 0;
+}
+
+int LuaUtility::loadFile(
+    lua_State * const L,
+    QString && a,
+    const QString & b) {
+    if (L)return _p_loadFile(L,std::move(a),b);
+    return 0;
+}
+
+int LuaUtility::loadFile(
+    lua_State * const L,
+    const QString & a,
+    QString && b) {
+    if (L)return _p_loadFile(L,a,std::move(b));
+    return 0;
 }
 
 int LuaUtility::openLib(lua_State * L) {

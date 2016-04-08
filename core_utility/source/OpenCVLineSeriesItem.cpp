@@ -110,6 +110,25 @@ OpenCVLineSeriesItem::OpenCVLineSeriesItem(QGraphicsItem *parent )
     this->setMinimumHeight(256);
 }
 
+void OpenCVLineSeriesItem::resizeEvent(QGraphicsSceneResizeEvent *event) {
+    P::resizeEvent(event);
+    if (chart_==nullptr) { return; }
+    if (chart_->animationOptions()) {
+        QTimer::singleShot(1998,this,[this]() {update(); });
+        QTimer::singleShot(998,this,[this]() {update(); });
+        QTimer::singleShot(500,this,[this]() {update(); });
+        QTimer::singleShot(300,this,[this]() {update(); });
+        QTimer::singleShot(200,this,[this]() {update(); });
+        QTimer::singleShot(150,this,[this]() {update(); });
+        QTimer::singleShot(100,this,[this]() {update(); });
+        QTimer::singleShot(50,this,[this]() {update(); });
+        QTimer::singleShot(30,this,[this]() {update(); });
+    }
+    else {
+        QTimer::singleShot(1500,this,[this]() {update(); });
+    }
+}
+
 OpenCVLineSeriesItem::~OpenCVLineSeriesItem() {
 
 }

@@ -52,6 +52,7 @@ private: template<typename _t_CENTREPOINTPAINT_t__>
     void _p_setCentrePointPaint(_t_CENTREPOINTPAINT_t__ && /*centrePointPaint*/);
 protected:
     void paint(QPainter *painter,const QStyleOptionGraphicsItem *option,QWidget *widget) override;
+    void resizeEvent(QGraphicsSceneResizeEvent *event)override;
 };
 
 #endif // OPENCVSCATTERITEM_HPP

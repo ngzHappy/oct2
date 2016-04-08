@@ -28,9 +28,16 @@ void OpenCVScene::contextMenuEvent(
     bool _v_isOK=false;
 
     {
-        OpenCVImageItem * imageItem_=dynamic_cast<OpenCVImageItem *>(item_);
+        typedef OpenCVImageItem _v_Type;
+        /*搜索深度为3*/
+        _v_Type * imageItem_=dynamic_cast<_v_Type *>(item_);
         if (imageItem_==nullptr) {
-            imageItem_=dynamic_cast<OpenCVImageItem *>(item_->parentItem());
+            auto * __it=item_->parentItem();
+            imageItem_=dynamic_cast<_v_Type *>(__it);
+            if (__it&&(imageItem_==nullptr)) {
+                __it=__it->parentItem();
+                imageItem_=dynamic_cast<_v_Type *>(__it);
+            }
         }
 
         if (imageItem_) {
@@ -44,9 +51,16 @@ void OpenCVScene::contextMenuEvent(
     }
 
     if (false==_v_isOK) {
-        OpenCVChartImage * imageItem_=dynamic_cast<OpenCVChartImage *>(item_);
+        /*搜索深度为3*/
+        typedef OpenCVChartImage _v_Type;
+        _v_Type * imageItem_=dynamic_cast<_v_Type *>(item_);
         if (imageItem_==nullptr) {
-            imageItem_=dynamic_cast<OpenCVChartImage *>(item_->parentItem());
+            auto * __it=item_->parentItem();
+            imageItem_=dynamic_cast<_v_Type *>(__it);
+            if (__it&&(imageItem_==nullptr)) {
+                __it=__it->parentItem();
+                imageItem_=dynamic_cast<_v_Type *>(__it);
+            }
         }
 
         if (imageItem_) {

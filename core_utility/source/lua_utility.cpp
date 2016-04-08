@@ -622,7 +622,12 @@ void _p_loadFile_read(
     __data.get()[1]=0; 
     __data.get()[2]=0;
     __data.get()[SIZE_]=0;
+    __data.get()[SIZE_+1]=0;
+    __data.get()[SIZE_+2]=0;
+    __data.get()[SIZE_+3]=0;
     auto size__=zFile.read(__data.get(),SIZE_);
+
+    /*加载第一段数据*/
     /*-bom :0xEF0xBB0xBF*/
     if (
         (__data.get()[0])==char(0x00ef)&&
@@ -630,25 +635,13 @@ void _p_loadFile_read(
         (__data.get()[2])==char(0x00bf)&&
         size__>3
         ) {
-        __data.get()[size__]= '\n';
-        __data.get()[size__+1]= '\n';
-        __data.get()[size__+2]= '\n';
-        __data.get()[size__+3]= '\n';
         luaL_addlstring(&_v_buffer,__data.get()+3,size__-3);
     }
     else {
-        __data.get()[size__]= '\n';
-        __data.get()[size__+1]= '\n';
-        __data.get()[size__+2]= '\n';
-        __data.get()[size__+3]= '\n';
         luaL_addlstring(&_v_buffer,__data.get(),size__ );
     }
 
     while ((size__=zFile.read(__data.get(),SIZE_))>0) {
-        __data.get()[size__]= '\n';
-        __data.get()[size__+1]= '\n';
-        __data.get()[size__+2]= '\n';
-        __data.get()[size__+3]= '\n';
         luaL_addlstring(&_v_buffer,__data.get(),size__);
     }
 }
@@ -727,8 +720,9 @@ inline int LuaUtility::_p_loadFile(
     }
 
     if (_is_Ok_) {
-        const char * __string__=lua_tostring(L,-1);
-        if( luaL_loadstring(L,__string__) == LUA_OK ){
+        size_t __size__;
+        const char * __string__=lua_tolstring(L,-1,&__size__);
+        if( luaL_loadbuffer(L,__string__,__size__,__string__) == LUA_OK ){
             assert( (lua_gettop(L)-top_lock_)==2 );
             lua_copy(L,-1,-2);
             lua_settop(L,top_lock_+1);

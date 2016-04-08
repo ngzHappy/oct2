@@ -1,4 +1,5 @@
-﻿#include "OpenCVWindow.hpp"
+﻿#include "../OpenCVWindow.hpp"
+#include "../OpenCVScene.hpp"
 #include "../core_utility.hpp"
 #include "QtGui/qicon.h"
 
@@ -16,6 +17,26 @@ OpenCVWindow::OpenCVWindow(QWidget *parent)
     setRenderHint(QPainter::SmoothPixmapTransform,true);
     setRenderHint(QPainter::TextAntialiasing,true);
     setRenderHint(QPainter::Antialiasing,true);
+}
+
+OpenCVHistItem * OpenCVWindow::insertHist(QList<qreal> data_) {
+    return scene_->insertHist(std::move(data_));
+}
+
+OpenCVImageItem * OpenCVWindow::insertImage(QImage i) {
+    return scene_->insertImage(std::move(i));
+}
+
+OpenCVChartImage * OpenCVWindow::insertChartImage(QImage i) {
+    return scene_->insertChartImage(std::move(i));
+}
+
+OpenCVScatterItem * OpenCVWindow::insertScatter(QList<QPointF> data_) {
+    return scene_->insertScatter(std::move(data_));
+}
+
+OpenCVLineSeriesItem * OpenCVWindow::insertLineSeries(QList<QPointF> data_) {
+    return scene_->insertLineSeries(std::move(data_));
 }
 
 OpenCVWindow::~OpenCVWindow() {

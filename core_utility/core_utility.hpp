@@ -8,6 +8,8 @@
 #define MACRO_PROTECTED protected
 #endif
 
+#include <QtCore/qstring.h>
+#include <QtCore/qbytearray.h>
 #include "core_utility_global.hpp"
 #include "quazip/quazip.h"
 #include "quazip/quazipdir.h"
@@ -17,8 +19,6 @@
 #include "lua/lua.hpp"
 #include "ReadOnly.hpp"
 #include "getxy.hpp"
-#include <QtCore/qstring.h>
-#include <QtCore/qbytearray.h>
 
 /*
 utility.copyTable

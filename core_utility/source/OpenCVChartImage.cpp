@@ -22,7 +22,7 @@ QtCharts::QLineSeries * OpenCVChartImage::insertLine(
     if (series_==nullptr) { return nullptr; }
     if (_a_.isEmpty()) { return nullptr; }
     QtCharts::QLineSeries * _v_line=new QtCharts::QLineSeries;
-    if (_a_close) {_a_.push_back(_a_.first());}
+    if (_a_close) { _a_.push_back(_a_.first()); }
     _v_line->append(_a_);
     chart_->addSeries(_v_line);
     chart_->setAxisX(chart_->axisX(series_),_v_line);
@@ -74,6 +74,8 @@ void OpenCVChartImage::_p_setChartImage(_t_CHARTIMAGE_t__ &&_chartImage_) {
     if (_v_width<=0) { return; }
     if (_v_height<=0) { return; }
 
+    chart_image_about_paint_=QPixmap::fromImage(chart_image_);
+
     {
         auto size_=this->minimumSize();
         size_=fit_size_(
@@ -112,11 +114,11 @@ void OpenCVChartImage::paint(
     if (_v_height<=0) { return; }
 
     QPointF top_left_=chart_->mapToPosition(
-        QPointF(0,_v_height ),this->series_);
+        QPointF(0,_v_height),this->series_);
     top_left_=chart_->mapToItem(this,top_left_);
 
     QPointF bottom_right_=chart_->mapToPosition(
-        QPointF(_v_width ,0),this->series_);
+        QPointF(_v_width,0),this->series_);
     bottom_right_=chart_->mapToItem(this,bottom_right_);
 
     top_left_.setX(std::ceil(top_left_.x()));
@@ -125,11 +127,27 @@ void OpenCVChartImage::paint(
     bottom_right_.setY(std::floor(bottom_right_.y()));
 
     QRectF target_rect_(top_left_,bottom_right_);
-    painter->drawImage(
-        target_rect_,
-        chart_image_,
-        chart_image_.rect(),
-        Qt::ImageConversionFlag::AutoColor
+
+    {
+        auto _v_size=chart_image_about_paint_.size();
+        if ((_v_size.width()!=target_rect_.width())||
+            (_v_size.height()!=target_rect_.height())
+            ) {
+            _v_size.setWidth(static_cast<int>(target_rect_.width()));
+            _v_size.setHeight(static_cast<int>(target_rect_.height()));
+            chart_image_about_paint_=
+                QPixmap::fromImage(
+                chart_image_.scaled(
+                    _v_size,
+                    Qt::AspectRatioMode::IgnoreAspectRatio,
+                    Qt::TransformationMode::SmoothTransformation)
+                    );
+        }
+    }
+
+    painter->drawPixmap(
+        target_rect_.topLeft(),
+        chart_image_about_paint_
         );
 
 }

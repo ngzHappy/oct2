@@ -2,6 +2,7 @@
 #define OPENCVCHARTIMAGE_0_HPP() 1
 
 #include "OpenCVLineSeriesItem.hpp"
+#include <QtGui/qpixmap.h>
 
 class CORE_UTILITYSHARED_EXPORT OpenCVChartImage : public OpenCVLineSeriesItem
 {
@@ -13,6 +14,7 @@ private:
     using P::setData;
 MACRO_PROTECTED:
     QImage chart_image_;
+    QPixmap chart_image_about_paint_;
 public:
     explicit OpenCVChartImage(QGraphicsItem * /**/=nullptr);
     ~OpenCVChartImage();

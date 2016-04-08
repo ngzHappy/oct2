@@ -5,7 +5,8 @@
 #define MACRO_PROTECTED protected
 #endif
 
-#include "OpenCVUtility.hpp"
+#include "core_utility_global.hpp"
+#include <opencv2/opencv.hpp>
 
 namespace _OPENCV_StdMatAllocator {
 namespace __private {

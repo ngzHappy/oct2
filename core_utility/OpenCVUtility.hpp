@@ -7,10 +7,14 @@
 
 #include <opencv2/opencv.hpp>
 #include "core_utility.hpp"
-#include <QtCore>
+#include <QtCore/qdir.h>
 #include <QtCore/qobject.h>
+#include <QtCore/qcommandlineoption.h>
+#include <QtCore/qcommandlineparser.h>
+#include <QtCore/qdebug.h>
+#include <QtGui/qpixmap.h>
 #include <QtGui/qpainter.h>
-#include <QtGui/qguiapplication.h>
+#include <QtCore/qtextstream.h>
 #include <QtWidgets/qapplication.h>
 
 class CORE_UTILITYSHARED_EXPORT OpenCVUtility :

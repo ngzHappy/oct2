@@ -7,7 +7,12 @@
 
 #include "OpenCVItem.hpp"
 #include <QtCore/qlist.h>
-#include <QtCharts>
+#include <QtCore/qpoint.h>
+class QGraphicsLinearLayout;
+namespace QtCharts{
+class QLineSeries;
+class QChart;
+}
 
 class CORE_UTILITYSHARED_EXPORT OpenCVLineSeriesItem : public OpenCVItem {
     Q_OBJECT

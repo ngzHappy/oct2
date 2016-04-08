@@ -1,7 +1,10 @@
 ﻿#undef MACRO_PROTECTED
 #define MACRO_PROTECTED public
 #include "OpenCVLineSeriesItem.hpp"
+#include <QtWidgets/qgraphicslayout.h>
+#include <QtWidgets/qgraphicslinearlayout.h>
 #include <memory>
+#include <QtCharts>
 
 namespace {
 namespace __private {

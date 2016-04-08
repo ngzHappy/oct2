@@ -5,6 +5,7 @@
 #include "../OpenCVChartImage.hpp"
 #include "../OpenCVUtility.hpp"
 #include <cassert>
+#include <QtCharts>
 
 OpenCVChartImage::OpenCVChartImage(QGraphicsItem * _a_p)
     :P(_a_p) {

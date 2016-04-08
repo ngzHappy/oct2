@@ -1,5 +1,6 @@
 ﻿#include "OpenCVHistItem.hpp"
 #include <QtWidgets/qgraphicslinearlayout.h>
+#include <QtCharts>
 
 OpenCVHistItem::OpenCVHistItem(QGraphicsItem * item_)
     :P(item_),

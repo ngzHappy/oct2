@@ -6,8 +6,13 @@
 #endif
 
 #include "OpenCVItem.hpp"
+class QGraphicsLinearLayout;
 #include <QtCore/qlist.h>
-#include <QtCharts>
+#include <QtCore/qrect.h>
+namespace QtCharts{
+class QChart;
+class QScatterSeries;
+}
 
 class CORE_UTILITYSHARED_EXPORT OpenCVScatterItem : public OpenCVItem {
     Q_OBJECT

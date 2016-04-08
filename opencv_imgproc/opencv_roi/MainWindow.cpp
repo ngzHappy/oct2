@@ -2,6 +2,7 @@
 #include <OpenCVUtility.hpp>
 #include "MainWindow.hpp"
 #include "OpenCVWindowDetail.hpp"
+#include <QtCore/qdebug.h>
 #include <QtWidgets/qboxlayout.h>
 #include <QtWidgets/qspinbox.h>
 #include <QtWidgets/qslider.h>

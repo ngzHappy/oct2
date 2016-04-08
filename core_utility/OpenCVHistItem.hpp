@@ -6,7 +6,12 @@
 #endif
 
 #include "OpenCVItem.hpp"
-#include <QtCharts>
+class QGraphicsLayout;
+namespace QtCharts{
+class QChart;
+class QBarSeries;
+class QBarSet;
+}
 
 class CORE_UTILITYSHARED_EXPORT OpenCVHistItem : public OpenCVItem {
     Q_OBJECT

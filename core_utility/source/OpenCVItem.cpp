@@ -11,6 +11,7 @@
 #include <QtWidgets/qapplication.h>
 #include <QtWidgets/qgraphicssceneevent.h>
 #include <atomic>
+#include <QtCore/qdebug.h>
 
 namespace {
 namespace __private {

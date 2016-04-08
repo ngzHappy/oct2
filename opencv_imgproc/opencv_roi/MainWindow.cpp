@@ -1,5 +1,6 @@
 ﻿/*MainWindow.cpp*/
 #include <OpenCVUtility.hpp>
+#include <QtWidgets/qgraphicsproxywidget.h>
 #include <QtWidgets/qgraphicslinearlayout.h>
 #include "MainWindow.hpp"
 #include "OpenCVWindowDetail.hpp"
@@ -311,7 +312,7 @@ void MainWindow::openImage() {
 
     if (files_.isEmpty()) { return; }
     getOpenCVWindow()->insertImage( QImage(files_) );
-    
+
 }
 
 /*析构主窗口*/

@@ -1,9 +1,11 @@
 ﻿#undef MACRO_PROTECTED
 #define MACRO_PROTECTED public
+
 #include "../OpenCVScatterItem.hpp"
 #include <QtWidgets/qgraphicslinearlayout.h>
 #include <memory>
 #include <QtCharts>
+#include <QtCore/qdebug.h>
 
 namespace {
 namespace __private {

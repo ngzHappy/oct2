@@ -7,11 +7,16 @@
 
 #include <opencv2/opencv.hpp>
 #include "core_utility.hpp"
+#include "quazip/quazip.h"
+#include "quazip/quazipdir.h"
+#include "quazip/quazipfile.h"
+#include "quazip/quazipfileinfo.h"
+#include "quazip/GZipCompressor.hpp"
+#include "lua/lua.hpp"
 #include <QtCore/qdir.h>
 #include <QtCore/qobject.h>
 #include <QtCore/qcommandlineoption.h>
 #include <QtCore/qcommandlineparser.h>
-#include <QtCore/qdebug.h>
 #include <QtGui/qpixmap.h>
 #include <QtGui/qpainter.h>
 #include <QtCore/qtextstream.h>

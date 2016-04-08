@@ -5,6 +5,7 @@
 #include <QtWidgets/qgraphicslinearlayout.h>
 #include <memory>
 #include <QtCharts>
+#include <QtCore/qdebug.h>
 
 namespace {
 namespace __private {

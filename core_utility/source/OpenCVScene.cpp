@@ -1,6 +1,7 @@
 ﻿#include "../OpenCVScene.hpp"
 #include <QtWidgets/qmenu.h>
 #include <QtWidgets/qgraphicssceneevent.h>
+#include <QtCore/qdebug.h>
 
 namespace {
 namespace __private {

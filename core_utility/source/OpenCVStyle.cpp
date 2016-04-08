@@ -1,4 +1,5 @@
 ﻿#include "../OpenCvStyle.hpp"
+#include <QtCore/qdebug.h>
 
 OpenCVStyle::OpenCVStyle(QStyle * parent)
     :P(parent) {

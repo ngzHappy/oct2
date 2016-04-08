@@ -11,14 +11,9 @@
 #include <QtCore/qstring.h>
 #include <QtCore/qbytearray.h>
 #include "core_utility_global.hpp"
-#include "quazip/quazip.h"
-#include "quazip/quazipdir.h"
-#include "quazip/quazipfile.h"
-#include "quazip/quazipfileinfo.h"
-#include "quazip/GZipCompressor.hpp"
-#include "lua/lua.hpp"
 #include "ReadOnly.hpp"
 #include "getxy.hpp"
+struct lua_State;
 
 /*
 utility.copyTable

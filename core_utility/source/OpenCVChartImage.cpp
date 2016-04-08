@@ -6,6 +6,7 @@
 #include <QtWidgets/qfiledialog.h>
 #include <cassert>
 #include <QtCharts>
+#include <QtCore/qdebug.h>
 
 OpenCVChartImage::OpenCVChartImage(QGraphicsItem * _a_p)
     :P(_a_p) {

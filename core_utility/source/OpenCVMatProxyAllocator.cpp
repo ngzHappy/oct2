@@ -1,4 +1,6 @@
 ﻿#include "../OpenCVMatProxyAllocator.hpp"
+#include <QtCore/qdebug.h>
+
 using namespace _OPENCV_StdMatAllocator;
 cv::UMatData* __private::StdMatAllocator::allocate_user_data(void * _a_data_) {
     using namespace cv;

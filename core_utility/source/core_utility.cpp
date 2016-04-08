@@ -1,5 +1,6 @@
 ﻿#include "core_utility.hpp"
 #include <QtGui/qimage.h>
+#include <QtCore/qdebug.h>
 
 CoreUtility::CoreUtility(){
 

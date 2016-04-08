@@ -3,9 +3,11 @@
 #define LUA_LIB
 
 #include "../opencv_application_configuration_file.hpp"
+#include "../lua/lua.hpp"
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <QtCore/qdebug.h>
 
 /*静态数据*/
 std::shared_ptr<lua_State> OpenCVApplicationConfigurationFile::L_;

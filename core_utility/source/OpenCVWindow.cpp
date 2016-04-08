@@ -1,7 +1,8 @@
 ﻿#include "../OpenCVWindow.hpp"
 #include "../OpenCVScene.hpp"
 #include "../core_utility.hpp"
-#include "QtGui/qicon.h"
+#include <QtGui/qicon.h>
+#include <QtCore/qdebug.h>
 
 OpenCVWindow::OpenCVWindow(QWidget *parent)
     :P(parent),

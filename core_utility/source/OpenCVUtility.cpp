@@ -4,6 +4,7 @@
 #include <QtCore/qtimer.h>
 #include <private/qimage_p.h>
 #include <QtGui/qimagereader.h>
+#include <QtCore/qdebug.h>
 
 #include <cstdlib>
 #include <ctime>

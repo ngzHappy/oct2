@@ -1,7 +1,8 @@
 ﻿#define LUA_LIB
-#include "core_utility.hpp"
-#include "lua/lstate.h"
-
+#include "../core_utility.hpp"
+#include "../lua/lua.hpp"
+#include "../lua/lstate.h"
+#include <QtCore/qdebug.h>
 
 #include <sstream>
 #include <iostream>

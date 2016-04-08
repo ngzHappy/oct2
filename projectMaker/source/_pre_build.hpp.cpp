@@ -8,12 +8,15 @@
 //#if defined(QT_CORE_LIB)
 //#include <QtCore/QtCore>
 //#endif/*~QtCore*/
-#if defined(QT_CORE_LIB)
-#include <QtCore/qdir.h>
+#if defined(QT_CORE_LIB)  
 #include <QtCore/qobject.h>
 #include <QtCore/qcommandlineoption.h>
 #include <QtCore/qcommandlineparser.h>
 #include <QtCore/qdebug.h>
+#include <QtCore/qstring.h>
+#include <QtCore/qbytearray.h>
+#include <QtCore/qdir.h>
+#include <QtCore/qtextcodec.h>
 #endif/*~QtCore*/
 
 #endif/*~__cplusplus*/

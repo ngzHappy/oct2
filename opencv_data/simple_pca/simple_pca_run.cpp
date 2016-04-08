@@ -62,11 +62,11 @@ void draw_axis_array_(
 }
 
 extern void run(OpenCVWindow * window) {
-    
+
     std::vector< cv::Point2d > testPoints = genPoints();
     OpenCVScatterItem * item_ =
         window->insertScatter(testPoints.cbegin(),testPoints.cend());
-    
+
     /*令每个点减去均值*/
     {
         cv::Point2d mean_=
@@ -81,7 +81,7 @@ extern void run(OpenCVWindow * window) {
         testPoints.size(),2,
         CV_64FC1,
         const_cast<cv::Point2d *>(testPoints.data()));
-   
+
     /*保存成MATLAB格式*/
     {
         std::stringstream data_diff;

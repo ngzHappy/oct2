@@ -1,6 +1,8 @@
 ﻿const char *_run_cpp = u8R"=_____=(/*run.cpp*/
 #include <OpenCVUtility.hpp>
 #include <opencv_application_configuration_file.hpp>
+#include <QtCore/qdebug.h>
+#include <QtCharts>
 
 extern void run(OpenCVWindow * window) {
 

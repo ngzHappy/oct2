@@ -6,7 +6,10 @@
 
 namespace {
 
-inline double rand_0_1() { return (rand()%10000)/10000.0;}
+inline double rand_0_1() { 
+    enum :std::intptr_t{_D_=54321};
+    return static_cast<double>(rand()%_D_)/_D_;
+}
 
 std::vector<cv::Point2f> genPoints() {
     std::vector<cv::Point2f> ans;

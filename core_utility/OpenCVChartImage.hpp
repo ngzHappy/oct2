@@ -43,7 +43,7 @@ public:
         return insertLine(std::move(_v_),_close_);
     }
 public slots:
-    void saveImage();
+    virtual void saveImage();
 };
 
 template<typename B,typename E>

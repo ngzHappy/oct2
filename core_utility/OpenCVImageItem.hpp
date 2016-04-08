@@ -32,8 +32,9 @@ public:
     const AlgFunctionType & getAlgFunction()const { return alg_; }
     void setAlgFunction(AlgFunctionType);
     void renderTo(QImage &) override;
-    virtual void saveImage();
     virtual void tryResizeImage();
+public slots:
+    virtual void saveImage();
 signals:
     void imageChanged();
 protected:

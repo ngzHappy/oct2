@@ -29,10 +29,10 @@ public:
     load file
     support .zip ans plain file
     */
-    static int loadFile(lua_State * const L,const QString& __file_name,const QString & __zip_file_name=QString());
-    static int loadFile(lua_State * const L,QString&&__file_name,QString &&__zip_file_name=QString());
-    static int loadFile(lua_State * const L,QString&& __file_name,const QString & __zip_file_name=QString());
-    static int loadFile(lua_State * const L,const QString&__file_name,QString &&__zip_file_name=QString());
+    static int loadFile(lua_State * const L,const QString& __file_name,const QString & __zip_file_name);
+    static int loadFile(lua_State * const L,QString&&__file_name,QString &&__zip_file_name);
+    static int loadFile(lua_State * const L,QString&& __file_name,const QString & __zip_file_name);
+    static int loadFile(lua_State * const L,const QString&__file_name,QString &&__zip_file_name);
     /*init utility lib*/
     static int openLib(lua_State * L);
     /*load utility module*/

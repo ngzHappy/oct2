@@ -17,7 +17,7 @@ public:
         this->addVersionOption();
         this->addHelpOption();
         this->addOption(QCommandLineOption("lua","lua configure file",QString(),
-            "configure_file_simple_test.lua"));
+            "configure_file_simple_test.zip"));
     }
 };
 

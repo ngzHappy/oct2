@@ -8,6 +8,7 @@
 #include <fstream>
 #include <string>
 #include <QtCore/qdebug.h>
+#include "../core_utility.hpp"
 
 /*静态数据*/
 std::shared_ptr<lua_State> OpenCVApplicationConfigurationFile::L_;
@@ -42,6 +43,11 @@ public:
     }
     ~LUAStateLock() { lua_settop(L,top_); }
 };
+
+char to_lower_(char i) {
+    if ((i>='A')&&(i<='Z')) { return char(i-'A'+'a'); }
+    return i;
+}
 
 void init(
     OpenCVApplicationConfigurationFile * _a_this,
@@ -84,13 +90,56 @@ void init(
         }
 
         std::cout<<"lua configure filename: "<<file_name_<<std::endl;
-        _a_this->L_=LuaUtility::createLuaState();
-        LUAStateLock __lock(_a_this->L_.get());
-        lua_pushcfunction(_a_this->L_.get(),&__private::error_function_lua_loadfile);
-        const auto error_fun_pos_=lua_gettop(_a_this->L_.get());
-        luaL_loadfile(_a_this->L_.get(),file_name_.c_str());
-        lua_pcall(_a_this->L_.get(),0,LUA_MULTRET,error_fun_pos_);
-        _a_this->L__=_a_this->L_.get();
+
+        std::string lua_this_file_name_=_a_lua_file_name;
+        if (
+            (lua_this_file_name_.size()<4)||
+            !(
+            (to_lower_(*(lua_this_file_name_.rbegin()))=='p')&&
+            (to_lower_(*(lua_this_file_name_.rbegin()+1))=='i')&&
+            (to_lower_(*(lua_this_file_name_.rbegin()+2))=='z')&&
+            ((*(lua_this_file_name_.rbegin()+3))=='.')
+            )
+            ) {
+            _a_this->L_=LuaUtility::createLuaState();
+            LUAStateLock __lock(_a_this->L_.get())/*锁定lua栈区*/;
+            lua_pushcfunction(_a_this->L_.get(),&__private::error_function_lua_loadfile);
+            const auto error_fun_pos_=lua_gettop(_a_this->L_.get());
+            if ( LuaUtility::loadFile(
+                _a_this->L_.get(),
+                QString::fromLocal8Bit(file_name_.c_str(),
+                static_cast<int>(file_name_.size())),
+                QString::fromLocal8Bit(lua_this_file_name_.c_str(),
+                static_cast<int>(lua_this_file_name_.size()))
+                )/*从plain文件中读取文件*/) {
+                lua_pcall(_a_this->L_.get(),0,LUA_MULTRET,error_fun_pos_);
+            }
+            _a_this->L__=_a_this->L_.get();
+        }
+        else /*zip file*/
+        {
+            lua_this_file_name_.resize(lua_this_file_name_.size()-4);
+            lua_this_file_name_+=".lua";
+
+            _a_this->L_=LuaUtility::createLuaState();
+            LUAStateLock __lock(_a_this->L_.get())/*锁定lua栈区*/;
+            lua_pushcfunction(_a_this->L_.get(),&__private::error_function_lua_loadfile);
+            const auto error_fun_pos_=lua_gettop(_a_this->L_.get());
+            if (
+                LuaUtility::loadFile(
+                _a_this->L_.get(),
+                QString::fromLocal8Bit(file_name_.c_str(),
+                static_cast<int>(file_name_.size())),
+                QString::fromLocal8Bit(lua_this_file_name_.c_str(),
+                static_cast<int>(lua_this_file_name_.size()))
+                )/*从zip文件中读取文件*/
+                ) {
+                /*执行文件*/
+                lua_pcall(_a_this->L_.get(),0,LUA_MULTRET,error_fun_pos_);
+            }
+            _a_this->L__=_a_this->L_.get();
+        }
+
         std::cout.flush();
     }
 }

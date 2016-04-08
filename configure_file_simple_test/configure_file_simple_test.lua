@@ -1,10 +1,10 @@
-﻿--[[lua--]]
+﻿--[[lua]]
 application={
         input_images={
                 "images:000001",
                 "images:000002",
                 "images:000003",
-        },
+        }, 
 		input_data_1d={
 			1,2,3,[[4]],5,
 		},

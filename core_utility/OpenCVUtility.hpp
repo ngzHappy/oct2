@@ -7,6 +7,7 @@
 
 #include <opencv2/opencv.hpp>
 #include "core_utility.hpp"
+#include <QtCore>
 #include <QtCore/qobject.h>
 #include <QtGui/qpainter.h>
 #include <QtGui/qguiapplication.h>

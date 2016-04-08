@@ -17,7 +17,8 @@
 #include "lua/lua.hpp"
 #include "ReadOnly.hpp"
 #include "getxy.hpp"
-#include <QtCore>
+#include <QtCore/qstring.h>
+#include <QtCore/qbytearray.h>
 
 /*
 utility.copyTable

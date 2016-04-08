@@ -27,7 +27,8 @@ QtCharts::QLineSeries * OpenCVChartImage::insertLine(
     chart_->addSeries(_v_line);
     chart_->setAxisX(chart_->axisX(series_),_v_line);
     chart_->setAxisY(chart_->axisY(series_),_v_line);
-    _v_line->setPen(QPen(QColor(0,0,0),2));
+    _v_line->setPen(QPen(QColor(150,255,100,199),2.3333));
+    _v_line->setBrush(QColor(255,0,0));
     _v_line->setPointsVisible(true);
     return _v_line;
 }
@@ -77,7 +78,7 @@ void OpenCVChartImage::_p_setChartImage(_t_CHARTIMAGE_t__ &&_chartImage_) {
         auto size_=this->minimumSize();
         size_=fit_size_(
             _v_width,_v_height,
-            size_.width(),size_.height());
+            size_.width()*1.25,size_.height()*1.25);
         this->resize(size_);
     }
 
@@ -99,32 +100,36 @@ void OpenCVChartImage::_p_setChartImage(_t_CHARTIMAGE_t__ &&_chartImage_) {
     update();
 }
 
-/*
-QPointF cen_position_=chart_->mapToPosition(cen_point_,series_);
-cen_position_=chart_->mapToItem(this,cen_position_);*/
-
 void OpenCVChartImage::paint(
     QPainter *painter,
     const QStyleOptionGraphicsItem *,
     QWidget *) {
+
     const auto _v_width=chart_image_.width();
     const auto _v_height=chart_image_.height();
+
     if (_v_width<=0) { return; }
     if (_v_height<=0) { return; }
 
     QPointF top_left_=chart_->mapToPosition(
-        QPointF(0,_v_height),this->series_);
+        QPointF(0,_v_height ),this->series_);
     top_left_=chart_->mapToItem(this,top_left_);
 
     QPointF bottom_right_=chart_->mapToPosition(
-        QPointF(_v_width,0),this->series_);
+        QPointF(_v_width ,0),this->series_);
     bottom_right_=chart_->mapToItem(this,bottom_right_);
+
+    top_left_.setX(std::ceil(top_left_.x()));
+    top_left_.setY(std::ceil(top_left_.y()));
+    bottom_right_.setX(std::floor(bottom_right_.x()));
+    bottom_right_.setY(std::floor(bottom_right_.y()));
 
     QRectF target_rect_(top_left_,bottom_right_);
     painter->drawImage(
         target_rect_,
         chart_image_,
-        chart_image_.rect()
+        chart_image_.rect(),
+        Qt::ImageConversionFlag::AutoColor
         );
 
 }

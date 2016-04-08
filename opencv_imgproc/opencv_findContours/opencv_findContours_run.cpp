@@ -28,6 +28,7 @@ extern void run(OpenCVWindow * window) {
                 input_image_.convertToFormat(QImage::Format_Grayscale8);
             
             auto * item_ = window->insertChartImage(input_image_);
+
             cv::Mat mat=OpenCVUtility::tryRead(input_image_);
             std::vector<std::vector<cv::Point>> ans;
 
@@ -40,13 +41,11 @@ extern void run(OpenCVWindow * window) {
 
            if (ans.empty()) { continue; }
 
+           /*绘制轮廓*/
            item_->setWindowTitle(u8"第%1幅图片轮廓"_qs.arg(count_));
            
-          
-           for (auto i=ans.begin(); i!=ans.end();++i) {
-               std::vector<cv::Point> & d=*i;
-               item_->insertLine(d.begin(),d.end(),true)
-                   ->setPen(QPen(QColor(200,200,100,150),2));
+           for (const auto & i:ans) {
+               item_->insertLine(i.cbegin(),i.cend(),true);
            }
         }
     }

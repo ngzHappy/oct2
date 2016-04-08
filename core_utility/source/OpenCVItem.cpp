@@ -59,25 +59,25 @@ public:
                 }break;
                 case 1: {
                     painter.setBrush(QColor(rand()&63,rand()&63,255,160+(rand()&15)));
-                    painter.drawPath(p1);
-                    painter.setBrush(QColor(rand()&63,255,rand()&63,160+(rand()&15)));
-                    painter.drawPath(p3);
-                    painter.setBrush(QColor(255,rand()&63,rand()&63,160+(rand()&15)));
                     painter.drawPath(p2);
-                }break;
+                    painter.setBrush(QColor(rand()&63,255,rand()&63,160+(rand()&15)));
+                    painter.drawPath(p1);
+                    painter.setBrush(QColor(255,rand()&63,rand()&63,160+(rand()&15)));
+                    painter.drawPath(p3);
                 case 2: {
                     painter.setBrush(QColor(rand()&63,rand()&63,255,160+(rand()&15)));
                     painter.drawPath(p2);
                     painter.setBrush(QColor(rand()&63,255,rand()&63,160+(rand()&15)));
-                    painter.drawPath(p1);
-                    painter.setBrush(QColor(255,rand()&63,rand()&63,160+(rand()&15)));
                     painter.drawPath(p3);
+                    painter.setBrush(QColor(255,rand()&63,rand()&63,160+(rand()&15)));
+                    painter.drawPath(p1);
+                }break;
                 }break;
                 case 3: {
                     painter.setBrush(QColor(rand()&63,rand()&63,255,160+(rand()&15)));
-                    painter.drawPath(p2);
-                    painter.setBrush(QColor(rand()&63,255,rand()&63,160+(rand()&15)));
                     painter.drawPath(p3);
+                    painter.setBrush(QColor(rand()&63,255,rand()&63,160+(rand()&15)));
+                    painter.drawPath(p2);
                     painter.setBrush(QColor(255,rand()&63,rand()&63,160+(rand()&15)));
                     painter.drawPath(p1);
                 }break;
@@ -91,11 +91,11 @@ public:
                 }break;
                 case 5: {
                     painter.setBrush(QColor(rand()&63,rand()&63,255,160+(rand()&15)));
-                    painter.drawPath(p3);
-                    painter.setBrush(QColor(rand()&63,255,rand()&63,160+(rand()&15)));
-                    painter.drawPath(p2);
-                    painter.setBrush(QColor(255,rand()&63,rand()&63,160+(rand()&15)));
                     painter.drawPath(p1);
+                    painter.setBrush(QColor(rand()&63,255,rand()&63,160+(rand()&15)));
+                    painter.drawPath(p3);
+                    painter.setBrush(QColor(255,rand()&63,rand()&63,160+(rand()&15)));
+                    painter.drawPath(p2);
                 }break;
                 default: {
                     rand_flag_=11-rand_flag_;
@@ -124,7 +124,7 @@ public:
         }();
         ++icon_index;
         if (icon_index>11) { icon_index=0; }
-        return ans_[icon_index];
+        return ans_[std::min(icon_index.load(),11)];
         (void)(init_icon_);
     }
 

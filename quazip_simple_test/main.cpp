@@ -1,6 +1,12 @@
 ﻿#include <QtWidgets/qapplication.h>
 #include <QtWidgets/qwidget.h>
 #include <QtCore/qtextstream.h>
+#include <QtCore/qtextcodec.h>
+#include <QtCore/qdir.h>
+#include <QtCore/qfile.h>
+#include <quazip/quazip.h>
+#include <quazip/quazipfile.h>
+#include <quazip/quazipfileinfo.h>
 #include <core_utility.hpp>
 
 int main(int argc, char *argv[])

@@ -7,6 +7,7 @@ const char *_main_cpp = u8R"=_____=(/*main.cpp*/
 #include <QtCore/qcommandlineparser.h>
 #include <QtCore/qcommandlineoption.h>
 #include <QtCore/qtextcodec.h>
+#include <QtCore/qdir.h>
 #include <opencv_application_configuration_file.hpp>
 #include <iostream>
 

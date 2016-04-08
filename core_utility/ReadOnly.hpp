@@ -1,7 +1,8 @@
 ﻿#if  !defined(_0_READONLY_HPP)
 #define _0_READONLY_HPP() 1
 
-//#include "QtUtility.hpp"
+#include <QtCore/qsharedpointer.h>
+#include <memory>
 
 namespace {
 namespace __header{

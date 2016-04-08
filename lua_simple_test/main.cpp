@@ -1,6 +1,7 @@
 ﻿#include <QtWidgets/qapplication.h>
 #include <QtWidgets/qwidget.h>
 #include <core_utility.hpp>
+#include <lua/lua.hpp>
 #include <iostream>
 
 int main(int argc, char *argv[])

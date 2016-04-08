@@ -12,10 +12,10 @@ OpenCVWindow::OpenCVWindow(QWidget *parent)
     scene_->setBackgroundBrush(QColor(200-30,200-15,200-10));
     this->setWindowIcon(QIcon());
 
-    setRenderHint( QPainter::HighQualityAntialiasing,true );
-    setRenderHint( QPainter::SmoothPixmapTransform,true );
-    setRenderHint( QPainter::TextAntialiasing,true );
-    setRenderHint( QPainter::Antialiasing,true );
+    setRenderHint(QPainter::HighQualityAntialiasing,true);
+    setRenderHint(QPainter::SmoothPixmapTransform,true);
+    setRenderHint(QPainter::TextAntialiasing,true);
+    setRenderHint(QPainter::Antialiasing,true);
 }
 
 OpenCVWindow::~OpenCVWindow() {

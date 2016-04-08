@@ -23,7 +23,7 @@ void OpenCVScene::contextMenuEvent(
 
     const QPoint pos_=contextMenuEvent->screenPos();
     QGraphicsItem * item_=this->itemAt(contextMenuEvent->scenePos(),QTransform());
-    if(item_==nullptr){return;}
+    if (item_==nullptr) { return; }
     OpenCVImageItem * imageItem_=dynamic_cast<OpenCVImageItem *>(item_);
     if (imageItem_==nullptr) {
         imageItem_=dynamic_cast<OpenCVImageItem *>(item_->parentItem());

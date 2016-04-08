@@ -21,7 +21,7 @@ private:
         minY=data_.first().y(); maxY=minY;
         auto pos=data_.begin();
         auto end=data_.end();
-        for (;pos!=end;++pos) {
+        for (; pos!=end; ++pos) {
             ++count_; centrePoint+=(*pos);
             if (minX>pos->x()) { minX=pos->x(); }
             if (maxX<pos->x()) { maxX=pos->x(); }
@@ -42,7 +42,7 @@ private:
 }
 }
 
-void OpenCVScatterItem::_OpenCVScatterItem_init( OpenCVScatterItem * this_) {
+void OpenCVScatterItem::_OpenCVScatterItem_init(OpenCVScatterItem * this_) {
     if (this_->data_.size()<=0) {
         this_->chart_=nullptr;
         this_->series_=nullptr;
@@ -52,7 +52,7 @@ void OpenCVScatterItem::_OpenCVScatterItem_init( OpenCVScatterItem * this_) {
     /*设置数据*/
     this_->series_=new QtCharts::QScatterSeries;
     this_->chart_=new QtCharts::QChart;
-    this_->series_->append( this_->data_ );
+    this_->series_->append(this_->data_);
     this_->chart_->addSeries(this_->series_);
     this_->layout_->addItem(this_->chart_);
     /*设置样式*/
@@ -63,8 +63,8 @@ void OpenCVScatterItem::_OpenCVScatterItem_init( OpenCVScatterItem * this_) {
     /*设置坐标系*/
     this_->chart_->createDefaultAxes();
     __private::Range range_(this_->data_);
-    this_->chart_->axisX()->setRange( range_.minX,range_.maxX );
-    this_->chart_->axisY()->setRange( range_.minY,range_.maxY );
+    this_->chart_->axisX()->setRange(range_.minX,range_.maxX);
+    this_->chart_->axisY()->setRange(range_.minY,range_.maxY);
     this_->cen_point_=range_.centrePoint;
     /*设置颜色*/
     this_->setColor(this_->color());
@@ -98,9 +98,8 @@ void OpenCVScatterItem::renderTo(QImage & i) {
     }
 }
 
-OpenCVScatterItem::OpenCVScatterItem(QGraphicsItem *parent )
-    :P(parent)
-{
+OpenCVScatterItem::OpenCVScatterItem(QGraphicsItem *parent)
+    :P(parent) {
     color_=QColor(123,123,123,200);
     cen_point_=QPointF(0,0);
     this->resize(512,512);
@@ -113,12 +112,12 @@ OpenCVScatterItem::~OpenCVScatterItem() {
 }
 
 
-const QList<QPointF> & OpenCVScatterItem::getData() const{
+const QList<QPointF> & OpenCVScatterItem::getData() const {
     return this->data_;
 }
 
 template<typename _t_DATA__t__>
-void OpenCVScatterItem::_p_setData(_t_DATA__t__ &&_data__){
+void OpenCVScatterItem::_p_setData(_t_DATA__t__ &&_data__) {
     layout_=new QGraphicsLinearLayout;
     data_=std::forward<_t_DATA__t__>(_data__);
     {
@@ -128,21 +127,21 @@ void OpenCVScatterItem::_p_setData(_t_DATA__t__ &&_data__){
     _OpenCVScatterItem_init(this);
 }
 
-void OpenCVScatterItem::setData(const QList<QPointF>&_data__){
+void OpenCVScatterItem::setData(const QList<QPointF>&_data__) {
     _p_setData(_data__);
 }
 
-void OpenCVScatterItem::setData(QList<QPointF>&&_data__){
+void OpenCVScatterItem::setData(QList<QPointF>&&_data__) {
     _p_setData(std::move(_data__));
 }
 
 
-const QColor & OpenCVScatterItem::getColor() const{
+const QColor & OpenCVScatterItem::getColor() const {
     return color_;
 }
 
 template<typename _t_COLOR_t__>
-void OpenCVScatterItem::_p_setColor(_t_COLOR_t__ &&_color_){
+void OpenCVScatterItem::_p_setColor(_t_COLOR_t__ &&_color_) {
     color_=std::forward<_t_COLOR_t__>(_color_);
     if (series_) {
         series_->setBrush(color_);
@@ -159,50 +158,50 @@ void OpenCVScatterItem::paint(
     {
         painter->setRenderHint(QPainter::HighQualityAntialiasing,true);
     }
-    if (chart_ && series_ ) {
+    if (chart_ && series_) {
         if (cen_paint_&&(*cen_paint_)) {
             QPointF cen_position_=chart_->mapToPosition(cen_point_,series_);
-            QPointF d_cen_position_=chart_->mapToPosition(cen_point_+QPointF{0.5,0.5},series_);
+            QPointF d_cen_position_=chart_->mapToPosition(cen_point_+QPointF{ 0.5,0.5 },series_);
             d_cen_position_-=cen_position_;
             cen_position_=chart_->mapToItem(this,cen_position_);
             painter->save();
             painter->translate(cen_position_);
-            const auto len_ =std::sqrt(
+            const auto len_=std::sqrt(
                 d_cen_position_.x()*d_cen_position_.x()+
                 d_cen_position_.y()*d_cen_position_.y()
                 )/1.50;
-            painter->scale( std::abs(d_cen_position_.x()/len_),std::abs(d_cen_position_.y()/len_) );
+            painter->scale(std::abs(d_cen_position_.x()/len_),std::abs(d_cen_position_.y()/len_));
             (*cen_paint_)(painter);
             painter->restore();
         }
     }
 }
 
-const std::shared_ptr< std::function<void(QPainter *)> > & OpenCVScatterItem::getCentrePointPaint() const{
+const std::shared_ptr< std::function<void(QPainter *)> > & OpenCVScatterItem::getCentrePointPaint() const {
     return cen_paint_;
 }
 
 template<typename _t_CENTREPOINTPAINT_t__>
-void OpenCVScatterItem::_p_setCentrePointPaint(_t_CENTREPOINTPAINT_t__ &&_centrePointPaint_){
+void OpenCVScatterItem::_p_setCentrePointPaint(_t_CENTREPOINTPAINT_t__ &&_centrePointPaint_) {
     if (cen_paint_==_centrePointPaint_) { return; }
     cen_paint_=std::forward<_t_CENTREPOINTPAINT_t__>(_centrePointPaint_);
     this->update();
 }
 
-void OpenCVScatterItem::setCentrePointPaint(const std::shared_ptr< std::function<void(QPainter *)> >&_centrePointPaint_){
+void OpenCVScatterItem::setCentrePointPaint(const std::shared_ptr< std::function<void(QPainter *)> >&_centrePointPaint_) {
     _p_setCentrePointPaint(_centrePointPaint_);
 }
 
-void OpenCVScatterItem::setCentrePointPaint(std::shared_ptr< std::function<void(QPainter *)> >&&_centrePointPaint_){
+void OpenCVScatterItem::setCentrePointPaint(std::shared_ptr< std::function<void(QPainter *)> >&&_centrePointPaint_) {
     _p_setCentrePointPaint(std::move(_centrePointPaint_));
 }
 
 
-void OpenCVScatterItem::setColor(const QColor&_color_){
+void OpenCVScatterItem::setColor(const QColor&_color_) {
     _p_setColor(_color_);
 }
 
-void OpenCVScatterItem::setColor(QColor&&_color_){
+void OpenCVScatterItem::setColor(QColor&&_color_) {
     _p_setColor(std::move(_color_));
 }
 

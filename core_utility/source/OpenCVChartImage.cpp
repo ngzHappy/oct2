@@ -22,9 +22,9 @@ QSizeF fit_size_(
     double width_,double height_,
     double dx_,double dy_
     ) {
-    if (width_ == height_) {
+    if (width_==height_) {
         /*长宽相等,缩放到最大值*/
-        dx_=std::max({ dx_,dy_ ,_value_max_()});
+        dx_=std::max({ dx_,dy_ ,_value_max_() });
         return QSizeF(dx_,dx_);
     }
     else {

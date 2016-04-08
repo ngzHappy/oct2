@@ -21,7 +21,7 @@ private:
         minY=data_.first().y(); maxY=minY;
         auto pos=data_.begin();
         auto end=data_.end();
-        for (;pos!=end;++pos) {
+        for (; pos!=end; ++pos) {
             ++count_; centrePoint+=(*pos);
             if (minX>pos->x()) { minX=pos->x(); }
             if (maxX<pos->x()) { maxX=pos->x(); }
@@ -42,7 +42,7 @@ private:
 }
 }
 
-void OpenCVLineSeriesItem::_OpenCVLineSeriesItem_init( OpenCVLineSeriesItem * this_) {
+void OpenCVLineSeriesItem::_OpenCVLineSeriesItem_init(OpenCVLineSeriesItem * this_) {
     if (this_->data_.size()<=0) {
         this_->chart_=nullptr;
         this_->series_=nullptr;
@@ -52,7 +52,7 @@ void OpenCVLineSeriesItem::_OpenCVLineSeriesItem_init( OpenCVLineSeriesItem * th
     /*设置数据*/
     this_->series_=new QtCharts::QLineSeries;
     this_->chart_=new QtCharts::QChart;
-    this_->series_->append( this_->data_ );
+    this_->series_->append(this_->data_);
     this_->chart_->addSeries(this_->series_);
     this_->layout_->addItem(this_->chart_);
     /*设置样式*/
@@ -63,8 +63,8 @@ void OpenCVLineSeriesItem::_OpenCVLineSeriesItem_init( OpenCVLineSeriesItem * th
     /*设置坐标系*/
     this_->chart_->createDefaultAxes();
     __private::Range range_(this_->data_);
-    this_->chart_->axisX()->setRange( range_.minX,range_.maxX );
-    this_->chart_->axisY()->setRange( range_.minY,range_.maxY );
+    this_->chart_->axisX()->setRange(range_.minX,range_.maxX);
+    this_->chart_->axisY()->setRange(range_.minY,range_.maxY);
     this_->cen_point_=range_.centrePoint;
     /*设置颜色*/
     this_->setColor(this_->color());
@@ -100,9 +100,8 @@ void OpenCVLineSeriesItem::renderTo(QImage & i) {
     }
 }
 
-OpenCVLineSeriesItem::OpenCVLineSeriesItem(QGraphicsItem *parent )
-    :P(parent)
-{
+OpenCVLineSeriesItem::OpenCVLineSeriesItem(QGraphicsItem *parent)
+    :P(parent) {
     color_=QColor(123,123,123,200);
     cen_point_=QPointF(0,0);
     this->resize(512,512);
@@ -134,12 +133,12 @@ OpenCVLineSeriesItem::~OpenCVLineSeriesItem() {
 }
 
 
-const QList<QPointF> & OpenCVLineSeriesItem::getData() const{
+const QList<QPointF> & OpenCVLineSeriesItem::getData() const {
     return this->data_;
 }
 
 template<typename _t_DATA__t__>
-void OpenCVLineSeriesItem::_p_setData(_t_DATA__t__ &&_data__){
+void OpenCVLineSeriesItem::_p_setData(_t_DATA__t__ &&_data__) {
     layout_=new QGraphicsLinearLayout;
     data_=std::forward<_t_DATA__t__>(_data__);
     {
@@ -149,21 +148,21 @@ void OpenCVLineSeriesItem::_p_setData(_t_DATA__t__ &&_data__){
     _OpenCVLineSeriesItem_init(this);
 }
 
-void OpenCVLineSeriesItem::setData(const QList<QPointF>&_data__){
+void OpenCVLineSeriesItem::setData(const QList<QPointF>&_data__) {
     _p_setData(_data__);
 }
 
-void OpenCVLineSeriesItem::setData(QList<QPointF>&&_data__){
+void OpenCVLineSeriesItem::setData(QList<QPointF>&&_data__) {
     _p_setData(std::move(_data__));
 }
 
 
-const QColor & OpenCVLineSeriesItem::getColor() const{
+const QColor & OpenCVLineSeriesItem::getColor() const {
     return color_;
 }
 
 template<typename _t_COLOR_t__>
-void OpenCVLineSeriesItem::_p_setColor(_t_COLOR_t__ &&_color_){
+void OpenCVLineSeriesItem::_p_setColor(_t_COLOR_t__ &&_color_) {
     color_=std::forward<_t_COLOR_t__>(_color_);
     if (series_) {
         series_->setBrush(color_);
@@ -180,50 +179,50 @@ void OpenCVLineSeriesItem::paint(
     {
         painter->setRenderHint(QPainter::HighQualityAntialiasing,true);
     }
-    if (chart_ && series_ ) {
+    if (chart_ && series_) {
         if (cen_paint_&&(*cen_paint_)) {
             QPointF cen_position_=chart_->mapToPosition(cen_point_,series_);
-            QPointF d_cen_position_=chart_->mapToPosition(cen_point_+QPointF{0.5,0.5},series_);
+            QPointF d_cen_position_=chart_->mapToPosition(cen_point_+QPointF{ 0.5,0.5 },series_);
             d_cen_position_-=cen_position_;
             cen_position_=chart_->mapToItem(this,cen_position_);
             painter->save();
             painter->translate(cen_position_);
-            const auto len_ =std::sqrt(
+            const auto len_=std::sqrt(
                 d_cen_position_.x()*d_cen_position_.x()+
                 d_cen_position_.y()*d_cen_position_.y()
                 )/1.50;
-            painter->scale( std::abs(d_cen_position_.x()/len_),std::abs(d_cen_position_.y()/len_) );
+            painter->scale(std::abs(d_cen_position_.x()/len_),std::abs(d_cen_position_.y()/len_));
             (*cen_paint_)(painter);
             painter->restore();
         }
     }
 }
 
-const std::shared_ptr< std::function<void(QPainter *)> > & OpenCVLineSeriesItem::getCentrePointPaint() const{
+const std::shared_ptr< std::function<void(QPainter *)> > & OpenCVLineSeriesItem::getCentrePointPaint() const {
     return cen_paint_;
 }
 
 template<typename _t_CENTREPOINTPAINT_t__>
-void OpenCVLineSeriesItem::_p_setCentrePointPaint(_t_CENTREPOINTPAINT_t__ &&_centrePointPaint_){
+void OpenCVLineSeriesItem::_p_setCentrePointPaint(_t_CENTREPOINTPAINT_t__ &&_centrePointPaint_) {
     if (cen_paint_==_centrePointPaint_) { return; }
     cen_paint_=std::forward<_t_CENTREPOINTPAINT_t__>(_centrePointPaint_);
     this->update();
 }
 
-void OpenCVLineSeriesItem::setCentrePointPaint(const std::shared_ptr< std::function<void(QPainter *)> >&_centrePointPaint_){
+void OpenCVLineSeriesItem::setCentrePointPaint(const std::shared_ptr< std::function<void(QPainter *)> >&_centrePointPaint_) {
     _p_setCentrePointPaint(_centrePointPaint_);
 }
 
-void OpenCVLineSeriesItem::setCentrePointPaint(std::shared_ptr< std::function<void(QPainter *)> >&&_centrePointPaint_){
+void OpenCVLineSeriesItem::setCentrePointPaint(std::shared_ptr< std::function<void(QPainter *)> >&&_centrePointPaint_) {
     _p_setCentrePointPaint(std::move(_centrePointPaint_));
 }
 
 
-void OpenCVLineSeriesItem::setColor(const QColor&_color_){
+void OpenCVLineSeriesItem::setColor(const QColor&_color_) {
     _p_setColor(_color_);
 }
 
-void OpenCVLineSeriesItem::setColor(QColor&&_color_){
+void OpenCVLineSeriesItem::setColor(QColor&&_color_) {
     _p_setColor(std::move(_color_));
 }
 

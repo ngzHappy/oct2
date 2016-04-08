@@ -729,10 +729,9 @@ inline int LuaUtility::_p_loadFile(
             return 1;
         }
         else {
-            size_t l;
-            const char * _error_=luaL_tolstring(L,-1,&l);
-            if ( l && _error_ ) {
-                qDebug()<<"error on build "<<QByteArray(_error_,l);
+            const char * _error_=luaL_tolstring(L,-1,&__size__);
+            if ( __size__ && _error_ ) {
+                qDebug()<<"error on build "<<QByteArray(_error_,__size__);
             }
             lua_settop(L,top_lock_);
             return 0;

@@ -1,4 +1,4 @@
-﻿#include "OpenCVScene.hpp"
+﻿#include "../OpenCVScene.hpp"
 #include <QtWidgets/qmenu.h>
 #include <QtWidgets/qgraphicssceneevent.h>
 

@@ -3,6 +3,7 @@
 #include <opencv_application_configuration_file.hpp>
 #include <vector>
 #include <array>
+#include <QtCharts>
 
 static inline std::vector<cv::Point2f>
 genRandPoint() {

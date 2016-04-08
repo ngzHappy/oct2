@@ -1,5 +1,6 @@
 ﻿/*MainWindow.cpp*/
 #include <OpenCVUtility.hpp>
+#include <QtWidgets/qgraphicslinearlayout.h>
 #include "MainWindow.hpp"
 #include "OpenCVWindowDetail.hpp"
 #include <QtCore/qdebug.h>

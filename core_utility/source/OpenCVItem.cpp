@@ -1,5 +1,5 @@
-﻿#include "OpenCVItem.hpp"
-#include "OpenCVStyle.hpp"
+﻿#include "../OpenCVItem.hpp"
+#include "../OpenCVStyle.hpp"
 #include <QtGui/qpalette.h>
 #include <QtWidgets/qstyleoption.h>
 #include <QtGui/qpainter.h>

@@ -1,4 +1,4 @@
-﻿#include "OpenCVUtility.hpp"
+﻿#include "../OpenCVUtility.hpp"
 #include <QtWidgets/qapplication.h>
 #include <QtGui/qimage.h>
 #include <QtCore/qtimer.h>

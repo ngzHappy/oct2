@@ -1,9 +1,9 @@
 ﻿#define MACRO_PROTECTED public
+#include "../OpenCVChartImage.hpp"
+#include "../OpenCVUtility.hpp"
 #include <QtGui/qimage.h>
 #include <private/qimage_p.h>
 #include <QtWidgets/qfiledialog.h>
-#include "../OpenCVChartImage.hpp"
-#include "../OpenCVUtility.hpp"
 #include <cassert>
 #include <QtCharts>
 

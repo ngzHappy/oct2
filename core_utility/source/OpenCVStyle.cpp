@@ -1,4 +1,4 @@
-﻿#include "OpenCvStyle.hpp"
+﻿#include "../OpenCvStyle.hpp"
 
 OpenCVStyle::OpenCVStyle(QStyle * parent)
     :P(parent) {

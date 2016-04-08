@@ -1,4 +1,4 @@
-﻿#include "OpenCVHistItem.hpp"
+﻿#include "../OpenCVHistItem.hpp"
 #include <QtWidgets/qgraphicslinearlayout.h>
 #include <QtCharts>
 

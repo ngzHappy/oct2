@@ -55,12 +55,14 @@ void init(
         if (application_path.empty()) { std::cout<<"app empty"<<std::endl; return; }
         {
             const auto last_=application_path.find_last_of("/\\");
-            if (last_==std::string::npos) { std::cout<<"application path :"<<application_path
-                                                    <<" can not find / \\ "<<std::endl;return; }
+            if (last_==std::string::npos) {
+                std::cout<<"application path :"<<application_path
+                    <<" can not find / \\ "<<std::endl; return;
+            }
             application_path=std::string(
                 application_path.begin(),
                 application_path.begin()+last_);
-            if (application_path.empty()) { std::cout<<"app empty ??"<<std::endl;return; }
+            if (application_path.empty()) { std::cout<<"app empty ??"<<std::endl; return; }
         }
         std::string file_name_=_a_lua_file_name;
         {
@@ -98,10 +100,158 @@ void init(
 const OpenCVApplicationConfigurationFile & CoreUtility::getConfigurationFile() {
     static OpenCVApplicationConfigurationFile ans_(
                 OpenCVApplicationConfigurationFile::L_.get()
-                ) ;
-    if(ans_.L__){return ans_;}
+                );
+    if (ans_.L__) { return ans_; }
     ans_.L__=OpenCVApplicationConfigurationFile::L_.get();
     return ans_;
+}
+
+std::shared_ptr<const void> OpenCVApplicationConfigurationFile::_p_begin_read_data_1d()const {
+    if (L__==nullptr) { throw nullptr; }
+    std::shared_ptr<const void> ans_(new __private::LUAStateLock(L__));
+    luaL_dostring(L__,"return application.input_data_1d");
+    if (false==lua_istable(L__,-1)) { throw nullptr; }
+    lua_pushnil(L__);
+    return std::move(ans_);
+}
+
+void OpenCVApplicationConfigurationFile::_p_end_read_data_1d()const {
+
+}
+
+bool OpenCVApplicationConfigurationFile::_p_get_1d_data(
+    NumberType & __1)const {
+    if (lua_next(L__,-2/*table index*/)) {
+        int is_num_=0;
+        __1=lua_tonumberx(L__,-1,&is_num_);
+        if (false==is_num_) {
+            return false;
+        }
+        lua_pop(L__,1);
+        return true;
+    }
+    return false;
+}
+
+bool OpenCVApplicationConfigurationFile::_p_get_1d_data(
+    IntegerType &__1)const {
+    if (lua_next(L__,-2/*table index*/)) {
+        int is_num_=0;
+        __1=lua_tointegerx(L__,-1,&is_num_);
+        if (false==is_num_) {
+            const auto ___1=(lua_tonumberx(L__,-1,&is_num_));
+            if (false==is_num_) { return false; }
+            /*?????*/
+            __1=static_cast<IntegerType>(___1);
+        }
+        lua_pop(L__,1);
+        return true;
+    }
+    return false;
+}
+
+std::shared_ptr<const void> OpenCVApplicationConfigurationFile::_p_begin_read_data_2d()const {
+    if (L__==nullptr) { throw nullptr; }
+    std::shared_ptr<const void> ans_(new __private::LUAStateLock(L__));
+    luaL_dostring(L__,"return application.input_data_2d");
+    if (false==lua_istable(L__,-1)) { throw nullptr; }
+    lua_pushnil(L__);
+    return std::move(ans_);
+}
+
+void OpenCVApplicationConfigurationFile::_p_end_read_data_2d() const {
+
+}
+
+bool OpenCVApplicationConfigurationFile::_p_get_2d_data(
+    NumberType &__1,
+    NumberType &__2)const {
+    if (lua_next(L__,-2/*table index*/)) {
+        if (lua_istable(L__,-1)) {
+            auto table_index=lua_gettop(L__);
+            lua_pushnil(L__);
+            if (_p_get_1d_data(__1)) {
+                if (_p_get_1d_data(__2)) {
+                    lua_settop(L__,table_index-1)/*pop the table*/;
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+bool OpenCVApplicationConfigurationFile::_p_get_2d_data(
+    IntegerType &__1,
+    IntegerType &__2)const {
+    if (lua_next(L__,-2/*table index*/)) {
+        if (lua_istable(L__,-1)) {
+            auto table_index=lua_gettop(L__);
+            lua_pushnil(L__);
+            if (_p_get_1d_data(__1)) {
+                if (_p_get_1d_data(__2)) {
+                    lua_settop(L__,table_index-1)/*pop the table*/;
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+std::shared_ptr<const void> OpenCVApplicationConfigurationFile::_p_begin_read_data_3d()const {
+    if (L__==nullptr) { throw nullptr; }
+    std::shared_ptr<const void> ans_(new __private::LUAStateLock(L__));
+    luaL_dostring(L__,"return application.input_data_3d");
+    if (false==lua_istable(L__,-1)) { throw nullptr; }
+    lua_pushnil(L__);
+    return std::move(ans_);
+}
+
+void OpenCVApplicationConfigurationFile::_p_end_read_data_3d()const {
+
+}
+
+bool OpenCVApplicationConfigurationFile::_p_get_3d_data(
+    NumberType &__1,
+    NumberType &__2,
+    NumberType &__3)const {
+    if (lua_next(L__,-2/*table index*/)) {
+        if (lua_istable(L__,-1)) {
+            const auto table_index=lua_gettop(L__);
+            lua_pushnil(L__);
+            if (_p_get_1d_data(__1)) {
+                if (_p_get_1d_data(__2)) {
+                    if (_p_get_1d_data(__3)) {
+                        lua_settop(L__,table_index-1)/*pop the table*/;
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    return false;
+}
+
+bool OpenCVApplicationConfigurationFile::_p_get_3d_data(
+    IntegerType &__1,
+    IntegerType &__2,
+    IntegerType &__3)const {
+    if (lua_next(L__,-2/*table index*/)) {
+        if (lua_istable(L__,-1)) {
+            const auto table_index=lua_gettop(L__);
+            lua_pushnil(L__);
+            if (_p_get_1d_data(__1)) {
+                if (_p_get_1d_data(__2)) {
+                    if (_p_get_1d_data(__3)) {
+                        lua_settop(L__,table_index-1)/*pop the table*/;
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    return false;
 }
 
 QStringList OpenCVApplicationConfigurationFile::getInputImagesNames(const QStringList & _a_default)const {
@@ -111,7 +261,7 @@ QStringList OpenCVApplicationConfigurationFile::getInputImagesNames(const QStrin
     luaL_dostring(L__,"return application.input_images");
     if (lua_isstring(L__,-1)) {
         QString ans_(QString::fromUtf8(lua_tostring(L__,-1)));
-        if (ans_.isEmpty()) {return _a_default;}
+        if (ans_.isEmpty()) { return _a_default; }
         return  QStringList{ ans_ };
     }
 
@@ -126,35 +276,35 @@ QStringList OpenCVApplicationConfigurationFile::getInputImagesNames(const QStrin
             lua_pop(L__,1);
         }
 
-        if (ans_.isEmpty()) {return _a_default;}
+        if (ans_.isEmpty()) { return _a_default; }
         return std::move(ans_);
     }
 
     return _a_default;
 }
 
-QByteArray OpenCVApplicationConfigurationFile::getLocalTextCodecName(const QByteArray & _a_default )const {
+QByteArray OpenCVApplicationConfigurationFile::getLocalTextCodecName(const QByteArray & _a_default)const {
     if (L__==nullptr) { return _a_default; }
     __private::LUAStateLock _L(L__);
     luaL_dostring(L__,"return application.text_codec");
-    if(lua_isstring(L__,-1)){
+    if (lua_isstring(L__,-1)) {
         QByteArray ans_(lua_tostring(L__,-1));
-        if (ans_.isEmpty()) {return _a_default;}
+        if (ans_.isEmpty()) { return _a_default; }
         return std::move(ans_);
     }
     return _a_default;
 }
 
 OpenCVApplicationConfigurationFile::OpenCVApplicationConfigurationFile(
-    const QByteArray _a_arg ,
+    const QByteArray _a_arg,
     const char * _a_build_path,
     const char * _a_lua_file_name) {
     if (L_) { L__=L_.get(); }
     else {
-        char * _a_argv[]{ const_cast<char *>( _a_arg.constData() )};
+        char * _a_argv[]{ const_cast<char *>(_a_arg.constData()) };
         __private::init(this,1,_a_argv,_a_build_path,_a_lua_file_name);
     }
 }
 
-OpenCVApplicationConfigurationFile::~OpenCVApplicationConfigurationFile(){
+OpenCVApplicationConfigurationFile::~OpenCVApplicationConfigurationFile() {
 }

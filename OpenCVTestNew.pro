@@ -142,3 +142,7 @@ SUBDIRS += opencv_findContours
 opencv_delaunay.file = $$PWD/opencv_point_algorithm/opencv_delaunay/opencv_delaunay.pro
 opencv_delaunay.depends += core_utility
 SUBDIRS += opencv_delaunay
+
+configure_file_simple_test.file = $$PWD/configure_file_simple_test/configure_file_simple_test.pro
+configure_file_simple_test.depends += core_utility
+SUBDIRS += configure_file_simple_test

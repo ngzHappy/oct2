@@ -2,71 +2,6 @@
 #include <OpenCVUtility.hpp>
 #include <opencv_application_configuration_file.hpp>
 
-namespace {
-void draw(
-    OpenCVWindow * window,
-    std::vector<std::vector<cv::Point>> &ans,
-    const int &width_,
-    const int &height_,
-    const intptr_t &count_) {
-    /*将轮廓按照从大到小排列*/
-    std::sort(ans.begin(),ans.end(),
-        [](const std::vector<cv::Point> & l,
-        const std::vector<cv::Point> & r) {
-        return r.size()<l.size();
-    });
-    if (ans[0].empty()) { return; }
-
-    /*插入第一个轮廓*/
-    QList<QPointF> data_;
-    data_.reserve(ans[0].size());
-    for (const auto & i:ans[0]) {
-        data_.push_back(QPointF(i.x,i.y));
-    }
-
-    auto * item_=window->insertLineSeries(data_);
-    item_->getLineSeries()->append(
-        (ans[0].begin()->x),
-        (ans[0].begin()->y));
-
-    /*设置坐标系大小与图片一致*/
-    item_->getChart()->axisX()->setRange(0,width_);
-    item_->getChart()->axisY()->setRange(0,height_);
-    item_->getChart()->axisY()->setReverse(true);
-
-    item_->resize(width_*1.3,height_*1.3);
-
-    /*插入剩余轮廓*/
-    auto pos_=ans.begin();
-    for (++pos_; pos_!=ans.end(); ++pos_) {
-        if (pos_->empty()) { continue; }
-        data_.clear();
-        for (const auto & i:*(pos_)) {
-            data_.push_back(QPointF(i.x,i.y));
-        }
-        data_.push_back(QPointF(pos_->begin()->x,pos_->begin()->y));
-        QtCharts::QLineSeries * series=new QtCharts::QLineSeries;
-        series->append(data_);
-        item_->getChart()->addSeries(series);
-        item_->getChart()->setAxisX(
-            item_->getChart()->axisX(item_->getLineSeries()),
-            series
-            );
-        item_->getChart()->setAxisY(
-            item_->getChart()->axisY(item_->getLineSeries()),
-            series
-            );
-        series->setPen(item_->getLineSeries()->pen());
-        series->setBrush(item_->getLineSeries()->brush());
-    }
-
-    /*设置轮廓标题*/
-    item_->setWindowTitle(u8"第%1幅图片轮廓"_qs.arg(count_));
-}
-
-}
-
-
 extern void run(OpenCVWindow * window) {
 
     /*测试图片显示*/
@@ -92,6 +27,7 @@ extern void run(OpenCVWindow * window) {
             input_image_=
                 input_image_.convertToFormat(QImage::Format_Grayscale8);
             
+            auto * item_ = window->insertChartImage(input_image_);
             cv::Mat mat=OpenCVUtility::tryRead(input_image_);
             std::vector<std::vector<cv::Point>> ans;
 
@@ -104,7 +40,14 @@ extern void run(OpenCVWindow * window) {
 
            if (ans.empty()) { continue; }
 
-           draw(window,ans,width_,height_,count_);
+           item_->setWindowTitle(u8"第%1幅图片轮廓"_qs.arg(count_));
+           
+          
+           for (auto i=ans.begin(); i!=ans.end();++i) {
+               std::vector<cv::Point> & d=*i;
+               item_->insertLine(d.begin(),d.end(),true)
+                   ->setPen(QPen(QColor(200,200,100,150),2));
+           }
         }
     }
   

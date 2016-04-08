@@ -14,6 +14,24 @@ const QImage & OpenCVChartImage::getChartImage() const {
     return chart_image_;
 }
 
+QtCharts::QLineSeries * OpenCVChartImage::insertLine(
+    QList<QPointF>&& _a_,
+    bool _a_close
+    ) {
+    if (chart_==nullptr) { return nullptr; }
+    if (series_==nullptr) { return nullptr; }
+    if (_a_.isEmpty()) { return nullptr; }
+    QtCharts::QLineSeries * _v_line=new QtCharts::QLineSeries;
+    if (_a_close) {_a_.push_back(_a_.first());}
+    _v_line->append(_a_);
+    chart_->addSeries(_v_line);
+    chart_->setAxisX(chart_->axisX(series_),_v_line);
+    chart_->setAxisY(chart_->axisY(series_),_v_line);
+    _v_line->setPen(QPen(QColor(0,0,0),2));
+    _v_line->setPointsVisible(true);
+    return _v_line;
+}
+
 namespace {
 
 constexpr double _value_max_() { return 260; }

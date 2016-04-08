@@ -102,11 +102,11 @@ public:
                     goto switch_flag_;
                 }
             }
-           
+
             return QIcon(QPixmap::fromImage(std::move(image_)));
         } ;
 
-        static QIcon ans_[12]; 
+        static QIcon ans_[12];
         static bool init_icon_=[icon_function_]() {
             ans_[0]=icon_function_(0);
             ans_[1]=icon_function_(1);
@@ -148,7 +148,7 @@ public:
     OpenCVItemStyle() {}
 };
 
-std::atomic<int> OpenCVItemStyle::icon_index=0;
+std::atomic<int> OpenCVItemStyle::icon_index{0};
 
 }
 }

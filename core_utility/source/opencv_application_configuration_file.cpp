@@ -54,11 +54,17 @@ void init(
     int _a_argc,char ** _a_argv,
     const char * _a_build_path,
     const char * _a_lua_file_name) {
+
     std::string _v_build_path;
+
     if (_a_build_path) { _v_build_path=_a_build_path; }
     if ((_a_argc>=1)&&(_a_argv)) {
         std::string application_path(_a_argv[0]);
-        if (application_path.empty()) { std::cout<<"app empty"<<std::endl; return; }
+        if (application_path.empty()) {
+            std::cout<<"app empty"<<std::endl;
+            return;
+        }
+
         {
             const auto last_=application_path.find_last_of("/\\");
             if (last_==std::string::npos) {
@@ -98,8 +104,8 @@ void init(
                 ifs.open(file_name_,std::ios::in);
                 if (ifs.is_open()==false) {
                     if (_v_build_path.empty()) {
-                        std::cout<<"build path is null"<<std::endl;
-                        return;
+                        /*附加搜索目录为空就跳过*/
+                        continue;
                     }
                     file_name_=_v_build_path+"/"+lua_this_file_name_;
                     ifs.open(file_name_,std::ios::in);

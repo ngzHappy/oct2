@@ -70,28 +70,53 @@ void init(
                 application_path.begin()+last_);
             if (application_path.empty()) { std::cout<<"app empty ??"<<std::endl; return; }
         }
+
         std::string file_name_=_a_lua_file_name;
-        {
+        std::string lua_this_file_name_;
+
+        const char * _v_app_[]{ "",".zip",".lua",nullptr };
+        for (const char * _app:_v_app_) {
+            if (_app==nullptr) {
+                std::cout
+                    <<"can not find "
+                    <<std::endl
+                    <<"apath:"<<application_path
+                    <<std::endl
+                    <<"bpath:"<<_a_build_path
+                    <<std::endl
+                    <<"filename:"<<_a_lua_file_name
+                    <<std::endl;
+                return;
+            }
+
+            lua_this_file_name_=_a_lua_file_name+std::string(_app);
+            file_name_=lua_this_file_name_;
+
             std::ifstream ifs(file_name_,std::ios::in);
             if (false==ifs.is_open()) {
-                file_name_=application_path+"/"+_a_lua_file_name;
+                file_name_=application_path+"/"+lua_this_file_name_;
                 ifs.open(file_name_,std::ios::in);
                 if (ifs.is_open()==false) {
-                    if (_v_build_path.empty()) { return; }
-                    file_name_=_v_build_path+"/"+_a_lua_file_name;
+                    if (_v_build_path.empty()) {
+                        std::cout<<"build path is null"<<std::endl;
+                        return;
+                    }
+                    file_name_=_v_build_path+"/"+lua_this_file_name_;
                     ifs.open(file_name_,std::ios::in);
                     if (ifs.is_open()==false) {
-                        file_name_=_v_build_path+_a_lua_file_name;
+                        file_name_=_v_build_path+lua_this_file_name_;
                         ifs.open(file_name_,std::ios::in);
-                        if (ifs.is_open()==false) { return; }
+                        if (ifs.is_open()) { break; }
                     }
+                    else { break; }
                 }
+                else { break; }
             }
+            else { break; }
         }
 
         std::cout<<"lua configure filename: "<<file_name_<<std::endl;
 
-        std::string lua_this_file_name_=_a_lua_file_name;
         if (
             (lua_this_file_name_.size()<4)||
             !(
@@ -101,11 +126,11 @@ void init(
             ((*(lua_this_file_name_.rbegin()+3))=='.')
             )
             ) {
-            
+
             LUAStateLock __lock(_a_this->L__)/*锁定lua栈区*/;
             lua_pushcfunction(_a_this->L__,&__private::error_function_lua_loadfile);
             const auto error_fun_pos_=lua_gettop(_a_this->L__);
-            if ( LuaUtility::loadFile(
+            if (LuaUtility::loadFile(
                 _a_this->L__,
                 QString::fromLocal8Bit(file_name_.c_str(),
                 static_cast<int>(file_name_.size())),
@@ -136,7 +161,7 @@ void init(
                 /*执行文件*/
                 lua_pcall(_a_this->L__,0,LUA_MULTRET,error_fun_pos_);
             }
-            
+
         }
 
         std::cout.flush();
@@ -333,9 +358,12 @@ QByteArray OpenCVApplicationConfigurationFile::getLocalTextCodecName(const QByte
 
 OpenCVApplicationConfigurationFile::OpenCVApplicationConfigurationFile(
     std::shared_ptr<lua_State> ___0,
-    const QByteArray ___1,
-    const QByteArray ___2,
-    const QByteArray ___3) {
+    QByteArray ___1,
+    QByteArray ___2,
+    QByteArray ___3) {
+    ___1=___1.trimmed();
+    ___2=___2.trimmed();
+    ___3=___3.trimmed();
     if (___0) {
         L__=___0.get();
         _m_manager=std::move(___0);
@@ -345,9 +373,12 @@ OpenCVApplicationConfigurationFile::OpenCVApplicationConfigurationFile(
 }
 
 OpenCVApplicationConfigurationFile::OpenCVApplicationConfigurationFile(
-    const QByteArray _a_arg,
-    const QByteArray _a_build_path,
-    const QByteArray _a_lua_file_name) {
+    QByteArray _a_arg,
+    QByteArray _a_build_path,
+    QByteArray _a_lua_file_name) {
+    _a_arg=_a_arg.trimmed();
+    _a_build_path=_a_build_path.trimmed();
+    _a_lua_file_name=_a_lua_file_name.trimmed();
     typedef _STATIC_OpenCVApplicationConfigurationFile _T_S;
     if (_T_S::L_) { L__=_T_S::L_.get(); }
     else {

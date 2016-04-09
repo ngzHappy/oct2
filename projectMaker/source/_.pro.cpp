@@ -27,6 +27,7 @@ SOURCES += $$PWD/_replace_run.cpp_replace_
 HEADERS += $$PWD/MainWindow.hpp
 HEADERS += $$PWD/OpenCVWindowDetail.hpp
 
+DEFINES += APP_NAME_=\\\"$$TARGET\\\"
 DEFINES += BUILD_PATH_=\\\"$$PWD\\\"
 
 include( _replace_$$PWD/../core_utility/core_utility.pri_replace_ )

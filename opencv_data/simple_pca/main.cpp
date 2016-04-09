@@ -18,10 +18,10 @@ public:
         parser.addVersionOption();
         parser.addHelpOption();
         const QCommandLineOption op(
-        { "l","lua" },
+            { "l","lua" },
             u8"lua configure file application.input_images application.input_data_2d"_qs,
             "lua",
-            "data_view");
+            APP_NAME_);
         parser.addOption(op);
     }
 };

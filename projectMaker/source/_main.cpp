@@ -1,7 +1,7 @@
 ﻿//_replace_first_window.lua_replace_
 //_replace_/../Images_replace_
 
-const char *_main_cpp = u8R"=_____=(/*main.cpp*/
+const char *_main_cpp = u8R"=_____=(/*main.cpp _replace_first_window.lua_replace_  */
 #include "MainWindow.hpp"
 #include <QtWidgets/qapplication.h>
 #include <QtCore/qcommandlineparser.h>
@@ -24,7 +24,7 @@ public:
             { "l","lua" },
             u8"lua configure file application.input_images application.input_data_2d"_qs,
             "lua",
-            "data_view");
+            APP_NAME_);
         parser.addOption(op);
     }
 };

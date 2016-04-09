@@ -22,6 +22,7 @@ HEADERS += $$PWD/MainWindow.hpp
 HEADERS += $$PWD/OpenCVWindowDetail.hpp
 
 DEFINES += BUILD_PATH_=\\\"$$PWD\\\"
+DEFINES += APP_NAME_=\\\"$$TARGET\\\"
 
 include( $$PWD/../core_utility/core_utility.pri )
 include( $$PWD/../core_utility/opencv3.pri )

@@ -13,6 +13,7 @@ TEMPLATE = app
 
 SOURCES += main.cpp
 DEFINES += BUILD_PATH_=\\\"$$PWD\\\"
+DEFINES += APP_NAME_=\\\"$$TARGET\\\"
 
 include( $$PWD/../core_utility/core_utility.pri )
 DESTDIR = $$OUTPWD

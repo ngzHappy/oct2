@@ -23,6 +23,7 @@ HEADERS += $$PWD/private/pre_build.hpp
 HEADERS += $$PWD/private/msvc_pre_build.hpp
 
 DEFINES += BUILD_PATH_=\\\"$$PWD\\\"
+DEFINES += APP_NAME_=\\\"$$TARGET\\\"
 
 include( $$PWD/../../core_utility/core_utility.pri )
 include( $$PWD/../../core_utility/opencv3.pri )

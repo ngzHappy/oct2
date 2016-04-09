@@ -1,8 +1,14 @@
-﻿#include "MainWindow.hpp"
-#include <OpenCVUtility.hpp>
+﻿/*main.cpp*/
+#include "MainWindow.hpp"
+#include <QtWidgets/qapplication.h>
+#include <QtCore/qcommandlineparser.h>
+#include <QtCore/qcommandlineoption.h>
+#include <QtCore/qtextcodec.h>
+#include <QtCore/qdir.h>
 #include <opencv_application_configuration_file.hpp>
+#include <iostream>
 
-extern void run(OpenCVWindow * window) ;
+extern void run(OpenCVWindow * window);
 
 /*命令行解析器*/
 class CommandLineParser : public QCommandLineParser {
@@ -12,7 +18,7 @@ public:
         parser.addVersionOption();
         parser.addHelpOption();
         const QCommandLineOption op(
-        { "l","lua" },
+            { "l","lua" },
             u8"lua configure file application.input_images application.input_data_2d"_qs,
             "lua",
             "data_view");
@@ -35,8 +41,8 @@ int main(int argc,char ** argv) {
         /*全局配置文件*/
         const QByteArray lua_file_name_=parser.value("lua").toLocal8Bit();
         OpenCVApplicationConfigurationFile configure(
-            app.applicationFilePath().toLocal8Bit(),
-            BUILD_PATH_,lua_file_name_.constData());
+                    app.applicationFilePath().toLocal8Bit(),
+                    BUILD_PATH_,lua_file_name_.constData());
 
     }
 
@@ -49,9 +55,11 @@ int main(int argc,char ** argv) {
 
     MainWindow * window=new MainWindow;
     window->setAttribute(Qt::WA_DeleteOnClose);
-    run(window->getOpenCVWindow());
     window->show();
+    run(window->getOpenCVWindow());
+    std::cout.flush();
 
     return app.exec();
 
 }
+

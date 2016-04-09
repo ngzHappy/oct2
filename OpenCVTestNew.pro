@@ -146,3 +146,7 @@ SUBDIRS += opencv_delaunay
 configure_file_simple_test.file = $$PWD/configure_file_simple_test/configure_file_simple_test.pro
 configure_file_simple_test.depends += core_utility
 SUBDIRS += configure_file_simple_test
+
+data_view.file = $$PWD/data_view/data_view.pro
+data_view.depends += core_utility
+SUBDIRS += data_view

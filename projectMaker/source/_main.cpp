@@ -17,10 +17,15 @@ extern void run(OpenCVWindow * window) ;
 class CommandLineParser : public QCommandLineParser {
 public:
     CommandLineParser() {
-        this->addVersionOption();
-        this->addHelpOption();
-        this->addOption(QCommandLineOption("lua","lua configure file",QString(),
-            "_replace_first_window.lua_replace_"));
+        auto & parser=*this;
+        parser.addVersionOption();
+        parser.addHelpOption();
+        const QCommandLineOption op(
+            { "l","lua" },
+            u8"lua configure file application.input_images application.input_data_2d"_qs,
+            "lua",
+            "data_view");
+        parser.addOption(op);
     }
 };
 

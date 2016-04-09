@@ -14,13 +14,17 @@ extern void run(OpenCVWindow * window) ;
 class CommandLineParser : public QCommandLineParser {
 public:
     CommandLineParser() {
-        this->addVersionOption();
-        this->addHelpOption();
-        this->addOption(QCommandLineOption("lua","lua configure file",QString(),
-            "opencv_roi"));
+        auto & parser=*this;
+        parser.addVersionOption();
+        parser.addHelpOption();
+        const QCommandLineOption op(
+        { "l","lua" },
+            u8"lua configure file application.input_images application.input_data_2d"_qs,
+            "lua",
+            "data_view");
+        parser.addOption(op);
     }
 };
-
 int main(int argc,char ** argv) {
     /*设置本地编码*/
     QTextCodec::setCodecForLocale(QTextCodec::codecForName(LOCAL_CODEC_));

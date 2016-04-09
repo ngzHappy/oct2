@@ -4,19 +4,26 @@
 #include <QtCore/qcommandlineparser.h>
 #include <QtCore/qcommandlineoption.h>
 #include <QtCore/qtextcodec.h>
+#include <QtCore/qdir.h>
 #include <opencv_application_configuration_file.hpp>
 #include <iostream>
 
 extern void run(OpenCVWindow * window) ;
 
 /*命令行解析器*/
+/*命令行解析器*/
 class CommandLineParser : public QCommandLineParser {
 public:
     CommandLineParser() {
-        this->addVersionOption();
-        this->addHelpOption();
-        this->addOption(QCommandLineOption("lua","lua configure file",QString(),
-            "opencv_simple_test"));
+        auto & parser=*this;
+        parser.addVersionOption();
+        parser.addHelpOption();
+        const QCommandLineOption op(
+            { "l","lua" },
+            u8"lua configure file application.input_images application.input_data_2d"_qs,
+            "lua",
+            "data_view");
+        parser.addOption(op);
     }
 };
 

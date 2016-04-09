@@ -49,6 +49,17 @@ char to_lower_(char i) {
     return i;
 }
 
+void copy_app_application_(lua_State * L) {
+    LUAStateLock __lock(L);
+    luaL_dostring(L,"return app");
+    if (lua_istable(L,-1)) {
+        luaL_dostring(L,"application=app");
+    }
+    else {
+        luaL_dostring(L,"app=application");
+    }
+}
+
 void init(
     OpenCVApplicationConfigurationFile * _a_this,
     int _a_argc,char ** _a_argv,
@@ -56,6 +67,9 @@ void init(
     const char * _a_lua_file_name) {
 
     std::string _v_build_path;
+
+    luaL_dostring(_a_this->L__,"app=nil");
+    luaL_dostring(_a_this->L__,"application=nil");
 
     if (_a_build_path) { _v_build_path=_a_build_path; }
     if ((_a_argc>=1)&&(_a_argv)) {
@@ -144,6 +158,7 @@ void init(
                 static_cast<int>(lua_this_file_name_.size()))
                 )/*从plain文件中读取文件*/) {
                 lua_pcall(_a_this->L__,0,LUA_MULTRET,error_fun_pos_);
+                copy_app_application_(_a_this->L__);
             }
             _a_this->L__=_a_this->L__;
         }
@@ -166,6 +181,7 @@ void init(
                 ) {
                 /*执行文件*/
                 lua_pcall(_a_this->L__,0,LUA_MULTRET,error_fun_pos_);
+                copy_app_application_(_a_this->L__);
             }
 
         }
@@ -189,7 +205,9 @@ std::shared_ptr<const void> OpenCVApplicationConfigurationFile::_p_begin_read_da
     if (L__==nullptr) { throw nullptr; }
     std::shared_ptr<const void> ans_(new __private::LUAStateLock(L__));
     luaL_dostring(L__,"return application.input_data_1d");
-    if (false==lua_istable(L__,-1)) { throw nullptr; }
+    if (false==lua_istable(L__,-1)) { 
+        throw nullptr; 
+    }
     lua_pushnil(L__);
     return std::move(ans_);
 }

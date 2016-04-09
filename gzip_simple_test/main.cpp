@@ -17,7 +17,7 @@ public:
         this->addVersionOption();
         this->addHelpOption();
         this->addOption(QCommandLineOption("lua","lua configure file",QString(),
-            "gzip_simple_test.lua"));
+            "gzip_simple_test"));
     }
 };
 

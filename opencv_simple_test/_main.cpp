@@ -16,7 +16,7 @@ public:
         this->addVersionOption();
         this->addHelpOption();
         this->addOption(QCommandLineOption("lua","lua configure file",QString(),
-            "opencv_simple_test.lua"));
+            "opencv_simple_test"));
     }
 };
 

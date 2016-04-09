@@ -17,7 +17,7 @@ public:
         this->addVersionOption();
         this->addHelpOption();
         this->addOption(QCommandLineOption("lua","lua configure file",QString(),
-            "first_image_show.lua"));
+            "first_image_show"));
     }
 };
 

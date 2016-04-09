@@ -17,7 +17,7 @@ public:
         this->addVersionOption();
         this->addHelpOption();
         this->addOption(QCommandLineOption("lua","lua configure file",QString(),
-            "simple_pca.lua"));
+            "simple_pca"));
     }
 };
 

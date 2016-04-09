@@ -47,14 +47,14 @@ public:
     typedef long long IntegerType;
 
     OpenCVApplicationConfigurationFile(
-        const QByteArray /*local8byte: full exe name lick c:/abc/xxx.exe */,
-        const QByteArray /*local8byte: append search path */,
-        const QByteArray /*local8byte: lua file name like abc.lua or abc.zip */);
+        QByteArray /*local8byte: full exe name lick c:/abc/xxx.exe */,
+        QByteArray /*local8byte: append search path */,
+        QByteArray /*local8byte: lua file name like abc.lua or abc.zip */);
     OpenCVApplicationConfigurationFile(
         std::shared_ptr<lua_State>,
-        const QByteArray,
-        const QByteArray,
-        const QByteArray);
+        QByteArray,
+        QByteArray,
+        QByteArray);
     ~OpenCVApplicationConfigurationFile();
     QStringList getInputImagesNames(const QStringList &/*default*/)const;
     QStringList getInputImagesNames()const { return getInputImagesNames(QStringList{}); }

@@ -17,7 +17,7 @@ public:
         this->addVersionOption();
         this->addHelpOption();
         this->addOption(QCommandLineOption("lua","lua configure file",QString(),
-            "opencv_findContours.lua"));
+            "opencv_findContours"));
     }
 };
 

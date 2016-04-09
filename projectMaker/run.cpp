@@ -42,7 +42,7 @@ std::string _get_sudirs_project_dir_(const ArgvPack & pack) {
     return std::move(sudirs_project_dir_);
 }
 
-const char bom[3]{char(0x00ef),char(0x00bb),char(0x00bf)};
+constexpr const char bom[3]{char(0x00ef),char(0x00bb),char(0x00bf)};
 inline void write_bom(std::ofstream & ofs) {ofs.write(bom,3);}
 
 inline void write_pre_build(const ArgvPack & pack) {
@@ -199,7 +199,7 @@ void write_main_cpp(const ArgvPack & pack) {
             about_to_write_.replace(
                 about_to_write_.find(replace_text_),
                 replace_text_.size(),
-                (pack.projectName()+".lua")
+                (pack.projectName() /*the app will auto add .zip or .lua*/ )
                 );
         }
         {

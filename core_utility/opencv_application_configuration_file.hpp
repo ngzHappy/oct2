@@ -9,6 +9,10 @@
 #include <memory>
 #include <iterator>
 
+class _STATIC_OpenCVApplicationConfigurationFile {
+public:
+    static std::shared_ptr<lua_State> L_;
+};
 /*
 --[[demo--]]
 application={
@@ -34,18 +38,23 @@ application={
 */
 class CORE_UTILITYSHARED_EXPORT OpenCVApplicationConfigurationFile {
 MACRO_PROTECTED:
-    static std::shared_ptr<lua_State> L_;
     lua_State * L__=nullptr;
     OpenCVApplicationConfigurationFile(lua_State *_L):L__(_L) {}
+    std::shared_ptr<const void> _m_manager;
 public:
 
     typedef double NumberType;
     typedef long long IntegerType;
 
     OpenCVApplicationConfigurationFile(
-        const QByteArray /*argv*/,
-        const char * /*buildpath*/,
-        const char * /*lua file name like abc.lua*/);
+        const QByteArray /*local8byte: full exe name lick c:/abc/xxx.exe */,
+        const QByteArray /*local8byte: append search path */,
+        const QByteArray /*local8byte: lua file name like abc.lua or abc.zip */);
+    OpenCVApplicationConfigurationFile(
+        std::shared_ptr<lua_State>,
+        const QByteArray,
+        const QByteArray,
+        const QByteArray);
     ~OpenCVApplicationConfigurationFile();
     QStringList getInputImagesNames(const QStringList &/*default*/)const;
     QStringList getInputImagesNames()const { return getInputImagesNames(QStringList{}); }
@@ -328,7 +337,7 @@ void OpenCVApplicationConfigurationFile::getInputData1D(_Vector_ _v_ans)const {
         _v_Locker _v_locker(this);
         NumberType _v_data;
         while (_p_get_1d_data(_v_data)) {
-            *_v_ans = { static_cast<_T_>(_v_data) };
+            *_v_ans={ static_cast<_T_>(_v_data) };
             ++_v_ans;
         }
         return;
@@ -360,7 +369,7 @@ void OpenCVApplicationConfigurationFile::getInputData2D(_Vector_ _v_ans) const {
         _v_Locker _v_locker(this);
         NumberType _v_data_1; NumberType _v_data_2;
         while (_p_get_2d_data(_v_data_1,_v_data_2)) {
-            *_v_ans = { static_cast<_T_>(_v_data_1) ,static_cast<_T_>(_v_data_2) };
+            *_v_ans={ static_cast<_T_>(_v_data_1) ,static_cast<_T_>(_v_data_2) };
             ++_v_ans;
         }
         return;
@@ -394,7 +403,7 @@ void OpenCVApplicationConfigurationFile::getInputData3D(_Vector_ _v_ans)const {
         NumberType _v_data_2;
         NumberType _v_data_3;
         while (_p_get_3d_data(_v_data_1,_v_data_2,_v_data_3)) {
-            *_v_ans =
+            *_v_ans=
             {
                 static_cast<_T_>(_v_data_1),
                 static_cast<_T_>(_v_data_2),
@@ -430,7 +439,7 @@ void OpenCVApplicationConfigurationFile::getInputData1DInteger(_Vector_ _v_ans)c
         _v_Locker _v_locker(this);
         IntegerType _v_data;
         while (_p_get_1d_data(_v_data)) {
-            *_v_ans={ static_cast<_T_>(_v_data) } ;
+            *_v_ans={ static_cast<_T_>(_v_data) };
             ++_v_ans;
         }
         return;

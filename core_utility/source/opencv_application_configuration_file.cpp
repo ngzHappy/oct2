@@ -11,7 +11,7 @@
 #include "../core_utility.hpp"
 
 /*静态数据*/
-std::shared_ptr<lua_State> OpenCVApplicationConfigurationFile::L_;
+std::shared_ptr<lua_State> _STATIC_OpenCVApplicationConfigurationFile::L_;
 
 namespace {
 namespace __private {
@@ -101,33 +101,32 @@ void init(
             ((*(lua_this_file_name_.rbegin()+3))=='.')
             )
             ) {
-            _a_this->L_=LuaUtility::createLuaState();
-            LUAStateLock __lock(_a_this->L_.get())/*锁定lua栈区*/;
-            lua_pushcfunction(_a_this->L_.get(),&__private::error_function_lua_loadfile);
-            const auto error_fun_pos_=lua_gettop(_a_this->L_.get());
+            
+            LUAStateLock __lock(_a_this->L__)/*锁定lua栈区*/;
+            lua_pushcfunction(_a_this->L__,&__private::error_function_lua_loadfile);
+            const auto error_fun_pos_=lua_gettop(_a_this->L__);
             if ( LuaUtility::loadFile(
-                _a_this->L_.get(),
+                _a_this->L__,
                 QString::fromLocal8Bit(file_name_.c_str(),
                 static_cast<int>(file_name_.size())),
                 QString::fromLocal8Bit(lua_this_file_name_.c_str(),
                 static_cast<int>(lua_this_file_name_.size()))
                 )/*从plain文件中读取文件*/) {
-                lua_pcall(_a_this->L_.get(),0,LUA_MULTRET,error_fun_pos_);
+                lua_pcall(_a_this->L__,0,LUA_MULTRET,error_fun_pos_);
             }
-            _a_this->L__=_a_this->L_.get();
+            _a_this->L__=_a_this->L__;
         }
         else /*zip file*/
         {
             lua_this_file_name_.resize(lua_this_file_name_.size()-4);
             lua_this_file_name_+=".lua";
 
-            _a_this->L_=LuaUtility::createLuaState();
-            LUAStateLock __lock(_a_this->L_.get())/*锁定lua栈区*/;
-            lua_pushcfunction(_a_this->L_.get(),&__private::error_function_lua_loadfile);
-            const auto error_fun_pos_=lua_gettop(_a_this->L_.get());
+            LUAStateLock __lock(_a_this->L__)/*锁定lua栈区*/;
+            lua_pushcfunction(_a_this->L__,&__private::error_function_lua_loadfile);
+            const auto error_fun_pos_=lua_gettop(_a_this->L__);
             if (
                 LuaUtility::loadFile(
-                _a_this->L_.get(),
+                _a_this->L__,
                 QString::fromLocal8Bit(file_name_.c_str(),
                 static_cast<int>(file_name_.size())),
                 QString::fromLocal8Bit(lua_this_file_name_.c_str(),
@@ -135,9 +134,9 @@ void init(
                 )/*从zip文件中读取文件*/
                 ) {
                 /*执行文件*/
-                lua_pcall(_a_this->L_.get(),0,LUA_MULTRET,error_fun_pos_);
+                lua_pcall(_a_this->L__,0,LUA_MULTRET,error_fun_pos_);
             }
-            _a_this->L__=_a_this->L_.get();
+            
         }
 
         std::cout.flush();
@@ -148,10 +147,10 @@ void init(
 
 const OpenCVApplicationConfigurationFile & CoreUtility::getConfigurationFile() {
     static OpenCVApplicationConfigurationFile ans_(
-                OpenCVApplicationConfigurationFile::L_.get()
+                _STATIC_OpenCVApplicationConfigurationFile::L_.get()
                 );
     if (ans_.L__) { return ans_; }
-    ans_.L__=OpenCVApplicationConfigurationFile::L_.get();
+    ans_.L__=_STATIC_OpenCVApplicationConfigurationFile::L_.get();
     return ans_;
 }
 
@@ -333,13 +332,33 @@ QByteArray OpenCVApplicationConfigurationFile::getLocalTextCodecName(const QByte
 }
 
 OpenCVApplicationConfigurationFile::OpenCVApplicationConfigurationFile(
+    std::shared_ptr<lua_State> ___0,
+    const QByteArray ___1,
+    const QByteArray ___2,
+    const QByteArray ___3) {
+    if (___0) {
+        L__=___0.get();
+        _m_manager=std::move(___0);
+        char * _a_argv[]{ const_cast<char *>(___1.constData()) };
+        __private::init(this,1,_a_argv,___2.constData(),___3.constData());
+    }
+}
+
+OpenCVApplicationConfigurationFile::OpenCVApplicationConfigurationFile(
     const QByteArray _a_arg,
-    const char * _a_build_path,
-    const char * _a_lua_file_name) {
-    if (L_) { L__=L_.get(); }
+    const QByteArray _a_build_path,
+    const QByteArray _a_lua_file_name) {
+    typedef _STATIC_OpenCVApplicationConfigurationFile _T_S;
+    if (_T_S::L_) { L__=_T_S::L_.get(); }
     else {
+        _T_S::L_=LuaUtility::createLuaState();
+        L__=_T_S::L_.get();
         char * _a_argv[]{ const_cast<char *>(_a_arg.constData()) };
-        __private::init(this,1,_a_argv,_a_build_path,_a_lua_file_name);
+        __private::init(
+            this,1,_a_argv,
+            _a_build_path.constData(),
+            _a_lua_file_name.constData()
+            );
     }
 }
 

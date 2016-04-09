@@ -51,8 +51,7 @@ static void _set_opencv_error_on_qt_start_up() {
 Q_COREAPP_STARTUP_FUNCTION(_set_opencv_error_on_qt_start_up)
 
 extern void run(OpenCVWindow * window ) try{
-    std::vector<cv::Point2d> sdfdsaf;
-    cv::findContours(sdfdsaf,sdfdsaf,1,1);
+   
     /*图片显示*/
     {
         intptr_t count_=0;

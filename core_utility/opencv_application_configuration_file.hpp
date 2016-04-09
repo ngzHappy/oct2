@@ -7,6 +7,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <memory>
+#include <iterator>
 
 /*
 --[[demo--]]
@@ -64,21 +65,32 @@ public:
     template<typename _T_=IntegerType,typename _Vector_=std::vector<std::array<_T_,3>>>
     _Vector_ getInputData3DInteger()const;
 
+    template<typename _T_=NumberType,typename _Push_Back_Iterator_ >
+    void getInputData1D(_Push_Back_Iterator_)const;
+    template<typename _T_=NumberType,typename _Push_Back_Iterator_ >
+    void getInputData2D(_Push_Back_Iterator_)const;
+    template<typename _T_=NumberType,typename _Push_Back_Iterator_ >
+    void getInputData3D(_Push_Back_Iterator_)const;
+
+    template<typename _T_=IntegerType,typename _Push_Back_Iterator_ >
+    void getInputData1DInteger(_Push_Back_Iterator_)const;
+    template<typename _T_=IntegerType,typename _Push_Back_Iterator_ >
+    void getInputData2DInteger(_Push_Back_Iterator_)const;
+    template<typename _T_=IntegerType,typename _Push_Back_Iterator_ >
+    void getInputData3DInteger(_Push_Back_Iterator_)const;
+
 MACRO_PROTECTED:
     QByteArray getLocalTextCodecName(const QByteArray &/*default*/)const;
 private:
     std::shared_ptr<const void> _p_begin_read_data_1d()const;
-    void _p_end_read_data_1d()const;
     bool _p_get_1d_data(NumberType &)const;
     bool _p_get_1d_data(IntegerType &)const;
 
     std::shared_ptr<const void> _p_begin_read_data_2d()const;
-    void _p_end_read_data_2d()const;
     bool _p_get_2d_data(NumberType &,NumberType &)const;
     bool _p_get_2d_data(IntegerType &,IntegerType&)const;
 
     std::shared_ptr<const void> _p_begin_read_data_3d()const;
-    void _p_end_read_data_3d()const;
     bool _p_get_3d_data(NumberType &,NumberType &,NumberType&)const;
     bool _p_get_3d_data(IntegerType &,IntegerType&,IntegerType&)const;
 };
@@ -98,7 +110,6 @@ _Vector_ OpenCVApplicationConfigurationFile::getInputData1D()const {
         }
         ~_v_Locker() {
             _data_.reset();
-            _this_->_p_end_read_data_1d();
         }
     };
     try {
@@ -106,7 +117,7 @@ _Vector_ OpenCVApplicationConfigurationFile::getInputData1D()const {
         _v_Locker _v_locker(this);
         NumberType _v_data;
         while (_p_get_1d_data(_v_data)) {
-            _v_ans.push_back(static_cast<_T_>(_v_data));
+            _v_ans.push_back({ static_cast<_T_>(_v_data) });
         }
         return std::move(_v_ans);
     }
@@ -131,7 +142,6 @@ _Vector_ OpenCVApplicationConfigurationFile::getInputData2D() const {
         }
         ~_v_Locker() {
             _data_.reset();
-            _this_->_p_end_read_data_2d();
         }
     };
     try {
@@ -166,7 +176,6 @@ _Vector_ OpenCVApplicationConfigurationFile::getInputData3D()const {
         }
         ~_v_Locker() {
             _data_.reset();
-            _this_->_p_end_read_data_3d();
         }
     };
     try {
@@ -207,7 +216,6 @@ _Vector_ OpenCVApplicationConfigurationFile::getInputData1DInteger()const {
         }
         ~_v_Locker() {
             _data_.reset();
-            _this_->_p_end_read_data_1d();
         }
     };
     try {
@@ -215,7 +223,7 @@ _Vector_ OpenCVApplicationConfigurationFile::getInputData1DInteger()const {
         _v_Locker _v_locker(this);
         IntegerType _v_data;
         while (_p_get_1d_data(_v_data)) {
-            _v_ans.push_back(static_cast<_T_>(_v_data));
+            _v_ans.push_back({ static_cast<_T_>(_v_data) });
         }
         return std::move(_v_ans);
     }
@@ -240,7 +248,6 @@ _Vector_ OpenCVApplicationConfigurationFile::getInputData2DInteger()const {
         }
         ~_v_Locker() {
             _data_.reset();
-            _this_->_p_end_read_data_2d();
         }
     };
     try {
@@ -275,7 +282,6 @@ _Vector_ OpenCVApplicationConfigurationFile::getInputData3DInteger()const {
         }
         ~_v_Locker() {
             _data_.reset();
-            _this_->_p_end_read_data_3d();
         }
     };
     try {
@@ -300,6 +306,212 @@ _Vector_ OpenCVApplicationConfigurationFile::getInputData3DInteger()const {
     }
 
 }
+
+template<
+    typename _T_,
+    typename _Vector_
+>
+void OpenCVApplicationConfigurationFile::getInputData1D(_Vector_ _v_ans)const {
+    struct _v_Locker {
+    private:
+        const OpenCVApplicationConfigurationFile * const _this_;
+        std::shared_ptr<const void> _data_;
+    public:
+        _v_Locker(const OpenCVApplicationConfigurationFile *t):_this_(t) {
+            _data_=_this_->_p_begin_read_data_1d();
+        }
+        ~_v_Locker() {
+            _data_.reset();
+        }
+    };
+    try {
+        _v_Locker _v_locker(this);
+        NumberType _v_data;
+        while (_p_get_1d_data(_v_data)) {
+            *_v_ans = { static_cast<_T_>(_v_data) };
+            ++_v_ans;
+        }
+        return;
+    }
+    catch (...) {
+        return;
+    }
+
+}
+
+template<
+    typename _T_,
+    typename _Vector_
+>
+void OpenCVApplicationConfigurationFile::getInputData2D(_Vector_ _v_ans) const {
+    struct _v_Locker {
+    private:
+        const OpenCVApplicationConfigurationFile * const _this_;
+        std::shared_ptr<const void> _data_;
+    public:
+        _v_Locker(const OpenCVApplicationConfigurationFile *t):_this_(t) {
+            _data_=_this_->_p_begin_read_data_2d();
+        }
+        ~_v_Locker() {
+            _data_.reset();
+        }
+    };
+    try {
+        _v_Locker _v_locker(this);
+        NumberType _v_data_1; NumberType _v_data_2;
+        while (_p_get_2d_data(_v_data_1,_v_data_2)) {
+            *_v_ans = { static_cast<_T_>(_v_data_1) ,static_cast<_T_>(_v_data_2) };
+            ++_v_ans;
+        }
+        return;
+    }
+    catch (...) {
+        return;
+    }
+
+}
+
+template<
+    typename _T_,
+    typename _Vector_
+>
+void OpenCVApplicationConfigurationFile::getInputData3D(_Vector_ _v_ans)const {
+    struct _v_Locker {
+    private:
+        const OpenCVApplicationConfigurationFile * const _this_;
+        std::shared_ptr<const void> _data_;
+    public:
+        _v_Locker(const OpenCVApplicationConfigurationFile *t):_this_(t) {
+            _data_=_this_->_p_begin_read_data_3d();
+        }
+        ~_v_Locker() {
+            _data_.reset();
+        }
+    };
+    try {
+        _v_Locker _v_locker(this);
+        NumberType _v_data_1;
+        NumberType _v_data_2;
+        NumberType _v_data_3;
+        while (_p_get_3d_data(_v_data_1,_v_data_2,_v_data_3)) {
+            *_v_ans =
+            {
+                static_cast<_T_>(_v_data_1),
+                static_cast<_T_>(_v_data_2),
+                static_cast<_T_>(_v_data_3)
+            }; ++_v_ans;
+        }
+        return;
+    }
+    catch (...) {
+        return;
+    }
+
+}
+
+template<
+    typename _T_,
+    typename _Vector_
+>
+void OpenCVApplicationConfigurationFile::getInputData1DInteger(_Vector_ _v_ans)const {
+    struct _v_Locker {
+    private:
+        const OpenCVApplicationConfigurationFile * const _this_;
+        std::shared_ptr<const void> _data_;
+    public:
+        _v_Locker(const OpenCVApplicationConfigurationFile *t):_this_(t) {
+            _data_=_this_->_p_begin_read_data_1d();
+        }
+        ~_v_Locker() {
+            _data_.reset();
+        }
+    };
+    try {
+        _v_Locker _v_locker(this);
+        IntegerType _v_data;
+        while (_p_get_1d_data(_v_data)) {
+            *_v_ans={ static_cast<_T_>(_v_data) } ;
+            ++_v_ans;
+        }
+        return;
+    }
+    catch (...) {
+        return;
+    }
+
+}
+
+template<
+    typename _T_,
+    typename _Vector_
+>
+void OpenCVApplicationConfigurationFile::getInputData2DInteger(_Vector_ _v_ans)const {
+    struct _v_Locker {
+    private:
+        const OpenCVApplicationConfigurationFile * const _this_;
+        std::shared_ptr<const void> _data_;
+    public:
+        _v_Locker(const OpenCVApplicationConfigurationFile *t):_this_(t) {
+            _data_=_this_->_p_begin_read_data_2d();
+        }
+        ~_v_Locker() {
+            _data_.reset();
+        }
+    };
+    try {
+        _v_Locker _v_locker(this);
+        IntegerType _v_data_1; IntegerType _v_data_2;
+        while (_p_get_2d_data(_v_data_1,_v_data_2)) {
+            *_v_ans=
+            { static_cast<_T_>(_v_data_1) ,static_cast<_T_>(_v_data_2) };
+            ++_v_ans;
+        }
+        return;
+    }
+    catch (...) {
+        return;
+    }
+
+}
+
+template<
+    typename _T_,
+    typename _Vector_
+>
+void OpenCVApplicationConfigurationFile::getInputData3DInteger(_Vector_ _v_ans)const {
+    struct _v_Locker {
+    private:
+        const OpenCVApplicationConfigurationFile * const _this_;
+        std::shared_ptr<const void>_data_;
+    public:
+        _v_Locker(const OpenCVApplicationConfigurationFile *t):_this_(t) {
+            _data_=_this_->_p_begin_read_data_3d();
+        }
+        ~_v_Locker() {
+            _data_.reset();
+        }
+    };
+    try {
+        _v_Locker _v_locker(this);
+        IntegerType _v_data_1;
+        IntegerType _v_data_2;
+        IntegerType _v_data_3;
+        while (_p_get_3d_data(_v_data_1,_v_data_2,_v_data_3)) {
+            *_v_ans=
+            {
+                static_cast<_T_>(_v_data_1),
+                static_cast<_T_>(_v_data_2),
+                static_cast<_T_>(_v_data_3)
+            }; ++_v_ans;
+        }
+        return;
+    }
+    catch (...) {
+        return;
+    }
+
+}
+
 
 #endif
 

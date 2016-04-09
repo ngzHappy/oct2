@@ -164,10 +164,6 @@ std::shared_ptr<const void> OpenCVApplicationConfigurationFile::_p_begin_read_da
     return std::move(ans_);
 }
 
-void OpenCVApplicationConfigurationFile::_p_end_read_data_1d()const {
-
-}
-
 bool OpenCVApplicationConfigurationFile::_p_get_1d_data(
     NumberType & __1)const {
     if (lua_next(L__,-2/*table index*/)) {
@@ -206,10 +202,6 @@ std::shared_ptr<const void> OpenCVApplicationConfigurationFile::_p_begin_read_da
     if (false==lua_istable(L__,-1)) { throw nullptr; }
     lua_pushnil(L__);
     return std::move(ans_);
-}
-
-void OpenCVApplicationConfigurationFile::_p_end_read_data_2d() const {
-
 }
 
 bool OpenCVApplicationConfigurationFile::_p_get_2d_data(
@@ -255,10 +247,6 @@ std::shared_ptr<const void> OpenCVApplicationConfigurationFile::_p_begin_read_da
     if (false==lua_istable(L__,-1)) { throw nullptr; }
     lua_pushnil(L__);
     return std::move(ans_);
-}
-
-void OpenCVApplicationConfigurationFile::_p_end_read_data_3d()const {
-
 }
 
 bool OpenCVApplicationConfigurationFile::_p_get_3d_data(

@@ -18,7 +18,7 @@ int ErrorCallback(
     void* /*userdata*/) {
     QString __error_;
 
-        #if !defined(NDEBUG)
+#if !defined(NDEBUG)
     cv::Error::Code estatus= static_cast<cv::Error::Code>(status);
     (void)estatus;
 #endif
@@ -32,7 +32,7 @@ int ErrorCallback(
             <<"line:"<<line;
     }
 
-            if (qApp) {
+    if (qApp) {
         QErrorMessage errorBox;
         errorBox.showMessage(__error_,"error");
         errorBox.exec();
@@ -41,7 +41,7 @@ int ErrorCallback(
         qDebug().noquote()<<__error_;
     }
 
-            return 0;
+    return 0;
     (void)status;
 }
 }

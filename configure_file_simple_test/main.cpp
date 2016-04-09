@@ -26,7 +26,7 @@ public:
     }
 };
 
-int main(int argc,char ** argv) {
+int main(int argc,char ** argv) try{
     /*设置本地编码*/
     QTextCodec::setCodecForLocale(QTextCodec::codecForName(LOCAL_CODEC_));
 
@@ -62,4 +62,7 @@ int main(int argc,char ** argv) {
     return app.exec();
 
 }
-
+catch (...) {
+    std::cout<<"unknow exception @ main"<<std::endl;
+    return -99999;
+}

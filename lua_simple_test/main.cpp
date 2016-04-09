@@ -4,7 +4,7 @@
 #include <lua/lua.hpp>
 #include <iostream>
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv[])try
 {
     QApplication app(argc, argv);
 
@@ -21,6 +21,10 @@ int main(int argc, char *argv[])
 
     return app.exec();
 
+}
+catch (...) {
+    std::cout<<"unknow exception @ main"<<std::endl;
+    return -99999;
 }
 
 

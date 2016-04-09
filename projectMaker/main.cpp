@@ -14,7 +14,7 @@
 #include "ArgvPack.hpp"
 extern int run( ArgvPack pack );
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv[])try
 {
     if(argc<4){
         /*输出帮助*/
@@ -29,6 +29,10 @@ int main(int argc, char *argv[])
     }
 
     return run(argv);
+}
+catch (...) {
+    std::cout<<"unknow exception @ main"<<std::endl;
+    return -99999;
 }
 
 

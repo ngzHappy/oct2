@@ -5,6 +5,7 @@
 #include <QtCore/qcommandlineoption.h>
 #include <QtCore/qtextcodec.h>
 #include <QtCore/qdir.h>
+#include <QtCore/qpointer.h>
 #include <opencv_application_configuration_file.hpp>
 #include <iostream>
 
@@ -26,7 +27,7 @@ public:
     }
 };
 
-int main(int argc,char ** argv) {
+int main(int argc,char ** argv) try{
     /*设置本地编码*/
     QTextCodec::setCodecForLocale(QTextCodec::codecForName(LOCAL_CODEC_));
 
@@ -56,10 +57,14 @@ int main(int argc,char ** argv) {
     MainWindow * window=new MainWindow;
     window->setAttribute(Qt::WA_DeleteOnClose);
     window->show();
-    run(window->getOpenCVWindow());
+    run(window->getOpenCVWindow() );
     std::cout.flush();
 
     return app.exec();
 
+}
+catch (...) {
+    std::cout<<"unknow exception @ main"<<std::endl;
+    return -99999;
 }
 

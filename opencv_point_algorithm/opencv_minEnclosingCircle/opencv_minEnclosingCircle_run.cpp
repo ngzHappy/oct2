@@ -3,6 +3,52 @@
 #include <vector>
 #include <array>
 #include <QtCharts>
+#include <QtCore/qtextstream.h>
+#include <QtWidgets/qapplication.h>
+#include <QtWidgets/qerrormessage.h>
+#include <QtCore/qdebug.h>
+namespace {
+int ErrorCallback(
+    int status/*cv::Error::Code*/,
+    const char* func_name,
+    const char* err_msg,
+    const char* file_name,
+    int line,
+    void* /*userdata*/) {
+    QString __error_;
+
+#if !defined(NDEBUG)
+    cv::Error::Code estatus= static_cast<cv::Error::Code>(status);
+    (void)estatus;
+#endif
+
+    {
+        QTextStream stream_(&__error_);
+        stream_
+            <<"function name:"<<func_name
+            <<"error message:"<<err_msg
+            <<"file name:"<<file_name
+            <<"line:"<<line;
+    }
+
+    if (qApp) {
+        QErrorMessage errorBox;
+        errorBox.showMessage(__error_,"error");
+        errorBox.exec();
+    }
+    else {
+        qDebug().noquote()<<__error_;
+    }
+
+    return 0;
+    (void)status;
+}
+}
+/*当qapplication运行时注册此函数*/
+static void _set_opencv_error_on_qt_start_up() {
+    cv::redirectError(&ErrorCallback);
+}
+Q_COREAPP_STARTUP_FUNCTION(_set_opencv_error_on_qt_start_up)
 
 namespace {
 inline std::vector<cv::Point2f>
@@ -84,7 +130,7 @@ inline QList<QPointF> genCircle(double cx_,double cy_,double r_) {
 
  
 
-extern void run(OpenCVWindow * window) {
+extern void run(OpenCVWindow * window) try{
 
     std::vector<cv::Point2f> points_input=
         genRandPoint();
@@ -107,4 +153,7 @@ extern void run(OpenCVWindow * window) {
     chart_->setAxisX(chart_->axisX(item_->getScatterSeries()),series_);
     chart_->setAxisY(chart_->axisY(item_->getScatterSeries()),series_);
     series_->setPointsVisible(true);
+}
+catch (const cv::Exception &) {
+    /*std::quick_exit(-1);*/
 }

@@ -137,7 +137,9 @@ QImage::Format format_change_(QImage::Format format_) {
         case QImage::Format_Invalid:break;
         case QImage::Format_Mono:break;
         case QImage::Format_MonoLSB:break;
-        case QImage::Format_Indexed8:break;
+        case QImage::Format_Indexed8:{
+            image_=QImage::Format_RGB888;
+        }break;
         case QImage::Format_RGB32: {
             image_=QImage::Format_RGB888;
         }break;
@@ -482,9 +484,9 @@ std::pair<ErrorCallBackFunction,std::shared_ptr<const void>> set_error_function(
         ){
     auto ans___=get_error_function();
     auto data_=_data_;
-    if (data_==nullptr) { 
+    if (data_==nullptr) {
         _data_=std::make_shared<_Static_Data>();
-        data_= _data_ ; 
+        data_= _data_ ;
         qAddPostRoutine([]() {
             auto old_=_data_;
             if (old_) {
@@ -518,7 +520,7 @@ void error(const cv::Exception & e){
     }
 }
 
-std::pair<ErrorCallBackFunction,std::shared_ptr<const void>> 
+std::pair<ErrorCallBackFunction,std::shared_ptr<const void>>
 get_error_function(){
     auto data_=_data_;
     if (data_==nullptr) {

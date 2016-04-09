@@ -14,6 +14,9 @@ typedef void (*ErrorCallBackFunction)(const cv::Exception &,std::shared_ptr<cons
 
 CORE_UTILITYSHARED_EXPORT std::pair<ErrorCallBackFunction,std::shared_ptr<const void>> set_error_function(ErrorCallBackFunction,std::shared_ptr<const void>/**/=nullptr);
 CORE_UTILITYSHARED_EXPORT std::pair<ErrorCallBackFunction,std::shared_ptr<const void>> get_error_function();
+inline std::pair<ErrorCallBackFunction,std::shared_ptr<const void>> set_error_function(const std::pair<ErrorCallBackFunction,std::shared_ptr<const void>> & d){
+    return set_error_function(d.first,d.second);
+}
 CORE_UTILITYSHARED_EXPORT void error(const cv::Exception &);
 
 }

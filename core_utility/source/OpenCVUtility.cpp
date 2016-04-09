@@ -470,53 +470,65 @@ class _Static_Data{
 public:
     ErrorCallBackFunction efunction_ = nullptr;
     std::shared_ptr<const void> efunction_data_;
-    std::shared_ptr<std::recursive_mutex> mutex_;
+    const std::shared_ptr<std::recursive_mutex> mutex_;
     _Static_Data():mutex_(new std::recursive_mutex) {}
 };
 
-_Static_Data * data_ = nullptr;
+std::shared_ptr< _Static_Data >  _data_  ;
 
 std::pair<ErrorCallBackFunction,std::shared_ptr<const void>> set_error_function(
         ErrorCallBackFunction e,
     std::shared_ptr<const void> v
         ){
     auto ans___=get_error_function();
+    auto data_=_data_;
     if (data_==nullptr) { 
-        data_=new _Static_Data ; 
+        _data_=std::make_shared<_Static_Data>();
+        data_= _data_ ; 
         qAddPostRoutine([]() {
-            auto *old_=data_;
+            auto old_=_data_;
             if (old_) {
                 auto mutex__=old_->mutex_;
                 {
                     std::unique_lock<std::recursive_mutex> _l(*(old_->mutex_));
-                    data_=nullptr;
-                    delete old_;
+                    _data_.reset();
                 }
             }
         });
     }
-    std::unique_lock<std::recursive_mutex> _l(*(data_->mutex_));
-    data_->efunction_=e;
-    data_->efunction_data_=std::move(v);
+    auto mutex__=data_->mutex_;
+    {
+        std::unique_lock<std::recursive_mutex> _l(*(data_->mutex_));
+        data_->efunction_=e;
+        data_->efunction_data_=std::move(v);
+    }
     return std::move(ans___);
 }
 
 void error(const cv::Exception & e){
+    auto data_=_data_;
     if (data_) {
-        std::unique_lock<std::recursive_mutex> _l(*(data_->mutex_));
-        if (data_->efunction_) {
-            data_->efunction_(e,data_->efunction_data_);
+        auto mutex__=data_->mutex_;
+        {
+            std::unique_lock<std::recursive_mutex> _l(*(mutex__));
+            if (data_->efunction_) {
+                data_->efunction_(e,data_->efunction_data_);
+            }
         }
     }
 }
 
 std::pair<ErrorCallBackFunction,std::shared_ptr<const void>> 
 get_error_function(){
+    auto data_=_data_;
     if (data_==nullptr) {
         return std::pair<ErrorCallBackFunction,std::shared_ptr<const void>> {};
     }
-    std::unique_lock<std::recursive_mutex> _l(*(data_->mutex_));
-    return{data_->efunction_,data_->efunction_data_};
+    auto mutex__=data_->mutex_;
+    {
+        std::unique_lock<std::recursive_mutex> _l(*(mutex__));
+        return{ data_->efunction_,data_->efunction_data_ };
+    }
 }
 
 }

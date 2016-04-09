@@ -29,6 +29,7 @@
 #include <ciso646>
 #include <utility>
 #include <numeric>
+#include <exception>
 #include <algorithm>
 #include <functional>
 #include <type_traits>

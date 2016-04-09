@@ -81,9 +81,9 @@ extern void run(OpenCVWindow * window) try{
         );
     scatter->setWindowTitle(u8"散点图"_qs);
 
-    }
-catch (const cv::Exception & e) {
-    throw e;
+}
+catch (const cv::Exception &e) {
+    opencv_exception::error(e);
 }
 
 )=_____=";

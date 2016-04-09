@@ -51,6 +51,6 @@ Q_COREAPP_STARTUP_FUNCTION(_set_opencv_error_on_qt_start_up)
 extern void run(OpenCVWindow * window ) try{
     window->insertImage(QImage("images:000007"));
 }
-catch (const cv::Exception &) {
-    /*std::quick_exit(-1);*/
+catch (const cv::Exception &e) {
+    opencv_exception::error(e);
 }

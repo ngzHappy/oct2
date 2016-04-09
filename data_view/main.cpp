@@ -8,6 +8,7 @@
 #include <QtCore/qpointer.h>
 #include <opencv_application_configuration_file.hpp>
 #include <iostream>
+#include <OpenCVException.hpp>
 
 extern void run(OpenCVWindow * window);
 
@@ -54,6 +55,12 @@ int main(int argc,char ** argv) try{
         QDir::addSearchPath("images",QDir::cleanPath(BUILD_PATH_"/../Images"));
     }
 
+    opencv_exception::set_error_function(
+        [](const auto &,auto) {
+        std::cout<<"opencv exception called"<<std::endl;
+    }
+        );
+
     MainWindow * window=new MainWindow;
     window->setAttribute(Qt::WA_DeleteOnClose);
     window->show();
@@ -62,6 +69,10 @@ int main(int argc,char ** argv) try{
 
     return app.exec();
 
+}
+catch (const std::exception & e) {
+    std::cout<<e.what()<<std::endl;
+    return -10;
 }
 catch (...) {
     std::cout<<"unknow exception @ main"<<std::endl;

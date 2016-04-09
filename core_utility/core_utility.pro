@@ -57,6 +57,7 @@ HEADERS += $$PWD/OpenCVItem.hpp
 HEADERS += $$PWD/OpenCVImageItem.hpp
 HEADERS += $$PWD/OpenCVHistItem.hpp
 HEADERS += $$PWD/OpenCVStyle.hpp
+HEADERS += $$PWD/OpenCVException.hpp
 HEADERS += $$PWD/OpenCVScatterItem.hpp
 HEADERS += $$PWD/OpenCVLineSeriesItem.hpp
 HEADERS += $$PWD/OpenCVUtility.hpp

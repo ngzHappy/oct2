@@ -154,6 +154,6 @@ extern void run(OpenCVWindow * window) try{
     chart_->setAxisY(chart_->axisY(item_->getScatterSeries()),series_);
     series_->setPointsVisible(true);
 }
-catch (const cv::Exception &) {
-    /*std::quick_exit(-1);*/
+catch (const cv::Exception &e) {
+    opencv_exception::error(e);
 }

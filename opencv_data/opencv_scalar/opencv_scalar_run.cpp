@@ -55,6 +55,6 @@ extern void run(OpenCVWindow *  ) try{
     std::cout<<scalar.isReal()<<std::endl;
     std::cout<<cv::Scalar::all(1)<<std::endl;
 }
-catch (const cv::Exception &) {
-    /*std::quick_exit(-1);*/
+catch (const cv::Exception &e) {
+    opencv_exception::error(e);
 }

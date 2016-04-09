@@ -62,6 +62,6 @@ extern void run(OpenCVWindow * window) try{
 
     window->insertScatter({point_0,point_1});
 }
-catch (const cv::Exception &) {
-    /*std::quick_exit(-1);*/
+catch (const cv::Exception &e) {
+    opencv_exception::error(e);
 }

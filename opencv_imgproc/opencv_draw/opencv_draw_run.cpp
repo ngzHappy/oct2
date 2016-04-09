@@ -91,8 +91,8 @@ static inline void openCVPaintTest(QImage image,OpenCVWindow * window)try{
     window->insertImage( OpenCVUtility::tryRead(matImage) )
         ->setWindowTitle("OpenCV Paint");
 }
-catch (const cv::Exception &) {
-    /*std::quick_exit(-1);*/
+catch (const cv::Exception &e) {
+    opencv_exception::error(e);
 }
 
 static inline void qtPaintTest(QImage image,OpenCVWindow * window){

@@ -6,6 +6,7 @@
 #include <QtCore/qtextstream.h>
 #include <QtWidgets/qapplication.h>
 #include <QtWidgets/qerrormessage.h>
+#include <OpenCVException.hpp>
 namespace {
 int ErrorCallback(
     int status/*cv::Error::Code*/,
@@ -78,7 +79,7 @@ extern void run(OpenCVWindow * window ) try{
     }
 
 }
-catch (const cv::Exception &) {
-    /*std::quick_exit(-1);*/
+catch (const cv::Exception &e) {
+    opencv_exception::error(e);
 }
 

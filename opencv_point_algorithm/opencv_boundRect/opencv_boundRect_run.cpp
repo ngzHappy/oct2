@@ -105,6 +105,6 @@ extern void run(OpenCVWindow * window) try{
     chart_->axisY(item_->getScatterSeries())
         ->setRange(-0.5+points_[0].y,0.5+points_[2].y);
 }
-catch (const cv::Exception &) {
-    /*std::quick_exit(-1);*/
+catch (const cv::Exception &e) {
+    opencv_exception::error(e);
 }

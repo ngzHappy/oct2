@@ -7,6 +7,7 @@
 #include <QtCore/qdir.h>
 #include <opencv_application_configuration_file.hpp>
 #include <iostream>
+#include <exception>
 
 extern void run(OpenCVWindow * window) ;
 
@@ -61,6 +62,10 @@ int main(int argc,char ** argv) try{
 
     return app.exec();
 
+}
+catch (const std::exception & e) {
+    std::cout<<e.what()<<std::endl;
+    return -10;
 }
 catch (...) {
     std::cout<<"unknow exception @ main"<<std::endl;

@@ -71,6 +71,6 @@ extern void run(OpenCVWindow * window) try{
     window->insertChartImage(QImage("images:000000"))
         ->setWindowTitle(u8"测试带坐标系图片"_qs);
 }
-catch (const cv::Exception &) {
-    /*std::quick_exit(-1);*/
+catch (const cv::Exception &e) {
+    opencv_exception::error(e);
 }

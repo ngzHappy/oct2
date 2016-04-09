@@ -71,6 +71,6 @@ extern void run(OpenCVWindow * window) try{
     item->setWindowTitle(u8"全景图"_qs);
     item->setGridLineVisible(false,false);
 }
-catch (const cv::Exception &) {
-    /*std::quick_exit(-1);*/
+catch (const cv::Exception &e) {
+    opencv_exception::error(e);
 }

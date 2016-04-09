@@ -115,6 +115,6 @@ extern void run(OpenCVWindow * window) try{
         ->setWindowTitle(u8"中心化后图像"_qs);
 
 }
-catch (const cv::Exception &) {
-    /*std::quick_exit(-1);*/
+catch (const cv::Exception &e) {
+    opencv_exception::error(e);
 }

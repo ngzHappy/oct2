@@ -65,6 +65,10 @@ int main(int argc,char ** argv) try{
     return app.exec();
 
 }
+catch (const std::exception & e) {
+    std::cout<<e.what()<<std::endl;
+    return -10;
+}
 catch (...) {
     std::cout<<"unknow exception @ main"<<std::endl;
     return -99999;

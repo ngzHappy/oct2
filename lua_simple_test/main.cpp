@@ -3,6 +3,7 @@
 #include <core_utility.hpp>
 #include <lua/lua.hpp>
 #include <iostream>
+#include <exception>
 
 int main(int argc, char *argv[])try
 {
@@ -21,6 +22,10 @@ int main(int argc, char *argv[])try
 
     return app.exec();
 
+}
+catch (const std::exception & e) {
+    std::cout<<e.what()<<std::endl;
+    return -10;
 }
 catch (...) {
     std::cout<<"unknow exception @ main"<<std::endl;

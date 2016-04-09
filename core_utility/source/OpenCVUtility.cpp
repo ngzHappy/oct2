@@ -1,11 +1,12 @@
 ﻿#include "../OpenCVUtility.hpp"
+#include "../OpenCVException.hpp"
 #include <QtWidgets/qapplication.h>
 #include <QtGui/qimage.h>
 #include <QtCore/qtimer.h>
 #include <private/qimage_p.h>
 #include <QtGui/qimagereader.h>
 #include <QtCore/qdebug.h>
-
+#include <mutex>
 #include <cstdlib>
 #include <ctime>
 #include <cassert>
@@ -461,6 +462,63 @@ QImage OpenCVUtility::tryRead(const cv::Mat & v) {
     }
 
     return std::move(ans_);
+}
+
+namespace opencv_exception {
+
+class _Static_Data{
+public:
+    ErrorCallBackFunction efunction_ = nullptr;
+    std::shared_ptr<const void> efunction_data_;
+    std::shared_ptr<std::recursive_mutex> mutex_;
+    _Static_Data():mutex_(new std::recursive_mutex) {}
+};
+
+_Static_Data * data_ = nullptr;
+
+std::pair<ErrorCallBackFunction,std::shared_ptr<const void>> set_error_function(
+        ErrorCallBackFunction e,
+    std::shared_ptr<const void> v
+        ){
+    auto ans___=get_error_function();
+    if (data_==nullptr) { 
+        data_=new _Static_Data ; 
+        qAddPostRoutine([]() {
+            auto *old_=data_;
+            if (old_) {
+                auto mutex__=old_->mutex_;
+                {
+                    std::unique_lock<std::recursive_mutex> _l(*(old_->mutex_));
+                    data_=nullptr;
+                    delete old_;
+                }
+            }
+        });
+    }
+    std::unique_lock<std::recursive_mutex> _l(*(data_->mutex_));
+    data_->efunction_=e;
+    data_->efunction_data_=std::move(v);
+    return std::move(ans___);
+}
+
+void error(const cv::Exception & e){
+    if (data_) {
+        std::unique_lock<std::recursive_mutex> _l(*(data_->mutex_));
+        if (data_->efunction_) {
+            data_->efunction_(e,data_->efunction_data_);
+        }
+    }
+}
+
+std::pair<ErrorCallBackFunction,std::shared_ptr<const void>> 
+get_error_function(){
+    if (data_==nullptr) {
+        return std::pair<ErrorCallBackFunction,std::shared_ptr<const void>> {};
+    }
+    std::unique_lock<std::recursive_mutex> _l(*(data_->mutex_));
+    return{data_->efunction_,data_->efunction_data_};
+}
+
 }
 
 /*在QApplication构造时运行*/

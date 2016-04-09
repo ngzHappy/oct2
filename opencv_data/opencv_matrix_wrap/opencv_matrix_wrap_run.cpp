@@ -66,6 +66,6 @@ extern void run(OpenCVWindow *) try{
     std::cout<<matrix_<<std::endl;
 
 }
-catch (const cv::Exception &) {
-    /*std::quick_exit(-1);*/
+catch (const cv::Exception &e) {
+    opencv_exception::error(e);
 }

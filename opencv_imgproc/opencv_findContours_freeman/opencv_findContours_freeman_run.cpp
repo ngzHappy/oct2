@@ -3,6 +3,7 @@
 #include <opencv_application_configuration_file.hpp>
 #include <QtCore/qdebug.h>
 #include <QtCore/qdir.h>
+#include <list>
 //#include <QtCharts>
 
 #include <QtCore/qtextstream.h>
@@ -137,7 +138,7 @@ void FreeManPoint::_p_setX(_t_X_t__ &&_x_){
 void FreeManPoint::setX(const std::int32_t&_x_){_p_setX(_x_);}
 void FreeManPoint::setX(std::int32_t&&_x_){_p_setX(std::move(_x_));}
 
-std::vector<std::vector<FreeManPoint>> 
+std::list<std::vector<FreeManPoint>> 
 findContoursFreeman(cv::Mat input_image) noexcept(false/*cv::Exception*/){
     typedef void(*FreeCvMemStorageType)(CvMemStorage*);
     
@@ -161,7 +162,7 @@ findContoursFreeman(cv::Mat input_image) noexcept(false/*cv::Exception*/){
         CV_RETR_EXTERNAL, CV_CHAIN_CODE );
 
     /*结果*/
-    std::vector<std::vector<FreeManPoint>> _ans_;
+    std::list<std::vector<FreeManPoint>> _ans_;
     
     for(;chain!=nullptr;chain=(CvChain*)chain ->h_next) {   
         
@@ -178,7 +179,7 @@ findContoursFreeman(cv::Mat input_image) noexcept(false/*cv::Exception*/){
 
         for(i=0;i<total;i++) 
         { 
-            char code/*连码*/; 
+            char code/*链码*/; 
             CV_READ_SEQ_ELEM(code, reader); 
 
             CvPoint pt/*点*/;
@@ -194,7 +195,7 @@ findContoursFreeman(cv::Mat input_image) noexcept(false/*cv::Exception*/){
 
 }
 
-extern void run(OpenCVWindow *  ) try{
+extern void run(OpenCVWindow *) try{
    
     {
         QDir dir_(qApp->applicationDirPath());
@@ -210,10 +211,12 @@ extern void run(OpenCVWindow *  ) try{
     QTextStream stream_(&file_);
 
     for (int deg=0; deg<360;++deg) {
+        /*生成测试图片*/
         QImage image_=getTestImage(deg);
+        /*将QImage 转换为 cv::Mat*/
         cv::Mat input_image=OpenCVUtility::tryRead(image_.copy());
         
-        std::vector<std::vector<FreeManPoint>> ans_=
+        std::list<std::vector<FreeManPoint>> ans_=
         findContoursFreeman(input_image);
       
         std::int32_t count_[8]{0,0,0,0,0,0,0,0};
@@ -223,6 +226,15 @@ extern void run(OpenCVWindow *  ) try{
             }
         }
 
+        const double weight_=
+            count_[0]+count_[1]+count_[2]+count_[3]+
+            count_[4]+count_[5]+count_[6]+count_[7];
+        double diff_=(
+            std::abs(count_[0]-count_[4])+
+            std::abs(count_[1]-count_[5])+
+            std::abs(count_[2]-count_[6])+
+            std::abs(count_[3]-count_[7])
+            )/weight_;
         /*输出到控制台*/
         //std::cout<<count_[0]<<",";
         //std::cout<<count_[1]<<",";
@@ -242,20 +254,11 @@ extern void run(OpenCVWindow *  ) try{
         stream_<<count_[5]<<",";
         stream_<<count_[6]<<",";
         stream_<<count_[7]<<",";
+        stream_<<weight_<<",";
+        stream_<<diff_<<",";
         stream_<<endl;
         
-        double length_=
-            count_[0]+count_[1]+count_[2]+count_[3]+
-            count_[4]+count_[5]+count_[6]+count_[7];
-        std::cout<<deg<<","<<
-            (
-                std::abs(count_[0]-count_[4])+
-                std::abs(count_[1]-count_[5])+
-                std::abs(count_[2]-count_[6])+
-                std::abs(count_[3]-count_[7])
-            )/length_
-            <<std::endl;
-
+        std::cout<<deg<<","<<diff_<<std::endl;
 
     }
 

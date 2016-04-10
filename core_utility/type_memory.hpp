@@ -26,10 +26,10 @@ inline auto wrap_shared_ptr(_T_ * _data_,_D_&&_deleter)->std::shared_ptr<_T_> {
 typedef void(*deleter_uniqute_ptr_t)(const void *);
 template<
     typename _T_,
-    typename _U_=std::enable_if_t<!(std::is_array<_T_>::value)>,
     typename ... Args
 >
 inline auto make_unique(Args && ... args)->std::unique_ptr<_T_,deleter_uniqute_ptr_t> {
+    static_assert(std::is_array<_T_>::value==false,"use std::array<type,size_t>");
     return std::unique_ptr<_T_,deleter_uniqute_ptr_t>(
         new _T_(std::forward<Args>(args)...),
         [](const void * _d) {delete ((_T_ *)(_d)); }
@@ -38,10 +38,10 @@ inline auto make_unique(Args && ... args)->std::unique_ptr<_T_,deleter_uniqute_p
 
 template<
     typename _T_,
-    typename _U_=std::enable_if_t<!(std::is_array<_T_>::value)>,
     typename ... Args
 >
 inline auto instance_unique(Args && ... args)->std::unique_ptr<_T_,deleter_uniqute_ptr_t> {
+    static_assert(std::is_array<_T_>::value==false,"use std::array<type,size_t>");
     return std::unique_ptr<_T_,deleter_uniqute_ptr_t>(
         new _T_{ std::forward<Args>(args)... },
         [](const void * _d) {delete ((_T_ *)(_d)); }
@@ -50,25 +50,24 @@ inline auto instance_unique(Args && ... args)->std::unique_ptr<_T_,deleter_uniqu
 
 template<
     typename _T_,
-    typename _U_=std::enable_if_t<!(std::is_array<_T_>::value)>,
     typename ... Args
 >
 inline auto make_shared_ptr(Args&&...args)->std::shared_ptr<_T_> {
+    static_assert(std::is_array<_T_>::value==false,"use std::array<type,size_t>");
     return std::shared_ptr<_T_>(make_unique<_T_>(std::forward<Args>(args)...));
 }
 
 template<
     typename _T_,
-    typename _U_=std::enable_if_t<!(std::is_array<_T_>::value)>,
     typename ... Args
 >
 inline auto instance_shared_ptr(Args&&...args)->std::shared_ptr<_T_> {
+    static_assert(std::is_array<_T_>::value==false,"use std::array<type,size_t>");
     return std::shared_ptr<_T_>(instance_unique<_T_>(std::forward<Args>(args)...));
 }
 
 template<
     typename _T_,
-    typename _U_=std::enable_if_t<!(std::is_array<_T_>::value)>,
     typename ... Args,
     typename Deleter
 >
@@ -76,6 +75,7 @@ inline auto make_shared_ptr_add_deleter(
     Deleter && deleter,
     Args&&...args
     ) ->std::shared_ptr<_T_> {
+    static_assert(std::is_array<_T_>::value==false,"use std::array<type,size_t>");
     typedef std::remove_const_t<std::remove_reference_t<Deleter>> Deleter_;
     Deleter_ deleter_0_{ std::forward<Deleter>(deleter) }/*create a copy*/;
     auto data_=make_unique<_T_>(std::forward<Args>(args)...)/*create data*/;
@@ -91,7 +91,6 @@ inline auto make_shared_ptr_add_deleter(
 
 template<
     typename _T_,
-    typename _U_=std::enable_if_t<!(std::is_array<_T_>::value)>,
     typename ... Args,
     typename Deleter
 >
@@ -99,6 +98,7 @@ inline auto instance_shared_ptr_add_deleter(
     Deleter && deleter,
     Args&&...args
     ) ->std::shared_ptr<_T_> {
+    static_assert(std::is_array<_T_>::value==false,"use std::array<type,size_t>");
     typedef std::remove_const_t<std::remove_reference_t<Deleter>> Deleter_;
     Deleter_ deleter_0_{ std::forward<Deleter>(deleter) }/*create a copy*/;
     auto data_=instance_unique<_T_>(std::forward<Args>(args)...)/*create data*/;

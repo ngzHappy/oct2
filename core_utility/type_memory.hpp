@@ -1,5 +1,5 @@
-﻿#if !defined(__TYPE__MEMORY_HPP_)
-#define __TYPE__MEMORY_HPP_() 1
+﻿#if !defined(__TYPE_0_MEMORY_HPP_)
+#define __TYPE_0_MEMORY_HPP_() 1
 
 #include <memory>
 #include <type_traits>

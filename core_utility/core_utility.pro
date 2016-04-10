@@ -48,6 +48,7 @@ HEADERS += $$PWD/private/_msvc_core_utility_prebuild.hpp
 HEADERS += $$PWD/core_utility.hpp
 HEADERS += $$PWD/OpenCVMatProxyAllocator.hpp
 HEADERS += $$PWD/getxy.hpp
+HEADERS += $$PWD/type_memory.hpp
 HEADERS += $$PWD/core_utility_global.hpp
 HEADERS += $$PWD/opencv_application_configuration_file.hpp
 HEADERS += $$PWD/ReadOnly.hpp

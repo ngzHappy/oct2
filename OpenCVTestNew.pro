@@ -150,3 +150,7 @@ SUBDIRS += configure_file_simple_test
 data_view.file = $$PWD/data_view/data_view.pro
 data_view.depends += core_utility
 SUBDIRS += data_view
+
+opencv_findContours_freeman.file = $$PWD/opencv_imgproc/opencv_findContours_freeman/opencv_findContours_freeman.pro
+opencv_findContours_freeman.depends += core_utility
+SUBDIRS += opencv_findContours_freeman

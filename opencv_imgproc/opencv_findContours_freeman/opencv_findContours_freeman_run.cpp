@@ -65,6 +65,7 @@ QImage getTestImage(double angle/*deg*/) {
     QImage image_(image_width(),image_height(),QImage::Format_RGB32);
     image_.fill(QColor(0,0,0));
     QPainter painter_(&image_);
+    painter_.setRenderHint(QPainter::HighQualityAntialiasing);
     painter_.translate(image_width()/2,image_height()/2);
     painter_.rotate(angle);
     painter_.setPen(QPen(QColor(255,255,255),1));
@@ -80,7 +81,7 @@ QImage getTestImage(double angle/*deg*/) {
 
 }
 
-namespace { 
+namespace {
 
 class FreeManPoint {
 protected:
@@ -104,9 +105,9 @@ public:
     const std::int32_t & y() const{ return getY();}
     void setCode(const unsigned char& /*code*/);
     void setCode(unsigned char&& /*code*/);
-    const short getCode() const;
-    const short code() const{ return getCode();}
-private: 
+    short getCode() const;
+    short code() const{ return getCode();}
+private:
     template<typename _t_CODE_t__>void _p_setCode(_t_CODE_t__ && /*code*/);
     template<typename _t_X_t__>void _p_setX(_t_X_t__ && /*x*/);
     template<typename _t_Y_t__>void _p_setY(_t_Y_t__ && /*y*/);
@@ -119,7 +120,7 @@ void FreeManPoint::_p_setY(_t_Y_t__ &&_y_){
 }
 void FreeManPoint::setY(const std::int32_t&_y_){_p_setY(_y_);}
 void FreeManPoint::setY(std::int32_t&&_y_){ _p_setY(std::move(_y_));}
-const short FreeManPoint::getCode() const{return code_;}
+short FreeManPoint::getCode() const{return code_;}
 template<typename _t_CODE_t__>
 void FreeManPoint::_p_setCode(_t_CODE_t__ &&_code_) {
     code_=std::forward<_t_CODE_t__>(_code_);
@@ -138,10 +139,10 @@ void FreeManPoint::_p_setX(_t_X_t__ &&_x_){
 void FreeManPoint::setX(const std::int32_t&_x_){_p_setX(_x_);}
 void FreeManPoint::setX(std::int32_t&&_x_){_p_setX(std::move(_x_));}
 
-std::list<std::vector<FreeManPoint>> 
+std::list<std::vector<FreeManPoint>>
 findContoursFreeman(cv::Mat input_image) noexcept(false/*cv::Exception*/){
     typedef void(*FreeCvMemStorageType)(CvMemStorage*);
-    
+
     CvChain* chain=nullptr;
     CvMemStorage* storage=nullptr;
     storage=cvCreateMemStorage(0)/*default*/;
@@ -153,23 +154,24 @@ findContoursFreeman(cv::Mat input_image) noexcept(false/*cv::Exception*/){
         cvClearMemStorage(data_)/*清空数据*/;
         cvReleaseMemStorage(&data_)/*释放内存*/;
     });
-     
+
+    IplImage tvarInputImage(input_image);
     cvFindContours(
-        &IplImage(input_image),
-        storage, 
-        (CvSeq**)(&chain), 
-        sizeof(*chain), 
+        &tvarInputImage,
+        storage,
+        (CvSeq**)(&chain),
+        sizeof(*chain),
         CV_RETR_EXTERNAL, CV_CHAIN_CODE );
 
     /*结果*/
     std::list<std::vector<FreeManPoint>> _ans_;
-    
-    for(;chain!=nullptr;chain=(CvChain*)chain ->h_next) {   
-        
-        CvSeqReader reader; 
+
+    for(;chain!=nullptr;chain=(CvChain*)chain ->h_next) {
+
+        CvSeqReader reader;
         int i=0;
         int total=chain->total;
-        cvStartReadSeq((CvSeq*)chain,&reader,0); 
+        cvStartReadSeq((CvSeq*)chain,&reader,0);
 
         CvChainPtReader reader_point;
         cvStartReadChainPoints((CvChain*)chain, &reader_point);
@@ -177,10 +179,10 @@ findContoursFreeman(cv::Mat input_image) noexcept(false/*cv::Exception*/){
         std::vector<FreeManPoint> _v_points;
         _v_points.reserve(total);
 
-        for(i=0;i<total;i++) 
-        { 
-            char code/*链码*/; 
-            CV_READ_SEQ_ELEM(code, reader); 
+        for(i=0;i<total;i++)
+        {
+            char code/*链码*/;
+            CV_READ_SEQ_ELEM(code, reader);
 
             CvPoint pt/*点*/;
             CV_READ_CHAIN_POINT(pt,reader_point);
@@ -191,12 +193,12 @@ findContoursFreeman(cv::Mat input_image) noexcept(false/*cv::Exception*/){
     }
     return std::move(_ans_);
 
-} 
+}
 
 }
 
 extern void run(OpenCVWindow *) try{
-   
+
     {
         QDir dir_(qApp->applicationDirPath());
         dir_.mkdir(APP_NAME_);
@@ -207,7 +209,7 @@ extern void run(OpenCVWindow *) try{
         +"/ans.txt";
     QFile file_(fileName_);
     file_.open(QIODevice::WriteOnly|QIODevice::Text);
-    
+
     QTextStream stream_(&file_);
 
     for (int deg=0; deg<360;++deg) {
@@ -215,10 +217,10 @@ extern void run(OpenCVWindow *) try{
         QImage image_=getTestImage(deg);
         /*将QImage 转换为 cv::Mat*/
         cv::Mat input_image=OpenCVUtility::tryRead(image_.copy());
-        
+
         std::list<std::vector<FreeManPoint>> ans_=
         findContoursFreeman(input_image);
-      
+
         std::int32_t count_[8]{0,0,0,0,0,0,0,0};
         for (const auto &i:ans_) {
             for (const auto & j:i) {
@@ -246,6 +248,7 @@ extern void run(OpenCVWindow *) try{
         //std::cout<<count_[7]<<",";
         //std::cout<<std::endl;
         /*输出到文件*/
+        stream_<<deg<<",";
         stream_<<count_[0]<<",";
         stream_<<count_[1]<<",";
         stream_<<count_[2]<<",";
@@ -257,7 +260,7 @@ extern void run(OpenCVWindow *) try{
         stream_<<weight_<<",";
         stream_<<diff_<<",";
         stream_<<endl;
-        
+
         std::cout<<deg<<","<<diff_<<std::endl;
 
     }

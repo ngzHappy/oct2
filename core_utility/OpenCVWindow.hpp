@@ -28,11 +28,11 @@ public:
     template<typename B,typename E>OpenCVHistItem * insertHist(B,E);
     template<typename B,typename E>OpenCVScatterItem * insertScatter(B,E);
     template<typename B,typename E>OpenCVLineSeriesItem * insertLineSeries(B,E);
-    virtual OpenCVHistItem * insertHist(QList<qreal> data_);
-    virtual OpenCVImageItem * insertImage(QImage i);
-    virtual OpenCVChartImage * insertChartImage(QImage i);
-    virtual OpenCVScatterItem * insertScatter(QList<QPointF> data_);
-    virtual OpenCVLineSeriesItem * insertLineSeries(QList<QPointF> data_);
+    virtual OpenCVHistItem * insertHist(QList<qreal> );
+    virtual OpenCVImageItem * insertImage(QImage );
+    virtual OpenCVChartImage * insertChartImage(QImage );
+    virtual OpenCVScatterItem * insertScatter(QList<QPointF> );
+    virtual OpenCVLineSeriesItem * insertLineSeries(QList<QPointF> );
     template<typename _U_>OpenCVScatterItem * insertScatter(std::initializer_list<_U_> &&);
     template<typename _U_>OpenCVLineSeriesItem * insertLineSeries(std::initializer_list<_U_> &&);
     void setImageAlg(const std::shared_ptr<const std::function<QImage(const QImage &)>> &);

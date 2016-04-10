@@ -10,7 +10,6 @@ template<
     typename _D_
 >
 inline auto wrap_unique(_T_ * _data_,_D_&&_deleter)->std::unique_ptr<_T_,std::remove_reference_t<_D_>> {
-    typedef std::remove_reference_t<_D_> Deleter_;
     return std::unique_ptr<_T_,std::remove_reference_t<_D_>>{
         _data_,std::forward<_D_>(_deleter)};
 }

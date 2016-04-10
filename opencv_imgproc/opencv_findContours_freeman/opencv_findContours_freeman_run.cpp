@@ -87,13 +87,14 @@ class FreeManPoint {
 protected:
     std::int32_t x_;
     std::int32_t y_;
-    unsigned char code_/*0,1,2,3,4,5,6,7*/;
+    std::int32_t code_/*0,1,2,3,4,5,6,7*/;
 public:
-    FreeManPoint() :x_(-1),y_(-1),code_(8){}
-    FreeManPoint(std::int32_t _x_,std::int32_t _y_,unsigned char _c_) :
-        x_(_x_),y_(_y_),code_(_c_){}
-    FreeManPoint(std::int32_t _x_,std::int32_t _y_,char _c_) :
-        x_(_x_),y_(_y_),code_(static_cast<unsigned char>(_c_)){}
+    FreeManPoint() :x_(-1),y_(-1),code_(7){}
+    FreeManPoint(
+        const std::int32_t _x_,
+        const std::int32_t _y_,
+        std::int32_t _c_) :
+        x_(_x_),y_(_y_),code_(_c_&7){}
 public:
     void setX(const std::int32_t& /*x*/);
     void setX(std::int32_t&& /*x*/);
@@ -103,10 +104,10 @@ public:
     void setY(std::int32_t&& /*y*/);
     const std::int32_t & getY() const;
     const std::int32_t & y() const{ return getY();}
-    void setCode(const unsigned char& /*code*/);
-    void setCode(unsigned char&& /*code*/);
-    short getCode() const;
-    short code() const{ return getCode();}
+    void setCode(const std::int32_t& /*code*/);
+    void setCode(std::int32_t&& /*code*/);
+    std::int32_t getCode() const;
+    std::int32_t code() const{ return getCode();}
 private:
     template<typename _t_CODE_t__>void _p_setCode(_t_CODE_t__ && /*code*/);
     template<typename _t_X_t__>void _p_setX(_t_X_t__ && /*x*/);
@@ -120,15 +121,15 @@ void FreeManPoint::_p_setY(_t_Y_t__ &&_y_){
 }
 void FreeManPoint::setY(const std::int32_t&_y_){_p_setY(_y_);}
 void FreeManPoint::setY(std::int32_t&&_y_){ _p_setY(std::move(_y_));}
-short FreeManPoint::getCode() const{return code_;}
+std::int32_t FreeManPoint::getCode() const{return code_;}
 template<typename _t_CODE_t__>
 void FreeManPoint::_p_setCode(_t_CODE_t__ &&_code_) {
-    code_=std::forward<_t_CODE_t__>(_code_);
+    code_=std::forward<_t_CODE_t__>(7&_code_);
 }
-void FreeManPoint::setCode(const unsigned char&_code_){
+void FreeManPoint::setCode(const std::int32_t&_code_){
     _p_setCode(_code_);
 }
-void FreeManPoint::setCode(unsigned char&&_code_){
+void FreeManPoint::setCode(std::int32_t&&_code_){
     _p_setCode(std::move(_code_));
 }
 const std::int32_t & FreeManPoint::getX() const{return x_;}

@@ -124,7 +124,7 @@ void FreeManPoint::setY(std::int32_t&&_y_){ _p_setY(std::move(_y_));}
 std::int32_t FreeManPoint::getCode() const{return code_;}
 template<typename _t_CODE_t__>
 void FreeManPoint::_p_setCode(_t_CODE_t__ &&_code_) {
-    code_=std::forward<_t_CODE_t__>(7&_code_);
+    code_=(7&_code_);
 }
 void FreeManPoint::setCode(const std::int32_t&_code_){
     _p_setCode(_code_);

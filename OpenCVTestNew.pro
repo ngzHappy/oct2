@@ -4,6 +4,15 @@ TEMPLATE = subdirs
 #git clone https://github.com/qtproject/qtcharts
 #
 
+#vsbuild.bat
+#set PATH=%PATH%;C:\QT\Qt57\vs2015\qtbase\bin;
+#qmake "../OpenCVTestNew" -r -tp vc
+
+#vsrun.bat
+#@set PATH=%PATH%;C:\QT\Qt57\vs2015\qtbase\bin;
+#@cd C:\Temp\ffjjj\otestnew\OpenCVTestNew\binlib\msvc\bin
+#cmd
+
 #.subdir #Use the specified subdirectory instead of SUBDIRS value.
 #.file #Specify the subproject pro file explicitly. Cannot be used in conjunction with .subdir modifier.
 #.depends #This subproject depends on specified subproject.
@@ -174,3 +183,15 @@ SUBDIRS += opencv_fitEllipse
 opencv_pointPolygonTest.file = $$PWD/opencv_imgproc/opencv_pointPolygonTest/opencv_pointPolygonTest.pro
 opencv_pointPolygonTest.depends += core_utility
 SUBDIRS += opencv_pointPolygonTest
+
+opencv_applyColorMap.file = $$PWD/opencv_imgproc/opencv_applyColorMap/opencv_applyColorMap.pro
+opencv_applyColorMap.depends += core_utility
+SUBDIRS += opencv_applyColorMap
+
+opencv_connectedComponents.file = $$PWD/opencv_imgproc/opencv_connectedComponents/opencv_connectedComponents.pro
+opencv_connectedComponents.depends += core_utility
+SUBDIRS += opencv_connectedComponents
+
+opencv_connectedComponentsWithStats.file = $$PWD/opencv_imgproc/opencv_connectedComponentsWithStats/opencv_connectedComponentsWithStats.pro
+opencv_connectedComponentsWithStats.depends += core_utility
+SUBDIRS += opencv_connectedComponentsWithStats

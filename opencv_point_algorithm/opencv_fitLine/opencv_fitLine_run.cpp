@@ -1,4 +1,4 @@
-﻿const char *_run_cpp=u8R"=_____=(/*run.cpp*/
+﻿/*run.cpp*/
 #include <OpenCVUtility.hpp>
 #include <opencv_application_configuration_file.hpp>
 #include <QtCore/qdebug.h>
@@ -33,7 +33,6 @@ int ErrorCallback(
     }
 
     if (qApp) {
-        qDebug().noquote()<<__error_;
         QErrorMessage errorBox;
         errorBox.showMessage(__error_,"error");
         errorBox.exec();
@@ -87,4 +86,3 @@ catch (const cv::Exception &e) {
     opencv_exception::error(e);
 }
 
-)=_____=";

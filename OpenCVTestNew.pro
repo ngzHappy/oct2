@@ -158,3 +158,11 @@ SUBDIRS += opencv_findContours_freeman
 opencv_contourArea.file = $$PWD/opencv_imgproc/opencv_contourArea/opencv_contourArea.pro
 opencv_contourArea.depends += core_utility
 SUBDIRS += opencv_contourArea
+
+opencv_arcLength.file = $$PWD/opencv_imgproc/opencv_arcLength/opencv_arcLength.pro
+opencv_arcLength.depends += core_utility
+SUBDIRS += opencv_arcLength
+
+opencv_fitLine.file = $$PWD/opencv_point_algorithm/opencv_fitLine/opencv_fitLine.pro
+opencv_fitLine.depends += core_utility
+SUBDIRS += opencv_fitLine

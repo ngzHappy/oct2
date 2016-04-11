@@ -81,19 +81,13 @@ extern void run(OpenCVWindow * window) try {
         }
 
         if (false==varContoursArea.isEmpty()) {
-            auto varSum = std::accumulate(
-                varContoursArea.constBegin(),
-                varContoursArea.constEnd(),
-                qreal(0)
-                );
-            auto varAvg=varSum/varContoursArea.size();
             for (auto & vari:varContoursArea) {
-                vari-=varAvg;
-                vari/=varAvg;
+                vari-=6000;
+                vari/=6000;
                 vari*=100;
             }
             window->insertHist(std::move(varContoursArea))
-                ->setWindowTitle(u8"(检测值-平均值)/平均值的百分比"_qs);
+                ->setWindowTitle(u8"(检测值-6000)/6000的百分比"_qs);
         }
     }
 

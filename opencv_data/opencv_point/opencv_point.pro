@@ -34,6 +34,7 @@ LIBS += -L$$OUTPWD -lcore_utility
 }
 
 DISTFILES += $$PWD/opencv_point.lua
+DISTFILES += $$PWD/private/opencv_point_run_exception.cpp
 
 !win32 {
     QMAKE_LFLAGS += -Wl,-rpath .

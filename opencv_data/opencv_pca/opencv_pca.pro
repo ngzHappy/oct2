@@ -35,6 +35,7 @@ LIBS += -L$$OUTPWD -lcore_utility
 
 DISTFILES += $$PWD/opencv_pca.lua
 DISTFILES += $$PWD/opencv_pca.PNG
+DISTFILES += $$PWD/private/opencv_pca_run_exception.cpp
 
 HEADERS += $$PWD/private/pre_build.hpp
 HEADERS += $$PWD/private/msvc_pre_build.hpp

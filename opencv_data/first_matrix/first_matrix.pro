@@ -35,6 +35,7 @@ LIBS += -L$$OUTPWD -lcore_utility
 
 DISTFILES += $$PWD/first_matrix.lua
 DISTFILES += $$PWD/first_matrix.PNG
+DISTFILES += $$PWD/private/first_matrix_run_exception.cpp
 
 !win32 {
     QMAKE_LFLAGS += -Wl,-rpath .

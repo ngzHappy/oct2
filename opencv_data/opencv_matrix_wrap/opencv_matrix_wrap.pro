@@ -35,6 +35,7 @@ LIBS += -L$$OUTPWD -lcore_utility
 }
 
 DISTFILES += $$PWD/opencv_matrix_wrap.lua
+DISTFILES += $$PWD/private/opencv_matrix_wrap_run_exception.cpp
 
 !win32 {
     QMAKE_LFLAGS += -Wl,-rpath .

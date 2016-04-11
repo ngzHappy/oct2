@@ -154,3 +154,7 @@ SUBDIRS += data_view
 opencv_findContours_freeman.file = $$PWD/opencv_imgproc/opencv_findContours_freeman/opencv_findContours_freeman.pro
 opencv_findContours_freeman.depends += core_utility
 SUBDIRS += opencv_findContours_freeman
+
+opencv_contourArea.file = $$PWD/opencv_imgproc/opencv_contourArea/opencv_contourArea.pro
+opencv_contourArea.depends += core_utility
+SUBDIRS += opencv_contourArea

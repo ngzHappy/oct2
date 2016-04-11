@@ -35,6 +35,7 @@ LIBS += -L$$OUTPWD -lcore_utility
 
 DISTFILES += $$PWD/configure_file_simple_test.lua
 DISTFILES += $$PWD/configure_file_simple_test.zip
+DISTFILES += $$PWD/private/configure_file_simple_test_run_exception.cpp
 
 !win32 {
     QMAKE_LFLAGS += -Wl,-rpath .

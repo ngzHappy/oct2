@@ -34,6 +34,7 @@ LIBS += -L$$OUTPWD -lcore_utility
 }
 
 DISTFILES += $$PWD/data_view.lua
+DISTFILES += $$PWD/private/data_view_run_exception.cpp
 
 !win32 {
     QMAKE_LFLAGS += -Wl,-rpath .

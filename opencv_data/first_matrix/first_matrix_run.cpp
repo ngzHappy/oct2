@@ -2,8 +2,9 @@
 #include <OpenCVUtility.hpp>
 #include <opencv_application_configuration_file.hpp>
 #include <iostream>
+#include "private/first_matrix_run_exception.cpp"
 
-extern void run(OpenCVWindow * ) {
+extern void run(OpenCVWindow * ) try{
 
     cv::Mat matrix(100,1,CV_32FC1);
     {
@@ -18,4 +19,6 @@ extern void run(OpenCVWindow * ) {
     std::cout<<matrix<<std::endl;
 
 }
-
+catch (const cv::Exception &e) {
+    opencv_exception::error(e);
+}

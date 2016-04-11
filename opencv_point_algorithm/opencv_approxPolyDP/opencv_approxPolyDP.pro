@@ -34,6 +34,7 @@ LIBS += -L$$OUTPWD -lcore_utility
 }
 
 DISTFILES += $$PWD/opencv_approxPolyDP.lua
+DISTFILES += $$PWD/private/opencv_approxPolyDP_run_exception.cpp
 
 !win32 {
     QMAKE_LFLAGS += -Wl,-rpath .

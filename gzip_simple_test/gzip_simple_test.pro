@@ -34,6 +34,7 @@ LIBS += -L$$OUTPWD -lcore_utility
 }
 
 DISTFILES += $$PWD/gzip_simple_test.lua
+DISTFILES += $$PWD/private/gzip_simple_test_run_exception.cpp
 
 !win32 {
     QMAKE_LFLAGS += -Wl,-rpath .

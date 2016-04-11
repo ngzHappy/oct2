@@ -1,4 +1,7 @@
 ﻿const char *_run_exception_cpp=u8R"=_____=(/*run_exception.cpp*/
+#if !defined(PROJECT__RUN__EXCEPTION__OPENCV__CCT)
+#define PROJECT__RUN__EXCEPTION__OPENCV__CCT
+
 /*the file is just in this.run*/
 #include <sstream>
 #include <QtCore/qtextstream.h>
@@ -49,6 +52,12 @@ static void _set_opencv_error_on_qt_start_up() {
     cv::redirectError(&ErrorCallback);
 }
 Q_COREAPP_STARTUP_FUNCTION(_set_opencv_error_on_qt_start_up)
+
+#endif
+
+
+
+
 
 )=_____=";
 

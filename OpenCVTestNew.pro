@@ -170,3 +170,7 @@ SUBDIRS += opencv_fitLine
 opencv_fitEllipse.file = $$PWD/opencv_point_algorithm/opencv_fitEllipse/opencv_fitEllipse.pro
 opencv_fitEllipse.depends += core_utility
 SUBDIRS += opencv_fitEllipse
+
+opencv_pointPolygonTest.file = $$PWD/opencv_imgproc/opencv_pointPolygonTest/opencv_pointPolygonTest.pro
+opencv_pointPolygonTest.depends += core_utility
+SUBDIRS += opencv_pointPolygonTest

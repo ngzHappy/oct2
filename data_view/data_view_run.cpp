@@ -6,8 +6,7 @@
 #include "private/data_view_run_exception.cpp"
 
 extern void run(OpenCVWindow * window ) try{
-    cv::findContours(std::vector<float>{},
-        std::vector<int>{},1,2);
+    
     /*图片显示*/
     {
         intptr_t count_=0;

@@ -166,3 +166,7 @@ SUBDIRS += opencv_arcLength
 opencv_fitLine.file = $$PWD/opencv_point_algorithm/opencv_fitLine/opencv_fitLine.pro
 opencv_fitLine.depends += core_utility
 SUBDIRS += opencv_fitLine
+
+opencv_fitEllipse.file = $$PWD/opencv_point_algorithm/opencv_fitEllipse/opencv_fitEllipse.pro
+opencv_fitEllipse.depends += core_utility
+SUBDIRS += opencv_fitEllipse

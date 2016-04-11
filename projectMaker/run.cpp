@@ -464,6 +464,7 @@ int run( ArgvPack pack ){
         write_OpenCVWindowDetail_hpp_cpp(pack);
         write_run_cpp(pack);
         write_pre_build(pack);
+        write_run_exception(pack);
     }
     catch (const int & errorCode) {
         return errorCode;

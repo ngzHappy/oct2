@@ -34,6 +34,7 @@ LIBS += -L$$OUTPWD -lcore_utility
 }
 
 DISTFILES += $$PWD/opencv_minEnclosingTriangle.lua
+DISTFILES += $$PWD/private/opencv_minEnclosingTriangle_run_exception.cpp
 
 !win32 {
     QMAKE_LFLAGS += -Wl,-rpath .

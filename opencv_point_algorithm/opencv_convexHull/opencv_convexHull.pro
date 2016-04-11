@@ -34,6 +34,7 @@ LIBS += -L$$OUTPWD -lcore_utility
 }
 
 DISTFILES += $$PWD/opencv_convexHull.lua
+DISTFILES += $$PWD/private/opencv_convexHull_run_exception.cpp
 
 !win32 {
     QMAKE_LFLAGS += -Wl,-rpath .

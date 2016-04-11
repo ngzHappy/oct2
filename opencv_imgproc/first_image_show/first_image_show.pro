@@ -35,6 +35,7 @@ LIBS += -L$$OUTPWD -lcore_utility
 
 DISTFILES += $$PWD/first_image_show.lua
 DISTFILES += $$PWD/first_image_show.PNG
+DISTFILES += $$PWD/private/first_image_show_run_exception.cpp
 
 !win32 {
     QMAKE_LFLAGS += -Wl,-rpath .

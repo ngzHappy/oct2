@@ -34,6 +34,7 @@ LIBS += -L$$OUTPWD -lcore_utility
 }
 
 DISTFILES += $$PWD/opencv_arcLength.lua
+DISTFILES += $$PWD/private/opencv_arcLength_run_exception.cpp
 
 !win32 {
     QMAKE_LFLAGS += -Wl,-rpath .

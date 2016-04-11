@@ -34,10 +34,10 @@ OpenCVImageItem::OpenCVImageItem(QGraphicsItem *parent)
 }
 
 void OpenCVImageItem::paint(
-        QPainter *,
-        const QStyleOptionGraphicsItem *,
-        QWidget *) {
-
+        QPainter * a,
+        const QStyleOptionGraphicsItem * b,
+        QWidget * c) {
+    QGraphicsWidget::paint(a,b,c);
 }
 
 void OpenCVImageItem::setAlgFunction(AlgFunctionType alg__) {

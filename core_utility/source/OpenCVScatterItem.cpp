@@ -158,7 +158,7 @@ void OpenCVScatterItem::paint(
     QPainter *painter,
     const QStyleOptionGraphicsItem *option,
     QWidget *widget) {
-    P::paint(painter,option,widget);
+    
     {
         painter->setRenderHint(QPainter::HighQualityAntialiasing,true);
     }
@@ -179,6 +179,7 @@ void OpenCVScatterItem::paint(
             painter->restore();
         }
     }
+    P::paint(painter,option,widget);
 }
 
 const std::shared_ptr< std::function<void(QPainter *)> > & OpenCVScatterItem::getCentrePointPaint() const {

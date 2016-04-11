@@ -115,9 +115,9 @@ void OpenCVChartImage::_p_setChartImage(_t_CHARTIMAGE_t__ &&_chartImage_) {
 
 void OpenCVChartImage::paint(
     QPainter *painter,
-    const QStyleOptionGraphicsItem *,
-    QWidget *) {
-
+    const QStyleOptionGraphicsItem * a,
+    QWidget * b) {
+    
     const auto _v_width=chart_image_.width();
     const auto _v_height=chart_image_.height();
 
@@ -160,7 +160,7 @@ void OpenCVChartImage::paint(
         target_rect_.topLeft(),
         chart_image_about_paint_
         );
-
+    P::paint(painter,a,b);
 }
 
 void OpenCVChartImage::saveImage() {

@@ -116,18 +116,41 @@ OpenCVLineSeriesItem::OpenCVLineSeriesItem(QGraphicsItem *parent)
 void OpenCVLineSeriesItem::resizeEvent(QGraphicsSceneResizeEvent *event) {
     P::resizeEvent(event);
     if (chart_==nullptr) { return; }
-    if (chart_->animationOptions()) {
-        QTimer::singleShot(1998,this,[this]() {update(); });
-        QTimer::singleShot(998,this,[this]() {update(); });
-        QTimer::singleShot(200,this,[this]() {update(); });
-        QTimer::singleShot(150,this,[this]() {update(); });
-        QTimer::singleShot(100,this,[this]() {update(); });
-        QTimer::singleShot(50,this,[this]() {update(); });
-        QTimer::singleShot(20,this,[this]() {update(); });
-    }
-    else {
-        QTimer::singleShot(1500,this,[this]() {update(); });
-    }
+    
+    //if (chart_->animationOptions()) {
+    //    QTimer::singleShot(1998,this,[this]() {update(); });
+    //    QTimer::singleShot(998,this,[this]() {update(); });
+    //    QTimer::singleShot(600,this,[this]() {update(); });
+    //    QTimer::singleShot(300,this,[this]() {update(); });
+    //}
+    //else {
+    //    QTimer::singleShot(1500,this,[this]() {update(); });
+    //}
+}
+
+void OpenCVLineSeriesItem::paint(
+    QPainter *painter,
+    const QStyleOptionGraphicsItem *option,
+    QWidget *widget) {
+
+        if (chart_ && series_) {
+            if (cen_paint_&&(*cen_paint_)) {
+                QPointF cen_position_=chart_->mapToPosition(cen_point_,series_);
+                QPointF d_cen_position_=chart_->mapToPosition(cen_point_+QPointF{ 0.5,0.5 },series_);
+                d_cen_position_-=cen_position_;
+                cen_position_=chart_->mapToItem(this,cen_position_);
+                painter->save();
+                painter->translate(cen_position_);
+                const auto len_=std::sqrt(
+                    d_cen_position_.x()*d_cen_position_.x()+
+                    d_cen_position_.y()*d_cen_position_.y()
+                    )/1.50;
+                painter->scale(std::abs(d_cen_position_.x()/len_),std::abs(d_cen_position_.y()/len_));
+                (*cen_paint_)(painter);
+                painter->restore();
+            }
+        }
+        P::paint(painter,option,widget);
 }
 
 OpenCVLineSeriesItem::~OpenCVLineSeriesItem() {
@@ -170,33 +193,6 @@ void OpenCVLineSeriesItem::_p_setColor(_t_COLOR_t__ &&_color_) {
         series_->setBrush(color_);
         series_->setColor(color_);
         series_->setPen(QPen(QColor(color_),2));
-    }
-}
-
-void OpenCVLineSeriesItem::paint(
-    QPainter *painter,
-    const QStyleOptionGraphicsItem *option,
-    QWidget *widget) {
-    P::paint(painter,option,widget);
-    {
-        painter->setRenderHint(QPainter::HighQualityAntialiasing,true);
-    }
-    if (chart_ && series_) {
-        if (cen_paint_&&(*cen_paint_)) {
-            QPointF cen_position_=chart_->mapToPosition(cen_point_,series_);
-            QPointF d_cen_position_=chart_->mapToPosition(cen_point_+QPointF{ 0.5,0.5 },series_);
-            d_cen_position_-=cen_position_;
-            cen_position_=chart_->mapToItem(this,cen_position_);
-            painter->save();
-            painter->translate(cen_position_);
-            const auto len_=std::sqrt(
-                d_cen_position_.x()*d_cen_position_.x()+
-                d_cen_position_.y()*d_cen_position_.y()
-                )/1.50;
-            painter->scale(std::abs(d_cen_position_.x()/len_),std::abs(d_cen_position_.y()/len_));
-            (*cen_paint_)(painter);
-            painter->restore();
-        }
     }
 }
 

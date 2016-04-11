@@ -26,15 +26,16 @@ int ErrorCallback(
     {
         QTextStream stream_(&__error_);
         stream_
-            <<"function name:"<<func_name
-            <<"error message:"<<err_msg
-            <<"file name:"<<file_name
-            <<"line:"<<line;
+            <<"function name:"<<func_name<<endl
+            <<"error message:"<<err_msg<<endl
+            <<"file name:"<<file_name<<endl
+            <<"line:"<<line<<endl;
     }
 
     if (qApp) {
         qDebug().noquote()<<__error_;
         QErrorMessage errorBox;
+        errorBox.setModal(true);
         errorBox.showMessage(__error_,"error");
         errorBox.exec();
     }

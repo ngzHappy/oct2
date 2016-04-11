@@ -3,6 +3,7 @@
 //_replace_$$PWD/../core_utility/opencv3.pri_replace_
 //_replace_$$PWD/first_window.lua_replace_
 //$$PWD/_replace_run.cpp_replace_
+//_replace_simple_pca_run__replace_
 
 const char *_pro = u8R"=_____=(##pro
 
@@ -29,6 +30,7 @@ HEADERS += $$PWD/OpenCVWindowDetail.hpp
 
 DEFINES += APP_NAME_=\\\"$$TARGET\\\"
 DEFINES += BUILD_PATH_=\\\"$$PWD\\\"
+DISTFILES += $$PWD/private/_replace_simple_pca_run__replace_exception.cpp
 
 include( _replace_$$PWD/../core_utility/core_utility.pri_replace_ )
 include( _replace_$$PWD/../core_utility/opencv3.pri_replace_ )

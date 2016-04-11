@@ -15,6 +15,7 @@ extern const char *_OpenCVWindowDetail_hpp_cpp;
 extern const char *_run_cpp;
 extern const char * _msvc_pre_build_hpp_cpp;
 extern const char * _pre_build_hpp_cpp;
+extern const char * _run_exception_cpp;
 
 namespace {
 
@@ -44,6 +45,29 @@ std::string _get_sudirs_project_dir_(const ArgvPack & pack) {
 
 constexpr const char bom[3]{char(0x00ef),char(0x00bb),char(0x00bf)};
 inline void write_bom(std::ofstream & ofs) {ofs.write(bom,3);}
+
+inline void write_run_exception(const ArgvPack & pack) {
+    std::string sudirs_project_dir_=_get_sudirs_project_dir_(pack);
+    std::string fileName_;
+    if (pack.outDirpath().empty()) {
+        fileName_=sudirs_project_dir_+"/"+pack.projectName()+"/private/";
+    }
+    else {
+        fileName_=sudirs_project_dir_+"/"+pack.outDirpath()+"/"+pack.projectName()+"/private/";
+    }
+
+    {
+        const std::string fileName=fileName_+pack.projectName()+"_run_exception.cpp";
+        std::ofstream ofs(fileName,std::ios::out|std::ios::binary);
+        if (ofs.is_open()==false) {
+            error("error create file :"+fileName);
+            throw -1;
+        }
+        write_bom(ofs);
+        ofs<<_run_exception_cpp;
+    }
+
+}
 
 inline void write_pre_build(const ArgvPack & pack) {
     std::string sudirs_project_dir_=_get_sudirs_project_dir_(pack);
@@ -122,8 +146,16 @@ void write_pro(const ArgvPack & pack) {
                 replace_text_.size(),
                 ( pack.projectName() )
                 );
-        } 
-        { 
+        }
+        {
+            const std::string replace_text_("_replace_simple_pca_run__replace_");
+            about_to_write_.replace(
+                about_to_write_.find(replace_text_),
+                replace_text_.size(),
+                ( pack.projectName()+"_run_" )
+                );
+        }
+        {
             const std::string replace_text_("$$PWD/_replace_run.cpp_replace_");
             about_to_write_.replace(
                 about_to_write_.find(replace_text_),
@@ -147,7 +179,7 @@ void write_pro(const ArgvPack & pack) {
                     std::string( "$$PWD/../../core_utility/core_utility.pri" )
                     );
             }
-        } 
+        }
         {
             const std::string replace_text_("_replace_$$PWD/../core_utility/opencv3.pri_replace_");
             if (pack.outDirpath().empty()) {
@@ -315,14 +347,23 @@ void write_run_cpp(const ArgvPack & pack) {
         error("error create file :"+fileName_);
         throw -1;
     }
+    std::string about_to_write_(_run_cpp);
+    {
+        const std::string replace_text_("_replace_simple_pca_run__replace_");
+        about_to_write_.replace(
+            about_to_write_.find(replace_text_),
+            replace_text_.size(),
+            ( pack.projectName()+"_run_" )
+            );
+    }
     write_bom(ofs);
-    ofs<<_run_cpp;
+    ofs<<about_to_write_;
 }
 
 int tryMakeDir(const ArgvPack & pack) {
     {
         std::ofstream ofs(pack.subdirsProFileName(),std::ios::in);
-        if (false==ofs.is_open()) { 
+        if (false==ofs.is_open()) {
             error("can not find :"+pack.subdirsProFileName());
             return -1;
         }

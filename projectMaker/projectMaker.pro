@@ -23,7 +23,8 @@ SOURCES += main.cpp \
     source/_MainWindow.hpp.cpp \
     source/_OpenCVWindowDetail.hpp.cpp \
     source/_msvc_pre_build.hpp.cpp \
-    source/_pre_build.hpp.cpp
+    source/_pre_build.hpp.cpp \
+    source/_run_exception.cpp
 
 include( $$PWD/../core_utility/core_utility.pri )
 DESTDIR = $$OUTPWD

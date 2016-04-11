@@ -35,6 +35,7 @@ LIBS += -L$$OUTPWD -lcore_utility
 
 DISTFILES += $$PWD/simple_pca.lua
 DISTFILES += $$PWD/simple_pca.PNG
+DISTFILES += $$PWD/private/simple_pca_run_exception.cpp
 
 !win32 {
     QMAKE_LFLAGS += -Wl,-rpath .

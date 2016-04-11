@@ -2,11 +2,6 @@
 #include <OpenCVUtility.hpp>
 #include <opencv_application_configuration_file.hpp>
 #include <vector>
-#include <sstream>
-#include <QtCore/qtextstream.h>
-#include <QtWidgets/qapplication.h>
-#include <QtWidgets/qerrormessage.h>
-#include <QtCore/qdebug.h>
 #include "private/simple_pca_run_exception.cpp"
 
 namespace {

@@ -21,7 +21,7 @@ int ErrorCallback(
     QString __error_;
 
 #if !defined(NDEBUG)
-    cv::Error::Code estatus= static_cast<cv::Error::Code>(status);
+    cv::Error::Code estatus=static_cast<cv::Error::Code>(status);
     (void)estatus;
 #endif
 
@@ -31,14 +31,14 @@ int ErrorCallback(
             <<"function name:"<<func_name<<endl
             <<"error message:"<<err_msg<<endl
             <<"file name:"<<file_name<<endl
-            <<"line:"<<line;
-        stream_.flush();
+            <<"line:"<<line<<endl;
     }
 
     if (qApp) {
         qDebug().noquote()<<__error_;
         QErrorMessage errorBox;
-        errorBox.showMessage(__error_);
+        errorBox.setModal(true);
+        errorBox.showMessage(__error_,"error");
         errorBox.exec();
     }
     else {

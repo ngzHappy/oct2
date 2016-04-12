@@ -9,7 +9,8 @@
 #include <QtCharts>
 #include <QtCore/qdebug.h>
 #include <QtWidgets/qgraphicsitem.h> 
- 
+#include <limits>
+
 namespace {
 namespace __private {
 
@@ -25,7 +26,8 @@ OpenCVChartImage::OpenCVChartImage(QGraphicsItem * _a_p)
     :P(_a_p) {
     item_chart_image_about_paint_=new __private::Item;
     item_chart_image_about_paint_->setParentItem(this);
-    item_chart_image_about_paint_->setZValue(-10000);
+    item_chart_image_about_paint_->setZValue(
+        std::numeric_limits<float>::lowest());
 
     connect(this,&OpenCVChartImage::_sp_update_image_,
         this,&OpenCVChartImage::_p_update_image_,

@@ -25,6 +25,7 @@ namespace  {
 inline int genType(){return rand()%13;}
 }
 
+namespace opencv_applyColorMap{
 extern void run(OpenCVWindow * window) try{
 
     /*测试图片显示*/
@@ -50,3 +51,4 @@ catch (const cv::Exception &e) {
     opencv_exception::error(e);
 }
 
+}

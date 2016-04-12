@@ -44,7 +44,7 @@ inline QList<QPointF> genCircle(double cx_,double cy_,double r_) {
         for (const auto & i:ans_) { ans.push_back(i); }
     }
     else if ((r_==1)&&(cx_==0)) {
-        for (const auto & i:ans_) { 
+        for (const auto & i:ans_) {
             ans.push_back({ i.x(),i.y()+cy_ });
         }
     }
@@ -54,37 +54,37 @@ inline QList<QPointF> genCircle(double cx_,double cy_,double r_) {
         }
     }
     else if(r_==1){
-        for (const auto & i:ans_) { 
+        for (const auto & i:ans_) {
             ans.push_back({ i.x()+cx_,i.y()+cy_ });
         }
     }
     else if((cy_==0)&&(cx_==0)){
-        for (const auto & i:ans_) { 
+        for (const auto & i:ans_) {
             ans.push_back({ r_*i.x() ,r_*i.y()  });
         }
     }
     else if (cy_==0) {
-        for (const auto & i:ans_) { 
+        for (const auto & i:ans_) {
             ans.push_back({ r_*i.x()+cx_ ,r_*i.y()  });
         }
     }
     else if (cx_==0) {
-        for (const auto & i:ans_) { 
+        for (const auto & i:ans_) {
             ans.push_back({ r_*i.x() ,r_*i.y() +cy_ });
         }
     }
     else {
-        for (const auto & i:ans_) { 
+        for (const auto & i:ans_) {
             ans.push_back({ r_*i.x()+cx_,r_*i.y()+cy_ });
         }
     }
     return std::move(ans) ;
 }
-    
+
 }
 
- 
 
+namespace opencv_minEnclosingCircle{
 extern void run(OpenCVWindow * window) try{
 
     std::vector<cv::Point2f> points_input=
@@ -96,7 +96,7 @@ extern void run(OpenCVWindow * window) try{
     cv::Point2f center;
     float radius;
     cv::minEnclosingCircle( points_input,center, radius);
-    
+
     std::cout<<radius<<" "<<center<<std::endl;
 
     /*绘制外接圆形*/
@@ -111,4 +111,6 @@ extern void run(OpenCVWindow * window) try{
 }
 catch (const cv::Exception &e) {
     opencv_exception::error(e);
+}
+
 }

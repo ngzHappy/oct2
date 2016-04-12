@@ -141,7 +141,7 @@ static inline void qtPaintTest(QImage image,OpenCVWindow * window){
         ->setWindowTitle("Qt Paint");
 }
 
-
+namespace opencv_draw {
 extern void run(OpenCVWindow * window) {
 
     QImage image("images:000006");
@@ -151,3 +151,4 @@ extern void run(OpenCVWindow * window) {
 
 }
 
+}

@@ -1,5 +1,8 @@
 TEMPLATE = subdirs
 
+#http://heanet.dl.sourceforge.net/project/opencvlibrary
+#http://heanet.dl.sourceforge.net/project/opencvlibrary/opencv-win/3.1.0/opencv-3.1.0.exe
+
 #
 #git clone https://github.com/qtproject/qtcharts
 #

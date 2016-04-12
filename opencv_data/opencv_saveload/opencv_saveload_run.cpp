@@ -6,7 +6,7 @@
 #include <QtWidgets/qerrormessage.h>
 #include <QtCore/qdebug.h>
 #include "private/opencv_saveload_run_exception.cpp"
-
+namespace opencv_saveload{
 extern void run(OpenCVWindow * window) try{
 
     /*格式化输出*/
@@ -51,4 +51,7 @@ extern void run(OpenCVWindow * window) try{
 }
 catch (const cv::Exception &e) {
     opencv_exception::error(e);
+}
+
+
 }

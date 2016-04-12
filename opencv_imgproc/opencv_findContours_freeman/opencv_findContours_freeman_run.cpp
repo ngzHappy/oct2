@@ -152,6 +152,7 @@ findContoursFreeman(cv::Mat input_image) noexcept(false/*cv::Exception*/){
 
 }
 
+namespace opencv_findContours_freeman{
 extern void run(OpenCVWindow *) try{
 
     {
@@ -225,6 +226,8 @@ extern void run(OpenCVWindow *) try{
 }
 catch (const cv::Exception &e) {
     opencv_exception::error(e);
+}
+
 }
 
 //http://stackoverflow.com/questions/22326412/how-to-get-the-freeman-chain-code-in-opencv

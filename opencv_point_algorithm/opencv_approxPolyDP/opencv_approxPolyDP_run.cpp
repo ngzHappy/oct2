@@ -38,6 +38,7 @@ genRandPoint() {
 
 }
 
+namespace opencv_approxPolyDP{
 extern void run(OpenCVWindow * window) try{
 
     std::vector<cv::Point2f> points_input=
@@ -70,6 +71,7 @@ catch (const cv::Exception &e) {
     opencv_exception::error(e);
 }
 
+}
 /*
 http://blog.csdn.net/wangqinghao/article/details/8207070
 Douglas-Peucker算法（该算法名字够吓人，其实思想很简单）

@@ -5,8 +5,9 @@
 //#include <QtCharts>
 #include "private/data_view_run_exception.cpp"
 
+namespace data_view{
 extern void run(OpenCVWindow * window ) try{
-    
+
     /*图片显示*/
     {
         intptr_t count_=0;
@@ -37,3 +38,4 @@ catch (const cv::Exception &e) {
     opencv_exception::error(e);
 }
 
+}

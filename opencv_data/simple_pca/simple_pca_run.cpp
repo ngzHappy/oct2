@@ -61,6 +61,7 @@ void draw_axis_array_(
 
 }
 
+namespace simple_pca{
 extern void run(OpenCVWindow * window) try{
 
     std::vector< cv::Point2d > testPoints = genPoints();
@@ -121,4 +122,6 @@ extern void run(OpenCVWindow * window) try{
 }
 catch (const cv::Exception &e) {
     opencv_exception::error(e);
+}
+
 }

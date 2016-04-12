@@ -4,6 +4,7 @@
 #include <QtCore/qdebug.h>
 #include "private/gzip_simple_test_run_exception.cpp"
 
+namespace gzip_simple_test{
 extern void run(OpenCVWindow *  ) {
 
     QByteArray data_("abcdefg");
@@ -11,4 +12,4 @@ extern void run(OpenCVWindow *  ) {
     qDebug()<< gzip::QCompressor::decompressData(compress_data_);
 
 }
-
+}

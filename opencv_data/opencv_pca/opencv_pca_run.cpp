@@ -65,6 +65,7 @@ void draw_axis_array_(
 
 }
 
+namespace opencv_pca{
 extern void run(OpenCVWindow * window) try{
     /*计算主成分*/
     auto data=genPoints();
@@ -115,4 +116,6 @@ extern void run(OpenCVWindow * window) try{
 }
 catch (const cv::Exception &e) {
     opencv_exception::error(e);
+}
+
 }

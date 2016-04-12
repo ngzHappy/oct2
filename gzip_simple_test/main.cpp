@@ -8,7 +8,9 @@
 #include <opencv_application_configuration_file.hpp>
 #include <iostream>
 
+namespace gzip_simple_test{
 extern void run(OpenCVWindow * window) ;
+}
 
 /*命令行解析器*/
 class CommandLineParser : public QCommandLineParser {
@@ -55,7 +57,7 @@ int main(int argc,char ** argv) try{
 
     MainWindow * window=new MainWindow;
     window->setAttribute(Qt::WA_DeleteOnClose);
-    run(window->getOpenCVWindow());
+    gzip_simple_test::run(window->getOpenCVWindow());
     std::cout.flush();
     window->show();
 

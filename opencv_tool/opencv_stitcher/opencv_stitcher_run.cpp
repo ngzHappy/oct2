@@ -4,6 +4,7 @@
 #include <opencv2/stitching.hpp>
 #include "private/opencv_stitcher_run_exception.cpp"
 
+namespace opencv_stitcher{
 extern void run(OpenCVWindow * window) try{
     std::vector< cv::Mat > images_;
     {
@@ -28,4 +29,6 @@ extern void run(OpenCVWindow * window) try{
 }
 catch (const cv::Exception &e) {
     opencv_exception::error(e);
+}
+
 }

@@ -4,12 +4,12 @@
 #include "private/opencv_contourArea_run_exception.cpp"
 #include <QtCore/qdebug.h>
 //#include <QtCharts>
-
+namespace opencv_contourArea{
 extern void run(OpenCVWindow * window) try {
 
     /*测试图片显示*/
     {
- 
+
         const auto images_names=
             CoreUtility::getConfigurationFile().getInputImagesNames("images:000001");
 
@@ -49,3 +49,4 @@ catch (const cv::Exception &e) {
     opencv_exception::error(e);
 }
 
+}

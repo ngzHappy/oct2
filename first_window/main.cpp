@@ -2,7 +2,9 @@
 #include <OpenCVUtility.hpp>
 #include <opencv_application_configuration_file.hpp>
 
+namespace first_window{
 extern void run(OpenCVWindow * window) ;
+}
 
 /*命令行解析器*/
 class CommandLineParser : public QCommandLineParser {
@@ -49,7 +51,7 @@ int main(int argc,char ** argv) try{
 
     MainWindow * window=new MainWindow;
     window->setAttribute(Qt::WA_DeleteOnClose);
-    run(window->getOpenCVWindow());
+    first_window::run(window->getOpenCVWindow());
     window->show();
 
     return app.exec();

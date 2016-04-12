@@ -5,6 +5,7 @@
 //#include <QtCharts>
 #include "private/configure_file_simple_test_run_exception.cpp"
 
+namespace configure_file_simple_test{
 extern void run(OpenCVWindow *) try{
 
     {
@@ -134,4 +135,6 @@ extern void run(OpenCVWindow *) try{
 }
 catch (const cv::Exception &e) {
     opencv_exception::error(e);
+}
+
 }

@@ -7,6 +7,7 @@
 #include <QtCore/qdebug.h>
 #include "private/opencv_scalar_run_exception.cpp"
 
+namespace opencv_scalar{
 extern void run(OpenCVWindow *  ) try{
 
     cv::Scalar scalar(1,2,3,4);
@@ -16,4 +17,6 @@ extern void run(OpenCVWindow *  ) try{
 }
 catch (const cv::Exception &e) {
     opencv_exception::error(e);
+}
+
 }

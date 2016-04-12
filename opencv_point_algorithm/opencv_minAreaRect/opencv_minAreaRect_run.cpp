@@ -14,13 +14,14 @@ genRandPoint() {
     for (std::intptr_t i=0; i<SIZE;++i) {
         const double x_=std::sin(double(std::rand()))*0.707;
         const double y_=std::cos(double(std::rand()))*0.707;
-        ans.emplace_back( 
+        ans.emplace_back(
             static_cast<float>(x_+y_),
             static_cast<float>(x_-y_));
     }
     return std::move(ans);
 }
 
+namespace opencv_minAreaRect{
 extern void run(OpenCVWindow * window) try{
 
     std::vector<cv::Point2f> points_input=
@@ -57,4 +58,6 @@ extern void run(OpenCVWindow * window) try{
 }
 catch (const cv::Exception &e) {
     opencv_exception::error(e);
+}
+
 }

@@ -7,6 +7,7 @@
 #include <QtCore/qdebug.h>
 #include "private/opencv_point_run_exception.cpp"
 
+namespace opencv_point{
 extern void run(OpenCVWindow * window) try{
 
     cv::Point2d point_0(1,2);
@@ -23,4 +24,6 @@ extern void run(OpenCVWindow * window) try{
 }
 catch (const cv::Exception &e) {
     opencv_exception::error(e);
+}
+
 }

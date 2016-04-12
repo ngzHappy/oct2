@@ -1,4 +1,4 @@
-﻿/*main.cpp*/
+﻿/*main.cpp data_view*/
 #include "MainWindow.hpp"
 #include <QtWidgets/qapplication.h>
 #include <QtCore/qcommandlineparser.h>
@@ -10,8 +10,9 @@
 #include <iostream>
 #include <OpenCVException.hpp>
 
+namespace data_view{
 extern void run(OpenCVWindow * window);
-
+}
 /*命令行解析器*/
 class CommandLineParser : public QCommandLineParser {
 public:
@@ -64,7 +65,7 @@ int main(int argc,char ** argv) try{
     MainWindow * window=new MainWindow;
     window->setAttribute(Qt::WA_DeleteOnClose);
     window->show();
-    run(window->getOpenCVWindow() );
+    data_view::run(window->getOpenCVWindow() );
     std::cout.flush();
 
     return app.exec();

@@ -3,6 +3,7 @@
 #include <opencv_application_configuration_file.hpp>
 #include "private/opencv_blur_run_exception.cpp"
 
+namespace opencv_blur{
 extern void run(OpenCVWindow * window) try{
 
     intptr_t count_=0;
@@ -23,4 +24,5 @@ extern void run(OpenCVWindow * window) try{
 }
 catch (const cv::Exception &e) {
     opencv_exception::error(e);
+}
 }

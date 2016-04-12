@@ -3,6 +3,7 @@
 #include <opencv_application_configuration_file.hpp>
 #include "private/opencv_pyrUp_run_exception.cpp"
 
+namespace opencv_pyrUp{
 extern void run(OpenCVWindow * window) try{
 
     intptr_t count_=0;
@@ -24,4 +25,6 @@ extern void run(OpenCVWindow * window) try{
 }
 catch (const cv::Exception &e) {
     opencv_exception::error(e);
+}
+
 }

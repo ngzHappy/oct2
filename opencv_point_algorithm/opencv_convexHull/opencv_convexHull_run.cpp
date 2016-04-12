@@ -30,7 +30,7 @@ genRandPoint() {
     rand_begin_:
         const double x_=std::sin(double(std::rand())) ;
         const double y_=std::cos(double(std::rand())) ;
-        auto aPoint = 
+        auto aPoint =
             cv::Point2f(static_cast<float>(x_),static_cast<float>(y_));
         if (cv::pointPolygonTest(test_data_,aPoint,false)<0) {
             goto rand_begin_;
@@ -43,6 +43,7 @@ genRandPoint() {
 
 }
 
+namespace opencv_convexHull{
 extern void run(OpenCVWindow * window) try{
 
     std::vector<cv::Point2f> points_input=
@@ -69,4 +70,6 @@ extern void run(OpenCVWindow * window) try{
 }
 catch (const cv::Exception &e) {
     opencv_exception::error(e);
+}
+
 }

@@ -18,7 +18,7 @@ genRandPoint() {
     }
     return std::move(ans);
 }
-
+namespace opencv_boundRect{
 extern void run(OpenCVWindow * window) try{
 
     std::vector<cv::Point2f> points_input=
@@ -60,4 +60,5 @@ extern void run(OpenCVWindow * window) try{
 }
 catch (const cv::Exception &e) {
     opencv_exception::error(e);
+}
 }

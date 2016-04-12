@@ -20,7 +20,7 @@ QList<QPointF> genEllipse(const cv::RotatedRect & argRect) {
     constexpr const eval_type varStep=3.141592654*2/SIZE;
     double varAngle=0;
     for (std::int_fast32_t i=0; i<SIZE;++i) {
-        varAns.push_back({ 
+        varAns.push_back({
             varA*std::cos(varAngle),
             varB*std::sin(varAngle) });
         varAngle+=varStep;
@@ -41,6 +41,7 @@ QList<QPointF> genEllipse(const cv::RotatedRect & argRect) {
 
 }
 
+namespace opencv_fitEllipse{
 extern void run(OpenCVWindow * window) try{
 
     std::vector<cv::Point2f> varPointsInput;
@@ -80,3 +81,4 @@ catch (const cv::Exception &e) {
     opencv_exception::error(e);
 }
 
+}

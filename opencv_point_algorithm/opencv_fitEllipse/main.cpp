@@ -7,9 +7,9 @@
 #include <QtCore/qdir.h>
 #include <opencv_application_configuration_file.hpp>
 #include <iostream>
-
+namespace opencv_fitEllipse{
 extern void run(OpenCVWindow * window) ;
-
+}
 /*命令行解析器*/
 class CommandLineParser : public QCommandLineParser {
 public:
@@ -57,9 +57,9 @@ int main(int argc,char ** argv) try{
     window->resize(768,512);
     window->setAttribute(Qt::WA_DeleteOnClose);
     window->show();
-    run(window->getOpenCVWindow());
+    opencv_fitEllipse::run(window->getOpenCVWindow());
     std::cout.flush();
-    
+
     return app.exec();
 
 }

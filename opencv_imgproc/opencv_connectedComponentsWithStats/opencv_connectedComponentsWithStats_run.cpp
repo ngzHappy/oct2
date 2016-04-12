@@ -4,7 +4,7 @@
 #include <QtCore/qdebug.h>
 #include "private/opencv_connectedComponentsWithStats_run_exception.cpp"
 //#include <QtCharts>
-
+namespace opencv_connectedComponentsWithStats{
 extern void run(OpenCVWindow * window) try{
 
     {
@@ -38,4 +38,4 @@ catch (const cv::Exception &e) {
     opencv_exception::error(e);
 }
 
-
+}

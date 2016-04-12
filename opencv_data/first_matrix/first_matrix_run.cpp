@@ -4,6 +4,7 @@
 #include <iostream>
 #include "private/first_matrix_run_exception.cpp"
 
+namespace first_matrix {
 extern void run(OpenCVWindow * ) try{
 
     cv::Mat matrix(100,1,CV_32FC1);
@@ -21,4 +22,5 @@ extern void run(OpenCVWindow * ) try{
 }
 catch (const cv::Exception &e) {
     opencv_exception::error(e);
+}
 }

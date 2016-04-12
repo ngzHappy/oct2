@@ -4,7 +4,7 @@
 #include <QtCore/qdebug.h>
 #include "private/opencv_arcLength_run_exception.cpp"
 //#include <QtCharts>
-
+namespace opencv_arcLength{
 extern void run(OpenCVWindow * window) try{
 
     /*测试图片显示*/
@@ -49,4 +49,4 @@ extern void run(OpenCVWindow * window) try{
 catch (const cv::Exception &e) {
     opencv_exception::error(e);
 }
-
+}

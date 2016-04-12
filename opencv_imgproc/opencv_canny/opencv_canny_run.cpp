@@ -2,6 +2,7 @@
 #include <OpenCVUtility.hpp>
 #include <opencv_application_configuration_file.hpp>
 #include "private/opencv_canny_run_exception.cpp"
+namespace  opencv_canny{
 
 extern void run(OpenCVWindow * window) try{
 
@@ -25,4 +26,6 @@ extern void run(OpenCVWindow * window) try{
 }
 catch (const cv::Exception &e) {
     opencv_exception::error(e);
+}
+
 }

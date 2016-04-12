@@ -7,6 +7,7 @@
 #include <QtCore/qdebug.h>
 #include "private/opencv_rect_run_exception.cpp"
 
+namespace opencv_rect{
 extern void run(OpenCVWindow * ) try{
 
     cv::Rect2d rect(0,0,100,100);
@@ -24,4 +25,6 @@ extern void run(OpenCVWindow * ) try{
 }
 catch (const cv::Exception &e) {
     opencv_exception::error(e);
+}
+
 }

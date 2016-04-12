@@ -8,7 +8,10 @@
 #include <opencv_application_configuration_file.hpp>
 #include <iostream>
 
+namespace first_matrix {
 extern void run(OpenCVWindow * window) ;
+}
+
 
 /*命令行解析器*/
 class CommandLineParser : public QCommandLineParser {
@@ -55,7 +58,7 @@ int main(int argc,char ** argv) try{
 
     MainWindow * window=new MainWindow;
     window->setAttribute(Qt::WA_DeleteOnClose);
-    run(window->getOpenCVWindow());
+    first_matrix::run(window->getOpenCVWindow());
     std::cout.flush();
     window->show();
 

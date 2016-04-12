@@ -4,7 +4,7 @@
 #include <QtCore/qdebug.h>
 #include "private/opencv_pointPolygonTest_run_exception.cpp"
 //#include <QtCharts>
-
+namespace opencv_pointPolygonTest{
 extern void run(OpenCVWindow * window) try{
 
     enum{ LENGTH_=32 };
@@ -74,3 +74,4 @@ catch (const cv::Exception &e) {
     opencv_exception::error(e);
 }
 
+}

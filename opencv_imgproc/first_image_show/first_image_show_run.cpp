@@ -3,6 +3,7 @@
 #include <opencv_application_configuration_file.hpp>
 #include "private/first_image_show_run_exception.cpp"
 
+namespace first_image_show{
 extern void run(OpenCVWindow * window) try{
 
     /*测试图片显示*/
@@ -27,4 +28,5 @@ extern void run(OpenCVWindow * window) try{
 }
 catch (const cv::Exception &e) {
     opencv_exception::error(e);
+}
 }

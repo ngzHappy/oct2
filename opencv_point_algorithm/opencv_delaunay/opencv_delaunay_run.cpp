@@ -6,7 +6,7 @@
 
 namespace {
 
-inline double rand_0_1() { 
+inline double rand_0_1() {
     enum :std::intptr_t{_D_=54321};
     return static_cast<double>(rand()%_D_)/_D_;
 }
@@ -14,7 +14,7 @@ inline double rand_0_1() {
 std::vector<cv::Point2f> genPoints() {
     std::vector<cv::Point2f> ans;
     enum {SIZE=10};
-    
+
     const double x_start_=1;
     const double y_start_=1;
 
@@ -38,6 +38,7 @@ std::vector<cv::Point2f> genPoints() {
 
 }
 
+namespace opencv_delaunay{
 extern void run(OpenCVWindow * window) try{
 
     /*随机生成测试数据*/
@@ -84,4 +85,6 @@ extern void run(OpenCVWindow * window) try{
 }
 catch (const cv::Exception &e) {
     opencv_exception::error(e);
+}
+
 }

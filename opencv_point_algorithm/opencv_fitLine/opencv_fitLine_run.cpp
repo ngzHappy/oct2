@@ -4,7 +4,7 @@
 #include <QtCore/qdebug.h>
 #include <QtCharts>
 #include "private/opencv_fitLine_run_exception.cpp"
-
+namespace opencv_fitLine{
 extern void run(OpenCVWindow * window) try {
 
     std::vector<cv::Point2f> varPointsInput;
@@ -35,7 +35,7 @@ extern void run(OpenCVWindow * window) try {
         <<"dy: "<<varAns[1]<<std::endl
         <<"x0: "<<varAns[2]<<std::endl
         <<"y0: "<<varAns[3]<<std::endl;
-    
+
     /*
     -dy*x+dx*y+c=0;
     c=dy*x0-dx*y0
@@ -56,7 +56,7 @@ extern void run(OpenCVWindow * window) try {
     if (varPointsInput.empty()) { return; }
     auto varFirstPointX=varPointsInput.front().x;
     auto varLastPointX=varPointsInput.rbegin()->x;
- 
+
     auto varChart = varItem->getChart();
     auto varLineSeriex=new QtCharts::QLineSeries;
     varLineSeriex->append(varFirstPointX,varY(varFirstPointX));
@@ -70,3 +70,4 @@ catch (const cv::Exception &e) {
     opencv_exception::error(e);
 }
 
+}

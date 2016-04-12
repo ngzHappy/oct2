@@ -5,6 +5,7 @@
 #define MACRO_PROTECTED protected
 #endif
 
+class OpenCVItem;
 #include <QtWidgets/qproxystyle.h>
 #include "core_utility_global.hpp"
 
@@ -14,9 +15,8 @@ private:
     typedef QProxyStyle P;
 public:
     explicit OpenCVStyle(QStyle * parent=nullptr);
-    ~OpenCVStyle();
-
-protected:
+    
+MACRO_PROTECTED:
     virtual void drawComplexControl(ComplexControl control,const QStyleOptionComplex *option,QPainter *painter,const QWidget *widget=Q_NULLPTR) const override;
     virtual void drawControl(ControlElement element,const QStyleOption *option,QPainter *painter,const QWidget *widget=Q_NULLPTR) const override;
     virtual void drawItemPixmap(QPainter *painter,const QRect &rect,int alignment,const QPixmap &pixmap) const override;
@@ -40,7 +40,14 @@ protected:
     virtual QRect subElementRect(SubElement element,const QStyleOption *option,const QWidget *widget) const override;
     virtual void unpolish(QWidget *widget) override;
     virtual void unpolish(QApplication *app) override;
-
+    virtual ~OpenCVStyle();
+public:
+    /*my defined*/
+    const QColor & opencvWindowBackGroundColor()const;
+    static OpenCVStyle * instance();
+MACRO_PROTECTED:
+    QColor setOpencvWindowBackGroundColor(const QColor &);
+    friend class OpenCVItem;
 };
 
 #endif // OPENCVSTYLE_HPP

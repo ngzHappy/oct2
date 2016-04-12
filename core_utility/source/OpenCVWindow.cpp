@@ -1,6 +1,7 @@
 ﻿#include "../OpenCVWindow.hpp"
 #include "../OpenCVScene.hpp"
 #include "../core_utility.hpp"
+#include "../OpenCVStyle.hpp"
 #include <QtGui/qicon.h>
 #include <QtCore/qdebug.h>
 
@@ -11,7 +12,10 @@ OpenCVWindow::OpenCVWindow(QWidget *parent)
     this->setScene(scene_);
     scene_->setParent(this);
     this->resize(512,512);
-    scene_->setBackgroundBrush(QColor(200-30,200-15,200-10));
+    /*style*/
+    scene_->setBackgroundBrush(
+        OpenCVStyle::instance()->opencvWindowBackGroundColor()
+        );
     this->setWindowIcon(QIcon());
 
     setRenderHint(QPainter::HighQualityAntialiasing,true);

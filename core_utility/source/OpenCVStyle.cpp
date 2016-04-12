@@ -165,3 +165,16 @@ void OpenCVStyle::unpolish(QApplication *app) {
     return P::unpolish(app);
 }
 
+namespace {
+    QColor varOpencvWindowBackGroundColor{200-30,200-15,200-10};
+}
+
+const QColor &OpenCVStyle::opencvWindowBackGroundColor() const{
+    return varOpencvWindowBackGroundColor;
+}
+
+QColor OpenCVStyle::setOpencvWindowBackGroundColor(const QColor &c) {
+    const auto old_=varOpencvWindowBackGroundColor;
+    varOpencvWindowBackGroundColor=c;
+    return old_;
+}

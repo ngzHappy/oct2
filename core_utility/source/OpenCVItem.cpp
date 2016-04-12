@@ -146,7 +146,8 @@ public:
         return P::drawComplexControl(control,option,painter,widget);
     }
 
-    OpenCVItemStyle() {}
+    OpenCVItemStyle() {
+    }
 };
 
 std::atomic<int> OpenCVItemStyle::icon_index{0};
@@ -154,26 +155,40 @@ std::atomic<int> OpenCVItemStyle::icon_index{0};
 }
 }
 
-OpenCVItem::OpenCVItem(QGraphicsItem *parent)
-    :P(parent,Qt::Window) {
-
+/*change here to set opencv window color*/
+OpenCVStyle * OpenCVStyle::instance() {
     static OpenCVStyle * style_=nullptr;
     if (style_==nullptr) {
         style_=new __private::OpenCVItemStyle/*construct by default style*/;
         qAddPostRoutine([]() {delete style_; style_=nullptr; });
     }
+    return style_;
+}
 
+OpenCVItem::OpenCVItem(QGraphicsItem *parent)
+    :P(parent,Qt::Window) {
+
+    OpenCVStyle * style_=OpenCVStyle::instance();
     this->setStyle(style_);
 
-    {
+    {/*style*/
         QPalette pal=this->palette();
-        pal.setBrush(QPalette::Background,Qt::transparent);
+        pal.setColor(
+            QPalette::Background,
+            style_->opencvWindowBackGroundColor()
+            );
         this->setPalette(pal);
     }
 
-    this->resize(128,128);
-    this->setMinimumWidth(128);
-    this->setMinimumHeight(128);
+    {
+        this->setFlag(QGraphicsItem::ItemDoesntPropagateOpacityToChildren,true);
+        this->setFlag(QGraphicsItem::ItemClipsChildrenToShape,true);
+        this->setAutoFillBackground(false)/*add draw speed*/;
+    }
+
+    this->resize(132,132);
+    this->setMinimumWidth(130);
+    this->setMinimumHeight(130);
     this->setPos(std::rand()&63,(std::rand()&63)+36);
     this->setAttribute(Qt::WA_DeleteOnClose);
 

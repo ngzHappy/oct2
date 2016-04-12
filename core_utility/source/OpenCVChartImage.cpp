@@ -145,6 +145,9 @@ void OpenCVChartImage::paint(
     const QStyleOptionGraphicsItem * a,
     QWidget * b) {
 
+    if (series_==nullptr) { return QGraphicsWidget::paint(painter,a,b); }
+    if (chart_==nullptr) { return QGraphicsWidget::paint(painter,a,b); }
+
     const auto _v_width=chart_image_.width();
     const auto _v_height=chart_image_.height();
 

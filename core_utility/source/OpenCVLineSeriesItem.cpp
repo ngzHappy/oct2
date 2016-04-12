@@ -119,7 +119,7 @@ OpenCVLineSeriesItem::OpenCVLineSeriesItem(QGraphicsItem *parent)
 
 void OpenCVLineSeriesItem::resizeEvent(QGraphicsSceneResizeEvent *event) {
     P::resizeEvent(event);
-    if (chart_==nullptr) { return; }
+    //if (chart_==nullptr) { return; }
     
     //if (chart_->animationOptions()) {
     //    QTimer::singleShot(1998,this,[this]() {update(); });

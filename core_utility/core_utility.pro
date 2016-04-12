@@ -65,7 +65,8 @@ HEADERS += $$PWD/OpenCVScatterItem.hpp
 HEADERS += $$PWD/OpenCVLineSeriesItem.hpp
 HEADERS += $$PWD/OpenCVUtility.hpp
 HEADERS += $$PWD/OpenCVUserDataAllocator.hpp
-HEADERS += &&PWD/OpenCVBoost.hpp
+HEADERS += $$PWD/OpenCVBoost.hpp
+HEADERS += $$PWD/boost/PartBoost.hpp
 
 HEADERS += $$PWD/quazip/GZipCompressor.hpp
 SOURCES += $$PWD/quazip/GZipCompressor.cpp
@@ -75,6 +76,7 @@ include($$PWD/opencv3.pri)
 include($$PWD/quazip/quazip.pri)
 include($$PWD/quazip/zlib.pri)
 include($$PWD/lua/lua.pri)
+include($$PWD/boost/boost.pri)
 DESTDIR = $$OUTPWD
 
 DISTFILES += $$PWD/../Images/000000.jpg

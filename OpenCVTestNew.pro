@@ -195,3 +195,7 @@ SUBDIRS += opencv_connectedComponents
 opencv_connectedComponentsWithStats.file = $$PWD/opencv_imgproc/opencv_connectedComponentsWithStats/opencv_connectedComponentsWithStats.pro
 opencv_connectedComponentsWithStats.depends += core_utility
 SUBDIRS += opencv_connectedComponentsWithStats
+
+boost_simple_test.file = $$PWD/boost_simple_test/boost_simple_test.pro
+boost_simple_test.depends += core_utility
+SUBDIRS += boost_simple_test

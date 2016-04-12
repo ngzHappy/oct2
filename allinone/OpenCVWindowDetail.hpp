@@ -12,7 +12,8 @@ MACRO_PROTECTED:
 public:
     OpenCVWindowDetail(QWidget * parent=nullptr);
     ~OpenCVWindowDetail();
-
+public slots:
+    void startDataView(QString);
 };
 
 #endif // OPENCVWINDOWDETAIL_HPP

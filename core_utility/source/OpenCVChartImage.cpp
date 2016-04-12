@@ -189,7 +189,7 @@ void OpenCVChartImage::paint(
     }
 
     P::paint(painter,a,b);
-   
+
 }
 
 void OpenCVChartImage::_p_update_image_pos(QPointF _top_left_) {
@@ -203,7 +203,7 @@ void OpenCVChartImage::saveImage() {
     return P::saveImage();
 }
 
-void OpenCVChartImage::renderTo(QImage & o){
+void OpenCVChartImage::renderTo(QImage & o) {
     return P::renderTo(o);
 }
 

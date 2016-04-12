@@ -1,7 +1,7 @@
 ﻿#if !defined(MAIN__WINDOW__HPP__)
 #define MAIN__WINDOW__HPP__
 
-#include <QQuickView>
+#include <QtQuick/qquickview.h>
 
 class MainWindow:public QQuickView{
     Q_OBJECT
@@ -10,6 +10,7 @@ private:
 public:
     MainWindow();
     virtual ~MainWindow();
+public slots:
 };
 
 #endif

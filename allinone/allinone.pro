@@ -29,6 +29,7 @@ DISTFILES += $$PWD/private/allinone_run_exception.cpp
 
 include( $$PWD/../core_utility/core_utility.pri )
 include( $$PWD/../core_utility/opencv3.pri )
+include( $$PWD/../core_utility/boost/boost.pri )
 DESTDIR = $$OUTPWD
 CONFIG(debug,debug|release){
 LIBS += -L$$OUTPWD -lcore_utilityd

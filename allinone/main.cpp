@@ -6,11 +6,8 @@
 #include <QtCore/qtextcodec.h>
 #include <QtCore/qdir.h>
 #include <opencv_application_configuration_file.hpp>
+#include <QtCore/qurl.h>
 #include <iostream>
-
-namespace allinone{
-extern void run(OpenCVWindow * window) ;
-}
 
 /*命令行解析器*/
 class CommandLineParser : public QCommandLineParser {
@@ -56,9 +53,10 @@ int main(int argc,char ** argv) try{
     }
 
     MainWindow * window=new MainWindow;
-    window->setAttribute(Qt::WA_DeleteOnClose);
+    window->setResizeMode(MainWindow::ResizeMode::SizeRootObjectToView);
+    window->setSource(QUrl("qrc:/MainWindowAllInOne/qml/AllInOneMainWindow.qml"));
+    window->resize(600,512);
     window->show();
-    allinone::run(window->getOpenCVWindow());
     std::cout.flush();
 
     return app.exec();

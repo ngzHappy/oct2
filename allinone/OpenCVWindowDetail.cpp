@@ -10,3 +10,7 @@ OpenCVWindowDetail::~OpenCVWindowDetail(){
 
 }
 
+void OpenCVWindowDetail::startDataView(QString){
+
+}
+

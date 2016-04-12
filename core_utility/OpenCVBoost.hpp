@@ -67,6 +67,11 @@ typedef std::recursive_mutex default_mutex;
 
 */
 
+/*
+//change 
+"boost\format\alt_sstream_impl.hpp to utf8 with bom
+*/
+
 #include "boost/PartBoost.hpp"
 
 /*

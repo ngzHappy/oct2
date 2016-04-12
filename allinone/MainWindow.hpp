@@ -11,6 +11,7 @@ public:
     MainWindow();
     virtual ~MainWindow();
 public slots:
+    void startDataView(QString);
 };
 
 #endif

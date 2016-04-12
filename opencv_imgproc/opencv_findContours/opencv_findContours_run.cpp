@@ -3,7 +3,8 @@
 #include <opencv_application_configuration_file.hpp>
 #include "private/opencv_findContours_run_exception.cpp"
 
-extern void run(OpenCVWindow * window) try{
+namespace opencv_findContours_run {
+extern void run(OpenCVWindow * window) try {
 
     /*测试图片显示*/
     {
@@ -27,8 +28,8 @@ extern void run(OpenCVWindow * window) try{
 
             input_image_=
                 input_image_.convertToFormat(QImage::Format_Grayscale8);
-            
-            auto * item_ = window->insertChartImage(input_image_);
+
+            auto * item_=window->insertChartImage(input_image_);
 
             cv::Mat mat=OpenCVUtility::tryRead(input_image_);
             std::vector<std::vector<cv::Point>> ans;
@@ -37,22 +38,24 @@ extern void run(OpenCVWindow * window) try{
             cv::findContours(
                 mat,ans,
                 cv::RETR_EXTERNAL,
-                cv::CHAIN_APPROX_SIMPLE 
+                cv::CHAIN_APPROX_SIMPLE
                 );
 
-           if (ans.empty()) { continue; }
+            if (ans.empty()) { continue; }
 
-           /*绘制轮廓*/
-           item_->setWindowTitle(u8"第%1幅图片轮廓"_qs.arg(count_));
-           
-           for (const auto & i:ans) {
-               item_->insertLine(i.cbegin(),i.cend(),true);
-           }
+            /*绘制轮廓*/
+            item_->setWindowTitle(u8"第%1幅图片轮廓"_qs.arg(count_));
+
+            for (const auto & i:ans) {
+                item_->insertLine(i.cbegin(),i.cend(),true);
+            }
         }
     }
-  
+
 
 }
 catch (const cv::Exception &e) {
     opencv_exception::error(e);
+}
+
 }

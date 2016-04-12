@@ -1,5 +1,7 @@
 ﻿//_replace_first_window.lua_replace_
 //_replace_/../Images_replace_
+//_replace_project_name_run__replace_
+//_replace_project_name1_run__replace_
 
 const char *_main_cpp = u8R"=_____=(/*main.cpp "_replace_first_window.lua_replace_"  */
 #include "MainWindow.hpp"
@@ -11,7 +13,9 @@ const char *_main_cpp = u8R"=_____=(/*main.cpp "_replace_first_window.lua_replac
 #include <opencv_application_configuration_file.hpp>
 #include <iostream>
 
+namespace _replace_project_name_run__replace_{
 extern void run(OpenCVWindow * window) ;
+}
 
 /*命令行解析器*/
 class CommandLineParser : public QCommandLineParser {
@@ -59,7 +63,7 @@ int main(int argc,char ** argv) try{
     MainWindow * window=new MainWindow;
     window->setAttribute(Qt::WA_DeleteOnClose);
     window->show();
-    run(window->getOpenCVWindow());
+    _replace_project_name1_run__replace_::run(window->getOpenCVWindow());
     std::cout.flush();
 
     return app.exec();

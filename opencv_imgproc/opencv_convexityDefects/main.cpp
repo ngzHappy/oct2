@@ -1,4 +1,4 @@
-﻿/*main.cpp*/
+﻿/*main.cpp "opencv_convexityDefects"  */
 #include "MainWindow.hpp"
 #include <QtWidgets/qapplication.h>
 #include <QtCore/qcommandlineparser.h>
@@ -8,8 +8,8 @@
 #include <opencv_application_configuration_file.hpp>
 #include <iostream>
 
-namespace opencv_findContours_run {
-extern void run(OpenCVWindow * window);
+namespace opencv_convexityDefects{
+extern void run(OpenCVWindow * window) ;
 }
 
 /*命令行解析器*/
@@ -20,7 +20,7 @@ public:
         parser.addVersionOption();
         parser.addHelpOption();
         const QCommandLineOption op(
-        { "l","lua" },
+            { "l","lua" },
             u8"lua configure file application.input_images application.input_data_2d"_qs,
             "lua",
             APP_NAME_);
@@ -57,9 +57,9 @@ int main(int argc,char ** argv) try{
 
     MainWindow * window=new MainWindow;
     window->setAttribute(Qt::WA_DeleteOnClose);
-    opencv_findContours_run::run(window->getOpenCVWindow());
-    std::cout.flush();
     window->show();
+    opencv_convexityDefects::run(window->getOpenCVWindow());
+    std::cout.flush();
 
     return app.exec();
 

@@ -235,6 +235,22 @@ void write_main_cpp(const ArgvPack & pack) {
                 );
         }
         {
+            const std::string replace_text_("_replace_project_name1_run__replace_");
+            about_to_write_.replace(
+                about_to_write_.find(replace_text_),
+                replace_text_.size(),
+                (pack.projectName() )
+                );
+        }
+        {
+            const std::string replace_text_("_replace_project_name_run__replace_");
+            about_to_write_.replace(
+                about_to_write_.find(replace_text_),
+                replace_text_.size(),
+                (pack.projectName() )
+                );
+        }
+        {
             const std::string replace_text_("_replace_/../Images_replace_");
             if (pack.outDirpath().empty()) {
                 about_to_write_.replace(
@@ -354,6 +370,14 @@ void write_run_cpp(const ArgvPack & pack) {
             about_to_write_.find(replace_text_),
             replace_text_.size(),
             ( pack.projectName()+"_run_" )
+            );
+    }
+    { 
+        const std::string replace_text_("_replace_project_name_run__replace_");
+        about_to_write_.replace(
+            about_to_write_.find(replace_text_),
+            replace_text_.size(),
+            ( pack.projectName() )
             );
     }
     write_bom(ofs);

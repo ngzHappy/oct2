@@ -39,7 +39,7 @@ QtCharts::QLineSeries * OpenCVChartImage::insertLine(
     chart_->addSeries(_v_line);
     chart_->setAxisX(chart_->axisX(series_),_v_line);
     chart_->setAxisY(chart_->axisY(series_),_v_line);
-    _v_line->setPen(QPen(QColor(150,255,100,199),2.3333));
+    _v_line->setPen(QPen(QColor(150,255,100,199),2.12));
     _v_line->setBrush(QColor(255,0,0));
     _v_line->setPointsVisible(true);
     return _v_line;
@@ -118,7 +118,7 @@ void OpenCVChartImage::paint(
     QPainter *painter,
     const QStyleOptionGraphicsItem * a,
     QWidget * b) {
-    
+
     const auto _v_width=chart_image_.width();
     const auto _v_height=chart_image_.height();
 
@@ -161,7 +161,9 @@ void OpenCVChartImage::paint(
         target_rect_.topLeft(),
         chart_image_about_paint_
         );
+
     P::paint(painter,a,b);
+   
 }
 
 void OpenCVChartImage::saveImage() {

@@ -1,4 +1,6 @@
 ﻿//_replace_simple_pca_run__replace_
+//_replace_project_name_run__replace_
+
 const char *_run_cpp=u8R"=_____=(/*run.cpp*/
 #include <OpenCVUtility.hpp>
 #include <opencv_application_configuration_file.hpp>
@@ -6,6 +8,7 @@ const char *_run_cpp=u8R"=_____=(/*run.cpp*/
 #include "private/_replace_simple_pca_run__replace_exception.cpp"
 //#include <QtCharts>
 
+namespace _replace_project_name_run__replace_{
 extern void run(OpenCVWindow * window) try{
 
     /*测试图片显示*/
@@ -40,5 +43,7 @@ extern void run(OpenCVWindow * window) try{
 catch (const cv::Exception &e) {
     opencv_exception::error(e);
 }
+
+}/*~namespace*/
 
 )=_____=";

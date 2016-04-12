@@ -199,3 +199,7 @@ SUBDIRS += opencv_connectedComponentsWithStats
 boost_simple_test.file = $$PWD/boost_simple_test/boost_simple_test.pro
 boost_simple_test.depends += core_utility
 SUBDIRS += boost_simple_test
+
+opencv_convexityDefects.file = $$PWD/opencv_imgproc/opencv_convexityDefects/opencv_convexityDefects.pro
+opencv_convexityDefects.depends += core_utility
+SUBDIRS += opencv_convexityDefects

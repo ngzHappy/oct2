@@ -206,3 +206,7 @@ SUBDIRS += boost_simple_test
 opencv_convexityDefects.file = $$PWD/opencv_imgproc/opencv_convexityDefects/opencv_convexityDefects.pro
 opencv_convexityDefects.depends += core_utility
 SUBDIRS += opencv_convexityDefects
+
+allinone.file = $$PWD/allinone/allinone.pro
+allinone.depends += core_utility
+SUBDIRS += allinone

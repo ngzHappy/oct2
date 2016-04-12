@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/MainWindowAllInOne">
+        <file>qml/AllInOneMainWindow.qml</file>
+    </qresource>
+</RCC>

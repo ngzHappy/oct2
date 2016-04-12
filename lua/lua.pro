@@ -11,7 +11,7 @@ CONFIG += console
 
 TEMPLATE = app
 
-SOURCES += $$PWD/../core_utility/lua/lua.cpp
+SOURCES += $$PWD/../core_utility/lua/lua_lua.cpp
 
 include( $$PWD/../core_utility/core_utility.pri )
 include( $$PWD/../core_utility/opencv3.pri )

@@ -65,6 +65,7 @@ HEADERS += $$PWD/OpenCVScatterItem.hpp
 HEADERS += $$PWD/OpenCVLineSeriesItem.hpp
 HEADERS += $$PWD/OpenCVUtility.hpp
 HEADERS += $$PWD/OpenCVUserDataAllocator.hpp
+HEADERS += &&PWD/OpenCVBoost.hpp
 
 HEADERS += $$PWD/quazip/GZipCompressor.hpp
 SOURCES += $$PWD/quazip/GZipCompressor.cpp

@@ -3,6 +3,7 @@
 
 #include "OpenCVLineSeriesItem.hpp"
 #include <QtGui/qpixmap.h>
+class QGraphicsPixmapItem;
 
 class CORE_UTILITYSHARED_EXPORT OpenCVChartImage : public OpenCVLineSeriesItem
 {
@@ -15,6 +16,7 @@ private:
 MACRO_PROTECTED:
     QImage chart_image_;
     QPixmap chart_image_about_paint_;
+    QGraphicsPixmapItem * item_chart_image_about_paint_=nullptr;
 public:
     explicit OpenCVChartImage(QGraphicsItem * /**/=nullptr);
     ~OpenCVChartImage();
@@ -44,6 +46,12 @@ public:
     }
 
     virtual void saveImage()override;
+private slots:
+    void _p_update_image_pos(QPointF);
+    void _p_update_image_();
+signals:
+    void _sp_update_image_pos(QPointF,QPrivateSignal);
+    void _sp_update_image_(QPrivateSignal);
 };
 
 template<typename B,typename E>

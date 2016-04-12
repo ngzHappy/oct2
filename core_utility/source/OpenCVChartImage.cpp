@@ -8,9 +8,32 @@
 #include <cassert>
 #include <QtCharts>
 #include <QtCore/qdebug.h>
+#include <QtWidgets/qgraphicsitem.h> 
+ 
+namespace {
+namespace __private {
+
+class Item :public QGraphicsPixmapItem {
+public:
+
+};
+
+}
+}
 
 OpenCVChartImage::OpenCVChartImage(QGraphicsItem * _a_p)
     :P(_a_p) {
+    item_chart_image_about_paint_=new __private::Item;
+    item_chart_image_about_paint_->setParentItem(this);
+    item_chart_image_about_paint_->setZValue(-10000);
+
+    connect(this,&OpenCVChartImage::_sp_update_image_,
+        this,&OpenCVChartImage::_p_update_image_,
+        Qt::ConnectionType::QueuedConnection);
+
+    connect(this,&OpenCVChartImage::_sp_update_image_pos,
+        this,&OpenCVChartImage::_p_update_image_pos,
+        Qt::ConnectionType::QueuedConnection);
 
 }
 
@@ -103,6 +126,7 @@ void OpenCVChartImage::_p_setChartImage(_t_CHARTIMAGE_t__ &&_chartImage_) {
         _v_d.push_back(QPointF(_v_width,_v_height));
         _v_d.push_back(QPointF(_v_width,0));
         setData(std::move(_v_d));
+        series_->setPen(QPen(QColor(1,2,3,0),0));
     }
     assert(this->chart_);
     assert(this->layout_);
@@ -133,10 +157,10 @@ void OpenCVChartImage::paint(
         QPointF(_v_width,0),this->series_);
     bottom_right_=chart_->mapToItem(this,bottom_right_);
 
-    top_left_.setX(std::ceil(top_left_.x()));
-    top_left_.setY(std::ceil(top_left_.y()));
-    bottom_right_.setX(std::floor(bottom_right_.x()));
-    bottom_right_.setY(std::floor(bottom_right_.y()));
+    //top_left_.setX(std::ceil(top_left_.x()));
+    //top_left_.setY(std::ceil(top_left_.y()));
+    //bottom_right_.setX(std::floor(bottom_right_.x()));
+    //bottom_right_.setY(std::floor(bottom_right_.y()));
 
     QRectF target_rect_(top_left_,bottom_right_);
 
@@ -154,16 +178,23 @@ void OpenCVChartImage::paint(
                     Qt::AspectRatioMode::IgnoreAspectRatio,
                     Qt::TransformationMode::SmoothTransformation)
                     );
+            _sp_update_image_({});
         }
     }
 
-    painter->drawPixmap(
-        target_rect_.topLeft(),
-        chart_image_about_paint_
-        );
+    if (item_chart_image_about_paint_->pos()!=top_left_) {
+        _sp_update_image_pos(top_left_,{});
+    }
 
     P::paint(painter,a,b);
    
+}
+
+void OpenCVChartImage::_p_update_image_pos(QPointF _top_left_) {
+    item_chart_image_about_paint_->setPos(_top_left_);
+}
+void OpenCVChartImage::_p_update_image_() {
+    item_chart_image_about_paint_->setPixmap(chart_image_about_paint_);
 }
 
 void OpenCVChartImage::saveImage() {

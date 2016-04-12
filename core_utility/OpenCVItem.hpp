@@ -25,7 +25,8 @@ protected:
 private:
     void _onYChanged();
     void _onXChanged();
-
+public slots:
+    virtual void saveImage();
 };
 
 #endif // OPENCVITEM_HPP

@@ -1,4 +1,6 @@
-﻿#include "../OpenCVMatProxyAllocator.hpp"
+﻿#undef MACRO_PROTECTED
+#define MACRO_PROTECTED public
+#include "../OpenCVMatProxyAllocator.hpp"
 #include <QtCore/qdebug.h>
 
 using namespace _OPENCV_StdMatAllocator;

@@ -93,6 +93,10 @@ void OpenCVScatterItem::renderTo(QImage & i) {
         QPointF spos_=chart_->mapToScene(chart_->rect().topLeft());
 
         QPainter painter(&i);
+        painter.setRenderHint(QPainter::Antialiasing);
+        painter.setRenderHint(QPainter::SmoothPixmapTransform);
+        painter.setRenderHint(QPainter::TextAntialiasing);
+        painter.setRenderHint(QPainter::HighQualityAntialiasing);
         sc_->render(
             &painter,
             QRectF(0,0,i.width(),i.height()),

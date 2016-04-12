@@ -1,4 +1,6 @@
-﻿#include "../OpenCVScene.hpp"
+﻿#undef MACRO_PROTECTED
+#define MACRO_PROTECTED public
+#include "../OpenCVScene.hpp"
 #include <QtWidgets/qmenu.h>
 #include <QtWidgets/qgraphicssceneevent.h>
 #include <QtCore/qdebug.h>
@@ -27,10 +29,8 @@ void OpenCVScene::contextMenuEvent(
     QGraphicsItem * item_=this->itemAt(contextMenuEvent->scenePos(),QTransform());
     if (item_==nullptr) { return; }
 
-    bool _v_isOK=false;
-
     {
-        typedef OpenCVImageItem _v_Type;
+        typedef OpenCVItem _v_Type;
         /*搜索深度为3*/
         _v_Type * imageItem_=dynamic_cast<_v_Type *>(item_);
         if (imageItem_==nullptr) {
@@ -43,35 +43,12 @@ void OpenCVScene::contextMenuEvent(
         }
 
         if (imageItem_) {
-            _v_isOK=true;
             QMenu menu_;
             QAction * action_=menu_.addAction(trUtf8(u8R"(保存)"));
             connect(action_,&QAction::triggered,
-                imageItem_,[imageItem_](bool) {imageItem_->saveImage(); });
-            menu_.exec(pos_);
-        }
-    }
-
-    if (false==_v_isOK) {
-        /*搜索深度为3*/
-        typedef OpenCVChartImage _v_Type;
-        _v_Type * imageItem_=dynamic_cast<_v_Type *>(item_);
-        if (imageItem_==nullptr) {
-            auto * __it=item_->parentItem();
-            imageItem_=dynamic_cast<_v_Type *>(__it);
-            if (__it&&(imageItem_==nullptr)) {
-                __it=__it->parentItem();
-                imageItem_=dynamic_cast<_v_Type *>(__it);
-            }
-        }
-
-        if (imageItem_) {
-            _v_isOK=true;
-            QMenu menu_;
-            QAction * action_=menu_.addAction(trUtf8(u8R"(保存)"));
-            connect(action_,&QAction::triggered,
-                imageItem_,[imageItem_](bool) {imageItem_->saveImage(); });
-            menu_.exec(pos_);
+                imageItem_,[imageItem_](bool) {
+                imageItem_->saveImage(); });
+                menu_.exec(pos_);
         }
     }
 

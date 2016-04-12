@@ -33,8 +33,8 @@ public:
     void setAlgFunction(AlgFunctionType);
     void renderTo(QImage &) override;
     virtual void tryResizeImage();
-public slots:
-    virtual void saveImage();
+
+    virtual void saveImage()override;
 signals:
     void imageChanged();
 protected:

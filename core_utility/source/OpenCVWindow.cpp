@@ -1,4 +1,6 @@
-﻿#include "../OpenCVWindow.hpp"
+﻿#undef MACRO_PROTECTED
+#define MACRO_PROTECTED public
+#include "../OpenCVWindow.hpp"
 #include "../OpenCVScene.hpp"
 #include "../core_utility.hpp"
 #include "../OpenCVStyle.hpp"
@@ -18,10 +20,10 @@ OpenCVWindow::OpenCVWindow(QWidget *parent)
         );
     this->setWindowIcon(QIcon());
 
-    setRenderHint(QPainter::HighQualityAntialiasing,true);
     setRenderHint(QPainter::SmoothPixmapTransform,true);
     setRenderHint(QPainter::TextAntialiasing,true);
     setRenderHint(QPainter::Antialiasing,true);
+    setRenderHint(QPainter::HighQualityAntialiasing,true);
 }
 
 OpenCVHistItem * OpenCVWindow::insertHist(QList<qreal> data_) {

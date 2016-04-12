@@ -44,6 +44,7 @@ MACRO_PROTECTED:
 public:
     /*my defined*/
     const QColor & opencvWindowBackGroundColor()const;
+    virtual void setQPainterRenderHints(QPainter &)const;
     static OpenCVStyle * instance();
 MACRO_PROTECTED:
     QColor setOpencvWindowBackGroundColor(const QColor &);

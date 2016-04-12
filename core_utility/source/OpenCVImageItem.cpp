@@ -1,4 +1,6 @@
-﻿#include "../OpenCVImageItem.hpp"
+﻿#undef MACRO_PROTECTED
+#define MACRO_PROTECTED public
+#include "../OpenCVImageItem.hpp"
 #include "../OpenCVUtility.hpp"
 #include <QtGui/qpainter.h>
 #include <QtWidgets/qfiledialog.h>

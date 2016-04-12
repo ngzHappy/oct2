@@ -1,4 +1,6 @@
-﻿#include "../OpenCVItem.hpp"
+﻿#undef MACRO_PROTECTED
+#define MACRO_PROTECTED public
+#include "../OpenCVItem.hpp"
 #include "../OpenCVStyle.hpp"
 #include <QtGui/qpalette.h>
 #include <QtWidgets/qstyleoption.h>
@@ -10,6 +12,7 @@
 #include <QtWidgets/qproxystyle.h>
 #include <QtWidgets/qapplication.h>
 #include <QtWidgets/qgraphicssceneevent.h>
+#include <QtWidgets/qfiledialog.h>
 #include <atomic>
 #include <QtCore/qdebug.h>
 
@@ -163,6 +166,28 @@ OpenCVStyle * OpenCVStyle::instance() {
         qAddPostRoutine([]() {delete style_; style_=nullptr; });
     }
     return style_;
+}
+
+void OpenCVItem::renderTo(QImage &) {}
+
+void OpenCVItem::saveImage() {
+    {
+        const QGraphicsScene * sc__=this->scene();
+        if (sc__==nullptr) { return; }
+    }
+
+    {
+        const QString saveFileName_=
+            QFileDialog::getSaveFileName(nullptr,
+                trUtf8(u8"设置保存文件名"),
+                QString(),
+                "Images (*.png *.jpg)"
+                );
+        if (saveFileName_.isEmpty()) { return; }
+        QImage _chart_image_;
+        renderTo(_chart_image_);
+        _chart_image_.save(saveFileName_);
+    }
 }
 
 OpenCVItem::OpenCVItem(QGraphicsItem *parent)

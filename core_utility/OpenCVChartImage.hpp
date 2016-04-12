@@ -42,8 +42,8 @@ public:
         QList<QPointF> _v_(_a_);
         return insertLine(std::move(_v_),_close_);
     }
-public slots:
-    virtual void saveImage();
+
+    virtual void saveImage()override;
 };
 
 template<typename B,typename E>

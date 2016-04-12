@@ -1,4 +1,6 @@
-﻿#include "../OpenCvStyle.hpp"
+﻿#undef MACRO_PROTECTED
+#define MACRO_PROTECTED public
+#include "../OpenCvStyle.hpp"
 #include <QtCore/qdebug.h>
 
 OpenCVStyle::OpenCVStyle(QStyle * parent)
@@ -15,6 +17,7 @@ void OpenCVStyle::drawComplexControl(
         const QStyleOptionComplex *option,
         QPainter *painter,
         const QWidget *widget) const {
+    if (painter) { setQPainterRenderHints(*painter); }
     return P::drawComplexControl(control,option,painter,widget);
 }
 
@@ -22,6 +25,7 @@ void OpenCVStyle::drawControl(
     ControlElement element,
     const QStyleOption *option,
     QPainter *painter,const QWidget *widget) const {
+    if (painter) { setQPainterRenderHints(*painter); }
     return P::drawControl(element,option,painter,widget);
 }
 
@@ -30,6 +34,7 @@ void OpenCVStyle::drawItemPixmap(
     const QRect &rect,
     int alignment,
     const QPixmap &pixmap) const {
+    if (painter) { setQPainterRenderHints(*painter); }
     return P::drawItemPixmap(painter,rect,alignment,pixmap);
 }
 
@@ -41,6 +46,7 @@ void OpenCVStyle::drawItemText(
     bool enabled,
     const QString &text,
     QPalette::ColorRole textRole) const {
+    if (painter) { setQPainterRenderHints(*painter); }
     return P::drawItemText(painter,rect,flags,pal,enabled,text,textRole);
 }
 
@@ -49,6 +55,7 @@ void OpenCVStyle::drawPrimitive(
     const QStyleOption *option,
     QPainter *painter,
     const QWidget *widget) const {
+    if (painter) { setQPainterRenderHints(*painter); }
     return P::drawPrimitive(element,option,painter,widget);
 }
 
@@ -167,6 +174,13 @@ void OpenCVStyle::unpolish(QApplication *app) {
 
 namespace {
     QColor varOpencvWindowBackGroundColor{200-30,200-15,200-10};
+}
+
+void OpenCVStyle::setQPainterRenderHints(QPainter & _p) const{
+    _p.setRenderHint(QPainter::Antialiasing);
+    _p.setRenderHint(QPainter::SmoothPixmapTransform);
+    _p.setRenderHint(QPainter::TextAntialiasing);
+    _p.setRenderHint(QPainter::HighQualityAntialiasing);
 }
 
 const QColor &OpenCVStyle::opencvWindowBackGroundColor() const{

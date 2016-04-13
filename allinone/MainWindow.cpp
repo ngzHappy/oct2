@@ -38,5 +38,8 @@ QString MainWindow::getStartString(int argN){
 void MainWindow::startApplication(QString argAppName,QString argStartString){
     argAppName=qApp->applicationDirPath()+"/"+argAppName.trimmed();
     argAppName+=" "+argStartString.trimmed();
-    QProcess::startDetached(argAppName);
+    if(false == QProcess::startDetached(argAppName)){
+        qDebug()<<argAppName;
+    }
+
 }

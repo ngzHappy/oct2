@@ -76,7 +76,7 @@ extern void run(OpenCVWindow * window) try {
                 varAboutToDraw.push_back(QPointF(varContour[i[1]].x,varContour[i[1]].y));
             }
             varItem->insertLine(
-                varAboutToDraw,true)->setPen({ QColor(255,30,50,200),2 });
+                varAboutToDraw,true)->setPen({ QColor(255,30,50,100),2 });
         }
 
     }

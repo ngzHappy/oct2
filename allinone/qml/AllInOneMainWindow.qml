@@ -22,37 +22,22 @@ Rectangle {
     ObjectModel {
         id: itemModel;
         AllInOneItem{projectName:"0";startString:"";width: rootItem.width;}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"0";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
-        AllInOneItem{projectName:"1";startString:"";}
+        AllInOneItem{projectName:"1";startString:"";width: rootItem.width;}
+        AllInOneItem{projectName:"2";startString:"";width: rootItem.width;}
+        AllInOneItem{projectName:"1";startString:"";width: rootItem.width;}
+        AllInOneItem{projectName:"1";startString:"";width: rootItem.width;}
+        AllInOneItem{projectName:"1";startString:"";width: rootItem.width;}
+        AllInOneItem{projectName:"1";startString:"";width: rootItem.width;}
+        AllInOneItem{projectName:"1";startString:"";width: rootItem.width;}
+        AllInOneItem{projectName:"1";startString:"";width: rootItem.width;}
+        AllInOneItem{projectName:"1";startString:"";width: rootItem.width;}
+        AllInOneItem{projectName:"1";startString:"";width: rootItem.width;}
+        AllInOneItem{projectName:"1";startString:"";width: rootItem.width;}
+        AllInOneItem{projectName:"1";startString:"";width: rootItem.width;}
+        AllInOneItem{projectName:"1";startString:"";width: rootItem.width;}
+        AllInOneItem{projectName:"1";startString:"";width: rootItem.width;}
+        AllInOneItem{projectName:"1";startString:"";width: rootItem.width;}
+        AllInOneItem{projectName:"0";startString:"";width: rootItem.width;}
     }
 
     ListView {

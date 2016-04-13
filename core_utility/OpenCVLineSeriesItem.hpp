@@ -16,7 +16,7 @@ class QChart;
 
 class CORE_UTILITYSHARED_EXPORT OpenCVLineSeriesItem : public OpenCVItem {
     Q_OBJECT
-private:
+protected:
     typedef OpenCVItem P;
     static void _OpenCVLineSeriesItem_init( OpenCVLineSeriesItem * );
 MACRO_PROTECTED:

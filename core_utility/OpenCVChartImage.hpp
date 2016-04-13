@@ -13,6 +13,8 @@ private:
     using P::setColor;
     using P::setCentrePointPaint;
     using P::setData;
+    std::uint32_t draw_updata_count_=0;
+    QPoint cursor_pos_on_draw_;
 MACRO_PROTECTED:
     QImage chart_image_;
     QPixmap chart_image_about_paint_;
@@ -38,6 +40,7 @@ private:
     void _p_setChartImage(_t_CHARTIMAGE_t__ && /*chartImage*/);
     void _p_private__set_image();
 protected:
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
     void paint(QPainter *painter,const QStyleOptionGraphicsItem *option,QWidget *widget) override;
 public:
     QtCharts::QLineSeries * insertLine(const QList<QPointF>& _a_,bool _close_=false) {
@@ -49,9 +52,11 @@ public:
 private slots:
     void _p_update_image_pos(QPointF);
     void _p_update_image_();
+    void _p_update_later();
 signals:
     void _sp_update_image_pos(QPointF,QPrivateSignal);
     void _sp_update_image_(QPrivateSignal);
+    void _sp_update_later(QPrivateSignal);
 };
 
 template<typename B,typename E>

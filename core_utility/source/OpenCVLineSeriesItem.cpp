@@ -46,7 +46,8 @@ private:
 }
 }
 
-void OpenCVLineSeriesItem::_OpenCVLineSeriesItem_init(OpenCVLineSeriesItem * this_) {
+void OpenCVLineSeriesItem::_OpenCVLineSeriesItem_init(
+    OpenCVLineSeriesItem * this_) {
     if (this_->data_.size()<=0) {
         this_->chart_=nullptr;
         this_->series_=nullptr;
@@ -119,17 +120,6 @@ OpenCVLineSeriesItem::OpenCVLineSeriesItem(QGraphicsItem *parent)
 
 void OpenCVLineSeriesItem::resizeEvent(QGraphicsSceneResizeEvent *event) {
     P::resizeEvent(event);
-    //if (chart_==nullptr) { return; }
-    
-    //if (chart_->animationOptions()) {
-    //    QTimer::singleShot(1998,this,[this]() {update(); });
-    //    QTimer::singleShot(998,this,[this]() {update(); });
-    //    QTimer::singleShot(600,this,[this]() {update(); });
-    //    QTimer::singleShot(300,this,[this]() {update(); });
-    //}
-    //else {
-    //    QTimer::singleShot(1500,this,[this]() {update(); });
-    //}
 }
 
 void OpenCVLineSeriesItem::paint(
@@ -168,8 +158,8 @@ const QList<QPointF> & OpenCVLineSeriesItem::getData() const {
 
 template<typename _t_DATA__t__>
 void OpenCVLineSeriesItem::_p_setData(_t_DATA__t__ &&_data__) {
-    layout_=new QGraphicsLinearLayout;
     data_=std::forward<_t_DATA__t__>(_data__);
+    layout_=new QGraphicsLinearLayout;
     {
         layout_->setSpacing(0);
         this->setLayout(layout_);

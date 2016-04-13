@@ -67,14 +67,16 @@ extern void run(OpenCVWindow * window) try {
                 true);
         }
 
-        for (const auto & i:varAns) {
-           
-            /*绘制起点 最远点 终点*/
-            varItem->insertLine({
-                varContour[i[0]],
-                varContour[i[2]],
-                varContour[i[1]],
-            })->setPen({ QColor(255,30,50,190),2 });
+        {/*绘制结果曲线*/
+            QList<QPointF> varAboutToDraw;
+            for (const auto & i:varAns) {
+                /*绘制起点 最远点 终点*/
+                varAboutToDraw.push_back(QPointF(varContour[i[0]].x,varContour[i[0]].y));
+                varAboutToDraw.push_back(QPointF(varContour[i[2]].x,varContour[i[2]].y));
+                varAboutToDraw.push_back(QPointF(varContour[i[1]].x,varContour[i[1]].y));
+            }
+            varItem->insertLine(
+                varAboutToDraw,true)->setPen({ QColor(255,30,50,200),2 });
         }
 
     }

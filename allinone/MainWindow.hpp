@@ -10,8 +10,14 @@ private:
 public:
     MainWindow();
     virtual ~MainWindow();
+
+    QString getProjectName(int);
+    QString getStartString(int);
+
 public slots:
-    void startDataView(QString);
+    void startApplication(QString,QString);
+
+
 };
 
 #endif

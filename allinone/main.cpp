@@ -1,5 +1,6 @@
 ﻿/*main.cpp "allinone"  */
 #include "MainWindow.hpp"
+#include "CreateMainWindowQml.hpp"
 #include <QtWidgets/qapplication.h>
 #include <QtCore/qcommandlineparser.h>
 #include <QtCore/qcommandlineoption.h>
@@ -52,11 +53,21 @@ int main(int argc,char ** argv) try{
         QDir::addSearchPath("images",QDir::cleanPath(BUILD_PATH_"/../Images"));
     }
 
-    MainWindow * window=new MainWindow;
-    window->setResizeMode(MainWindow::ResizeMode::SizeRootObjectToView);
-    window->setSource(QUrl("qrc:/MainWindowAllInOne/qml/AllInOneMainWindow.qml"));
-    window->resize(600,512);
-    window->show();
+    {/*创建qml文件*/
+        auto qml_creator = CreateMainWindowQml::instance();
+        qml_creator->createAllInOneItemQml();
+        qml_creator->createAllInOneMainWindowQml();
+    }
+
+    MainWindow window ;
+    window.setResizeMode(MainWindow::ResizeMode::SizeRootObjectToView);
+    window.setSource(
+                QUrl::fromLocalFile(
+                    QDir::cleanPath(qApp->applicationDirPath()+"/AllInOneMainWindow.qml")
+                    )
+                );
+    window.resize(600,512);
+    window.show();
     std::cout.flush();
 
     return app.exec();

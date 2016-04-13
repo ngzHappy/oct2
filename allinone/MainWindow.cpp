@@ -13,7 +13,31 @@ MainWindow::~MainWindow(){
 
 }
 
-void MainWindow::startDataView(QString s){
-    qDebug()<<s;
+QString MainWindow::getProjectName(int argN){
+    QQuickItem * varItem = this->rootObject();
+    QVariant varAns;
+    QMetaObject::invokeMethod(varItem,
+                              "getProjectName",
+                              Qt::DirectConnection,
+                              Q_RETURN_ARG(QVariant, varAns),
+                              Q_ARG(QVariant, argN));
+    return varAns.toString();
+}
+QString MainWindow::getStartString(int argN){
+    QQuickItem * varItem = this->rootObject();
+    QVariant varAns;
+    QMetaObject::invokeMethod(varItem,
+                              "getStartString",
+                              Qt::DirectConnection,
+                              Q_RETURN_ARG(QVariant, varAns),
+                              Q_ARG(QVariant, argN));
+    return varAns.toString();
+}
+
+void MainWindow::startApplication(QString argAppName,QString argStartString){
+    qDebug()<<argAppName
+           <<argStartString
+          <<getProjectName(0)
+           <<getStartString(0);
 
 }

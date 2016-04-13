@@ -17,7 +17,8 @@ public:
 public slots:
     void startApplication(QString,QString);
 
-
+private:
+    void _save();
 };
 
 #endif

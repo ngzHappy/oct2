@@ -21,7 +21,7 @@ Rectangle {
 
     ObjectModel {
         id: itemModel;
-		AllInOneItem{projectName:"0";startString:"";}
+        AllInOneItem{projectName:"0";startString:"";width: rootItem.width;}
         AllInOneItem{projectName:"1";startString:"";}
         AllInOneItem{projectName:"1";startString:"";}
         AllInOneItem{projectName:"1";startString:"";}
@@ -56,6 +56,7 @@ Rectangle {
     }
 
     ListView {
+        width: parent.width;
         anchors.fill: parent;
         model: itemModel;
     }

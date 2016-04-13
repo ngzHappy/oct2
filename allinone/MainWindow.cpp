@@ -1,6 +1,7 @@
 ﻿#include "MainWindow.hpp"
 #include <QtCore/qdebug.h>
 #include <QtQuick/QtQuick>
+#include <QtCore/qprocess.h>
 
 MainWindow::MainWindow(){
     this->rootContext()
@@ -10,7 +11,7 @@ MainWindow::MainWindow(){
 }
 
 MainWindow::~MainWindow(){
-
+    _save();
 }
 
 QString MainWindow::getProjectName(int argN){
@@ -35,9 +36,7 @@ QString MainWindow::getStartString(int argN){
 }
 
 void MainWindow::startApplication(QString argAppName,QString argStartString){
-    qDebug()<<argAppName
-           <<argStartString
-          <<getProjectName(0)
-           <<getStartString(0);
-
+    argAppName=qApp->applicationDirPath()+"/"+argAppName.trimmed();
+    argAppName+=" "+argStartString.trimmed();
+    QProcess::startDetached(argAppName);
 }

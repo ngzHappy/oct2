@@ -6,7 +6,7 @@ MouseArea {
     id:rootMouseArea;
     hoverEnabled: true;
     height: 32;
-    width: parent.width;
+    //width: parent.width;
     acceptedButtons: Qt.LeftButton;
     property string projectName: "";
     property alias startString: startStringID.text;

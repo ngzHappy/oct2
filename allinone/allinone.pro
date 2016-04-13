@@ -15,14 +15,14 @@ CONFIG += console
 
 TEMPLATE = app
 
-SOURCES += $$PWD/main.cpp \
-    CreateMainWindowQml.cpp
+SOURCES += $$PWD/main.cpp
+SOURCES += $$PWD/CreateMainWindowQml.cpp
 SOURCES += $$PWD/MainWindow.cpp
 SOURCES += $$PWD/OpenCVWindowDetail.cpp
 SOURCES += $$PWD/allinone_run.cpp
 
-HEADERS += $$PWD/MainWindow.hpp \
-    CreateMainWindowQml.hpp
+HEADERS += $$PWD/MainWindow.hpp
+HEADERS += $$PWD/CreateMainWindowQml.hpp
 HEADERS += $$PWD/OpenCVWindowDetail.hpp
 
 DEFINES += APP_NAME_=\\\"$$TARGET\\\"

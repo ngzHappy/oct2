@@ -22,6 +22,7 @@ TEMPLATE = subdirs
 #.makefile #The makefile of subproject. Available only on platforms that use makefiles.
 #.target #Base string used for makefile targets related to this subproject. Available only on platforms that use makefiles.
 SUBDIRS += projectMaker
+SUBDIRS += opencv_tool/image_rand_draw
 SUBDIRS += setgetutility
 
 core_utility.file = $$PWD/core_utility/core_utility.pro

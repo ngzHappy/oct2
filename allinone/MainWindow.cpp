@@ -36,10 +36,17 @@ QString MainWindow::getStartString(int argN){
 }
 
 void MainWindow::startApplication(QString argAppName,QString argStartString){
-    argAppName=qApp->applicationDirPath()+"/"+argAppName.trimmed();
-    argAppName+=" "+argStartString.trimmed();
-    if(false == QProcess::startDetached(argAppName)){
-        qDebug()<<argAppName;
+    auto varAppName=qApp->applicationDirPath()+"/"+argAppName.trimmed();
+    varAppName+=" "+argStartString.trimmed();
+    if(false == QProcess::startDetached(varAppName.trimmed())){
+#if defined(Q_OS_WIN)
+        varAppName=qApp->applicationDirPath()+"/"+argAppName.trimmed()+".exe";
+        varAppName+=" "+argStartString.trimmed();
+        if (false==QProcess::startDetached(varAppName.trimmed()))
+#endif
+        {
+            qDebug()<<"can not start:"<<argAppName;
+        }
     }
 
 }

@@ -219,3 +219,7 @@ SUBDIRS += opencv_intersectConvexConvex
 opencv_matchShapes.file = $$PWD/opencv_point_algorithm/opencv_matchShapes/opencv_matchShapes.pro
 opencv_matchShapes.depends += core_utility
 SUBDIRS += opencv_matchShapes
+
+opencv_HuMoments.file = $$PWD/opencv_imgproc/opencv_HuMoments/opencv_HuMoments.pro
+opencv_HuMoments.depends += core_utility
+SUBDIRS += opencv_HuMoments

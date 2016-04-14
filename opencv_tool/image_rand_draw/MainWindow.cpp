@@ -25,6 +25,7 @@ public:
     DrawMatrix(const QMatrix  & t):QMatrix(t) {}
 };
 
+/*进行逻辑坐标变换*/
 std::list<DrawMatrix> gen_rotate_matrix() {
     std::list<DrawMatrix> ans;
 
@@ -73,7 +74,7 @@ void make_rand_image(
     };
 
     auto runFuncion=[pack](DrawMatrix & i) ->void {
- 
+
         auto to_cvPoint=[](const auto & v) {return cv::Point2f(v.x(),v.y());};
 
         std::vector<cv::Point2f> points{
@@ -83,19 +84,24 @@ void make_rand_image(
             to_cvPoint(QPointF(pack->image_width_/2,0)*i),
         };
 
+        /*计算绘图坐标*/
         cv::Rect bound_rect=cv::boundingRect(points);
-        auto bottom_right=bound_rect.br();
+
+        /*生成边框*/
+        auto ax=(rand()&15)+1;
+        auto ay=(rand()&15)+1;
 
         QImage _image_(
-            bound_rect.width,
-            bound_rect.height,
+            bound_rect.width+2*ax,
+            bound_rect.height+2*ay,
             pack->image_.format()
         );
 
+        /*计算逻辑坐标到绘图坐标*/
         QMatrix matrix;
         matrix.translate(
-            -bound_rect.x,
-            -bound_rect.y 
+            ax-bound_rect.x,
+            ay-bound_rect.y
             );
 
         _image_.fill(QColor(0,0,0,0));
@@ -104,33 +110,21 @@ void make_rand_image(
 
             painter.setRenderHint(QPainter::SmoothPixmapTransform);
             painter.setRenderHint(QPainter::HighQualityAntialiasing);
-            painter.setMatrix(i*matrix);
+            painter.setMatrix(i*matrix/*将逻辑坐标投影到绘图坐标*/);
             const auto & image_=pack->image_;
 
             painter.drawImage(QPoint{ 0,0 },image_);
 
         }
 
-        {
-            auto ax=(rand()&15)+1;
-            auto ay=(rand()&15)+1;
-            QImage image_add_bounder_(
-                _image_.width()+ax*2,
-                _image_.height()+ay*2,
-                _image_.format()
-                );
-            image_add_bounder_.fill(QColor(0,0,0,0));
-            QPainter painter(&image_add_bounder_);
-            painter.drawImage(ax,ay,_image_);
-            _image_=std::move(image_add_bounder_);
-        }
-        
+        /*设置文件名并保存*/
         QString fileName=QString("%1").arg(i.id,6,10,QChar('0'));
         fileName=pack->dir_.absoluteFilePath(fileName+".png");
         _image_.save(fileName);
 
     };
 
+    /*多线程执行任务*/
     QtConcurrent::blockingMap(
                 rotate_rects.begin(),
                 rotate_rects.end(),

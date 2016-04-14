@@ -10,7 +10,6 @@
 #include <QtWidgets/qapplication.h>
 #include <QtQuick/QtQuick>
 #include <QtWidgets/qfiledialog.h>
-#include <opencv2/opencv.hpp>
 #include <iostream>
 
 namespace {
@@ -75,33 +74,31 @@ void make_rand_image(
 
     auto runFuncion=[pack](DrawMatrix & i) ->void {
 
-        auto to_cvPoint=[](const auto & v) {return cv::Point2f(v.x(),v.y());};
+        QPolygonF polygon{{
+            QPointF(pack->image_width_/2,pack->image_height_/2)*i,
+            QPointF(0,pack->image_height_/2)*i,
+            QPointF(pack->image_width_/2,0)*i,
+            QPointF(0,0)*i}};
 
-        std::vector<cv::Point2f> points{
-            to_cvPoint(QPointF(0,0)*i),
-                    to_cvPoint(QPointF(0,pack->image_height_/2)*i),
-                    to_cvPoint(QPointF(pack->image_width_/2,pack->image_height_/2)*i),
-                    to_cvPoint(QPointF(pack->image_width_/2,0)*i),
-        };
-
-        /*计算绘图坐标*/
-        cv::Rect bound_rect=cv::boundingRect(points);
+        QRect bound_rect=[](const QRectF & v) {
+            return v.toRect().marginsAdded({1,1,1,1});
+        }(polygon.boundingRect());
 
         /*生成边框*/
         auto ax=(rand()&15)+1;
         auto ay=(rand()&15)+1;
 
         QImage _image_(
-                    bound_rect.width+2*ax,
-                    bound_rect.height+2*ay,
+                    bound_rect.width()+2*ax,
+                    bound_rect.height()+2*ay,
                     pack->image_.format()
                     );
 
         /*计算逻辑坐标到绘图坐标*/
         QMatrix matrix;
         matrix.translate(
-                    ax-bound_rect.x,
-                    ay-bound_rect.y
+                    ax-bound_rect.x(),
+                    ay-bound_rect.y()
                     );
 
         _image_.fill(QColor(0,0,0,0));

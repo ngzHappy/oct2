@@ -18,7 +18,6 @@ HEADERS  += \
     MainWindow.hpp
 
 include( $$PWD/../../core_utility/core_utility.pri )
-include( $$PWD/../../core_utility/opencv3.pri )
 DESTDIR = $$OUTPWD
 
 RESOURCES += \

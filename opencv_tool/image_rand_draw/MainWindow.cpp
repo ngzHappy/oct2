@@ -70,8 +70,8 @@ void make_rand_image(
     };
 
     std::shared_ptr<const DrawPack> pack=std::shared_ptr<const DrawPack>{
-        new DrawPack{image_,dir_,image_width_,image_height_}
-    };
+            new DrawPack{image_,dir_,image_width_,image_height_}
+};
 
     auto runFuncion=[pack](DrawMatrix & i) ->void {
 
@@ -79,9 +79,9 @@ void make_rand_image(
 
         std::vector<cv::Point2f> points{
             to_cvPoint(QPointF(0,0)*i),
-            to_cvPoint(QPointF(0,pack->image_height_/2)*i),
-            to_cvPoint(QPointF(pack->image_width_/2,pack->image_height_/2)*i),
-            to_cvPoint(QPointF(pack->image_width_/2,0)*i),
+                    to_cvPoint(QPointF(0,pack->image_height_/2)*i),
+                    to_cvPoint(QPointF(pack->image_width_/2,pack->image_height_/2)*i),
+                    to_cvPoint(QPointF(pack->image_width_/2,0)*i),
         };
 
         /*计算绘图坐标*/
@@ -92,17 +92,17 @@ void make_rand_image(
         auto ay=(rand()&15)+1;
 
         QImage _image_(
-            bound_rect.width+2*ax,
-            bound_rect.height+2*ay,
-            pack->image_.format()
-        );
+                    bound_rect.width+2*ax,
+                    bound_rect.height+2*ay,
+                    pack->image_.format()
+                    );
 
         /*计算逻辑坐标到绘图坐标*/
         QMatrix matrix;
         matrix.translate(
-            ax-bound_rect.x,
-            ay-bound_rect.y
-            );
+                    ax-bound_rect.x,
+                    ay-bound_rect.y
+                    );
 
         _image_.fill(QColor(0,0,0,0));
         {

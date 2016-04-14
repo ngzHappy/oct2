@@ -211,3 +211,11 @@ SUBDIRS += opencv_convexityDefects
 allinone.file = $$PWD/allinone/allinone.pro
 allinone.depends += core_utility
 SUBDIRS += allinone
+
+opencv_intersectConvexConvex.file = $$PWD/opencv_point_algorithm/opencv_intersectConvexConvex/opencv_intersectConvexConvex.pro
+opencv_intersectConvexConvex.depends += core_utility
+SUBDIRS += opencv_intersectConvexConvex
+
+opencv_matchShapes.file = $$PWD/opencv_point_algorithm/opencv_matchShapes/opencv_matchShapes.pro
+opencv_matchShapes.depends += core_utility
+SUBDIRS += opencv_matchShapes

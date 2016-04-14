@@ -223,3 +223,7 @@ SUBDIRS += opencv_matchShapes
 opencv_HuMoments.file = $$PWD/opencv_imgproc/opencv_HuMoments/opencv_HuMoments.pro
 opencv_HuMoments.depends += core_utility
 SUBDIRS += opencv_HuMoments
+
+quick_test.file = $$PWD/opencv_imgproc/quick_test/quick_test.pro
+quick_test.depends += core_utility
+SUBDIRS += quick_test

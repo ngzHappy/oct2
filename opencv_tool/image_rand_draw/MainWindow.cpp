@@ -81,7 +81,7 @@ void make_rand_image(
             QPointF(0,0)*i}};
 
         QRect bound_rect=[](const QRectF & v) {
-            return v.toRect().marginsAdded({1,1,1,1});
+            return v.marginsAdded({-.495,-.495,.495,.495}).toRect();
         }(polygon.boundingRect());
 
         /*生成边框*/

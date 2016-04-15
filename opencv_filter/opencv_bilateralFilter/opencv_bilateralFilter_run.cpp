@@ -144,6 +144,8 @@ extern void run(OpenCVWindow * window) try {
 
         auto * item=window->insertImage(image);
         item->setWindowTitle(u8"第%1幅图片"_qs.arg(++count_));
+        window->insertImage(image)
+            ->setWindowTitle(u8"第%1幅原始图片"_qs.arg(count_));
 
         OpenCVVerticalItems * control_=new OpenCVVerticalItems(item);
         control_->addWidget(new TitleBar(item));

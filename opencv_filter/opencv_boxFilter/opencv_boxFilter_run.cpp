@@ -5,36 +5,27 @@
 #include "private/opencv_boxFilter_run_exception.cpp"
 //#include <QtCharts>
 
-namespace opencv_boxFilter{
-extern void run(OpenCVWindow * window) try{
+namespace opencv_boxFilter {
+extern void run(OpenCVWindow * window) try {
 
-    /*测试图片显示*/
-    {
-        intptr_t count_=0;
-        const auto images_names=
-            CoreUtility::getConfigurationFile().getInputImagesNames("images:000001");
+    intptr_t count_=0;
+    const auto images_names=
+        CoreUtility::getConfigurationFile().getInputImagesNames("images:000001");
 
-            for (const auto & image_name:images_names) {
-            window->insertImage(QImage(image_name))
-                ->setWindowTitle(u8"第%1幅图片"_qs.arg(++count_));
-        }
+    for (const auto & image_name:images_names) {
+        cv::Mat image=OpenCVUtility::tryRead(
+            QImage(image_name).convertToFormat(QImage::Format_RGB888)
+            );
+        window->insertImage(image)
+            ->setWindowTitle(u8"第%1幅图片"_qs.arg(++count_));
+
+        image.convertTo(image,CV_32FC3);
+        cv::boxFilter(image,image,-1,{ 3,3 },{-1,-1},false);
+
+        window->insertImage(image)
+            ->setWindowTitle(u8"第%1幅图片滤波结果"_qs.arg(count_));
     }
-    /*测试柱状图*/
-    window->insertHist({ 1,2,3,4,5 })->setWindowTitle(u8"柱状图"_qs);
-    /*测试散点图*/
-    auto scatter=window->insertScatter({ {0,0},{1,1},{2,2} });
-    scatter->setCentrePointPaint(
-        std::shared_ptr< std::function<void(QPainter *)> >(
-        new std::function<void(QPainter *)>{
-        [](QPainter * painter) {
-        painter->setBrush(Qt::transparent);
-        painter->setPen(QPen(QColor(0,0,0),1));
-        painter->drawRect(QRect{-10,-10,20,20});
-    }
-    }
-        )
-        );
-    scatter->setWindowTitle(u8"散点图"_qs);
+
 
 }
 catch (const cv::Exception &e) {

@@ -90,7 +90,7 @@ public:
         sigmaSpace_->setValue(12.5);
 
     }
-    ~TitleBar() {}
+    ~TitleBar() { }
 
     void do_eval() try {
 

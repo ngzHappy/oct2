@@ -22,11 +22,14 @@ public:
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
     void paint(QPainter *painter,const QStyleOptionGraphicsItem *option,QWidget *widget) override;
+    
 private:
     void _onYChanged();
     void _onXChanged();
 public slots:
     virtual void saveImage();
+    virtual void onYChanged();
+    virtual void onXChanged();
 };
 
 #endif // OPENCVITEM_HPP

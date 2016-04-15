@@ -190,7 +190,6 @@ void MainWindow::setImage(QImage&&_image_) {
     _p_setImage(std::move(_image_));
 }
 
-
 const QString & MainWindow::getDstDir() const {
     return to_dir_;
 }

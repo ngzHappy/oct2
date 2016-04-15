@@ -60,6 +60,7 @@ public:
 #include "OpenCVScatterItem.hpp"
 #include "OpenCVLineSeriesItem.hpp"
 #include "OpenCVChartImage.hpp"
+#include "OpenCVVerticalItems.hpp"
 #include "OpenCVException.hpp"
 #include "OpenCVUserDataAllocator.hpp"
 

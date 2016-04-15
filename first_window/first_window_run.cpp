@@ -1,5 +1,6 @@
 ﻿#include <OpenCVUtility.hpp>
 #include <opencv_application_configuration_file.hpp>
+#include <QtWidgets/qslider.h>
 
 namespace first_window{
 extern void run(OpenCVWindow * window) {
@@ -34,5 +35,12 @@ extern void run(OpenCVWindow * window) {
     /*测试折线图*/
     auto line_serie=window->insertLineSeries({ {0,0},{1,1},{2,2},{2,0},{0,0} });
     line_serie->setWindowTitle(u8"折线图"_qs);
+
+    {
+        OpenCVVerticalItems * item=new OpenCVVerticalItems(line_serie);
+        item->addWidget(new QSlider(Qt::Horizontal));
+        item->addWidget(new QSlider(Qt::Horizontal));
+        item->addWidget(new QSlider(Qt::Horizontal));
+    }
 }
 }

@@ -207,7 +207,7 @@ public:
 
 };
 
-void MainWindow::save() {
+void MainWindow::save() try{
 
     const QString saveFileName__=QFileDialog::getSaveFileName();
     if (saveFileName__.isEmpty()) { return; }
@@ -230,6 +230,9 @@ void MainWindow::save() {
         qDebug()<<"roi is null";
     }
 
+}
+catch (const cv::Exception & e) {
+    opencv_exception::error(e);
 }
 
 void MainWindow::open() {
@@ -255,8 +258,10 @@ namespace __private {
 
 void create(OpenCVImageItem *  itemWidget) {
 
+    if (itemWidget==nullptr) { return; }
     QGraphicsScene * scene_=itemWidget->scene();
-    if (scene_==0) { return; }
+    if (scene_==nullptr) { return; }
+    if (itemWidget->getImageItem()==nullptr) { return; }
 
     __private::MainWindow * tbar=new __private::MainWindow;
     auto * dtbar=scene_->addWidget(tbar);

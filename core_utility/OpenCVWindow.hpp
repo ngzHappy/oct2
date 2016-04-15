@@ -15,6 +15,9 @@ class OpenCVChartImage;
 class OpenCVScatterItem;
 class OpenCVLineSeriesItem;
 class OpenCVScene;
+namespace cv{
+class Mat;
+}
 
 class CORE_UTILITYSHARED_EXPORT OpenCVWindow : public QGraphicsView {
     Q_OBJECT
@@ -30,6 +33,8 @@ public:
     template<typename B,typename E>OpenCVLineSeriesItem * insertLineSeries(B,E);
     virtual OpenCVHistItem * insertHist(QList<qreal> );
     virtual OpenCVImageItem * insertImage(QImage );
+    OpenCVImageItem * insertImage(const cv::Mat&)/*call inertImage(QImage)*/;
+    OpenCVImageItem * insertImage(cv::Mat&&)/*call inertImage(QImage)*/;
     virtual OpenCVChartImage * insertChartImage(QImage );
     virtual OpenCVScatterItem * insertScatter(QList<QPointF> );
     virtual OpenCVLineSeriesItem * insertLineSeries(QList<QPointF> );

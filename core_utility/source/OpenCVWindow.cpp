@@ -6,6 +6,7 @@
 #include "../OpenCVStyle.hpp"
 #include <QtGui/qicon.h>
 #include <QtCore/qdebug.h>
+#include "../OpenCVUtility.hpp"
 
 OpenCVWindow::OpenCVWindow(QWidget *parent)
     :P(parent),
@@ -28,6 +29,13 @@ OpenCVWindow::OpenCVWindow(QWidget *parent)
 
 OpenCVHistItem * OpenCVWindow::insertHist(QList<qreal> data_) {
     return scene_->insertHist(std::move(data_));
+}
+
+OpenCVImageItem * OpenCVWindow::insertImage(const cv::Mat&m) {
+    return insertImage(OpenCVUtility::tryRead(m));
+}
+OpenCVImageItem * OpenCVWindow::insertImage(cv::Mat&&m) {
+    return insertImage(OpenCVUtility::tryRead(std::move(m)));
 }
 
 OpenCVImageItem * OpenCVWindow::insertImage(QImage i) {

@@ -170,6 +170,9 @@ OpenCVStyle * OpenCVStyle::instance() {
 
 void OpenCVItem::renderTo(QImage &) {}
 
+void OpenCVItem::onYChanged() { _onYChanged(); }
+void OpenCVItem::onXChanged() { _onXChanged(); }
+
 void OpenCVItem::saveImage() {
     {
         const QGraphicsScene * sc__=this->scene();
@@ -217,8 +220,8 @@ OpenCVItem::OpenCVItem(QGraphicsItem *parent)
     this->setPos(std::rand()&63,(std::rand()&63)+36);
     this->setAttribute(Qt::WA_DeleteOnClose);
 
-    connect(this,&OpenCVItem::yChanged,this,[this]() {_onYChanged(); });
-    connect(this,&OpenCVItem::xChanged,this,[this]() {_onXChanged(); });
+    connect(this,&OpenCVItem::yChanged,this,[this]() {onYChanged(); });
+    connect(this,&OpenCVItem::xChanged,this,[this]() {onXChanged(); });
 }
 
 OpenCVItem::~OpenCVItem() {

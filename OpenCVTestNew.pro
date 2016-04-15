@@ -227,3 +227,11 @@ SUBDIRS += opencv_HuMoments
 quick_test.file = $$PWD/opencv_imgproc/quick_test/quick_test.pro
 quick_test.depends += core_utility
 SUBDIRS += quick_test
+
+x00000.file = $$PWD/tmp/x00000/x00000.pro
+x00000.depends += core_utility
+SUBDIRS += x00000
+
+opencv_copyMakeBorder.file = $$PWD/opencv_imgproc/opencv_copyMakeBorder/opencv_copyMakeBorder.pro
+opencv_copyMakeBorder.depends += core_utility
+SUBDIRS += opencv_copyMakeBorder

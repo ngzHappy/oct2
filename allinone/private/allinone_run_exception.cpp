@@ -17,6 +17,9 @@ int ErrorCallback(
     const char* file_name,
     int line,
     void* /*userdata*/) {
+
+#if defined(PROJECT__RUN__EXCEPTION__OPENCV__CCT_NEED)
+
     QString __error_;
 
 #if !defined(NDEBUG)
@@ -43,10 +46,17 @@ int ErrorCallback(
     else {
         qDebug().noquote()<<__error_;
     }
+#else
+    (void)func_name;
+    (void)err_msg;
+    (void)line;
+    (void)file_name;
+#endif
 
     return 0;
     (void)status;
 }
+
 }
 
 /*当qapplication运行时注册此函数*/

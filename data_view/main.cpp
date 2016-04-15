@@ -57,7 +57,7 @@ int main(int argc,char ** argv) try{
     }
 
     opencv_exception::set_error_function(
-        [](const auto &,auto) {
+        [](const auto &,auto,auto,auto,auto,auto) {
         std::cout<<"opencv exception called"<<std::endl;
     }
         );

@@ -8,6 +8,8 @@
 #include <private/qimage_p.h>
 #include <QtGui/qimagereader.h>
 #include <QtCore/qdebug.h>
+#include <QtCore/qstring.h>
+#include <QtCore/qtextstream.h>
 #include <mutex>
 #include <cstdlib>
 #include <ctime>
@@ -470,15 +472,49 @@ QImage OpenCVUtility::tryRead(const cv::Mat & v) {
 
 namespace opencv_exception {
 
-class _Static_Data{
+namespace {
+class _Static_Data {
 public:
-    ErrorCallBackFunction efunction_ = nullptr;
+    ErrorCallBackFunction efunction_=nullptr;
     std::shared_ptr<const void> efunction_data_;
     const std::shared_ptr<std::recursive_mutex> mutex_;
     _Static_Data():mutex_(new std::recursive_mutex) {}
 };
 
-std::shared_ptr< _Static_Data >  _data_  ;
+void _ErrorCallBackFunction_(
+    const cv::Exception &e,
+    const std::string &gwhat,
+    std::size_t gline,
+    const char *gfile,
+    const char *gfunc,
+    std::shared_ptr<const void>) {
+
+    QString error_info_;
+    {
+        QTextStream stream_(&error_info_);
+
+        stream_<<"from:"<<endl;
+        stream_<<"what:"<<e.what()<<endl;
+        stream_<<"line:"<<e.line<<endl;
+        stream_<<"file:"<<e.file.c_str()<<endl;
+        stream_<<"function:"<<e.func.c_str()<<endl;
+        stream_<<"catched @"<<endl;
+        stream_<<"what:"<<gwhat.c_str()<<endl;
+        stream_<<"line:"<<gline<<endl;
+        stream_<<"file:"<<gfile<<endl;
+        stream_<<"function:"<<gfunc<<endl;
+        
+    }
+    qDebug()<<error_info_;
+}
+
+std::shared_ptr< _Static_Data >  _data_=[]() {
+    std::shared_ptr< _Static_Data > ans=std::make_shared<_Static_Data>();
+    ans->efunction_=&_ErrorCallBackFunction_;
+    return std::move(ans);
+}();
+
+}
 
 std::pair<ErrorCallBackFunction,std::shared_ptr<const void>> set_error_function(
         ErrorCallBackFunction e,

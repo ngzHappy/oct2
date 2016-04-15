@@ -1,6 +1,6 @@
 ﻿/*run_exception.cpp*/
-#if !defined(_1_PROJECT__RUN__EXCEPTION__OPENCV__CCT)
-#define _1_PROJECT__RUN__EXCEPTION__OPENCV__CCT
+#if !defined(PROJECT__RUN__EXCEPTION__OPENCV__CCT)
+#define PROJECT__RUN__EXCEPTION__OPENCV__CCT
 
 /*the file is just in this.run*/
 #include <sstream>
@@ -9,6 +9,7 @@
 #include <QtWidgets/qerrormessage.h>
 #include <QtCore/qdebug.h>
 namespace {
+
 int ErrorCallback(
     int status/*cv::Error::Code*/,
     const char* func_name,
@@ -47,6 +48,7 @@ int ErrorCallback(
     (void)status;
 }
 }
+
 /*当qapplication运行时注册此函数*/
 static void _set_opencv_error_on_qt_start_up() {
     cv::redirectError(&ErrorCallback);

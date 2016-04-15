@@ -98,7 +98,7 @@ public:
         const double s_c=sigmaColor_->value();
         const double s_s=sigmaSpace_->value();
         const int type=
-            TitleBar2CVBorderType[std::max(4,borderType_->currentIndex())];
+            TitleBar2CVBorderType[std::min(4,borderType_->currentIndex())];
 
         std::shared_ptr<std::function<QImage(const QImage &)>> run_function
             =std::make_shared<std::function<QImage(const QImage &)>>(

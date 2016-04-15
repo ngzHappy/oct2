@@ -16,7 +16,7 @@ extern void run(OpenCVWindow *  ) try{
     std::cout<<cv::Scalar::all(1)<<std::endl;
 }
 catch (const cv::Exception &e) {
-    opencv_exception::error(e);
+    opencv_exception::error(e,"get opencv exception",__LINE__,__FILE__,__func__);
 }
 
 }

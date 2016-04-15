@@ -28,7 +28,7 @@ extern void run(OpenCVWindow * window) try{
     item->setGridLineVisible(false,false);
 }
 catch (const cv::Exception &e) {
-    opencv_exception::error(e);
+    opencv_exception::error(e,"get opencv exception",__LINE__,__FILE__,__func__);
 }
 
 }

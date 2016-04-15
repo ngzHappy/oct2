@@ -509,14 +509,21 @@ std::pair<ErrorCallBackFunction,std::shared_ptr<const void>> set_error_function(
     return std::move(ans___);
 }
 
-void error(const cv::Exception & e){
+void error(
+    const cv::Exception & e,
+    const std::string & _what,
+    std::size_t _Line,
+    const char * _File,
+    const char * _Func){
     auto data_=_data_;
     if (data_) {
         auto mutex__=data_->mutex_;
         {
             std::unique_lock<std::recursive_mutex> _l(*(mutex__));
             if (data_->efunction_) {
-                data_->efunction_(e,data_->efunction_data_);
+                data_->efunction_(e,
+                    _what,_Line,_File,_Func,
+                    data_->efunction_data_);
             }
         }
     }

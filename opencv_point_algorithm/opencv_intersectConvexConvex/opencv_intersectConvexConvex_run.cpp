@@ -78,7 +78,7 @@ extern void run(OpenCVWindow * window) try{
     item->setWindowTitle(u8"边界线交集"_qs);
 }
 catch (const cv::Exception &e) {
-    opencv_exception::error(e);
+    opencv_exception::error(e,"get opencv exception",__LINE__,__FILE__,__func__);
 }
 
 }/*~namespace*/

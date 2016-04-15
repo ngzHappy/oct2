@@ -27,6 +27,6 @@ extern void run(OpenCVWindow * window) try{
         ->setWindowTitle(u8"测试带坐标系图片"_qs);
 }
 catch (const cv::Exception &e) {
-    opencv_exception::error(e);
+    opencv_exception::error(e,"get opencv exception",__LINE__,__FILE__,__func__);
 }
 }

@@ -67,7 +67,7 @@ extern void run(OpenCVWindow * window) try {
     varLineSeriex->setPen(QPen(QColor(1,1,1),2));
 }
 catch (const cv::Exception &e) {
-    opencv_exception::error(e);
+    opencv_exception::error(e,"get opencv exception",__LINE__,__FILE__,__func__);
 }
 
 }

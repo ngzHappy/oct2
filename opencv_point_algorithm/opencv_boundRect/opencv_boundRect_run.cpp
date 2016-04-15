@@ -59,6 +59,6 @@ extern void run(OpenCVWindow * window) try{
         ->setRange(-0.5+points_[0].y,0.5+points_[2].y);
 }
 catch (const cv::Exception &e) {
-    opencv_exception::error(e);
+    opencv_exception::error(e,"get opencv exception",__LINE__,__FILE__,__func__);
 }
 }

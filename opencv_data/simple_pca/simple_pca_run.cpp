@@ -121,7 +121,7 @@ extern void run(OpenCVWindow * window) try{
     item_->setWindowTitle(u8"绘制特征向量"_qs);
 }
 catch (const cv::Exception &e) {
-    opencv_exception::error(e);
+    opencv_exception::error(e,"get opencv exception",__LINE__,__FILE__,__func__);
 }
 
 }

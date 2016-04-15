@@ -23,7 +23,7 @@ extern void run(OpenCVWindow * window) try{
     window->insertScatter({point_0,point_1});
 }
 catch (const cv::Exception &e) {
-    opencv_exception::error(e);
+    opencv_exception::error(e,"get opencv exception",__LINE__,__FILE__,__func__);
 }
 
 }

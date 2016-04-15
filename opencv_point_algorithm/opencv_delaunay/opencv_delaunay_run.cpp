@@ -84,7 +84,7 @@ extern void run(OpenCVWindow * window) try{
     item->setWindowTitle(u8"三角形剖分"_qs);
 }
 catch (const cv::Exception &e) {
-    opencv_exception::error(e);
+    opencv_exception::error(e,"get opencv exception",__LINE__,__FILE__,__func__);
 }
 
 }

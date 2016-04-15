@@ -7,7 +7,11 @@
 #include <string>
 #include <cstddef>
 #include <cstdint>
-#include <opencv2/opencv.hpp>
+#include <opencv2/core.hpp>
+
+#define opencv_line() __LINE__
+#define opencv_file() __FILE__
+#define opencv_func() __func__
 
 namespace cv {
 class Exception;

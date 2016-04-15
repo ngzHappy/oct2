@@ -8,6 +8,7 @@
 #include <opencv_application_configuration_file.hpp>
 #include <iostream>
 #include <exception>
+#include <OpenCVException.hpp>
 
 namespace configure_file_simple_test{
 extern void run(OpenCVWindow * window) ;
@@ -63,6 +64,9 @@ int main(int argc,char ** argv) try{
 
     return app.exec();
 
+}
+catch (const cv::Exception & e) {
+    opencv_exception::error(e,"get opencv exception",__LINE__,__FILE__,__func__);
 }
 catch (const std::exception & e) {
     std::cout<<e.what()<<std::endl;

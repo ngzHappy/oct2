@@ -1,6 +1,7 @@
 ﻿#include "MainWindow.hpp"
 #include <OpenCVUtility.hpp>
 #include <opencv_application_configuration_file.hpp>
+#include <OpenCVException.hpp>
 
 namespace first_window{
 extern void run(OpenCVWindow * window) ;
@@ -56,6 +57,9 @@ int main(int argc,char ** argv) try{
 
     return app.exec();
 
+}
+catch (const cv::Exception & e) {
+    opencv_exception::error(e,"get opencv exception",__LINE__,__FILE__,__func__);
 }
 catch (const std::exception & e) {
     std::cout<<e.what()<<std::endl;

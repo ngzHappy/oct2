@@ -7,6 +7,7 @@
 #include <QtCore/qdir.h>
 #include <opencv_application_configuration_file.hpp>
 #include <iostream>
+#include <OpenCVException.hpp>
 
 extern void run(OpenCVWindow * window) ;
 

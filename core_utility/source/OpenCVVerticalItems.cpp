@@ -8,6 +8,7 @@
 OpenCVVerticalItems::OpenCVVerticalItems(QGraphicsItem *parent)
     :P(parent)
 {
+    setWindowTitle(trUtf8(u8"控件"));
     layout_=new QGraphicsLinearLayout(Qt::Orientation::Vertical);
     this->setLayout(layout_);
     layout_->setSpacing(0);
@@ -16,6 +17,16 @@ OpenCVVerticalItems::OpenCVVerticalItems(QGraphicsItem *parent)
     this->setWindowFlags(Qt::Window | Qt::CustomizeWindowHint | Qt::WindowTitleHint);
     this->setMinimumHeight(64);
     this->setMinimumWidth(128);
+    this->setFlag(ItemClipsChildrenToShape,false);
+    {/*style*/
+        QPalette pal=this->palette();
+        pal.setColor(
+            QPalette::Background,
+            Qt::transparent 
+            );
+        this->setPalette(pal);
+    }
+    this->setPos(1,1);
 }
 
 OpenCVVerticalItems::~OpenCVVerticalItems()
@@ -26,7 +37,12 @@ OpenCVVerticalItems::~OpenCVVerticalItems()
 void OpenCVVerticalItems::addItem(QGraphicsLayoutItem *item_){
     if(item_==nullptr){return;}
     auto count_=layout_->count();
-    return layout_->insertItem(count_,item_)/*insert before stretch*/;
+    layout_->insertItem(count_,item_)/*insert before stretch*/;
+    auto _height_=layout_->preferredHeight();
+    auto _width_=layout_->preferredWidth();
+    this->resize(_width_,_height_);
+    this->setMinimumHeight(std::max<double>(_height_,32));
+    this->setMinimumWidth(std::max<double>(_width_,32));
 }
 
 QGraphicsProxyWidget * OpenCVVerticalItems::addWidget(QWidget * p){
@@ -39,13 +55,18 @@ QGraphicsProxyWidget * OpenCVVerticalItems::addWidget(QWidget * p){
     QGraphicsProxyWidget * item_ =scene_->addWidget(p);
     auto count_=layout_->count();
     layout_->insertItem(count_,item_)/*insert before stretch*/;
+    auto _height_=layout_->preferredHeight();
+    auto _width_=layout_->preferredWidth();
+    this->resize(_width_,_height_);
+    this->setMinimumHeight(std::max<double>(_height_,32));
+    this->setMinimumWidth(std::max<double>(_width_,32));
     return item_;
 }
 
 void OpenCVVerticalItems::onXChanged() {
     qreal t_[1],b_[1],l_[1],r_[1];
     this->getWindowFrameMargins(l_,t_,r_,b_);
-    l_[0]-=512;
+    //l_[0]-=512;
     if (x()>=(l_[0])) { return; }
     setPos(l_[0],y());
 }
@@ -53,7 +74,7 @@ void OpenCVVerticalItems::onXChanged() {
 void OpenCVVerticalItems::onYChanged() {
     qreal t_[1],b_[1],l_[1],r_[1];
     this->getWindowFrameMargins(l_,t_,r_,b_);
-    t_[0]-=512;
+    //t_[0]-=512;
     if (y()>=(t_[0])) { return; }
     setPos(x(),(t_[0]));
 }

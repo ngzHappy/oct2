@@ -210,8 +210,8 @@ OpenCVItem::OpenCVItem(QGraphicsItem *parent)
 
     {
         //this->setFlag(QGraphicsItem::ItemDoesntPropagateOpacityToChildren,true);
-        //this->setFlag(QGraphicsItem::ItemClipsChildrenToShape,true);
-        this->setAutoFillBackground(false);
+        this->setFlag(QGraphicsItem::ItemClipsChildrenToShape,true);
+        //this->setAutoFillBackground(false);
     }
 
     this->resize(132,132);

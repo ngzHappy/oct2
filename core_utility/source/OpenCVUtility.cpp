@@ -505,7 +505,7 @@ void _ErrorCallBackFunction_(
         stream_<<"function:"<<gfunc<<endl;
         
     }
-    qDebug()<<error_info_;
+    qDebug().noquote()<<error_info_;
 }
 
 std::shared_ptr< _Static_Data >  _data_=[]() {

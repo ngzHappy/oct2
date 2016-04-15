@@ -17,6 +17,7 @@ class Item : public QGraphicsWidget {
 public:
     Item(OpenCVImageItem * s):QGraphicsWidget(s),super(s) {}
     ~Item() {}
+
     void paint(
         QPainter * p,
         const QStyleOptionGraphicsItem *,
@@ -32,7 +33,16 @@ public:
 OpenCVImageItem::OpenCVImageItem(QGraphicsItem *parent)
     :P(parent) {
     item_=new __private::Item(this);
+    item_->setZValue(-999);
     this->setFlag(OpenCVImageItem::ItemClipsChildrenToShape,true);
+    {/*style*/
+        QPalette pal=this->palette();
+        pal.setColor(
+            QPalette::Background,
+            Qt::transparent 
+            );
+        this->setPalette(pal);
+    }
 }
 
 void OpenCVImageItem::paint(

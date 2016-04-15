@@ -134,7 +134,7 @@ extern void run(OpenCVWindow *) try{
 
 }
 catch (const cv::Exception &e) {
-    opencv_exception::error(e,"get opencv exception",__LINE__,__FILE__,__func__);
+    opencv_exception::error(e,"get opencv exception",opencv_line(),opencv_file(),opencv_func());
 }
 
 }

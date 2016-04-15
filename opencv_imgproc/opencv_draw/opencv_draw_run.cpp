@@ -47,7 +47,7 @@ static inline void openCVPaintTest(QImage image,OpenCVWindow * window)try{
         ->setWindowTitle("OpenCV Paint");
 }
 catch (const cv::Exception &e) {
-    opencv_exception::error(e,"get opencv exception",__LINE__,__FILE__,__func__);
+    opencv_exception::error(e,"get opencv exception",opencv_line(),opencv_file(),opencv_func());
 }
 
 static inline void qtPaintTest(QImage image,OpenCVWindow * window){

@@ -57,7 +57,7 @@ extern void run(OpenCVWindow * window) try{
     chart_->setAxisY(chart_->axisY(item_->getScatterSeries()),series_);
 }
 catch (const cv::Exception &e) {
-    opencv_exception::error(e,"get opencv exception",__LINE__,__FILE__,__func__);
+    opencv_exception::error(e,"get opencv exception",opencv_line(),opencv_file(),opencv_func());
 }
 
 }

@@ -7,6 +7,7 @@
 #include <string>
 #include <cstddef>
 #include <cstdint>
+#include <opencv2/opencv.hpp>
 
 namespace cv {
 class Exception;

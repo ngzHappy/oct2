@@ -235,3 +235,67 @@ SUBDIRS += x00000
 opencv_copyMakeBorder.file = $$PWD/opencv_imgproc/opencv_copyMakeBorder/opencv_copyMakeBorder.pro
 opencv_copyMakeBorder.depends += core_utility
 SUBDIRS += opencv_copyMakeBorder
+
+opencv_bilateralFilter.file = $$PWD/opencv_filter/opencv_bilateralFilter/opencv_bilateralFilter.pro
+opencv_bilateralFilter.depends += core_utility
+SUBDIRS += opencv_bilateralFilter
+
+opencv_boxFilter.file = $$PWD/opencv_filter/opencv_boxFilter/opencv_boxFilter.pro
+opencv_boxFilter.depends += core_utility
+SUBDIRS += opencv_boxFilter
+
+opencv_buildPyramid.file = $$PWD/opencv_filter/opencv_buildPyramid/opencv_buildPyramid.pro
+opencv_buildPyramid.depends += core_utility
+SUBDIRS += opencv_buildPyramid
+
+opencv_dilate.file = $$PWD/opencv_filter/opencv_dilate/opencv_dilate.pro
+opencv_dilate.depends += core_utility
+SUBDIRS += opencv_dilate
+
+opencv_erode.file = $$PWD/opencv_filter/opencv_erode/opencv_erode.pro
+opencv_erode.depends += core_utility
+SUBDIRS += opencv_erode
+
+opencv_filter2D.file = $$PWD/opencv_filter/opencv_filter2D/opencv_filter2D.pro
+opencv_filter2D.depends += core_utility
+SUBDIRS += opencv_filter2D
+
+opencv_GaussianBlur.file = $$PWD/opencv_filter/opencv_GaussianBlur/opencv_GaussianBlur.pro
+opencv_GaussianBlur.depends += core_utility
+SUBDIRS += opencv_GaussianBlur
+
+opencv_Laplacian.file = $$PWD/opencv_filter/opencv_Laplacian/opencv_Laplacian.pro
+opencv_Laplacian.depends += core_utility
+SUBDIRS += opencv_Laplacian
+
+opencv_medianBlur.file = $$PWD/opencv_filter/opencv_medianBlur/opencv_medianBlur.pro
+opencv_medianBlur.depends += core_utility
+SUBDIRS += opencv_medianBlur
+
+opencv_morphologyEx.file = $$PWD/opencv_filter/opencv_morphologyEx/opencv_morphologyEx.pro
+opencv_morphologyEx.depends += core_utility
+SUBDIRS += opencv_morphologyEx
+
+opencv_pyrMeanShiftFiltering.file = $$PWD/opencv_filter/opencv_pyrMeanShiftFiltering/opencv_pyrMeanShiftFiltering.pro
+opencv_pyrMeanShiftFiltering.depends += core_utility
+SUBDIRS += opencv_pyrMeanShiftFiltering
+
+opencv_Scharr.file = $$PWD/opencv_filter/opencv_Scharr/opencv_Scharr.pro
+opencv_Scharr.depends += core_utility
+SUBDIRS += opencv_Scharr
+
+opencv_sepFilter2D.file = $$PWD/opencv_filter/opencv_sepFilter2D/opencv_sepFilter2D.pro
+opencv_sepFilter2D.depends += core_utility
+SUBDIRS += opencv_sepFilter2D
+
+opencv_Sobel.file = $$PWD/opencv_filter/opencv_Sobel/opencv_Sobel.pro
+opencv_Sobel.depends += core_utility
+SUBDIRS += opencv_Sobel
+
+opencv_spatialGradient.file = $$PWD/opencv_filter/opencv_spatialGradient/opencv_spatialGradient.pro
+opencv_spatialGradient.depends += core_utility
+SUBDIRS += opencv_spatialGradient
+
+opencv_sqrBoxFilter.file = $$PWD/opencv_filter/opencv_sqrBoxFilter/opencv_sqrBoxFilter.pro
+opencv_sqrBoxFilter.depends += core_utility
+SUBDIRS += opencv_sqrBoxFilter

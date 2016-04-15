@@ -14,7 +14,7 @@ namespace opencv_bilateralFilter {
 
 
 namespace {
-int TitleBar2CVBorderType[]{
+cv::BorderTypes TitleBar2CVBorderType[]{
     cv::BORDER_REFLECT_101,
     cv::BORDER_CONSTANT,
     cv::BORDER_REPLICATE,
@@ -97,7 +97,7 @@ public:
         const int d=d_->value();
         const double s_c=sigmaColor_->value();
         const double s_s=sigmaSpace_->value();
-        const int type=
+        const cv::BorderTypes type=
             TitleBar2CVBorderType[std::min(4,borderType_->currentIndex())];
 
         std::shared_ptr<std::function<QImage(const QImage &)>> run_function
@@ -113,6 +113,7 @@ public:
                 }
                 catch (const cv::Exception &e) {
                     opencv_exception::error(e,"get opencv exception",opencv_line(),opencv_file(),opencv_func());
+                    return image_;
                 }
             }
         }

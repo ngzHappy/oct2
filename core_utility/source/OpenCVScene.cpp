@@ -15,7 +15,7 @@ constexpr float inline middle() { return 0.5; }
 }
 
 OpenCVScene::OpenCVScene(QObject * p):P(p) {
-
+    opencv_items_=std::make_shared<std::set<OpenCVItem*>>();
 }
 
 OpenCVScene::~OpenCVScene() {
@@ -70,7 +70,7 @@ void OpenCVScene::saveAll() {
     if (_dir_name_.isEmpty()) { return; }
 
     int _index_=0;
-    for (auto * i:opencv_items_) {
+    for (auto * i:(*opencv_items_)) {
         if (i==nullptr) { continue; }
         ++_index_;
         QImage _image_;
@@ -83,11 +83,12 @@ void OpenCVScene::saveAll() {
 }
 
 void OpenCVScene::addItem(OpenCVItem *_item_) {
-    opencv_items_.insert(_item_);
+    auto ocvItems=opencv_items_;
+    opencv_items_->insert(_item_);
     connect(_item_,&OpenCVItem::onCloseEventCalled,
-        this,[this](OpenCVItem * _i_) {opencv_items_.erase(_i_); });
+        [ocvItems](OpenCVItem * _i_) {ocvItems->erase(_i_); });
     connect(_item_,&OpenCVItem::destroyed,
-        this,[this,_item_](QObject * ) {opencv_items_.erase(_item_); });
+        [ocvItems,_item_](QObject * ) {ocvItems->erase(_item_);});
     P::addItem(_item_);
 }
 

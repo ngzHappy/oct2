@@ -21,7 +21,7 @@ class CORE_UTILITYSHARED_EXPORT OpenCVScene : public QGraphicsScene {
 private:
     typedef QGraphicsScene P;
 MACRO_PROTECTED:
-    std::set<OpenCVItem *> opencv_items_;
+    std::shared_ptr<std::set<OpenCVItem *>> opencv_items_;
 public:
     explicit OpenCVScene(QObject * /**/=nullptr);
     ~OpenCVScene();

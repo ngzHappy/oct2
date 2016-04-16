@@ -2,7 +2,16 @@
 #include <OpenCVUtility.hpp>
 #include <opencv_application_configuration_file.hpp>
 #include "private/opencv_canny_run_exception.cpp"
+
 namespace  opencv_canny{
+
+namespace {
+class TitleWidget:public QWidget {
+
+public:
+
+};
+}
 
 extern void run(OpenCVWindow * window) try{
 

@@ -32,8 +32,14 @@ MainWindow::MainWindow(QWidget *parent):
     this->setCentralWidget(new __private::CentralWidget(openCVWindow_));
     this->setMinimumSize(512,512);
     this->resize(600,600);
-    QAction * openImage_=menuBar()->addAction(trUtf8(u8"打开图片"));
-    connect(openImage_,&QAction::triggered,this,[this](bool) {openImage(); });
+    {
+        QAction * openImage_=menuBar()->addAction(trUtf8(u8"打开图片"));
+        connect(openImage_,&QAction::triggered,this,[this](bool) {openImage(); });
+    }
+    {
+        QAction * saveImage_=menuBar()->addAction(trUtf8(u8"保存所有图片"));
+        connect(saveImage_,&QAction::triggered,this,[this](bool) {openCVWindow_->saveAll(); });
+    }
 }
 
 void MainWindow::openImage() {
@@ -54,3 +60,4 @@ MainWindow::~MainWindow() {
 
 }
 
+ 

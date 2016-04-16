@@ -227,6 +227,11 @@ OpenCVItem::OpenCVItem(QGraphicsItem *parent)
 OpenCVItem::~OpenCVItem() {
 }
 
+void OpenCVItem::closeEvent(QCloseEvent *event) {
+    onCloseEventCalled(this);
+    P::closeEvent(event);
+}
+
 void OpenCVItem::paint(
         QPainter *painter,
         const QStyleOptionGraphicsItem *option,

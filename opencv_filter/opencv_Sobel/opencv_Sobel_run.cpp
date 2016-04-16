@@ -15,9 +15,25 @@ extern void run(OpenCVWindow * window) try {
     if (images_names.isEmpty()) { return; }
 
     for (const auto & image_name:images_names) {
+        cv::Mat image=OpenCVUtility::tryRead(
+            QImage(image_name).convertToFormat(QImage::Format_Grayscale8)
+            );
         window->insertImage(QImage(image_name))
             ->setWindowTitle(u8"第%1幅图片"_qs.arg(++count_));
-    }
+
+        {
+            cv::Mat dx,dy,ans;
+            cv::Sobel(image,dx,CV_32F,1,0);
+            cv::Sobel(image,dy,CV_32F,0,1);
+
+            window->insertImage(cv::Mat(cv::abs(cv::abs(dx)-cv::abs(dy))))
+                ->setWindowTitle(u8"第%1幅图片结果(dx-dy)"_qs.arg(count_));
+
+            window->insertImage(cv::Mat(cv::abs(cv::abs(dx)+cv::abs(dy))))
+                ->setWindowTitle(u8"第%1幅图片结果(dx+dy)"_qs.arg(count_));
+        }
+
+    }/*~for*/
 
 }
 catch (const cv::Exception &e) {

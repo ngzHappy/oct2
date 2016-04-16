@@ -4,6 +4,7 @@
 #include <QtWidgets/qmenu.h>
 #include <QtWidgets/qgraphicssceneevent.h>
 #include <QtCore/qdebug.h>
+#include <QtWidgets/qfiledialog.h>
 
 namespace {
 namespace __private {
@@ -60,6 +61,34 @@ void OpenCVScene::setImageAlg(const OpenCVImageItem::AlgFunctionType & a) {
         OpenCVImageItem * image_item_=dynamic_cast<OpenCVImageItem *>(i);
         if (image_item_) { image_item_->setAlgFunction(a); }
     }
+}
+
+void OpenCVScene::saveAll() {
+
+    QString _dir_name_;
+    _dir_name_=QFileDialog::getExistingDirectory();
+    if (_dir_name_.isEmpty()) { return; }
+
+    int _index_=0;
+    for (auto * i:opencv_items_) {
+        if (i==nullptr) { continue; }
+        ++_index_;
+        QImage _image_;
+        i->renderTo(_image_);
+        QString _name_=_dir_name_+"/"
+            +QString("%1").arg(_index_,6,16,QChar('0'))
+            +".png";
+        _image_.save(_name_);
+    }
+}
+
+void OpenCVScene::addItem(OpenCVItem *_item_) {
+    opencv_items_.insert(_item_);
+    connect(_item_,&OpenCVItem::onCloseEventCalled,
+        this,[this](OpenCVItem * _i_) {opencv_items_.erase(_i_); });
+    connect(_item_,&OpenCVItem::destroyed,
+        this,[this,_item_](QObject * ) {opencv_items_.erase(_item_); });
+    P::addItem(_item_);
 }
 
 OpenCVChartImage * OpenCVScene::insertChartImage(QImage image_) {

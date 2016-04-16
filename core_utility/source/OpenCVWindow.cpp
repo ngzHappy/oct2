@@ -78,3 +78,7 @@ void OpenCVWindow::resizeEvent(QResizeEvent *event) {
     if (sr__==sr_) { return; }
     scene_->setSceneRect(sr__);
 }
+
+void OpenCVWindow::saveAll(){
+    if (scene_) { scene_->saveAll(); }
+}

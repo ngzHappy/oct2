@@ -41,6 +41,7 @@ public:
     template<typename _U_>OpenCVScatterItem * insertScatter(std::initializer_list<_U_> &&);
     template<typename _U_>OpenCVLineSeriesItem * insertLineSeries(std::initializer_list<_U_> &&);
     void setImageAlg(const std::shared_ptr<const std::function<QImage(const QImage &)>> &);
+    virtual void saveAll();
 protected:
     void resizeEvent(QResizeEvent *event) override;
 };

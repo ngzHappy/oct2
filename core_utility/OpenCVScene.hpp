@@ -14,11 +14,14 @@
 #include "OpenCVLineSeriesItem.hpp"
 #include "OpenCVChartImage.hpp"
 #include "core_utility_global.hpp"
+#include <set>
 
 class CORE_UTILITYSHARED_EXPORT OpenCVScene : public QGraphicsScene {
     Q_OBJECT
 private:
     typedef QGraphicsScene P;
+MACRO_PROTECTED:
+    std::set<OpenCVItem *> opencv_items_;
 public:
     explicit OpenCVScene(QObject * /**/=nullptr);
     ~OpenCVScene();
@@ -30,6 +33,8 @@ public:
     OpenCVChartImage * insertChartImage(QImage);
     template<typename B,typename E>
     OpenCVHistItem * insertHist(B,E);
+    virtual void addItem(OpenCVItem *);
+    virtual void saveAll();
 protected:
     virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent *contextMenuEvent) override;
 private:

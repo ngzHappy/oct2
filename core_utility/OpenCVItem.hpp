@@ -20,9 +20,11 @@ public:
     ~OpenCVItem();
     virtual void renderTo(QImage &)=0;
 protected:
-    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
-    void paint(QPainter *painter,const QStyleOptionGraphicsItem *option,QWidget *widget) override;
-    
+    void mousePressEvent(QGraphicsSceneMouseEvent *) override;
+    void paint(QPainter *painter,const QStyleOptionGraphicsItem *,QWidget *) override;
+    void closeEvent(QCloseEvent *) override;
+signals:
+    void onCloseEventCalled(OpenCVItem*);
 private:
     void _onYChanged();
     void _onXChanged();

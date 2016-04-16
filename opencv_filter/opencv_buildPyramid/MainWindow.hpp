@@ -18,7 +18,7 @@ public:
     ~MainWindow();
 
     OpenCVWindow * getOpenCVWindow()const { return openCVWindow_; }
-
+  
 signals:
 
 public slots:

@@ -66,7 +66,6 @@ public:
         if (i_size.height()<=0) { qDebug()<<"image size is null";return; }
 
         if (super->isAutoFitImageSize()) {
-            qDebug()<<"is auto";
             const QImage & s_image=super->image();
             auto s_size=super->size();
             if ((s_image.width()<=s_size.width())&&

@@ -260,6 +260,7 @@ void create(OpenCVImageItem *  itemWidget) {
 
     if (itemWidget==nullptr) { return; }
     QGraphicsScene * scene_=itemWidget->scene();
+    itemWidget->setAutoFitImageSize(false);
     if (scene_==nullptr) { return; }
     if (itemWidget->getImageItem()==nullptr) { return; }
 

@@ -8,6 +8,7 @@
 #include <functional>
 #include <memory>
 #include <QtGui/qimage.h>
+#include <bitset>
 #include "OpenCVItem.hpp"
 
 class CORE_UTILITYSHARED_EXPORT OpenCVImageItem : public OpenCVItem {
@@ -15,12 +16,19 @@ class CORE_UTILITYSHARED_EXPORT OpenCVImageItem : public OpenCVItem {
     Q_PROPERTY(QImage image READ image WRITE setImage NOTIFY imageChanged)
 public:
     typedef std::shared_ptr< const std::function< QImage(const QImage &) > >  AlgFunctionType;
-private:
+MACRO_PROTECTED:
+    enum:std::int32_t {
+        Image_Auto_Fit_Size,
+        THIS_ENUM_SIZE_,
+    };
     typedef OpenCVItem P;
     QPointer<QGraphicsWidget> item_;
     QImage image_;
     QImage image_input_;
     AlgFunctionType alg_;
+    std::bitset<THIS_ENUM_SIZE_> bits_;
+    bool _getBit(std::int32_t n) const{ return bits_[n]; }
+    void _setBit(std::int32_t n,bool v=true) { bits_.set(n,v); }
 public:
     OpenCVImageItem(QGraphicsItem *parent=nullptr);
     virtual ~OpenCVImageItem();
@@ -35,6 +43,9 @@ public:
     virtual void tryResizeImage();
 
     virtual void saveImage()override;
+    bool isAutoFitImageSize()const { return _getBit(Image_Auto_Fit_Size); }
+    bool autoFitImageSize()const { return isAutoFitImageSize(); }
+    void setAutoFitImageSize(bool =true);
 signals:
     void imageChanged();
 protected:

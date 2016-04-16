@@ -21,7 +21,7 @@ public:
     explicit OpenCVVerticalItems(QGraphicsItem * /*parent*/=nullptr);
     virtual ~OpenCVVerticalItems();
 
-    virtual QGraphicsProxyWidget *addWidget(QWidget *);
+    virtual QGraphicsProxyWidget *addWidget(QWidget *,bool fixedHeight=false,QSize fixedMinSize=QSize(-1,-1));
     virtual void addItem(QGraphicsLayoutItem *p);
 
     void renderTo(QImage &)override;

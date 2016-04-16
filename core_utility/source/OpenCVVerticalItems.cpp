@@ -22,7 +22,7 @@ OpenCVVerticalItems::OpenCVVerticalItems(QGraphicsItem *parent)
         QPalette pal=this->palette();
         pal.setColor(
             QPalette::Background,
-            Qt::transparent 
+            Qt::transparent
             );
         this->setPalette(pal);
     }
@@ -45,7 +45,11 @@ void OpenCVVerticalItems::addItem(QGraphicsLayoutItem *item_){
     this->setMinimumWidth(std::max<double>(_width_,32));
 }
 
-QGraphicsProxyWidget * OpenCVVerticalItems::addWidget(QWidget * p){
+QGraphicsProxyWidget * OpenCVVerticalItems::addWidget(
+        QWidget * p,
+        bool fixedHeight,
+        QSize _fixedSize){
+
     if(p==nullptr){return nullptr;}
     if(this->scene()==nullptr){
         qDebug().noquote()<<__LINE__<<__FILE__<<__func__;
@@ -58,8 +62,25 @@ QGraphicsProxyWidget * OpenCVVerticalItems::addWidget(QWidget * p){
     auto _height_=layout_->preferredHeight();
     auto _width_=layout_->preferredWidth();
     this->resize(_width_,_height_);
-    this->setMinimumHeight(std::max<double>(_height_,32));
-    this->setMinimumWidth(std::max<double>(_width_,32));
+
+    if(_fixedSize.width()>0){
+        this->setMinimumWidth(std::max<double>(_fixedSize.width(),32));
+    }else{
+        this->setMinimumWidth(std::max<double>(_width_,32));
+    }
+
+    if(_fixedSize.height()>0){
+        this->setMinimumHeight(std::max<double>(_fixedSize.height(),32));
+        if(fixedHeight){
+            this->setMaximumHeight(std::max<double>(_fixedSize.height(),32));
+        }
+    }else{
+        this->setMinimumHeight(std::max<double>(_height_,32));
+        if(fixedHeight){
+            this->setMaximumHeight(std::max<double>(_height_,32));
+        }
+    }
+
     return item_;
 }
 

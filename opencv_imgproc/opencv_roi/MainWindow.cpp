@@ -55,6 +55,10 @@ public:
         setLayout(layout_);
         layout_->setSpacing(0);
         layout_->setMargin(0);
+        xPos_.slider->setRange(0,1000);
+        yPos_.slider->setRange(0,1000);
+        width_.slider->setRange(0,1000);
+        height_.slider->setRange(0,1000);
         xPos_.slider->setValue(0);
         yPos_.slider->setValue(0);
         width_.slider->setValue(100);
@@ -81,6 +85,7 @@ public:
             this->setPalette(pal);
         }
         this->setFlag(QGraphicsItem::ItemIsMovable);
+        this->setAutoFillBackground(true);
     }
 
     void setBrush(const QBrush &v) { brush_=v; update(); }
@@ -155,10 +160,7 @@ public:
     void save();
     void open();
 
-    void resetSize(OpenCVImageItem * i) {
-        auto h_=this->height()+i->image().height();
-        auto ih_=i->minimumHeight();
-        i->setMinimumHeight((h_>ih_)?h_:ih_);
+    void resetSize(OpenCVImageItem *i ) {
         titleBar_->xPos_.setRange(0,i->image().width());
         titleBar_->yPos_.setRange(0,i->image().height());
         titleBar_->width_.setRange(1,std::max(1,i->image().width()));
@@ -171,6 +173,7 @@ public:
         rectItem_->setGeometry({ 0,0,100.0f,100.0f });
         rectItem_->setBrush(QColor(200,30,60,130));
         rectItem_->setPen(QPen(QColor(30,50,200,200),2));
+        rectItem_->setZValue(1000);
 
         connect(titleBar_->xPos_.slider,&QSlider::valueChanged,this,[this](int) {setRectPos(); });
         connect(titleBar_->yPos_.slider,&QSlider::valueChanged,this,[this](int) {setRectPos(); });
@@ -185,6 +188,7 @@ public:
         isUpdateTitleBar=true;
         try {
             auto g_=rectItem_->geometry();
+
             if (g_.x()!=titleBar_->xPos_.slider->value()) {
                 titleBar_->xPos_.slider->setValue(qRound(g_.x()));
             }
@@ -264,28 +268,17 @@ void create(OpenCVImageItem *  itemWidget) {
     if (scene_==nullptr) { return; }
     if (itemWidget->getImageItem()==nullptr) { return; }
 
+    OpenCVVerticalItems * vitem = new OpenCVVerticalItems(itemWidget->getImageItem());
     __private::MainWindow * tbar=new __private::MainWindow;
-    auto * dtbar=scene_->addWidget(tbar);
-
+    vitem->addWidget(tbar,true,{399,-1});
     tbar->create(itemWidget);
-
-    QGraphicsLinearLayout * layout_=new QGraphicsLinearLayout(Qt::Vertical);
-    itemWidget->setLayout(layout_);
-
-    layout_->addItem(dtbar);
-
-    itemWidget->getImageItem()->setParentItem(nullptr);
-    itemWidget->getImageItem()->setParent(nullptr);
-    layout_->addItem(itemWidget->getImageItem());
-
-    layout_->addStretch();
-    layout_->setSpacing(0);
-    layout_->setContentsMargins(0,0,0,0);
 
     QObject::connect(itemWidget,&OpenCVImageItem::imageChanged,
         tbar,[itemWidget,tbar]() {tbar->resetSize(itemWidget); }
     );
+
     tbar->resetSize(itemWidget);
+
 }
 
 }

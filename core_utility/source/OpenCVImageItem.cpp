@@ -45,8 +45,10 @@ class Item : public QGraphicsWidget {
     OpenCVImageItem * const super;
     std::shared_ptr<QPixmap> about_to_draw_resize_map_;
 public:
-    Item(OpenCVImageItem * s):QGraphicsWidget(s),super(s) {
-        setAutoFillBackground(true);
+    Item(OpenCVImageItem * s):
+        QGraphicsWidget(s),
+        super(s) {
+        /*setAutoFillBackground(true);*/
         connect(super,&OpenCVImageItem::imageChanged,
             this,[this]() {about_to_draw_resize_map_.reset(); });
     }
@@ -54,14 +56,17 @@ public:
 
     void paint(
         QPainter * p,
-        const QStyleOptionGraphicsItem *,
-        QWidget *) {
+        const QStyleOptionGraphicsItem *a,
+        QWidget *b) {
+
+        QGraphicsWidget::paint(p,a,b);
 
         const QSizeF i_size=super->image().size();
-        if (i_size.width()<=0) { return; }
-        if (i_size.height()<=0) { return; }
+        if (i_size.width()<=0) { qDebug()<<"image size is null"; return; }
+        if (i_size.height()<=0) { qDebug()<<"image size is null";return; }
 
         if (super->isAutoFitImageSize()) {
+            qDebug()<<"is auto";
             const QImage & s_image=super->image();
             auto s_size=super->size();
             if ((s_image.width()<=s_size.width())&&
@@ -80,7 +85,7 @@ public:
                 auto b_size=gen_best_draw_size(s_size,i_size);
 
                 if (bool(about_to_draw_resize_map_)&&
-                    about_to_draw_resize_map_->size()==b_size
+                    (about_to_draw_resize_map_->size()==b_size)
                     ) {
                     this->setPos(
                         (s_size.width()-b_size.width())/2.0,
@@ -120,7 +125,7 @@ OpenCVImageItem::OpenCVImageItem(QGraphicsItem *parent)
     setAutoFitImageSize(true);
     item_=new __private::Item(this);
     item_->setZValue(-999);
-    this->setFlag(OpenCVImageItem::ItemClipsChildrenToShape,true);
+    /*this->setFlag(OpenCVImageItem::ItemClipsChildrenToShape,true);*/
     {/*style*/
         QPalette pal=this->palette();
         pal.setColor(

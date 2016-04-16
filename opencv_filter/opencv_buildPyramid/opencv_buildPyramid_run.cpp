@@ -17,11 +17,15 @@ extern void run(OpenCVWindow * window) try {
     for (const auto & image_name:images_names) {
         QImage image_input(image_name);
         window->insertImage(image_input)
-            ->setWindowTitle(u8"第%1幅图片"_qs.arg(++count_));
+            ->setWindowTitle(u8"原图"_qs);
         std::vector<cv::Mat> ans;
         cv::buildPyramid(
             OpenCVUtility::tryRead(image_input),
             ans,4);
+        for (auto & i:ans) {
+            window->insertImage(std::move(i))
+                ->setWindowTitle(u8"第%1幅图片"_qs.arg(++count_));
+        }
     }
 
 }

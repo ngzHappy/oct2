@@ -13,8 +13,23 @@ extern void run(OpenCVWindow * window) try {
         CoreUtility::getConfigurationFile().getInputImagesNames("images:000001");
 
     for (const auto & image_name:images_names) {
-        window->insertImage(QImage(image_name))
+
+        QImage image_input=QImage(image_name);
+
+        image_input=image_input.convertToFormat(
+            QImage::Format_Grayscale8);
+
+        window->insertImage(image_input)
             ->setWindowTitle(u8"第%1幅图片"_qs.arg(++count_));
+
+        cv::Mat vimage=OpenCVUtility::tryRead(image_input);
+        auto selement=cv::getStructuringElement(cv::MORPH_RECT,{ 5,5 });
+        cv::Mat vans;
+        cv::dilate(vimage,vans,selement);
+        window->insertImage(vans)
+            ->setWindowTitle(u8"第%1幅图片结果"_qs.arg(count_));
+        window->insertImage(cv::Mat(cv::abs(vimage-vans)))
+            ->setWindowTitle(u8"第%1幅图片结果-原图"_qs.arg(count_));
     }
 
 

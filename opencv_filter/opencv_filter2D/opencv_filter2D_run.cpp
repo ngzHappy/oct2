@@ -13,8 +13,25 @@ extern void run(OpenCVWindow * window) try {
         CoreUtility::getConfigurationFile().getInputImagesNames("images:000001");
 
     for (const auto & image_name:images_names) {
-        window->insertImage(QImage(image_name))
+        QImage input_image=QImage(image_name);
+
+        cv::Mat core(3,3,CV_32FC1,cv::Scalar(1));
+        {
+            float * varData=core.ptr<float>();
+            varData[4]=-8;
+        }
+
+        cv::Mat ans;
+        cv::filter2D(
+            OpenCVUtility::tryRead(input_image),
+            ans,CV_32F,
+            core);
+
+        window->insertImage(input_image)
             ->setWindowTitle(u8"第%1幅图片"_qs.arg(++count_));
+        window->insertImage(ans)
+            ->setWindowTitle(u8"第%1幅图片结果"_qs.arg(count_));
+
     }
 
 }

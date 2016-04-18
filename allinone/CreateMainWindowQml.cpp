@@ -238,6 +238,11 @@ Rectangle {
          /*name??? 因为有后缀,这里不跨平台 */
          QString name_ = i.completeBaseName();
          if (name_==app_name_) { continue; }
+#if defined(Q_OS_WIN32)
+#else
+         if (name_.startsWith("libcore_utilityd.so")) { continue; }
+         if (name_.startsWith("libcore_utility.so")) { continue; }
+#endif
          /*on windows it's ???.exe ???.bat ...but on linux it will be ??? */
          name_=i.fileName();
          ans_.insert({ std::move(name_),arg_ });

@@ -1,3 +1,9 @@
+include($$PWD/core_utility.pri)
+include($$PWD/opencv3.pri)
+include($$PWD/quazip/quazip.pri)
+include($$PWD/quazip/zlib.pri)
+include($$PWD/lua/lua.pri)
+include($$PWD/boost/boost.pri)
 
 QT += gui
 QT += core
@@ -72,12 +78,6 @@ HEADERS += $$PWD/boost/PartBoost.hpp
 HEADERS += $$PWD/quazip/GZipCompressor.hpp
 SOURCES += $$PWD/quazip/GZipCompressor.cpp
 
-include($$PWD/core_utility.pri)
-include($$PWD/opencv3.pri)
-include($$PWD/quazip/quazip.pri)
-include($$PWD/quazip/zlib.pri)
-include($$PWD/lua/lua.pri)
-include($$PWD/boost/boost.pri)
 DESTDIR = $$OUTPWD
 
 DISTFILES += $$PWD/../Images/000000.jpg

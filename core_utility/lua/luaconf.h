@@ -230,11 +230,12 @@
 ** LUA_BUILD_AS_DLL to get it).
 */
 #if defined(LUA_BUILD_AS_DLL)	/* { */
+#include <QtCore/qglobal.h>
 
 #if defined(LUA_CORE) || defined(LUA_LIB)	/* { */
-#define LUA_API __declspec(dllexport)
+#define LUA_API  Q_DECL_EXPORT
 #else						/* }{ */
-#define LUA_API __declspec(dllimport)
+#define LUA_API  Q_DECL_IMPORT
 #endif						/* } */
 
 #else				/* }{ */

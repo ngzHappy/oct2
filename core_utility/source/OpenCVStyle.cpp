@@ -1,6 +1,6 @@
 ﻿#undef MACRO_PROTECTED
 #define MACRO_PROTECTED public
-#include "../OpenCvStyle.hpp"
+#include "../OpenCVStyle.hpp"
 #include <QtCore/qdebug.h>
 
 OpenCVStyle::OpenCVStyle(QStyle * parent)

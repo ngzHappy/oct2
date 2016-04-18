@@ -55,7 +55,7 @@ public:
 #include "OpenCVScene.hpp"
 #include "OpenCVItem.hpp"
 #include "OpenCVWindow.hpp"
-#include "OpenCvStyle.hpp"
+#include "OpenCVStyle.hpp"
 #include "OpenCVHistItem.hpp"
 #include "OpenCVScatterItem.hpp"
 #include "OpenCVLineSeriesItem.hpp"

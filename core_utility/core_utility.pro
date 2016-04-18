@@ -1,9 +1,3 @@
-include($$PWD/core_utility.pri)
-include($$PWD/opencv3.pri)
-include($$PWD/quazip/quazip.pri)
-include($$PWD/quazip/zlib.pri)
-include($$PWD/lua/lua.pri)
-include($$PWD/boost/boost.pri)
 
 QT += gui
 QT += core
@@ -16,9 +10,9 @@ QT += widgets_private
 QT += charts_private
 
 CONFIG(debug,debug|release){
-TARGET = core_utilityd
+    TARGET = core_utilityd
 }else{
-TARGET = core_utility
+    TARGET = core_utility
 }
 
 TEMPLATE = lib
@@ -78,8 +72,6 @@ HEADERS += $$PWD/boost/PartBoost.hpp
 HEADERS += $$PWD/quazip/GZipCompressor.hpp
 SOURCES += $$PWD/quazip/GZipCompressor.cpp
 
-DESTDIR = $$OUTPWD
-
 DISTFILES += $$PWD/../Images/000000.jpg
 DISTFILES += $$PWD/../Images/030000.png
 DISTFILES += $$PWD/../Images/030001.png
@@ -123,6 +115,13 @@ DISTFILES += $$PWD/../Images/000009.pbm
 
 RESOURCES += imageResource.qrc
 
+include($$PWD/core_utility.pri)
+include($$PWD/opencv3.pri)
+include($$PWD/quazip/quazip.pri)
+include($$PWD/quazip/zlib.pri)
+include($$PWD/lua/lua.pri)
+include($$PWD/boost/boost.pri)
+
 !win32 {
     QMAKE_LFLAGS += -Wl,-rpath .
 }
@@ -133,3 +132,5 @@ PRECOMPILED_HEADER  += $$PWD/private/_msvc_core_utility_prebuild.hpp
 }else{
 PRECOMPILED_HEADER  += $$PWD/private/_core_utility_prebuild.hpp
 }
+
+

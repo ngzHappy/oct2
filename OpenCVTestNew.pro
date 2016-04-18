@@ -1,4 +1,5 @@
 TEMPLATE = subdirs
+CONFIG -= ordered
 
 #http://heanet.dl.sourceforge.net/project/opencvlibrary
 #http://heanet.dl.sourceforge.net/project/opencvlibrary/opencv-win/3.1.0/opencv-3.1.0.exe

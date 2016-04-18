@@ -7,7 +7,7 @@
 #include <string>
 #include <cstddef>
 #include <cstdint>
-#include <opencv2/core.hpp>
+#include <opencv2/opencv.hpp>
 
 #define opencv_line() __LINE__
 #define opencv_file() __FILE__

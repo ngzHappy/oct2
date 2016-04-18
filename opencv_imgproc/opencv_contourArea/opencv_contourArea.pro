@@ -5,7 +5,6 @@ QT += core
 QT += widgets
 QT += charts
 
-CONFIG += 
 
 TARGET = opencv_contourArea
 CONFIG += console

@@ -85,7 +85,45 @@ LIBS += -lopencv_highgui310
 }##~win32-msvc*
 
 linux-g++*{
-	
+
+CONFIG(debug,debug|release){
+LIBS += -lopencv_calib3d
+LIBS += -lopencv_core
+LIBS += -lopencv_features2d
+LIBS += -lopencv_flann
+LIBS += -lopencv_imgcodecs
+LIBS += -lopencv_imgproc
+LIBS += -lopencv_ml
+LIBS += -lopencv_objdetect
+LIBS += -lopencv_photo
+LIBS += -lopencv_shape
+LIBS += -lopencv_stitching
+LIBS += -lopencv_superres
+LIBS += -lopencv_ts
+LIBS += -lopencv_video
+LIBS += -lopencv_videoio
+LIBS += -lopencv_videostab
+LIBS += -lopencv_highgui
+}else{
+LIBS += -lopencv_calib3d
+LIBS += -lopencv_core
+LIBS += -lopencv_features2d
+LIBS += -lopencv_flann
+LIBS += -lopencv_imgcodecs
+LIBS += -lopencv_imgproc
+LIBS += -lopencv_ml
+LIBS += -lopencv_objdetect
+LIBS += -lopencv_photo
+LIBS += -lopencv_shape
+LIBS += -lopencv_stitching
+LIBS += -lopencv_superres
+LIBS += -lopencv_ts3
+LIBS += -lopencv_video
+LIBS += -lopencv_videoio
+LIBS += -lopencv_videostab
+LIBS += -lopencv_highgui
+}
+
 }##~linux-g++*
 
 

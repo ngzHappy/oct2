@@ -89,7 +89,9 @@ void init(
 
             auto last_pos_=application_path.begin()+last_+1;
             if (last_pos_>=application_path.end()) {
-
+                std::cout<<"application name :"<<application_path
+                    <<" can not find / \\ "<<std::endl; return;
+                return;
             }
 
             {

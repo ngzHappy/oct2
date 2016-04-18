@@ -299,3 +299,4 @@ SUBDIRS += opencv_spatialGradient
 opencv_sqrBoxFilter.file = $$PWD/opencv_filter/opencv_sqrBoxFilter/opencv_sqrBoxFilter.pro
 opencv_sqrBoxFilter.depends += core_utility
 SUBDIRS += opencv_sqrBoxFilter
+

@@ -1,5 +1,6 @@
 
 win32-g++{
+
 ##STRSAFE_NO_DEPRECATE
 CONFIG(debug,debug|release){
 LIBS += -lopencv_calib3d310d
@@ -39,7 +40,7 @@ LIBS += -lopencv_videostab310
 LIBS += -lopencv_highgui310
 }
 
-}
+}##~win32-g++
 
 win32-msvc*{
 
@@ -81,7 +82,10 @@ LIBS += -lopencv_videostab310
 LIBS += -lopencv_highgui310
 }
 
-}
+}##~win32-msvc*
 
+linux-g++*{
+	
+}##~linux-g++*
 
 

@@ -6,7 +6,6 @@ MouseArea {
     id:rootMouseArea;
     hoverEnabled: true;
     height: 32;
-    //width: parent.width;
     acceptedButtons: Qt.LeftButton;
     property string projectName: "";
     property alias startString: startStringID.text;
@@ -28,7 +27,7 @@ MouseArea {
         Row {
             x:16;
             height:thisRect.height;
-            Text {
+            Label {
                 id:projectNameID;
                 width: 300;
                 height: rootMouseArea.height;

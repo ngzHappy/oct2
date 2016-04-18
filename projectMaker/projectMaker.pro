@@ -1,7 +1,6 @@
 QT -= core
 QT -= gui
 
-CONFIG += c++14
 
 TARGET = projectMaker
 CONFIG += console

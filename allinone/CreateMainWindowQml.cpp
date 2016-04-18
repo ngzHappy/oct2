@@ -54,7 +54,7 @@ CreateMainWindowQml::CreateMainWindowQml()
     QString varFileName=QDir::cleanPath(qApp->applicationDirPath()+"/AllInOneMainWindow.qml");
     QFile varFile(varFileName);
     varFile.open(QIODevice::WriteOnly|QIODevice::Text);
-    
+
     auto configure=__private::gen_configure();
     {/*设置保存的arg*/
         const auto oldConfigure=__private::gen_old_configure();
@@ -92,7 +92,7 @@ CreateMainWindowQml::CreateMainWindowQml()
 
  namespace __private {
  static void save_AllInOneMainWindowQml(const std::list<std::pair<QString,QString>>& data) {
-     
+
      if ( data.empty()  ) {
          QuaZip zip(qApp->applicationDirPath()+"/all_in_one.zip");
          if (zip.open(QuaZip::mdCreate)) {
@@ -168,7 +168,7 @@ CreateMainWindowQml::CreateMainWindowQml()
      const std::map<QString,QString>& configure) {
      QTextStream stream_(&file);
      stream_.setCodec(QTextCodec::codecForName("UTF-8"));
-     
+
      stream_<<u8R"_!!_(/*qml main window*/
 /*
 此文件由程序生成
@@ -235,8 +235,11 @@ Rectangle {
      dir.setFilter(QDir::Executable|QDir::Files);
      auto info=dir.entryInfoList();
      for (const auto & i:info) {
+         /*name??? 因为有后缀,这里不跨平台 */
          QString name_ = i.completeBaseName();
          if (name_==app_name_) { continue; }
+         /*on windows it's ???.exe ???.bat ...but on linux it will be ??? */
+         name_=i.fileName();
          ans_.insert({ std::move(name_),arg_ });
      }
 
@@ -261,19 +264,19 @@ Rectangle {
      bool isExist=false;
      {
          QFileInfo info(dirPath_+"/all_in_one.zip");
-         if (info.exists()) { 
+         if (info.exists()) {
              isExist=
                  LuaUtility::loadFile(L,dirPath_+"/all_in_one.zip","all_in_one.lua")>0;
          }
      }
      if(isExist==false){
          QFileInfo info(dirPath_+"/all_in_one.lua");
-         if (info.exists()) { 
+         if (info.exists()) {
              isExist=
                  LuaUtility::loadFile(L,dirPath_+"/all_in_one.lua","all_in_one.lua")>0;
          }
      }
-     
+
      if (isExist==false) { return{}; }
 
      if (0==lua_pcall(L,0,LUA_MULTRET,-1)) {

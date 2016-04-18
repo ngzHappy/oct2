@@ -12,7 +12,6 @@ QT += core
 QT += widgets
 QT += charts
 
-CONFIG += c++14
 
 TARGET = _replace_first_window_replace_
 CONFIG += console

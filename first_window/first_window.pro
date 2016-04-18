@@ -3,7 +3,6 @@ QT += core
 QT += widgets
 QT += charts
 
-CONFIG += c++14
 
 TARGET = first_window
 CONFIG += console

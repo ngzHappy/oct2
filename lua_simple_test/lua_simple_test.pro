@@ -3,7 +3,6 @@ QT += core
 QT += widgets
 QT += charts
 
-CONFIG += c++14
 
 TARGET = lua_simple_test
 CONFIG += console

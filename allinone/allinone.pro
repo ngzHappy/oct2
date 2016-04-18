@@ -7,8 +7,6 @@ QT += charts
 QT += qml
 QT += quick
 
-CONFIG += c++14
-
 TARGET = allinone
 CONFIG += console
 

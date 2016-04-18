@@ -5,7 +5,6 @@ QT += core
 QT += widgets
 QT += charts
 
-CONFIG += c++14
 
 TARGET = x00000
 CONFIG += console

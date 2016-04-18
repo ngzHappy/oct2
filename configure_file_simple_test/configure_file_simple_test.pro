@@ -5,8 +5,6 @@ QT += core
 QT += widgets
 QT += charts
 
-CONFIG += c++14
-
 TARGET = configure_file_simple_test
 CONFIG += console
 

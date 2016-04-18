@@ -5,7 +5,6 @@ QT += core
 QT += widgets
 QT += charts
 
-CONFIG += c++14
 
 TARGET = first_image_show
 CONFIG += console

@@ -1,9 +1,5 @@
+include($$PWD/cplusplus_configure.pri)
 
-CONFIG(debug,debug|release){
-
-}else{
-DEFINES *= NDEBUG
-}
 
 INCLUDEPATH += $$PWD
 

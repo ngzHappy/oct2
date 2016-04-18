@@ -67,6 +67,7 @@ void init(
     const char * _a_lua_file_name) {
 
     std::string _v_build_path;
+    std::string var_app_name_;
 
     luaL_dostring(_a_this->L__,"app=nil");
     luaL_dostring(_a_this->L__,"application=nil");
@@ -85,9 +86,22 @@ void init(
                 std::cout<<"application path :"<<application_path
                     <<" can not find / \\ "<<std::endl; return;
             }
-            application_path=std::string(
-                application_path.begin(),
-                application_path.begin()+last_);
+
+            auto last_pos_=application_path.begin()+last_+1;
+            if (last_pos_>=application_path.end()) {
+
+            }
+
+            {
+                auto tmp_application_path=std::string(
+                    application_path.begin(),
+                    application_path.begin()+last_);
+                var_app_name_=std::string(
+                    last_pos_,application_path.end());
+                application_path=std::move(tmp_application_path);
+            }
+
+            if (var_app_name_.empty()) { std::cout<<"app name empty ??"<<std::endl; return; }
             if (application_path.empty()) { std::cout<<"app empty ??"<<std::endl; return; }
         }
 
@@ -111,6 +125,11 @@ void init(
 
             lua_this_file_name_=_a_lua_file_name+std::string(_app);
             file_name_=lua_this_file_name_;
+
+            /*配置文件名称不可能与应用程序名字相同*/
+            if (var_app_name_==file_name_) {
+                continue;
+            }
 
             std::ifstream ifs(file_name_,std::ios::in);
             if (false==ifs.is_open()) {
@@ -385,10 +404,11 @@ OpenCVApplicationConfigurationFile::OpenCVApplicationConfigurationFile(
     QByteArray ___1,
     QByteArray ___2,
     QByteArray ___3) {
-    ___1=___1.trimmed();
-    ___2=___2.trimmed();
-    ___3=___3.trimmed();
     if (___0) {
+        __private::LUAStateLock _lock(___0.get());
+        ___1=___1.trimmed();
+        ___2=___2.trimmed();
+        ___3=___3.trimmed();
         L__=___0.get();
         _m_manager=std::move(___0);
         char * _a_argv[]{ const_cast<char *>(___1.constData()) };
@@ -408,6 +428,7 @@ OpenCVApplicationConfigurationFile::OpenCVApplicationConfigurationFile(
     else {
         _T_S::L_=LuaUtility::createLuaState();
         L__=_T_S::L_.get();
+        __private::LUAStateLock _lock(L__);
         char * _a_argv[]{ const_cast<char *>(_a_arg.constData()) };
         __private::init(
             this,1,_a_argv,

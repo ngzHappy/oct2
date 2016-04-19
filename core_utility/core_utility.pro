@@ -133,4 +133,4 @@ PRECOMPILED_HEADER  += $$PWD/private/_msvc_core_utility_prebuild.hpp
 PRECOMPILED_HEADER  += $$PWD/private/_core_utility_prebuild.hpp
 }
 
-
+DESTDIR = $$OUTPWD

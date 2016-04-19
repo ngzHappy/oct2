@@ -2,16 +2,27 @@
 #define MACRO_PROTECTED public
 #define LUA_LIB
 
+#include <QtCore/qcoreapplication.h>
 #include "../opencv_application_configuration_file.hpp"
 #include "../lua/lua.hpp"
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
 #include <string>
 #include <QtCore/qdebug.h>
 #include "../core_utility.hpp"
 
 /*静态数据*/
 std::shared_ptr<lua_State> _STATIC_OpenCVApplicationConfigurationFile::L_;
+namespace {
+bool __add_qt_remove_function_=[]() {
+    qAddPostRoutine([]() {
+        _STATIC_OpenCVApplicationConfigurationFile::L_.reset();
+    });
+    return bool(std::rand()>3);
+}();
+}
+
 
 namespace {
 namespace __private {

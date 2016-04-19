@@ -28,7 +28,7 @@ namespace __private {
 
 std::shared_ptr<lua_State> createLuaState() {
     lua_State * L=luaL_newstate();
-    L->userCount=1;
+    L->cpp_user_data_->userCount=1;
 
     /*open all library*/
     luaL_openlibs(L);
@@ -36,18 +36,24 @@ std::shared_ptr<lua_State> createLuaState() {
 
     return std::shared_ptr<lua_State>(L,[](lua_State * L_) {
         if (L_==nullptr) { return; }
-        --(L_->userCount);
-        if (L_->userCount<=0) { lua_close(L_); }
+        auto __lock__data__=L_->cpp_user_data_->mutex();
+        std::unique_lock<std::recursive_mutex>  _lock_(*(__lock__data__));
+        --(L_->cpp_user_data_->userCount);
+        if (L_->cpp_user_data_->userCount<=0) { lua_close(L_); }
     });
 }
 
 std::shared_ptr<lua_State> createLuaState(lua_State * L) {
     if (L==nullptr) { return nullptr; }
-    ++(L->userCount);
+    auto __lock__data__=L->cpp_user_data_->mutex();
+    std::unique_lock<std::recursive_mutex>  _lock_(*(__lock__data__));
+    ++(L->cpp_user_data_->userCount);
     return std::shared_ptr<lua_State>(L,[](lua_State * L_) {
         if (L_==nullptr) { return; }
-        --(L_->userCount);
-        if (L_->userCount<=0) { lua_close(L_); }
+        auto __lock__data__=L_->cpp_user_data_->mutex();
+        std::unique_lock<std::recursive_mutex>  _lock_(*(__lock__data__));
+        --(L_->cpp_user_data_->userCount);
+        if (L_->cpp_user_data_->userCount<=0) { lua_close(L_); }
     });
 }
 

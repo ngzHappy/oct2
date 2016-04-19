@@ -21,6 +21,8 @@ int main(int argc, char *argv[])try
     luaL_dostring(L,"return a[1]");
     std::cout <<std::boolalpha<< bool(lua_isnumber(L,-1))<<std::endl;
 
+    lua_newthread(L);
+
     return app.exec();
 
 }

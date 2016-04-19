@@ -61,5 +61,6 @@ SOURCES += $$PWD/lua_lutf8lib.cpp
 SOURCES += $$PWD/lua_lvm.cpp
 SOURCES += $$PWD/lua_lzio.cpp
 
-
+HEADERS +=$$PWD/lua_user.hpp
+SOURCES += $$PWD/lua_user.cpp
 

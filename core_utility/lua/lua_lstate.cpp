@@ -299,7 +299,6 @@ LUA_API lua_State *lua_newstate (lua_Alloc f, void *ud) {
   LG *l = cast(LG *, (*f)(ud, NULL, LUA_TTHREAD, sizeof(LG)));
   if (l == NULL) return NULL;
   L = &l->l.l;
-  L->userCount = 0;
   g = &l->g;
   L->next = NULL;
   L->tt = LUA_TTHREAD;

@@ -65,11 +65,11 @@ typedef unsigned char lu_byte;
 typedef LUAI_USER_ALIGNMENT_T L_Umaxalign;
 #else
 typedef union {
-  lua_Number n;
-  double u;
-  void *s;
-  lua_Integer i;
-  long l;
+    lua_Number n;
+    double u;
+    void *s;
+    lua_Integer i;
+    long l;
 } L_Umaxalign;
 #endif
 
@@ -205,14 +205,22 @@ typedef unsigned long Instruction;
 #define LUA_MINBUFFER	32
 #endif
 
+namespace __private__lua {
+extern void _lua_lock(lua_State *);
+extern void _lua_unlock(lua_State *);
+extern void _luai_userstateopen(lua_State *);
+extern void _luai_userstateclose(lua_State *);
+extern void _luai_userstatethread(lua_State *,lua_State *);
+extern void _luai_userstatefree(lua_State *,lua_State *);
+}
 
 /*
 ** macros that are executed whenever program enters the Lua core
 ** ('lua_lock') and leaves the core ('lua_unlock')
 */
 #if !defined(lua_lock)
-#define lua_lock(L)	((void) 0)
-#define lua_unlock(L)	((void) 0)
+#define lua_lock(L)	  (__private__lua::_lua_lock(L))
+#define lua_unlock(L) (__private__lua::_lua_unlock(L))
 #endif
 
 /*
@@ -230,19 +238,19 @@ typedef unsigned long Instruction;
 ** created/deleted/resumed/yielded.
 */
 #if !defined(luai_userstateopen)
-#define luai_userstateopen(L)		((void)L)
+#define luai_userstateopen(L)		( __private__lua::_luai_userstateopen(L) )
 #endif
 
 #if !defined(luai_userstateclose)
-#define luai_userstateclose(L)		((void)L)
+#define luai_userstateclose(L)		( __private__lua::_luai_userstateclose(L) )
 #endif
 
 #if !defined(luai_userstatethread)
-#define luai_userstatethread(L,L1)	((void)L)
+#define luai_userstatethread(L,L1)	( __private__lua::_luai_userstatethread(L,L1) )
 #endif
 
 #if !defined(luai_userstatefree)
-#define luai_userstatefree(L,L1)	((void)L)
+#define luai_userstatefree(L,L1)	( __private__lua::_luai_userstatefree(L,L1) )
 #endif
 
 #if !defined(luai_userstateresume)

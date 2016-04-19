@@ -8,7 +8,7 @@
 #define lstate_h
 
 #include "lua.h"
-
+#include "lua_user.hpp"
 #include "lobject.h"
 #include "ltm.h"
 #include "lzio.h"
@@ -143,7 +143,6 @@ typedef struct global_State {
   TString *strcache[STRCACHE_N][STRCACHE_M];  /* cache for strings in API */
 } global_State;
 
-
 /*
 ** 'per thread' state
 */
@@ -172,7 +171,9 @@ public:
   unsigned short nCcalls;  /* number of nested C calls */
   lu_byte hookmask;
   lu_byte allowhook;
-  int userCount ;
+  /*my defined data*/
+  
+  __private__lua::LuaUserData * cpp_user_data_;
 };
 
 

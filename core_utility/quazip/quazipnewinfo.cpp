@@ -1,4 +1,4 @@
-/*
+﻿/*
 Copyright (C) 2005-2014 Sergey A. Tachenov
 
 This file is part of QuaZIP.
@@ -80,6 +80,20 @@ QuaZipNewInfo::QuaZipNewInfo(const QString& name):
   name(name), dateTime(QDateTime::currentDateTime()), internalAttr(0), externalAttr(0),
   uncompressedSize(0)
 {
+    const static auto permissions__default__=
+                QFileDevice::ReadOwner|
+                QFileDevice::WriteOwner|
+                QFileDevice::ExeOwner|
+                QFileDevice::ReadUser|
+                QFileDevice::WriteUser|
+                QFileDevice::ExeUser|
+                QFileDevice::ReadGroup|
+                QFileDevice::WriteGroup|
+                QFileDevice::ExeGroup|
+                QFileDevice::ReadOther|
+                QFileDevice::WriteOther|
+                QFileDevice::ExeOther;
+    setPermissions(permissions__default__);
 }
 
 QuaZipNewInfo::QuaZipNewInfo(const QString& name, const QString& file):

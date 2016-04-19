@@ -26,6 +26,10 @@ SUBDIRS += projectMaker
 SUBDIRS += opencv_tool/image_rand_draw
 SUBDIRS += setgetutility
 
+guiprojectmaker.file =$$PWD/guiprojectmaker/guiprojectmaker.pro
+guiprojectmaker.depends+=projectMaker
+SUBDIRS+=guiprojectmaker
+
 core_utility.file = $$PWD/core_utility/core_utility.pro
 SUBDIRS += core_utility
 
@@ -300,4 +304,3 @@ SUBDIRS += opencv_spatialGradient
 opencv_sqrBoxFilter.file = $$PWD/opencv_filter/opencv_sqrBoxFilter/opencv_sqrBoxFilter.pro
 opencv_sqrBoxFilter.depends += core_utility
 SUBDIRS += opencv_sqrBoxFilter
-

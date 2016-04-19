@@ -5,6 +5,11 @@
 #include <iostream>
 #include <list>
 
+#if defined(QT_CORE_LIB)
+#include <QtCore/qdir.h>
+#include <QtCore/qstring.h>
+#endif
+
 extern const char *_lua;
 extern const char *_pro;
 extern const char *_main_cpp;
@@ -372,7 +377,7 @@ void write_run_cpp(const ArgvPack & pack) {
             ( pack.projectName()+"_run_" )
             );
     }
-    { 
+    {
         const std::string replace_text_("_replace_project_name_run__replace_");
         about_to_write_.replace(
             about_to_write_.find(replace_text_),
@@ -426,6 +431,16 @@ int tryMakeDir(const ArgvPack & pack) {
             +"/"+pack.projectName()+".pro";
     }
 
+#if defined(QT_CORE_LIB)
+    QDir var_dir_(QString::fromLocal8Bit(
+        sudirs_project_dir_.c_str(),
+        static_cast<std::int32_t>(sudirs_project_dir_.size())));
+    for (const std::string & dir_:try_make_dirs) {
+        QString dir_name_=QString::fromLocal8Bit(dir_.c_str(),
+            static_cast<std::int32_t>(dir_.size()));
+        var_dir_.mkdir(dir_name_);
+    }
+#else
 #if defined(_WIN32)
     for (const std::string & dir_:try_make_dirs) {
         std::string command=std::string("mkdir ")+"\""+dir_+"\"";
@@ -436,6 +451,7 @@ int tryMakeDir(const ArgvPack & pack) {
         std::string command=std::string("mkdir ")+"\""+dir_+"\"";
         system(command.c_str());
     }
+#endif
 #endif
 
     std::ofstream ofs(output_project_name,std::ios::out);

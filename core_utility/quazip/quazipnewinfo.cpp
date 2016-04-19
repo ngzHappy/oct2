@@ -77,9 +77,13 @@ QuaZipNewInfo::QuaZipNewInfo(const QuaZipFileInfo64 &existing)
 }
 
 QuaZipNewInfo::QuaZipNewInfo(const QString& name):
-  name(name), dateTime(QDateTime::currentDateTime()), internalAttr(0), externalAttr(0),
+  name(name), 
+  dateTime(QDateTime::currentDateTime()), 
+  internalAttr(0), 
+  externalAttr(0),
   uncompressedSize(0)
 {
+    /*默认给所有权限*/
     const static auto permissions__default__=
                 QFileDevice::ReadOwner|
                 QFileDevice::WriteOwner|

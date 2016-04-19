@@ -16,6 +16,14 @@ extern void run(OpenCVWindow * window) try {
         QImage imageInput=QImage(image_name);
         window->insertImage(imageInput)
             ->setWindowTitle(u8"第%1幅图片"_qs.arg(++count_));
+
+        cv::Mat image=OpenCVUtility::tryRead(imageInput);
+        cv::Mat ans;
+        cv::resize(image,ans,{},
+            0.5+((rand()%200)/200.0),
+            0.5+((rand()%200)/200.0));
+        window->insertImage(ans)
+            ->setWindowTitle(u8"第%1幅图片结果"_qs.arg(count_));
     }
 
 }

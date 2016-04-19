@@ -10,12 +10,13 @@ class LuaUserData {
     
 public:
     LuaUserData();
+    LuaUserData(const std::shared_ptr<std::recursive_mutex> &);
     ~LuaUserData();
 
     void lock() { mutex_->lock();}
     void unlock() {mutex_->unlock();}
     std::shared_ptr<std::recursive_mutex> mutex() const { return mutex_; }
-    int userCount{ 0 };
+    std::shared_ptr<int> userCount ;
 };
 }
 

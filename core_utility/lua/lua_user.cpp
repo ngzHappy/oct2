@@ -1,4 +1,5 @@
-﻿#define LUA_LIB
+﻿//#define DEBUG_THIS_FILE
+#define LUA_LIB
 #include "lua_user.hpp"
 #include "lstate.h"
 #include "llimits.h"
@@ -15,6 +16,18 @@ static int test_count_=0;
 
 LuaUserData::LuaUserData(){
     mutex_=std::make_shared<std::recursive_mutex>();
+    userCount=std::make_shared<int>(0);
+#if defined(DEBUG_THIS_FILE)
+    std::cout<<"??test"<<test_count_<<std::endl;
+    ++test_count_;
+#endif
+}
+
+LuaUserData::LuaUserData(
+    const std::shared_ptr<std::recursive_mutex> &u
+) {
+    mutex_=u;
+    userCount=std::make_shared<int>(0);
 #if defined(DEBUG_THIS_FILE)
     std::cout<<"??test"<<test_count_<<std::endl;
     ++test_count_;
@@ -37,15 +50,15 @@ extern void _lua_unlock(lua_State *L) {
 }
 
 extern void _luai_userstatethread(
-    lua_State *,
+    lua_State *L,
     lua_State *L1){
-    L1->cpp_user_data_=new LuaUserData;
+    L1->cpp_user_data_=new LuaUserData(L->cpp_user_data_->mutex());
 }
 
 extern void _luai_userstatefree(
     lua_State *,
     lua_State *L1) {
-    _luai_userstateclose(L1);
+    delete L1->cpp_user_data_;
 }
 
 extern void _luai_userstateopen(lua_State *L) {

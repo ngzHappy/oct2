@@ -71,7 +71,18 @@ int main(int argc, char *argv[])try
 
             QuaZipFile outFile(&zip);
             QuaZipNewInfo info(file_name_);
-            info.setPermissions(file_.permissions());
+            info.setPermissions(QFileDevice::ReadOwner|
+                                QFileDevice::WriteOwner|
+                                QFileDevice::ExeOwner|
+                                QFileDevice::ReadUser|
+                                QFileDevice::WriteUser|
+                                QFileDevice::ExeUser|
+                                QFileDevice::ReadGroup|
+                                QFileDevice::WriteGroup|
+                                QFileDevice::ExeGroup|
+                                QFileDevice::ReadOther|
+                                QFileDevice::WriteOther|
+                                QFileDevice::ExeOther);
             outFile.open(QIODevice::WriteOnly,info );
 
             outFile.write( file_.readAll() );

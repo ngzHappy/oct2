@@ -304,3 +304,19 @@ SUBDIRS += opencv_spatialGradient
 opencv_sqrBoxFilter.file = $$PWD/opencv_filter/opencv_sqrBoxFilter/opencv_sqrBoxFilter.pro
 opencv_sqrBoxFilter.depends += core_utility
 SUBDIRS += opencv_sqrBoxFilter
+
+opencv_warpPerspective.file = $$PWD/opencv_image_transformations/opencv_warpPerspective/opencv_warpPerspective.pro
+opencv_warpPerspective.depends += core_utility
+SUBDIRS += opencv_warpPerspective
+
+opencv_remap.file = $$PWD/opencv_image_transformations/opencv_remap/opencv_remap.pro
+opencv_remap.depends += core_utility
+SUBDIRS += opencv_remap
+
+opencv_resize.file = $$PWD/opencv_image_transformations/opencv_resize/opencv_resize.pro
+opencv_resize.depends += core_utility
+SUBDIRS += opencv_resize
+
+opencv_warpAffine.file = $$PWD/opencv_image_transformations/opencv_warpAffine/opencv_warpAffine.pro
+opencv_warpAffine.depends += core_utility
+SUBDIRS += opencv_warpAffine

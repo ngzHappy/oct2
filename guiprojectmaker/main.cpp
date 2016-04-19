@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
     MainWindow *window = new MainWindow;
     window->setAttribute(Qt::WA_DeleteOnClose);
     window->setWindowTitle(QObject::trUtf8(u8"项目生成器"));
+    window->resize(512,768);
     window->show();
 
     return app.exec();

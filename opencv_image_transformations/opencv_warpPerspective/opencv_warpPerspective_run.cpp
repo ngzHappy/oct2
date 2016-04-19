@@ -5,36 +5,50 @@
 #include "private/opencv_warpPerspective_run_exception.cpp"
 //#include <QtCharts>
 
-namespace opencv_warpPerspective{
-extern void run(OpenCVWindow * window) try{
+namespace opencv_warpPerspective {
+extern void run(OpenCVWindow * window) try {
 
-    /*测试图片显示*/
-    {
-        intptr_t count_=0;
-        const auto images_names=
-            CoreUtility::getConfigurationFile().getInputImagesNames("images:000001");
+    intptr_t count_=0;
+    const auto images_names=
+        CoreUtility::getConfigurationFile().getInputImagesNames("images:000001");
 
-            for (const auto & image_name:images_names) {
-            window->insertImage(QImage(image_name))
-                ->setWindowTitle(u8"第%1幅图片"_qs.arg(++count_));
-        }
+    for (const auto & image_name:images_names) {
+        QImage imageInput=QImage(image_name);
+        window->insertImage(imageInput)
+            ->setWindowTitle(u8"第%1幅图片"_qs.arg(++count_));
+
+        QImage image0=imageInput;
+
+        const float width_image_=image0.width();
+        const float height_image_=image0.height();
+
+        const std::vector< cv::Point2f > from_{ 
+            {0,0},
+            {0,height_image_},
+            {width_image_,height_image_}, 
+            {width_image_,0} 
+        };
+
+        const std::vector< cv::Point2f > to_{ 
+            {0,0},
+            {0,height_image_},
+            {width_image_,height_image_/4*3}, 
+            {width_image_,height_image_/4} 
+        };
+
+        cv::Mat atmax_ = cv::getPerspectiveTransform(from_,to_);
+
+        auto cvImage0=OpenCVUtility::tryRead(image0);
+
+        auto ansSize=cv::Size(image0.width(),image0.height());
+        cv::Mat ans;
+
+        cv::warpPerspective(cvImage0,ans ,atmax_,ansSize);
+
+        window->insertImage( ans )
+            ->setWindowTitle(QObject::trUtf8(u8"变换后图像%1").arg(count_));
+
     }
-    /*测试柱状图*/
-    window->insertHist({ 1,2,3,4,5 })->setWindowTitle(u8"柱状图"_qs);
-    /*测试散点图*/
-    auto scatter=window->insertScatter({ {0,0},{1,1},{2,2} });
-    scatter->setCentrePointPaint(
-        std::shared_ptr< std::function<void(QPainter *)> >(
-        new std::function<void(QPainter *)>{
-        [](QPainter * painter) {
-        painter->setBrush(Qt::transparent);
-        painter->setPen(QPen(QColor(0,0,0),1));
-        painter->drawRect(QRect{-10,-10,20,20});
-    }
-    }
-        )
-        );
-    scatter->setWindowTitle(u8"散点图"_qs);
 
 }
 catch (const cv::Exception &e) {

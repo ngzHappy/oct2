@@ -66,11 +66,14 @@ int main(int argc, char *argv[])try
 
         for(const QString & file_name_ : files)
         {
-            QuaZipFile outFile(&zip);
-            outFile.open(QIODevice::WriteOnly,QuaZipNewInfo(file_name_) );
-
             QFile file_(dir_string_+"/"+file_name_);
             file_.open(QFile::ReadOnly );
+
+            QuaZipFile outFile(&zip);
+            QuaZipNewInfo info(file_name_);
+            info.setPermissions(file_.permissions());
+            outFile.open(QIODevice::WriteOnly,info );
+
             outFile.write( file_.readAll() );
 
         }

@@ -52,8 +52,7 @@ extern void _lua_unlock(lua_State *L) {
 extern void _luai_userstatethread(
     lua_State *L,
     lua_State *L1){
-    /*每个线程有自己独立的锁*/
-    L1->cpp_user_data_=new LuaUserData ;
+    L1->cpp_user_data_=new LuaUserData(L->cpp_user_data_->mutex()) ;
     (void)L;
 }
 

@@ -85,7 +85,14 @@
     </widget>
    </item>
    <item>
-    <widget class="QGraphicsView" name="template_image_view"/>
+    <widget class="QGraphicsView" name="template_image_view">
+     <property name="minimumSize">
+      <size>
+       <width>266</width>
+       <height>266</height>
+      </size>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QPushButton" name="do_button">

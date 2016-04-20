@@ -41,14 +41,14 @@ void ControlItem::on_do_button_clicked(){
                 pack->minLineLength,
                 pack->maxLineGap);
 
-            QImage image_ans(inputImage.size(),QImage::Format_RGBA8888);
-            image_ans.fill(QColor(150,150,150,200));
+            QImage image_ans=inputImage;
+            image_ans=image_ans.convertToFormat(QImage::Format_RGBA8888);
             QPainter painter(&image_ans);
             painter.setRenderHint(QPainter::Antialiasing);
             painter.setRenderHint(QPainter::SmoothPixmapTransform);
             painter.setRenderHint(QPainter::TextAntialiasing);
             painter.setRenderHint(QPainter::HighQualityAntialiasing);
-            painter.setPen(QPen(QColor(255,255,255),2));
+            painter.setPen(QPen(QColor(255,std::rand()&127,std::rand()&127),2));
             for (const auto & i:lines) {
                 painter.drawLine(i[0],i[1],i[2],i[3]);
             }

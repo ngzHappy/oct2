@@ -28,7 +28,6 @@ public:
 
 private slots:
     void on_do_button_clicked();
-
     void on_select_image_button_clicked();
 
 private:

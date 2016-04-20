@@ -45,7 +45,23 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QDoubleSpinBox" name="rhoDoubleSpinBox"/>
+      <widget class="QDoubleSpinBox" name="rhoDoubleSpinBox">
+       <property name="decimals">
+        <number>10</number>
+       </property>
+       <property name="minimum">
+        <double>-9999.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>9999.000000000000000</double>
+       </property>
+       <property name="singleStep">
+        <double>0.300000000000000</double>
+       </property>
+       <property name="value">
+        <double>1.000000000000000</double>
+       </property>
+      </widget>
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="thetaLabel">
@@ -55,7 +71,23 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QDoubleSpinBox" name="thetaDoubleSpinBox"/>
+      <widget class="QDoubleSpinBox" name="thetaDoubleSpinBox">
+       <property name="decimals">
+        <number>10</number>
+       </property>
+       <property name="minimum">
+        <double>-9999.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>9999.000000000000000</double>
+       </property>
+       <property name="singleStep">
+        <double>0.010000000000000</double>
+       </property>
+       <property name="value">
+        <double>0.017453000000000</double>
+       </property>
+      </widget>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="thresholdLabel">
@@ -65,7 +97,17 @@
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QSpinBox" name="thresholdSpinBox"/>
+      <widget class="QSpinBox" name="thresholdSpinBox">
+       <property name="minimum">
+        <number>-9999</number>
+       </property>
+       <property name="maximum">
+        <number>9999</number>
+       </property>
+       <property name="value">
+        <number>80</number>
+       </property>
+      </widget>
      </item>
      <item row="3" column="0">
       <widget class="QLabel" name="minLineLengthLabel">
@@ -75,7 +117,23 @@
       </widget>
      </item>
      <item row="3" column="1">
-      <widget class="QDoubleSpinBox" name="minLineLengthDoubleSpinBox"/>
+      <widget class="QDoubleSpinBox" name="minLineLengthDoubleSpinBox">
+       <property name="decimals">
+        <number>10</number>
+       </property>
+       <property name="minimum">
+        <double>-9999.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>99999.000000000000000</double>
+       </property>
+       <property name="singleStep">
+        <double>0.500000000000000</double>
+       </property>
+       <property name="value">
+        <double>30.000000000000000</double>
+       </property>
+      </widget>
      </item>
      <item row="4" column="0">
       <widget class="QLabel" name="maxLineGapLabel">
@@ -85,7 +143,23 @@
       </widget>
      </item>
      <item row="4" column="1">
-      <widget class="QDoubleSpinBox" name="maxLineGapDoubleSpinBox"/>
+      <widget class="QDoubleSpinBox" name="maxLineGapDoubleSpinBox">
+       <property name="decimals">
+        <number>10</number>
+       </property>
+       <property name="minimum">
+        <double>-9999.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>9999.000000000000000</double>
+       </property>
+       <property name="singleStep">
+        <double>0.500000000000000</double>
+       </property>
+       <property name="value">
+        <double>10.000000000000000</double>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

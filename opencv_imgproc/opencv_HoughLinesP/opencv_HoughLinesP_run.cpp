@@ -7,6 +7,7 @@
 #include "ControlItem.hpp"
 #include <QtWidgets/qfiledialog.h>
 #include <functional>
+#include <QtGui/qpainter.h>
 //#include <QtCharts>
 
 OpenCVImageItem * OpenCVWindowDetail::insertImage(QImage i){
@@ -25,6 +26,40 @@ void ControlItem::on_do_button_clicked(){
             std::make_shared<ControlItem::Pack>();
     _p_init_pack(pack.get());
 
+    typedef std::function<QImage(const QImage &)> FunctionType;
+    auto function=std::shared_ptr<FunctionType>(
+        new FunctionType([pack](const QImage & inputImage)->QImage {
+        try {
+            cv::Mat image=OpenCVUtility::tryRead(inputImage);
+            std::vector<cv::Vec4i> lines;
+            cv::HoughLinesP(
+                image,
+                lines,
+                pack->rho,
+                pack->theta,
+                pack->threshold,
+                pack->minLineLength,
+                pack->maxLineGap);
+
+            QImage image_ans(inputImage.size(),QImage::Format_RGBA8888);
+            image_ans.fill(QColor(150,150,150,200));
+            QPainter painter(&image_ans);
+            painter.setRenderHint(QPainter::Antialiasing);
+            painter.setRenderHint(QPainter::SmoothPixmapTransform);
+            painter.setRenderHint(QPainter::TextAntialiasing);
+            painter.setRenderHint(QPainter::HighQualityAntialiasing);
+            painter.setPen(QPen(QColor(255,255,255),2));
+            for (const auto & i:lines) {
+                painter.drawLine(i[0],i[1],i[2],i[3]);
+            }
+            return std::move(image_ans);
+        }
+        catch (const cv::Exception &e) {
+            opencv_exception::error(e,"get opencv exception",opencv_line(),opencv_file(),opencv_func());
+        }
+    }));
+
+    rootItem_->setAlgFunction(function);
 }
 
 void ControlItem::on_select_image_button_clicked(){

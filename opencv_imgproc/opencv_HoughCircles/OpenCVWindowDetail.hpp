@@ -12,7 +12,7 @@ MACRO_PROTECTED:
 public:
     OpenCVWindowDetail(QWidget * parent=nullptr);
     ~OpenCVWindowDetail();
-
+    OpenCVImageItem * insertImage(QImage)override;
 };
 
 #endif // OPENCVWINDOWDETAIL_HPP

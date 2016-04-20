@@ -56,6 +56,7 @@ void ControlItem::on_do_button_clicked(){
         }
         catch (const cv::Exception &e) {
             opencv_exception::error(e,"get opencv exception",opencv_line(),opencv_file(),opencv_func());
+            return inputImage;
         }
     }));
 

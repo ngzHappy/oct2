@@ -51,6 +51,9 @@
     </layout>
    </item>
    <item>
+    <widget class="QComboBox" name="comboBox"/>
+   </item>
+   <item>
     <widget class="QGraphicsView" name="graphicsView"/>
    </item>
    <item>

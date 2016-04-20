@@ -2,6 +2,7 @@
 #define CONTROLITEM_HPP
 
 #include <QtWidgets/QWidget>
+class OpenCVImageItem;
 
 namespace Ui {
 class ControlItem;
@@ -12,7 +13,17 @@ class ControlItem : public QWidget
     Q_OBJECT
 
 public:
-    explicit ControlItem(QWidget *parent = 0);
+
+    class Pack{
+    public:
+        double rho;
+        double theta;
+        int threshold;
+        double minLineLength;
+        double maxLineGap;
+    };
+
+    ControlItem(OpenCVImageItem *,QWidget *parent = 0);
     ~ControlItem();
 
 private slots:
@@ -22,6 +33,8 @@ private slots:
 
 private:
     Ui::ControlItem *ui;
+    OpenCVImageItem * rootItem_;
+    void _p_init_pack(Pack *);
 };
 
 #endif // CONTROLITEM_HPP

@@ -1,24 +1,19 @@
 ﻿#include "ControlItem.hpp"
 #include "ui_ControlItem.h"
 
-ControlItem::ControlItem(QWidget *parent) :
+ControlItem::ControlItem(OpenCVImageItem * arg_i, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ControlItem)
+    ui(new Ui::ControlItem),
+    rootItem_(arg_i)
 {
     ui->setupUi(this);
 }
+
+void ControlItem::_p_init_pack(Pack * pack){}
 
 ControlItem::~ControlItem()
 {
     delete ui;
 }
 
-void ControlItem::on_do_button_clicked()
-{
 
-}
-
-void ControlItem::on_select_image_button_clicked()
-{
-
-}

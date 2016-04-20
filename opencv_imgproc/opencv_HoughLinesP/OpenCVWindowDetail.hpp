@@ -2,6 +2,7 @@
 #ifndef OPENCVWINDOWDETAIL_HPP
 #define OPENCVWINDOWDETAIL_HPP
 
+class OpenCVImageItem;
 #include <OpenCVWindow.hpp>
 
 class OpenCVWindowDetail : public OpenCVWindow
@@ -12,6 +13,9 @@ MACRO_PROTECTED:
 public:
     OpenCVWindowDetail(QWidget * parent=nullptr);
     ~OpenCVWindowDetail();
+
+    OpenCVImageItem * insertImage(QImage)override;
+private:
 
 };
 

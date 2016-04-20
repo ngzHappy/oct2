@@ -320,3 +320,7 @@ SUBDIRS += opencv_resize
 opencv_warpAffine.file = $$PWD/opencv_image_transformations/opencv_warpAffine/opencv_warpAffine.pro
 opencv_warpAffine.depends += core_utility
 SUBDIRS += opencv_warpAffine
+
+opencv_matchTemplate.file = $$PWD/opencv_imgproc/opencv_matchTemplate/opencv_matchTemplate.pro
+opencv_matchTemplate.depends += core_utility
+SUBDIRS += opencv_matchTemplate

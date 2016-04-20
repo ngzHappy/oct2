@@ -28,14 +28,14 @@ public:
         parser.addOption(op);
     }
 };
-#include "ControlItem.hpp"
+
 int main(int argc,char ** argv) try{
     /*设置本地编码*/
     QTextCodec::setCodecForLocale(QTextCodec::codecForName(LOCAL_CODEC_));
 
     /*初始化应用程序*/
     QApplication app(argc,argv);
-ControlItem i;i.show();
+
     {
         /*解析命令行*/
         CommandLineParser parser;

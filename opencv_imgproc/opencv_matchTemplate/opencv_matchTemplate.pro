@@ -12,14 +12,14 @@ CONFIG += console
 
 TEMPLATE = app
 
-SOURCES += $$PWD/main.cpp \
-    ControlItem.cpp
+SOURCES += $$PWD/main.cpp
+SOURCES += $$PWD/ControlItem.cpp
 SOURCES += $$PWD/MainWindow.cpp
 SOURCES += $$PWD/OpenCVWindowDetail.cpp
-SOURCES += opencv_matchTemplate_run.cpp
+SOURCES += $$PWD/opencv_matchTemplate_run.cpp
 
-HEADERS += $$PWD/MainWindow.hpp \
-    ControlItem.hpp
+HEADERS += $$PWD/MainWindow.hpp
+HEADERS += $$PWD/ControlItem.hpp
 HEADERS += $$PWD/OpenCVWindowDetail.hpp
 
 DEFINES += APP_NAME_=\\\"$$TARGET\\\"

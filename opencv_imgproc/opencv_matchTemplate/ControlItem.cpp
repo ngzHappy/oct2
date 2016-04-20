@@ -2,16 +2,17 @@
 #include "ControlItem.hpp"
 #include <QtWidgets/qboxlayout.h>
 
-ControlItem::~ControlItem(){}
+ControlItem::~ControlItem(){
+    delete ui;
+}
 
 ControlItem::ControlItem(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Form)
 {
-    QHBoxLayout * layout_=new QHBoxLayout;
-    this->setLayout(layout_);
-    layout_->setSpacing(0);
-    layout_->setMargin(0);
-    layout_->addWidget(ui);
+    ui->setupUi(new QWidget);
+    this->setLayout(ui->thisLayout);
+    this->setMinimumWidth(128);
+    this->setMinimumHeight(64);
 }
 

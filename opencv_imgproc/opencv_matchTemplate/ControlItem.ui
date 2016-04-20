@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>162</width>
+    <height>134</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -35,14 +35,14 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="open_image">
        <property name="text">
         <string>打开图片</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="open_template_image">
        <property name="text">
         <string>选择模板图片</string>
        </property>
@@ -51,13 +51,44 @@
     </layout>
    </item>
    <item>
-    <widget class="QComboBox" name="comboBox"/>
+    <widget class="QComboBox" name="mode_select">
+     <item>
+      <property name="text">
+       <string>TM_SQDIFF</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>TM_SQDIFF_NORMED</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>TM_CCORR</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>TM_CCORR_NORMED</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>TM_CCOEFF</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>TM_CCOEFF_NORMED</string>
+      </property>
+     </item>
+    </widget>
    </item>
    <item>
-    <widget class="QGraphicsView" name="graphicsView"/>
+    <widget class="QGraphicsView" name="template_image_view"/>
    </item>
    <item>
-    <widget class="QPushButton" name="pushButton_3">
+    <widget class="QPushButton" name="do_button">
      <property name="text">
       <string>确定</string>
      </property>

@@ -10,7 +10,7 @@
 OpenCVImageItem * OpenCVWindowDetail::insertImage(QImage inputImage) {
     OpenCVImageItem * ans =OpenCVWindow::insertImage(inputImage);
     auto * var_vi= new OpenCVVerticalItems(ans);
-    var_vi->addWidget(new ControlItem);
+    var_vi->addWidget(new ControlItem(ans));
     ans->resize(
         inputImage.width()+360,
         inputImage.height()+360

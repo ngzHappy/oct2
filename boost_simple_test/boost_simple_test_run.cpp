@@ -48,6 +48,15 @@ extern void run(OpenCVWindow * ) try{
         std::cout<<"~test:1"<<std::endl;
     }
 
+    {
+        boost::ptr_vector<int> test;
+        test.push_back(new int(0));
+        test.push_back(new int(1));
+        test.push_back(new int(2));
+
+        auto v =test.release(test.begin());
+        std::cout<<test.size()<<std::endl;
+    }
 
     {
         boost::optional<int> value;

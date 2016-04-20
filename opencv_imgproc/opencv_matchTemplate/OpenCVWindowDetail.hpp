@@ -13,6 +13,8 @@ public:
     OpenCVWindowDetail(QWidget * parent=nullptr);
     ~OpenCVWindowDetail();
 
+public:
+    OpenCVImageItem * insertImage(QImage )override;
 };
 
 #endif // OPENCVWINDOWDETAIL_HPP

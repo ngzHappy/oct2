@@ -12,12 +12,14 @@ CONFIG += console
 
 TEMPLATE = app
 
-SOURCES += $$PWD/main.cpp
+SOURCES += $$PWD/main.cpp \
+    ControlItem.cpp
 SOURCES += $$PWD/MainWindow.cpp
 SOURCES += $$PWD/OpenCVWindowDetail.cpp
 SOURCES += opencv_matchTemplate_run.cpp
 
-HEADERS += $$PWD/MainWindow.hpp
+HEADERS += $$PWD/MainWindow.hpp \
+    ControlItem.hpp
 HEADERS += $$PWD/OpenCVWindowDetail.hpp
 
 DEFINES += APP_NAME_=\\\"$$TARGET\\\"
@@ -47,4 +49,7 @@ PRECOMPILED_HEADER  += $$PWD/private/msvc_pre_build.hpp
 }else{
 PRECOMPILED_HEADER  += $$PWD/private/pre_build.hpp
 }
+
+FORMS += \
+    ControlItem.ui
 

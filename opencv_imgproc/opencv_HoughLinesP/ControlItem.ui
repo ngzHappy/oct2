@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ControlItem</class>
+ <widget class="QWidget" name="ControlItem">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <layout class="QFormLayout" name="formLayout">
+     <property name="horizontalSpacing">
+      <number>0</number>
+     </property>
+     <property name="verticalSpacing">
+      <number>0</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="QLabel" name="rhoLabel">
+       <property name="text">
+        <string>rho</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QDoubleSpinBox" name="rhoDoubleSpinBox"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="thetaLabel">
+       <property name="text">
+        <string>theta</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QDoubleSpinBox" name="thetaDoubleSpinBox"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="thresholdLabel">
+       <property name="text">
+        <string>threshold</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QSpinBox" name="thresholdSpinBox"/>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="minLineLengthLabel">
+       <property name="text">
+        <string>minLineLength</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QDoubleSpinBox" name="minLineLengthDoubleSpinBox"/>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="maxLineGapLabel">
+       <property name="text">
+        <string>maxLineGap</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QDoubleSpinBox" name="maxLineGapDoubleSpinBox"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QPushButton" name="select_image_button">
+       <property name="text">
+        <string>选择图片</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="do_button">
+       <property name="text">
+        <string>执行</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

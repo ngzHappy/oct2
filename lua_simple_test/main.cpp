@@ -23,6 +23,7 @@ int main(int argc, char *argv[])try
 
     auto * thread_= lua_newthread(L);
     lua_pushboolean(thread_,false);
+    lua_setglobal(L,"valuea");
 
     return app.exec();
 

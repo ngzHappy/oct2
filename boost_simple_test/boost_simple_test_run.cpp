@@ -23,8 +23,31 @@ extern void run(OpenCVWindow * ) try{
     }
 
     {
-        boost::circular_buffer<int> buffer{200};
+        std::cout<<"test:0"<<std::endl;
+        boost::circular_buffer<int> buffer{3};
+        buffer.push_back(0);
+        buffer.push_back(1);
+        buffer.push_back(2);
+        buffer.rset_capacity(2);
+        for (const auto & i:buffer) {
+            std::cout<<i<<std::endl;
+        }
+        std::cout<<"~test:0"<<std::endl;
     }
+
+    {
+        std::cout<<"test:1"<<std::endl;
+        boost::circular_buffer<int> buffer{3};
+        buffer.push_back(0);
+        buffer.push_back(1);
+        buffer.push_back(2);
+        buffer.set_capacity(2);
+        for (const auto & i:buffer) {
+            std::cout<<i<<std::endl;
+        }
+        std::cout<<"~test:1"<<std::endl;
+    }
+
 
     {
         boost::optional<int> value;

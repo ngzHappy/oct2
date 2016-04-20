@@ -52,7 +52,11 @@ extern void _lua_unlock(lua_State *L) {
 extern void _luai_userstatethread(
     lua_State *L,
     lua_State *L1){
-    L1->cpp_user_data_=new LuaUserData(L->cpp_user_data_->mutex()) ;
+    /*
+    每个thread都共享global_State,
+    所以必须用同一个锁
+    */
+    L1->cpp_user_data_=new LuaUserData(L->cpp_user_data_->mutex());
     (void)L;
 }
 

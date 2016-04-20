@@ -172,7 +172,6 @@ public:
   lu_byte hookmask;
   lu_byte allowhook;
   /*my defined data*/
-  
   __private__lua::LuaUserData * cpp_user_data_;
 };
 

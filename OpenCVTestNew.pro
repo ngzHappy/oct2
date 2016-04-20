@@ -324,3 +324,19 @@ SUBDIRS += opencv_warpAffine
 opencv_matchTemplate.file = $$PWD/opencv_imgproc/opencv_matchTemplate/opencv_matchTemplate.pro
 opencv_matchTemplate.depends += core_utility
 SUBDIRS += opencv_matchTemplate
+
+opencv_cornerHarris.file = $$PWD/opencv_imgproc/opencv_cornerHarris/opencv_cornerHarris.pro
+opencv_cornerHarris.depends += core_utility
+SUBDIRS += opencv_cornerHarris
+
+opencv_HoughCircles.file = $$PWD/opencv_imgproc/opencv_HoughCircles/opencv_HoughCircles.pro
+opencv_HoughCircles.depends += core_utility
+SUBDIRS += opencv_HoughCircles
+
+opencv_HoughLines.file = $$PWD/opencv_imgproc/opencv_HoughLines/opencv_HoughLines.pro
+opencv_HoughLines.depends += core_utility
+SUBDIRS += opencv_HoughLines
+
+opencv_HoughLinesP.file = $$PWD/opencv_imgproc/opencv_HoughLinesP/opencv_HoughLinesP.pro
+opencv_HoughLinesP.depends += core_utility
+SUBDIRS += opencv_HoughLinesP

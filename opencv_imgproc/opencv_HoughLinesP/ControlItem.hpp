@@ -34,6 +34,18 @@ private:
     Ui::ControlItem *ui;
     OpenCVImageItem * rootItem_;
     void _p_init_pack(Pack *);
+    std::shared_ptr<Pack> lastPack_;
 };
+
+inline bool operator==(
+    const ControlItem::Pack &l,
+    const ControlItem::Pack &r
+    ) {
+    if (l.maxLineGap==r.maxLineGap)if (l.minLineLength==r.minLineLength)
+        if (l.rho==r.rho)if (l.theta==r.theta)if (l.threshold==r.threshold) {
+            return true;
+        }
+    return false;
+}
 
 #endif // CONTROLITEM_HPP

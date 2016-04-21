@@ -35,6 +35,17 @@ private:
     Ui::ControlItem *ui;
     OpenCVImageItem * rootItem_;
     void _p_init_pack(Pack*);
+    std::shared_ptr<Pack> lastPack_;
 };
+
+inline bool operator==(
+    const ControlItem::Pack & l,
+    const ControlItem::Pack & r) {
+    if (l.dp==r.dp)if (l.maxRadius==r.maxRadius)
+        if (l.method==r.method)if (l.minDist==r.minDist)
+            if (l.minRadius==r.minRadius)if (l.param1==r.param1)
+                if (l.param2==r.param2)return true;
+    return false;
+}
 
 #endif // CONTROLITEM_HPP

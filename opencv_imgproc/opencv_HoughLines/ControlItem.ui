@@ -233,5 +233,118 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>rhoDoubleSpinBox</sender>
+   <signal>editingFinished()</signal>
+   <receiver>do_button</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>135</x>
+     <y>10</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>236</x>
+     <y>266</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>thetaDoubleSpinBox</sender>
+   <signal>editingFinished()</signal>
+   <receiver>do_button</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>94</x>
+     <y>32</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>262</x>
+     <y>272</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>thresholdSpinBox</sender>
+   <signal>editingFinished()</signal>
+   <receiver>do_button</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>145</x>
+     <y>52</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>262</x>
+     <y>268</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>srnDoubleSpinBox</sender>
+   <signal>editingFinished()</signal>
+   <receiver>do_button</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>162</x>
+     <y>68</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>254</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>stnDoubleSpinBox</sender>
+   <signal>editingFinished()</signal>
+   <receiver>do_button</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>225</x>
+     <y>97</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>282</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>min_thetaDoubleSpinBox</sender>
+   <signal>editingFinished()</signal>
+   <receiver>do_button</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>74</x>
+     <y>110</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>257</x>
+     <y>275</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>max_thetaDoubleSpinBox</sender>
+   <signal>editingFinished()</signal>
+   <receiver>do_button</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>207</x>
+     <y>134</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>263</x>
+     <y>269</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

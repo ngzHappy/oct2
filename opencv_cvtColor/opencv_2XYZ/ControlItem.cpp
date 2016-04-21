@@ -12,7 +12,13 @@ ControlItem::ControlItem(
 }
 
 void ControlItem::_p_init_pack(Pack *pack){
-    
+    pack->x=ui->xDoubleSpinBox->value();
+    pack->y=ui->yDoubleSpinBox->value();
+    pack->z=ui->zDoubleSpinBox->value();
+
+    pack->xBase=ui->xBaseDoubleSpinBox->value();
+    pack->yBase=ui->yBaseDoubleSpinBox->value();
+    pack->zBase=ui->zBaseDoubleSpinBox->value();
 }
 
 ControlItem::~ControlItem()

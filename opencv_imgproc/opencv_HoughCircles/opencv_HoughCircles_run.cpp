@@ -27,10 +27,15 @@ void ControlItem::on_select_image_button_clicked(){
     rootItem_->setImage(std::move(image_));
 }
 
-void ControlItem::on_do_button_clicked(){
+void ControlItem::on_do_button_clicked() {
     std::shared_ptr<ControlItem::Pack> pack=
-            std::make_shared<ControlItem::Pack>();
+        std::make_shared<ControlItem::Pack>();
     _p_init_pack(pack.get());
+
+    if (bool(lastPack_)&&(*lastPack_==*pack)) {
+        return;
+    }
+    lastPack_=pack;
 
     typedef std::function<QImage(const QImage &)> FunctionType;
     auto function=std::shared_ptr<FunctionType>(

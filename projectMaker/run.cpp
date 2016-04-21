@@ -165,7 +165,7 @@ void write_pro(const ArgvPack & pack) {
             about_to_write_.replace(
                 about_to_write_.find(replace_text_),
                 replace_text_.size(),
-                (pack.projectName()+"_run.cpp")
+                ("$$PWD/"+pack.projectName()+"_run.cpp")
                 );
         }
         {

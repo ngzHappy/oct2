@@ -9,7 +9,7 @@
 //#include <QtCharts>
 
 OpenCVImageItem * OpenCVWindowDetail::insertImage(QImage i) {
-    auto ans=OpenCVWindow::insertImage(i);
+    auto ans=OpenCVWindow::insertImage(i.convertToFormat(QImage::Format_RGB888));
     auto item=new OpenCVVerticalItems(ans);
     item->addWidget(new ControlItem(ans),true);
     ans->resize(768,600);
@@ -39,9 +39,12 @@ void ControlItem::on_do_button_clicked() {
             {
                 std::vector<cv::Mat> rgb{ 3 };
                 cv::split(image,rgb);
-                rgb[0]+=pack->rBase; rgb[0]*=pack->r;
-                rgb[1]+=pack->gBase; rgb[1]*=pack->g;
-                rgb[2]+=pack->bBase; rgb[2]*=pack->b;
+                rgb[0]*=pack->r;
+                rgb[1]*=pack->g;
+                rgb[2]*=pack->b;
+                if(pack->rBase!=0)rgb[0]+=pack->rBase; 
+                if(pack->gBase!=0)rgb[1]+=pack->gBase; 
+                if(pack->bBase!=0)rgb[2]+=pack->bBase; 
                 image=rgb[0]+rgb[1]+rgb[2];
             }
             return OpenCVUtility::tryRead(image);

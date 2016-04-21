@@ -139,8 +139,12 @@ QImage::Format format_change_(QImage::Format format_) {
     QImage::Format & image_=format_;
     switch (format_) {
         case QImage::Format_Invalid:break;
-        case QImage::Format_Mono:break;
-        case QImage::Format_MonoLSB:break;
+        case QImage::Format_Mono: {
+            image_=QImage::Format_Grayscale8;
+        }break;
+        case QImage::Format_MonoLSB: {
+            image_=QImage::Format_Grayscale8;
+        }break;
         case QImage::Format_Indexed8:{
             image_=QImage::Format_RGB888;
         }break;

@@ -56,8 +56,8 @@ void ControlItem::on_do_button_clicked(){
             painter.setRenderHint(QPainter::SmoothPixmapTransform);
             painter.setRenderHint(QPainter::TextAntialiasing);
             painter.setRenderHint(QPainter::HighQualityAntialiasing);
-            painter.setPen(QPen(QColor(255,std::rand()&127,std::rand()&127),2));
             for (const auto & i:circles) {
+                painter.setPen(QPen(QColor(255,std::rand()&127,std::rand()&127),2));
                 painter.drawEllipse(QPointF(i[0],i[1]),i[2],i[2]);
             }
             return std::move(image_ans);

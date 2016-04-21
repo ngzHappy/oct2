@@ -28,6 +28,11 @@ void ControlItem::on_do_button_clicked() {
         std::make_shared<ControlItem::Pack>();
     _p_init_pack(pack.get());
 
+    if (bool(lastPack_)&&(*lastPack_==*pack)) {
+        return;
+    }
+    lastPack_=pack;
+
     typedef std::function<QImage(const QImage &)> FunctionType;
     auto function=std::shared_ptr<FunctionType>(
         new FunctionType([pack](const QImage & inputImage)->QImage {
@@ -39,9 +44,9 @@ void ControlItem::on_do_button_clicked() {
             {
                 std::vector<cv::Mat> rgb{ 3 };
                 cv::split(image,rgb);
-                rgb[0]*=pack->r;
-                rgb[1]*=pack->g;
-                rgb[2]*=pack->b;
+                if(pack->r!=1)rgb[0]*=pack->r;
+                if(pack->g!=1)rgb[1]*=pack->g;
+                if(pack->b!=1)rgb[2]*=pack->b;
                 if(pack->rBase!=0)rgb[0]+=pack->rBase; 
                 if(pack->gBase!=0)rgb[1]+=pack->gBase; 
                 if(pack->bBase!=0)rgb[2]+=pack->bBase; 

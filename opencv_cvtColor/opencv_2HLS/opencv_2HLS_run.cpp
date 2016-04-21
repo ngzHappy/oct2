@@ -27,6 +27,11 @@ void ControlItem::on_do_button_clicked(){
             std::make_shared<ControlItem::Pack>();
     _p_init_pack(pack.get());
 
+    if (bool(lastPack_)&&(*lastPack_==*pack)) {
+        return;
+    }
+    lastPack_=pack;
+
     typedef std::function<QImage(const QImage &)> FunctionType;
     auto function=std::shared_ptr<FunctionType>(
         new FunctionType([pack](const QImage & inputImage)->QImage {
@@ -56,9 +61,9 @@ void ControlItem::on_do_button_clicked(){
             image.release();
 
             /*对hls空间进行线性变换*/
-            hls[0]*=pack->h; 
-            hls[1]*=pack->l;
-            hls[2]*=pack->s;
+            if(pack->h!=1)hls[0]*=pack->h; 
+            if(pack->l!=1)hls[1]*=pack->l;
+            if(pack->s!=1)hls[2]*=pack->s;
 
             if(pack->hBase!=0)hls[0]+=pack->hBase; 
             if(pack->lBase!=0)hls[1]+=pack->lBase;

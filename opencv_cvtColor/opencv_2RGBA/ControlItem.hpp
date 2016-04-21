@@ -1,8 +1,8 @@
 ﻿#ifndef CONTROLITEM_HPP
 #define CONTROLITEM_HPP
 
-#include <QtWidgets/QWidget>
 #include <memory>
+#include <QtWidgets/QWidget>
 class OpenCVImageItem;
 
 namespace Ui {
@@ -17,6 +17,8 @@ public:
 
     class Pack{
     public:
+        double r,g,b,a;
+        double rBase,gBase,bBase,aBase;
     };
 
     ControlItem(OpenCVImageItem *,QWidget *parent = 0);
@@ -24,7 +26,6 @@ public:
 
 private slots:
     void on_select_image_button_clicked();
-
     void on_do_button_clicked();
 
 private:
@@ -36,10 +37,15 @@ private:
 
 inline bool operator==(
     const ControlItem::Pack & l,
-    const ControlItem::Pack & r
-    ) {
-    return false;
+    const ControlItem::Pack & r) {
+    if (l.a!=r.a) { return false; }
+    if (l.aBase!=r.aBase) { return false; }
+    if (l.b!=r.b) { return false; }
+    if (l.bBase!=r.bBase) { return false; }
+    if (l.g!=r.g) { return false; }
+    if (l.gBase!=r.gBase) { return false; }
+    if (l.r!=r.r) { return false; }
+    return l.rBase==r.rBase;
 }
-
 
 #endif // CONTROLITEM_HPP

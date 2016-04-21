@@ -372,3 +372,7 @@ SUBDIRS += opencv_2HLS
 opencv_2YUV.file = $$PWD/opencv_cvtColor/opencv_2YUV/opencv_2YUV.pro
 opencv_2YUV.depends += core_utility
 SUBDIRS += opencv_2YUV
+
+opencv_2RGBA.file = $$PWD/opencv_cvtColor/opencv_2RGBA/opencv_2RGBA.pro
+opencv_2RGBA.depends += core_utility
+SUBDIRS += opencv_2RGBA

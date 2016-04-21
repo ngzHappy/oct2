@@ -2,6 +2,7 @@
 #define CONTROLITEM_HPP
 
 #include <QtWidgets/QWidget>
+#include <memory>
 class OpenCVImageItem;
 
 namespace Ui {
@@ -23,13 +24,21 @@ public:
 
 private slots:
     void on_select_image_button_clicked();
-
     void on_do_button_clicked();
 
 private:
     Ui::ControlItem *ui;
     OpenCVImageItem * rootItem_;
     void _p_init_pack(Pack *);
+    std::shared_ptr<Pack> lastPack_;
 };
+
+inline bool operator==(
+    const ControlItem::Pack & l,
+    const ControlItem::Pack & r
+    ) {
+    return false;
+}
+
 
 #endif // CONTROLITEM_HPP

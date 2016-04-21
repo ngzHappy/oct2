@@ -48,3 +48,7 @@ PRECOMPILED_HEADER  += $$PWD/private/msvc_pre_build.hpp
 PRECOMPILED_HEADER  += $$PWD/private/pre_build.hpp
 }
 
+HEADERS += $$PWD/ControlItem.hpp
+SOURCES += $$PWD/ControlItem.cpp
+FORMS += \
+    ControlItem.ui

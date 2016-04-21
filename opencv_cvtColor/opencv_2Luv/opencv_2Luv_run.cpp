@@ -5,6 +5,7 @@
 #include "private/opencv_2Luv_run_exception.cpp"
 #include "ControlItem.hpp"
 #include "OpenCVWindowDetail.hpp"
+#include <QtWidgets/qfiledialog.h>
 //#include <QtCharts>
 
 namespace opencv_2Luv{

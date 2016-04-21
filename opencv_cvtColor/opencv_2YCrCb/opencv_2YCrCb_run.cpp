@@ -5,6 +5,7 @@
 #include "private/opencv_2YCrCb_run_exception.cpp"
 #include "ControlItem.hpp"
 #include "OpenCVWindowDetail.hpp"
+#include <QtWidgets/qfiledialog.h>
 //#include <QtCharts>
 
 namespace opencv_2YCrCb{

@@ -11,8 +11,13 @@ ControlItem::ControlItem(
     ui->setupUi(this);
 }
 
-void ControlItem::_p_init_pack(Pack *){
-
+void ControlItem::_p_init_pack(Pack *pack){
+    pack->y=ui->yDoubleSpinBox->value();
+    pack->yBase=ui->yBaseDoubleSpinBox->value();
+    pack->u=ui->uDoubleSpinBox->value();
+    pack->uBase=ui->uBaseDoubleSpinBox->value();
+    pack->v=ui->vDoubleSpinBox->value();
+    pack->vBase=ui->vBaseDoubleSpinBox->value();
 }
 
 ControlItem::~ControlItem()

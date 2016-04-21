@@ -3,6 +3,8 @@
 #include <opencv_application_configuration_file.hpp>
 #include <QtCore/qdebug.h>
 #include "private/opencv_2YCrCb_run_exception.cpp"
+#include "ControlItem.hpp"
+#include "OpenCVWindowDetail.hpp"
 //#include <QtCharts>
 
 namespace opencv_2YCrCb{

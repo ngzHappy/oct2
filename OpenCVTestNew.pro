@@ -340,3 +340,35 @@ SUBDIRS += opencv_HoughLines
 opencv_HoughLinesP.file = $$PWD/opencv_imgproc/opencv_HoughLinesP/opencv_HoughLinesP.pro
 opencv_HoughLinesP.depends += core_utility
 SUBDIRS += opencv_HoughLinesP
+
+opencv_2GRAY.file = $$PWD/opencv_cvtColor/opencv_2GRAY/opencv_2GRAY.pro
+opencv_2GRAY.depends += core_utility
+SUBDIRS += opencv_2GRAY
+
+opencv_2XYZ.file = $$PWD/opencv_cvtColor/opencv_2XYZ/opencv_2XYZ.pro
+opencv_2XYZ.depends += core_utility
+SUBDIRS += opencv_2XYZ
+
+opencv_2YCrCb.file = $$PWD/opencv_cvtColor/opencv_2YCrCb/opencv_2YCrCb.pro
+opencv_2YCrCb.depends += core_utility
+SUBDIRS += opencv_2YCrCb
+
+opencv_2HSV.file = $$PWD/opencv_cvtColor/opencv_2HSV/opencv_2HSV.pro
+opencv_2HSV.depends += core_utility
+SUBDIRS += opencv_2HSV
+
+opencv_2Lab.file = $$PWD/opencv_cvtColor/opencv_2Lab/opencv_2Lab.pro
+opencv_2Lab.depends += core_utility
+SUBDIRS += opencv_2Lab
+
+opencv_2Luv.file = $$PWD/opencv_cvtColor/opencv_2Luv/opencv_2Luv.pro
+opencv_2Luv.depends += core_utility
+SUBDIRS += opencv_2Luv
+
+opencv_2HLS.file = $$PWD/opencv_cvtColor/opencv_2HLS/opencv_2HLS.pro
+opencv_2HLS.depends += core_utility
+SUBDIRS += opencv_2HLS
+
+opencv_2YUV.file = $$PWD/opencv_cvtColor/opencv_2YUV/opencv_2YUV.pro
+opencv_2YUV.depends += core_utility
+SUBDIRS += opencv_2YUV

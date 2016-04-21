@@ -8,7 +8,7 @@
 #include <QtWidgets/qfiledialog.h>
 //#include <QtCharts>
 OpenCVImageItem * OpenCVWindowDetail::insertImage(QImage i){
-    auto ans=OpenCVWindow::insertImage(i);
+    auto ans=OpenCVWindow::insertImage(i.convertToFormat(QImage::Format_RGBA8888));
     auto item=new OpenCVVerticalItems(ans);
     item->addWidget(new ControlItem(ans),true);
     ans->resize(768,600);
@@ -37,7 +37,13 @@ void ControlItem::on_do_button_clicked(){
         new FunctionType([pack](const QImage & inputImage)->QImage {
         if (inputImage.isNull()) { return{}; }
         try {
-           return inputImage.convertToFormat(QImage::Format_Grayscale8);
+            cv::Mat image=OpenCVUtility::tryRead(
+                inputImage.convertToFormat(QImage::Format_RGBA8888)
+            );
+
+
+
+            return OpenCVUtility::tryRead(image);
         }
         catch (const cv::Exception &e) {
             opencv_exception::error(e,"get opencv exception",opencv_line(),opencv_file(),opencv_func());

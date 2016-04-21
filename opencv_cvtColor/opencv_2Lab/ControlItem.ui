@@ -13,33 +13,212 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>190</y>
-     <width>168</width>
-     <height>22</height>
-    </rect>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <widget class="QPushButton" name="select_image_button">
-      <property name="text">
-       <string>选择图片</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="do_button">
-      <property name="text">
-       <string>确定</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <layout class="QFormLayout" name="formLayout">
+     <property name="horizontalSpacing">
+      <number>0</number>
+     </property>
+     <property name="verticalSpacing">
+      <number>0</number>
+     </property>
+     <item row="0" column="0">
+      <widget class="QLabel" name="lLabel">
+       <property name="text">
+        <string>l</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QDoubleSpinBox" name="lDoubleSpinBox"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="aLabel">
+       <property name="text">
+        <string>a</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QDoubleSpinBox" name="aDoubleSpinBox"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="bLabel">
+       <property name="text">
+        <string>b</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QDoubleSpinBox" name="bDoubleSpinBox"/>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="lBaseLabel">
+       <property name="text">
+        <string>lBase</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QDoubleSpinBox" name="lBaseDoubleSpinBox"/>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="aBaseLabel">
+       <property name="text">
+        <string>aBase</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QDoubleSpinBox" name="aBaseDoubleSpinBox"/>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="bBaseLabel">
+       <property name="text">
+        <string>bBase</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QDoubleSpinBox" name="bBaseDoubleSpinBox"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QPushButton" name="select_image_button">
+       <property name="text">
+        <string>选择图片</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="do_button">
+       <property name="text">
+        <string>确定</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>lDoubleSpinBox</sender>
+   <signal>editingFinished()</signal>
+   <receiver>do_button</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>103</x>
+     <y>15</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>280</x>
+     <y>226</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>aDoubleSpinBox</sender>
+   <signal>editingFinished()</signal>
+   <receiver>do_button</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>170</x>
+     <y>43</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>265</x>
+     <y>226</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bDoubleSpinBox</sender>
+   <signal>editingFinished()</signal>
+   <receiver>do_button</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>120</x>
+     <y>67</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>296</x>
+     <y>225</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lBaseDoubleSpinBox</sender>
+   <signal>editingFinished()</signal>
+   <receiver>do_button</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>129</x>
+     <y>91</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>268</x>
+     <y>234</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>aBaseDoubleSpinBox</sender>
+   <signal>editingFinished()</signal>
+   <receiver>do_button</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>215</x>
+     <y>120</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>271</x>
+     <y>229</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bBaseDoubleSpinBox</sender>
+   <signal>editingFinished()</signal>
+   <receiver>do_button</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>84</x>
+     <y>148</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>310</x>
+     <y>234</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

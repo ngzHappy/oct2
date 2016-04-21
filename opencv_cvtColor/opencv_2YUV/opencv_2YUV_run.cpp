@@ -8,7 +8,8 @@
 #include <QtWidgets/qfiledialog.h>
 //#include <QtCharts>
 OpenCVImageItem * OpenCVWindowDetail::insertImage(QImage i){
-    auto ans=OpenCVWindow::insertImage(i);
+    auto ans=OpenCVWindow::insertImage(
+        i.convertToFormat(QImage::Format_RGBA8888));
     auto item=new OpenCVVerticalItems(ans);
     item->addWidget(new ControlItem(ans),true);
     ans->resize(768,600);
@@ -37,7 +38,42 @@ void ControlItem::on_do_button_clicked(){
         new FunctionType([pack](const QImage & inputImage)->QImage {
         if (inputImage.isNull()) { return{}; }
         try {
-           return inputImage.convertToFormat(QImage::Format_Grayscale8);
+            cv::Mat image=OpenCVUtility::tryRead(
+                inputImage.convertToFormat(QImage::Format_RGBA8888)
+            );
+
+            std::vector<cv::Mat> yuv;
+            cv::Mat rgba_a;
+            {
+                cv::split(image,yuv);
+                rgba_a=yuv[3];
+                yuv.resize(3);
+            }
+
+            cv::merge(yuv,image);
+
+            cv::cvtColor(image,image,cv::COLOR_RGB2Luv);
+            cv::split(image,yuv);
+
+            if (pack->value<0>()!=1) { yuv[0]*=pack->value<0>(); }
+            if (pack->value<1>()!=1) { yuv[1]*=pack->value<1>(); }
+            if (pack->value<2>()!=1) { yuv[2]*=pack->value<2>(); }
+
+            if (pack->value<0>()!=0) { yuv[0]+=pack->value<0>(); }
+            if (pack->value<1>()!=0) { yuv[1]+=pack->value<1>(); }
+            if (pack->value<2>()!=0) { yuv[2]+=pack->value<2>(); }
+
+            cv::merge(yuv,image);
+            cv::cvtColor(image,image,cv::COLOR_Luv2RGB);
+
+            cv::split(image,yuv);
+            yuv.push_back(rgba_a);
+            cv::merge(yuv,image);
+
+            rgba_a.release();
+            yuv.clear();
+
+            return OpenCVUtility::tryRead(image);
         }
         catch (const cv::Exception &e) {
             opencv_exception::error(e,"get opencv exception",opencv_line(),opencv_file(),opencv_func());

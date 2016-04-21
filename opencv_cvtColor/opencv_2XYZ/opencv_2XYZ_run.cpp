@@ -38,8 +38,42 @@ void ControlItem::on_do_button_clicked(){
         new FunctionType([pack](const QImage & inputImage)->QImage {
         if (inputImage.isNull()) { return{}; }
         try {
-            
-           return inputImage.convertToFormat(QImage::Format_Grayscale8);
+            cv::Mat image=OpenCVUtility::tryRead(
+                inputImage.convertToFormat(QImage::Format_RGBA8888)
+            );
+             
+            std::vector<cv::Mat> xyz;
+            cv::Mat rgba_a;
+            {
+                cv::split(image,xyz);
+                rgba_a=xyz[3];
+                xyz.resize(3);
+            }
+
+            cv::merge(xyz,image);
+
+            cv::cvtColor(image,image,cv::COLOR_RGB2Luv);
+            cv::split(image,xyz);
+
+            if (pack->value<0>()!=1) { xyz[0]*=pack->value<0>(); }
+            if (pack->value<1>()!=1) { xyz[1]*=pack->value<1>(); }
+            if (pack->value<2>()!=1) { xyz[2]*=pack->value<2>(); }
+
+            if (pack->value<0>()!=0) { xyz[0]+=pack->value<0>(); }
+            if (pack->value<1>()!=0) { xyz[1]+=pack->value<1>(); }
+            if (pack->value<2>()!=0) { xyz[2]+=pack->value<2>(); }
+
+            cv::merge(xyz,image);
+            cv::cvtColor(image,image,cv::COLOR_Luv2RGB);
+
+            cv::split(image,xyz);
+            xyz.push_back(rgba_a);
+            cv::merge(xyz,image);
+
+            rgba_a.release();
+            xyz.clear();
+
+            return OpenCVUtility::tryRead(image);
         }
         catch (const cv::Exception &e) {
             opencv_exception::error(e,"get opencv exception",opencv_line(),opencv_file(),opencv_func());

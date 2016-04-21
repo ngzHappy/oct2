@@ -8,7 +8,8 @@
 #include <QtWidgets/qfiledialog.h>
 //#include <QtCharts>
 OpenCVImageItem * OpenCVWindowDetail::insertImage(QImage i){
-    auto ans=OpenCVWindow::insertImage(i);
+    auto ans=OpenCVWindow::insertImage(
+        i.convertToFormat(QImage::Format_RGBA8888));
     auto item=new OpenCVVerticalItems(ans);
     item->addWidget(new ControlItem(ans),true);
     ans->resize(768,600);
@@ -37,7 +38,42 @@ void ControlItem::on_do_button_clicked(){
         new FunctionType([pack](const QImage & inputImage)->QImage {
         if (inputImage.isNull()) { return{}; }
         try {
-           return inputImage.convertToFormat(QImage::Format_Grayscale8);
+            cv::Mat image=OpenCVUtility::tryRead(
+                inputImage.convertToFormat(QImage::Format_RGBA8888)
+            );
+
+            std::vector<cv::Mat> ycrcb;
+            cv::Mat rgba_a;
+            {
+                cv::split(image,ycrcb);
+                rgba_a=ycrcb[3];
+                ycrcb.resize(3);
+            }
+
+            cv::merge(ycrcb,image);
+
+            cv::cvtColor(image,image,cv::COLOR_RGB2Luv);
+            cv::split(image,ycrcb);
+
+            if (pack->value<0>()!=1) { ycrcb[0]*=pack->value<0>(); }
+            if (pack->value<1>()!=1) { ycrcb[1]*=pack->value<1>(); }
+            if (pack->value<2>()!=1) { ycrcb[2]*=pack->value<2>(); }
+
+            if (pack->value<0>()!=0) { ycrcb[0]+=pack->value<0>(); }
+            if (pack->value<1>()!=0) { ycrcb[1]+=pack->value<1>(); }
+            if (pack->value<2>()!=0) { ycrcb[2]+=pack->value<2>(); }
+
+            cv::merge(ycrcb,image);
+            cv::cvtColor(image,image,cv::COLOR_Luv2RGB);
+
+            cv::split(image,ycrcb);
+            ycrcb.push_back(rgba_a);
+            cv::merge(ycrcb,image);
+
+            rgba_a.release();
+            ycrcb.clear();
+
+            return OpenCVUtility::tryRead(image);
         }
         catch (const cv::Exception &e) {
             opencv_exception::error(e,"get opencv exception",opencv_line(),opencv_file(),opencv_func());

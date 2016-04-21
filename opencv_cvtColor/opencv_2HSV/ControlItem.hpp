@@ -9,22 +9,21 @@ namespace Ui {
 class ControlItem;
 }
 
-class ControlItem : public QWidget
-{
+class ControlItem : public QWidget {
     Q_OBJECT
-
 public:
 
-    class Pack{
+    class Pack {
     public:
+        double h,s,v;
+        double hBase,sBase,vBase;
     };
 
-    ControlItem(OpenCVImageItem *,QWidget *parent = 0);
+    ControlItem(OpenCVImageItem *,QWidget *parent=0);
     ~ControlItem();
 
-private slots:
+    private slots:
     void on_select_image_button_clicked();
-
     void on_do_button_clicked();
 
 private:
@@ -38,6 +37,9 @@ inline bool operator==(
     const ControlItem::Pack & l,
     const ControlItem::Pack & r
     ) {
+    if (l.h==r.h)if (l.hBase==r.hBase)
+        if (l.s==r.s)if (l.sBase==r.sBase)
+            if (l.v==r.v)if (l.vBase==r.vBase) { return true; }
     return false;
 }
 

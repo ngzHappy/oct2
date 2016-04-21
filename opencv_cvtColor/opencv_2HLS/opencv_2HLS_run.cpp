@@ -8,7 +8,7 @@
 #include <QtWidgets/qfiledialog.h>
 //#include <QtCharts>
 OpenCVImageItem * OpenCVWindowDetail::insertImage(QImage i){
-    auto ans=OpenCVWindow::insertImage(i);
+    auto ans=OpenCVWindow::insertImage(i.convertToFormat(QImage::Format_RGB888));
     auto item=new OpenCVVerticalItems(ans);
     item->addWidget(new ControlItem(ans),true);
     ans->resize(768,600);
@@ -32,7 +32,22 @@ void ControlItem::on_do_button_clicked(){
         new FunctionType([pack](const QImage & inputImage)->QImage {
         if (inputImage.isNull()) { return{}; }
         try {
-           return inputImage.convertToFormat(QImage::Format_Grayscale8);
+            cv::Mat image=OpenCVUtility::tryRead(
+                inputImage.convertToFormat(QImage::Format_RGB888));
+            image.convertTo(image,CV_32FC3);
+            cv::cvtColor(image,image,cv::COLOR_RGB2HLS);
+            std::vector<cv::Mat> hls{3};
+            cv::split(image,hls);
+            hls[0]*=pack->h; 
+            hls[1]*=pack->l;
+            hls[2]*=pack->s;
+            if(pack->hBase!=0)hls[0]+=pack->hBase; 
+            if(pack->lBase!=0)hls[1]+=pack->lBase;
+            if(pack->sBase!=0)hls[2]+=pack->sBase;
+            cv::merge(hls,image);
+            cv::cvtColor(image,image,cv::COLOR_HLS2RGB);
+            hls.clear();
+            return OpenCVUtility::tryRead(image);
         }
         catch (const cv::Exception &e) {
             opencv_exception::error(e,"get opencv exception",opencv_line(),opencv_file(),opencv_func());

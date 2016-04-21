@@ -46,8 +46,14 @@
      </item>
      <item row="0" column="1">
       <widget class="QDoubleSpinBox" name="hDoubleSpinBox">
+       <property name="toolTip">
+        <string>色相</string>
+       </property>
        <property name="decimals">
         <number>6</number>
+       </property>
+       <property name="singleStep">
+        <double>0.050000000000000</double>
        </property>
        <property name="value">
         <double>1.000000000000000</double>
@@ -63,8 +69,14 @@
      </item>
      <item row="1" column="1">
       <widget class="QDoubleSpinBox" name="lDoubleSpinBox">
+       <property name="toolTip">
+        <string>亮度</string>
+       </property>
        <property name="decimals">
         <number>6</number>
+       </property>
+       <property name="singleStep">
+        <double>0.050000000000000</double>
        </property>
        <property name="value">
         <double>1.000000000000000</double>
@@ -80,8 +92,14 @@
      </item>
      <item row="2" column="1">
       <widget class="QDoubleSpinBox" name="sDoubleSpinBox">
+       <property name="toolTip">
+        <string>饱和度</string>
+       </property>
        <property name="decimals">
         <number>6</number>
+       </property>
+       <property name="singleStep">
+        <double>0.050000000000000</double>
        </property>
        <property name="value">
         <double>1.000000000000000</double>
@@ -100,6 +118,9 @@
        <property name="decimals">
         <number>6</number>
        </property>
+       <property name="singleStep">
+        <double>0.050000000000000</double>
+       </property>
       </widget>
      </item>
      <item row="4" column="0">
@@ -114,6 +135,9 @@
        <property name="decimals">
         <number>6</number>
        </property>
+       <property name="singleStep">
+        <double>0.050000000000000</double>
+       </property>
       </widget>
      </item>
      <item row="5" column="0">
@@ -127,6 +151,9 @@
       <widget class="QDoubleSpinBox" name="sBaseDoubleSpinBox">
        <property name="decimals">
         <number>6</number>
+       </property>
+       <property name="singleStep">
+        <double>0.050000000000000</double>
        </property>
       </widget>
      </item>

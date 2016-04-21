@@ -195,10 +195,10 @@ void OpenCVImageItem::saveImage() {
 void OpenCVImageItem::tryResizeImage() {
     {
         const auto size_=this->size();
-        const auto width_=(std::max<qreal>)(
-        { 128.0,static_cast<qreal>(image_.width()),size_.width() });
-        const auto height_=(std::max<qreal>)(
-        { 128.0,static_cast<qreal>(image_.height()),size_.height() });
+        const auto width_=(std::min<qreal>)(
+         768.0,std::max(static_cast<qreal>(image_.width()),size_.width() ));
+        const auto height_=(std::min<qreal>)(
+         600.0,std::max(static_cast<qreal>(image_.height()),size_.height() ));
         this->setMinimumWidth(std::max(128,image_.width()/112));
         this->setMinimumHeight(std::max(128,image_.height()/112));
         this->resize(width_,height_);

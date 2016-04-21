@@ -16,6 +16,8 @@ public:
 
     class Pack{
     public:
+        double r,g,b;
+        double rBase,gBase,bBase;
     };
 
     ControlItem(OpenCVImageItem *,QWidget *parent = 0);

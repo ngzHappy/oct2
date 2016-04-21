@@ -33,7 +33,18 @@ void ControlItem::on_do_button_clicked() {
         new FunctionType([pack](const QImage & inputImage)->QImage {
         if (inputImage.isNull()) { return{}; }
         try {
-            return inputImage.convertToFormat(QImage::Format_Grayscale8);
+            cv::Mat image=OpenCVUtility::tryRead(
+                inputImage.convertToFormat(QImage::Format_RGB888));
+            image.convertTo(image,CV_32FC3);
+            {
+                std::vector<cv::Mat> rgb{ 3 };
+                cv::split(image,rgb);
+                rgb[0]+=pack->rBase; rgb[0]*=pack->r;
+                rgb[1]+=pack->gBase; rgb[1]*=pack->g;
+                rgb[2]+=pack->bBase; rgb[2]*=pack->b;
+                image=rgb[0]+rgb[1]+rgb[2];
+            }
+            return OpenCVUtility::tryRead(image);
         }
         catch (const cv::Exception &e) {
             opencv_exception::error(e,"get opencv exception",opencv_line(),opencv_file(),opencv_func());

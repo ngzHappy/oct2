@@ -1,7 +1,7 @@
 #ifndef CONTROLITEM_HPP
 #define CONTROLITEM_HPP
 
-#include <QtGui/QWidget>
+#include <QtWidgets/QWidget>
 
 namespace Ui {
 class ControlItem;

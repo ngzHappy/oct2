@@ -11,8 +11,8 @@ ControlItem::ControlItem(
     ui->setupUi(this);
 }
 
-void ControlItem::_p_init_pack(Pack *){
-
+void ControlItem::_p_init_pack(Pack *pack){
+    
 }
 
 ControlItem::~ControlItem()

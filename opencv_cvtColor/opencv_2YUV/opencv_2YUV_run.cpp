@@ -41,7 +41,7 @@ void ControlItem::on_do_button_clicked(){
             cv::Mat image=OpenCVUtility::tryRead(
                 inputImage.convertToFormat(QImage::Format_RGBA8888)
             );
-
+           
             std::vector<cv::Mat> yuv;
             cv::Mat rgba_a;
             {
@@ -51,6 +51,7 @@ void ControlItem::on_do_button_clicked(){
             }
 
             cv::merge(yuv,image);
+            yuv.clear();
 
             cv::cvtColor(image,image,cv::COLOR_RGB2Luv);
             cv::split(image,yuv);
@@ -59,9 +60,9 @@ void ControlItem::on_do_button_clicked(){
             if (pack->value<1>()!=1) { yuv[1]*=pack->value<1>(); }
             if (pack->value<2>()!=1) { yuv[2]*=pack->value<2>(); }
 
-            if (pack->value<0>()!=0) { yuv[0]+=pack->value<0>(); }
-            if (pack->value<1>()!=0) { yuv[1]+=pack->value<1>(); }
-            if (pack->value<2>()!=0) { yuv[2]+=pack->value<2>(); }
+            if (pack->base<0>()!=0) { yuv[0]+=pack->base<0>(); }
+            if (pack->base<1>()!=0) { yuv[1]+=pack->base<1>(); }
+            if (pack->base<2>()!=0) { yuv[2]+=pack->base<2>(); }
 
             cv::merge(yuv,image);
             cv::cvtColor(image,image,cv::COLOR_Luv2RGB);

@@ -59,9 +59,9 @@ void ControlItem::on_do_button_clicked(){
             if (pack->value<1>()!=1) { ycrcb[1]*=pack->value<1>(); }
             if (pack->value<2>()!=1) { ycrcb[2]*=pack->value<2>(); }
 
-            if (pack->value<0>()!=0) { ycrcb[0]+=pack->value<0>(); }
-            if (pack->value<1>()!=0) { ycrcb[1]+=pack->value<1>(); }
-            if (pack->value<2>()!=0) { ycrcb[2]+=pack->value<2>(); }
+            if (pack->base<0>()!=0) { ycrcb[0]+=pack->base<0>(); }
+            if (pack->base<1>()!=0) { ycrcb[1]+=pack->base<1>(); }
+            if (pack->base<2>()!=0) { ycrcb[2]+=pack->base<2>(); }
 
             cv::merge(ycrcb,image);
             cv::cvtColor(image,image,cv::COLOR_Luv2RGB);

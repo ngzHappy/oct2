@@ -376,3 +376,7 @@ SUBDIRS += opencv_2YUV
 opencv_2RGBA.file = $$PWD/opencv_cvtColor/opencv_2RGBA/opencv_2RGBA.pro
 opencv_2RGBA.depends += core_utility
 SUBDIRS += opencv_2RGBA
+
+gifMaker.file = $$PWD/opencv_tool/gifMaker/gifMaker.pro
+gifMaker.depends += core_utility
+SUBDIRS += gifMaker

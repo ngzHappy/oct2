@@ -8,14 +8,14 @@ application={
         input_gif_data={
             width=440,
             height=616,
-			{"images:giftest/000000",700},
-            {"images:giftest/000001",700},
-            {"images:giftest/000002",700},
-            {"images:giftest/000003",700},
-			{"images:giftest/000004",700},
-            {"images:giftest/000005",700},
-            {"images:giftest/000006",700},
-            {"images:giftest/000007",700},
+			{"images:giftest/000000",200},
+            {"images:giftest/000001",200},
+            {"images:giftest/000002",200},
+            {"images:giftest/000003",200},
+			{"images:giftest/000004",200},
+            {"images:giftest/000005",200},
+            {"images:giftest/000006",200},
+            {"images:giftest/000007",200},
         },
 }
 

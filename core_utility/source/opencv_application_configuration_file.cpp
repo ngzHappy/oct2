@@ -371,6 +371,61 @@ bool OpenCVApplicationConfigurationFile::_p_get_3d_data(
     return false;
 }
 
+OpenCVApplicationConfigurationFile::GifMakerData 
+OpenCVApplicationConfigurationFile::getInputGifMaderData()const {
+    if (L__==nullptr) { return{}; }
+    GifMakerData ans;
+    typedef OpenCVApplicationConfigurationFile::GifMakerData::Item Item;
+    auto data=std::make_shared<std::list<Item>>(); 
+    __private::LUAStateLock _L(L__);
+
+    luaL_dostring(L__,"return application.input_gif_data");
+
+    int is_num_;
+    if (lua_istable(L__,-1)) {
+        auto table_index=lua_gettop(L__);
+        
+        lua_pushnil(L__);
+        while (lua_next(L__,table_index)>0) {
+            if (lua_isnumber(L__,-2)==false) {
+                std::string tmp=lua_tostring(L__,-2);
+                if (tmp=="width") {
+                    auto width= lua_tonumberx(L__,-1,&is_num_);
+                    if (is_num_) { ans.width=std::int32_t(width); }
+                    else { return{}; }
+                }
+                else if (tmp=="height") {
+                    auto height= lua_tonumberx(L__,-1,&is_num_);
+                    if (is_num_) { ans.height=std::int32_t(height); }
+                    else { return{}; }
+                }
+            }
+            else if(lua_istable(L__,-1)){
+                QString fileName;
+                std::int32_t time;
+                auto tindex=lua_gettop(L__);
+                lua_pushnil(L__);
+                lua_next(L__,tindex);
+                size_t len;
+                auto * str=luaL_tolstring(L__,-1,&len);
+                if (len&&str) { fileName=QString::fromUtf8(str,len); }
+                else { return{}; }
+                lua_pop(L__,1);lua_pop(L__,1);
+                lua_next(L__,tindex);
+                time=std::int32_t(lua_tonumberx(L__,-1,&is_num_));
+                if (is_num_) { data->emplace_back(fileName,time); }
+                else { return{}; }
+                lua_settop(L__,tindex);
+            }
+            lua_pop(L__,1);
+        }
+
+    }
+
+    ans.data=std::move(data);
+    return std::move(ans);
+}
+
 QStringList OpenCVApplicationConfigurationFile::getInputImagesNames(const QStringList & _a_default)const {
     if (L__==nullptr) { return _a_default; }
     __private::LUAStateLock _L(L__);

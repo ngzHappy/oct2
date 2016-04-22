@@ -5,12 +5,12 @@ application={
                 "images:000002",
                 "images:000003",
         },
-		input_gif_data{
-		width=100,
-		height=100,
-		{"images:000001",100--[[time--]]},
-		{"images:000002",100--[[time--]]},
-		{"images:000003",100--[[time--]]},
-		},
+        input_gif_data={
+            width=512,
+            height=512,
+            {"images:000001",600},
+            {"images:000002",700},
+            {"images:000003",800},
+        },
 }
 

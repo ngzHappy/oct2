@@ -10,6 +10,31 @@ namespace boost_simple_test{
 extern void run(OpenCVWindow * ) try{
 
     {
+        namespace bgi=boost::geometry::index;
+        namespace bg=boost::geometry;
+        typedef bg::model::point<std::int32_t,3,bg::cs::cartesian> point/*笛卡尔坐标系点*/;
+        typedef std::pair<point,std::int32_t> value;
+
+        bgi::rtree<value,bgi::quadratic<16>> rtree;
+        rtree.insert(std::make_pair(point(1,2,3),std::int32_t(0)));
+        rtree.insert(std::make_pair(point(0,2,3),std::int32_t(0)));
+        rtree.insert(std::make_pair(point(1,5,3),std::int32_t(0)));
+        rtree.insert(std::make_pair(point(1,0,3),std::int32_t(0)));
+
+        std::vector<value> ans;
+        rtree.query(bgi::nearest(point(1,0,3),1),std::back_inserter(ans));
+
+        for (const auto & i:ans) {
+            std::cout
+                <<"x:"<<i.first.get<0>()
+                <<"y:"<<i.first.get<1>()
+                <<"z:"<<i.first.get<2>()
+                <<std::endl;
+        }
+
+    }
+
+    {
         boost::shared_ptr<int> value=boost::make_shared<int>(12);
         assert(value);
         assert(*value==12);

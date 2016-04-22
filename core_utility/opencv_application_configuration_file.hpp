@@ -2,6 +2,7 @@
 #define _OPENCV_APPLICATION_CONFIGURATION_FILE
 
 #include "core_utility.hpp"
+#include <list>
 #include <array>
 #include <utility>
 #include <cstddef>
@@ -33,7 +34,14 @@ application={
             {1.1,2.2,3.3},
             {3.4,4.5,5.6},
             {5.7,6.8,7.9,},
-        }
+        },
+        input_gif_data{
+            width=100,
+            height=100,
+            {"images:000001",100--[[time--]]},
+            {"images:000002",100--[[time--]]},
+            {"images:000003",100--[[time--]]},
+        },
 }
 */
 class CORE_UTILITYSHARED_EXPORT OpenCVApplicationConfigurationFile {
@@ -42,6 +50,24 @@ MACRO_PROTECTED:
     OpenCVApplicationConfigurationFile(lua_State *_L):L__(_L) {}
     std::shared_ptr<const void> _m_manager;
 public:
+
+    class GifMakerData {
+    public:
+        struct Item {
+            QString fileName;
+            std::int32_t time;
+            Item(std::int32_t t,const QString & f):fileName(f),time(t) {}
+            Item(const QString & f,std::int32_t t):fileName(f),time(t) {}
+        };
+        std::int32_t width=-1;
+        std::int32_t height=-1;
+        std::shared_ptr<const std::list<Item>>data;
+        operator bool()const { 
+            if (height<=0) { return false; }
+            if (width<=0) { return false; }
+            return (bool(data)&&data->empty()==false);
+        }
+    };
 
     typedef double NumberType;
     typedef long long IntegerType;
@@ -59,6 +85,7 @@ public:
     QStringList getInputImagesNames(const QStringList &/*default*/)const;
     QStringList getInputImagesNames()const { return getInputImagesNames(QStringList{}); }
     QStringList getInputImagesNames(const QString & _default_)const { return getInputImagesNames(QStringList{ _default_ }); }
+    GifMakerData getInputGifMaderData()const;
 
     template<typename _T_=NumberType,typename _Vector_=std::vector<_T_>>
     _Vector_ getInputData1D()const;

@@ -1,12 +1,14 @@
 ﻿#include "QAnimatedGifEncoder.h"
 
-#include<cmath>
-#include<QVector>
-#include<vector>
-#include<utility>
-#include<algorithm>
-#include<QPainter>
-#include<array>
+#include <cmath>
+#include <QVector>
+#include <vector>
+#include <utility>
+#include <algorithm>
+#include <QPainter>
+#include <array>
+#include <OpenCVBoost.hpp>
+#include <type_traits>
 
 #ifndef null
 #define null 0
@@ -16,7 +18,34 @@
 #define one (Integer(1))
 #endif
 
+namespace {
+
+void put_char(QIODevice * o,char c) { o->putChar(c); }
+ 
+}
+
 namespace mgui {
+
+namespace {
+
+constexpr const double uchar2doule[]{
+    0/256.0,	1/256.0,	2/256.0,	3/256.0,	4/256.0,	5/256.0,	6/256.0,	7/256.0,	8/256.0,	9/256.0,	10/256.0,	11/256.0,	12/256.0,	13/256.0,	14/256.0,	15/256.0,
+    16/256.0,	17/256.0,	18/256.0,	19/256.0,	20/256.0,	21/256.0,	22/256.0,	23/256.0,	24/256.0,	25/256.0,	26/256.0,	27/256.0,	28/256.0,	29/256.0,	30/256.0,	31/256.0,
+    32/256.0,	33/256.0,	34/256.0,	35/256.0,	36/256.0,	37/256.0,	38/256.0,	39/256.0,	40/256.0,	41/256.0,	42/256.0,	43/256.0,	44/256.0,	45/256.0,	46/256.0,	47/256.0,
+    48/256.0,	49/256.0,	50/256.0,	51/256.0,	52/256.0,	53/256.0,	54/256.0,	55/256.0,	56/256.0,	57/256.0,	58/256.0,	59/256.0,	60/256.0,	61/256.0,	62/256.0,	63/256.0,
+    64/256.0,	65/256.0,	66/256.0,	67/256.0,	68/256.0,	69/256.0,	70/256.0,	71/256.0,	72/256.0,	73/256.0,	74/256.0,	75/256.0,	76/256.0,	77/256.0,	78/256.0,	79/256.0,
+    80/256.0,	81/256.0,	82/256.0,	83/256.0,	84/256.0,	85/256.0,	86/256.0,	87/256.0,	88/256.0,	89/256.0,	90/256.0,	91/256.0,	92/256.0,	93/256.0,	94/256.0,	95/256.0,
+    96/256.0,	97/256.0,	98/256.0,	99/256.0,	100/256.0,	101/256.0,	102/256.0,	103/256.0,	104/256.0,	105/256.0,	106/256.0,	107/256.0,	108/256.0,	109/256.0,	110/256.0,	111/256.0,
+    112/256.0,	113/256.0,	114/256.0,	115/256.0,	116/256.0,	117/256.0,	118/256.0,	119/256.0,	120/256.0,	121/256.0,	122/256.0,	123/256.0,	124/256.0,	125/256.0,	126/256.0,	127/256.0,
+    128/256.0,	129/256.0,	130/256.0,	131/256.0,	132/256.0,	133/256.0,	134/256.0,	135/256.0,	136/256.0,	137/256.0,	138/256.0,	139/256.0,	140/256.0,	141/256.0,	142/256.0,	143/256.0,
+    144/256.0,	145/256.0,	146/256.0,	147/256.0,	148/256.0,	149/256.0,	150/256.0,	151/256.0,	152/256.0,	153/256.0,	154/256.0,	155/256.0,	156/256.0,	157/256.0,	158/256.0,	159/256.0,
+    160/256.0,	161/256.0,	162/256.0,	163/256.0,	164/256.0,	165/256.0,	166/256.0,	167/256.0,	168/256.0,	169/256.0,	170/256.0,	171/256.0,	172/256.0,	173/256.0,	174/256.0,	175/256.0,
+    176/256.0,	177/256.0,	178/256.0,	179/256.0,	180/256.0,	181/256.0,	182/256.0,	183/256.0,	184/256.0,	185/256.0,	186/256.0,	187/256.0,	188/256.0,	189/256.0,	190/256.0,	191/256.0,
+    192/256.0,	193/256.0,	194/256.0,	195/256.0,	196/256.0,	197/256.0,	198/256.0,	199/256.0,	200/256.0,	201/256.0,	202/256.0,	203/256.0,	204/256.0,	205/256.0,	206/256.0,	207/256.0,
+    208/256.0,	209/256.0,	210/256.0,	211/256.0,	212/256.0,	213/256.0,	214/256.0,	215/256.0,	216/256.0,	217/256.0,	218/256.0,	219/256.0,	220/256.0,	221/256.0,	222/256.0,	223/256.0,
+    224/256.0,	225/256.0,	226/256.0,	227/256.0,	228/256.0,	229/256.0,	230/256.0,	231/256.0,	232/256.0,	233/256.0,	234/256.0,	235/256.0,	236/256.0,	237/256.0,	238/256.0,	239/256.0,
+    240/256.0,	241/256.0,	242/256.0,	243/256.0,	244/256.0,	245/256.0,	246/256.0,	247/256.0,	248/256.0,	249/256.0,	250/256.0,	251/256.0,	252/256.0,	253/256.0,	254/256.0,	255/256.0,
+};
 
 template<typename T1,typename T>
 static inline void writeSome(const T1 & some,T * out) {
@@ -34,15 +63,13 @@ static inline void writeSome(Byte some,T * out) {
 }
 
 }
+}
 
-namespace mgui
-{
-#ifdef _DEBUG
-typedef std::vector<Byte> PixType;
-#else
+namespace mgui {
+
+namespace {
 //隐式数据共享
 typedef  QVector<Byte>  PixType;
-#endif
 
 class QuantizationAlgorithm {
 public:
@@ -51,6 +78,256 @@ public:
     virtual ~QuantizationAlgorithm() {}
     virtual QVector<Byte> process()=0;
     virtual Integer map(Integer b,Integer g,Integer r)=0;
+};
+
+class Quantization :public QuantizationAlgorithm {
+    static unsigned char int2unsignedchar(int i) {
+        return (unsigned char)((i&0x00ff));
+    }
+
+public:
+    struct DataItem {
+        unsigned char a,b,c;
+        std::int32_t count=0;
+        DataItem():a(0),b(0),c(0) {}
+        DataItem(
+            unsigned char _0,
+            unsigned char _1,
+            unsigned char _2):a(_0),b(_1),c(_2) {
+        }
+        template<typename T0,typename T1,typename T2>
+        DataItem(T0 _0,T1 _1,T2 _2):
+            a(int2unsignedchar(_0)),
+            b(int2unsignedchar(_1)),
+            c(int2unsignedchar(_2)) {
+        }
+        friend bool operator<(const DataItem & l,const DataItem & r) {
+            if (l.a<r.a) { return true; }
+            if (l.a>r.a) { return false; }
+            if (l.b<r.b) { return true; }
+            if (l.b>r.b) { return false; }
+            return l.c<r.c;
+        }
+    };
+
+    PixType pix;
+    QVector<Byte> quantization;
+    typedef boost::geometry::model::point<
+        std::int32_t,3,boost::geometry::cs::cartesian> point_t/*笛卡尔坐标系点*/;
+    typedef std::pair<point_t,std::int32_t> value_t;
+    typedef boost::geometry::index::rtree<value_t,boost::geometry::index::quadratic<16>> rtree_t;
+    std::shared_ptr<rtree_t> rtree/*使用rtree加快搜索速度*/;
+
+    void construct(const PixType & hepic,Integer /*len*/,Integer /*sample*/) override {
+        pix=hepic;
+    }
+
+    QVector<Byte> process() {
+        QVector<Byte> & ans=quantization;
+        ans.clear();
+        rtree=std::make_shared<rtree_t>();
+
+        evalQuantization();
+
+        return quantization;
+    }
+
+    Integer map(Integer _1_,Integer _2_,Integer _3_) {
+        if (rtree) {
+            point_t point(_1_,_2_,_3_);
+            std::vector<value_t> ans;
+            rtree->query(
+                boost::geometry::index::nearest(point,1),
+                std::back_inserter(ans));
+            if (ans.empty()==false) { return ans[0].second; }
+        }
+        return 0;
+    }
+private:
+    void evalQuantization() {
+        std::map<DataItem,std::int32_t>hist;
+
+        {/*得到统计值*/
+            auto begin_=(const DataItem *)(pix.cbegin());
+            auto end_=(const DataItem*)(pix.cend());
+            for (auto pos=begin_; pos!=end_; ++pos) {
+                auto hpos=hist.find(*pos);
+                if (hpos!=hist.end()) { ++(hpos->second); }
+                else { hist.insert({ *pos,1 }); }
+            }
+            for (auto & i:hist) { (const_cast<DataItem &>(i.first).count)=i.second; }
+        }
+
+        /*颜色数小于等于256*/
+        if (hist.size()<=256) {
+            std::int32_t index_=0;
+            for (auto & i:hist) {
+                rtree->insert(std::make_pair(
+                    point_t(i.first.a,i.first.b,i.first.c),index_++
+                ));
+                quantization.push_back(Byte(i.first.a&0x00ff));
+                quantization.push_back(Byte(i.first.b&0x00ff));
+                quantization.push_back(Byte(i.first.c&0x00ff));
+            }
+            return;
+        }
+
+        /*降低颜色数目*/
+        struct Data {
+            double a,b,c;
+            std::int32_t count;
+        };
+
+        struct Pack {
+            std::list<Data>data;
+            double mean_x,mean_y,mean_z;
+            double std_x,std_y,std_z;
+
+            void update() {
+                double x=0,y=0,z=0;
+                double x_w=0;
+                for (const auto & i:(data)) {
+                    x_w+=i.count;
+                    x+=i.a*i.count; 
+                    y+=i.b*i.count;
+                    z+=i.c*i.count;
+                }
+
+                mean_x=x/x_w;
+                mean_y=y/x_w;
+                mean_z=z/x_w;
+
+                std_x=0; std_y=0; std_z=0;
+                for (const auto & i:(data)) {
+                    std_z+=std::abs(i.count*(i.c-mean_z));
+                    std_y+=std::abs(i.count*(i.b-mean_y));
+                    std_x+=std::abs(i.count*(i.a-mean_x));
+                }
+
+            }
+
+            std::pair<
+                std::shared_ptr<Pack>,
+                std::shared_ptr<Pack>
+            >next() {
+                if ((std_x>=std_y)&&(std_x>=std_z)) {
+                    return split_x();
+                }
+                if ((std_y>=std_x)&&(std_y>=std_z)) {
+                    return split_y();
+                }
+                return split_z();
+            }
+
+            std::pair<
+                std::shared_ptr<Pack>,
+                std::shared_ptr<Pack>
+            >split_x() {
+                std::shared_ptr<Pack> l=std::make_shared<Pack>();
+                std::shared_ptr<Pack> r=std::make_shared<Pack>();
+
+                for (const Data & i:data) {
+                    if (i.a>mean_x) { l->data.push_back(i); }
+                    else { r->data.push_back(i); }
+                }
+
+                l->update(); r->update();
+                return{std::move(l),std::move(r)};
+            }
+            std::pair<
+                std::shared_ptr<Pack>,
+                std::shared_ptr<Pack>
+            >split_y() {
+                std::shared_ptr<Pack> l=std::make_shared<Pack>();
+                std::shared_ptr<Pack> r=std::make_shared<Pack>();
+
+                for (const Data & i:data) {
+                    if (i.b>mean_y) { l->data.push_back(i); }
+                    else { r->data.push_back(i); }
+                }
+
+                l->update(); r->update();
+                return{std::move(l),std::move(r)};
+            }
+            std::pair<
+                std::shared_ptr<Pack>,
+                std::shared_ptr<Pack>
+            >split_z() {
+                std::shared_ptr<Pack> l=std::make_shared<Pack>();
+                std::shared_ptr<Pack> r=std::make_shared<Pack>();
+
+                for (const Data & i:data) {
+                    if (i.c>mean_z) { l->data.push_back(i); }
+                    else { r->data.push_back(i); }
+                }
+
+                l->update(); r->update();
+                return{std::move(l),std::move(r)};
+            }
+        };
+
+        auto comp_pack_function=[](
+            std::shared_ptr<Pack> &l,
+            std::shared_ptr<Pack> &r
+            ) {
+            auto std_l=std::max(l->std_z,std::max(l->std_x,l->std_y));
+            auto std_r=std::max(r->std_x,std::max(r->std_y,r->std_z));
+            return std_l>std_r;
+        };
+
+        std::vector<std::shared_ptr<Pack>> packs;
+        packs.reserve(256);
+        {
+            auto pack_root=std::make_shared<Pack>();
+            for (const auto & i:hist) {
+                pack_root->data.push_back({
+                    uchar2doule[i.first.a],
+                    uchar2doule[i.first.b],
+                    uchar2doule[i.first.c],
+                    i.second
+                }
+                );
+            }
+            pack_root->update();
+            packs.push_back(std::move(pack_root));
+        }
+
+        hist.clear();
+        while (packs.size()<256) {
+            std::sort(packs.begin(),packs.end(),comp_pack_function);
+            auto next_=packs.begin()->get()->next();
+            packs[0]=next_.first;
+            packs.push_back(next_.second);
+        }
+
+        std::int32_t index=0;
+        for (auto & p:packs) {
+
+            p->mean_x*=256;
+            p->mean_y*=256;
+            p->mean_z*=256;
+
+            std::int32_t a,b,c;
+            a=std::int32_t(std::round(p->mean_x));
+            b=std::int32_t(std::round(p->mean_y));
+            c=std::int32_t(std::round(p->mean_z));
+
+            if (a>255) { a=255; }
+            if (b>255) { b=255; }
+            if (c>255) { c=255; }
+
+            rtree->insert(std::make_pair(
+                point_t(a,b,c),index++
+            ));
+
+            quantization.push_back(Byte(a&0x00ff));
+            quantization.push_back(Byte(b&0x00ff));
+            quantization.push_back(Byte(c&0x00ff));
+
+            p.reset();
+        }
+
+    }
 };
 
 /* NeuQuant Neural-Net Quantization Algorithm
@@ -465,10 +742,11 @@ private:
     }
 }; //~class NeuQuant
 
-
+}
 }
 
 namespace mgui {
+namespace {
 class LZWEncoder {
 public:
 #ifndef EOF
@@ -603,17 +881,17 @@ public:
 
     //----------------------------------------------------------------------------
     void encode(OutputStream * os) {
-        os->put(initCodeSize&0x00ff); // write "initial code size" byte
+        put_char(os,initCodeSize&0x00ff); // write "initial code size" byte
         remaining=imgW * imgH; // reset navigation variables
         curPixel=0;
         compress(initCodeSize+1,os); // compress and write the pixel data
-        os->put(0);
+        put_char(os,0);
     }
 
     //// Flush the packet to disk, and reset the accumulator
     void flush_char(OutputStream * outs) {
         if (a_count>0) {
-            outs->put(0x00ff&a_count);
+            put_char(outs,0x00ff&a_count);
             outs->write(accum.data(),a_count);
             a_count=0;
         }
@@ -667,10 +945,10 @@ public:
                 char_out((Byte)(cur_accum&0x00ff),outs);
                 cur_accum>>=8;
                 cur_bits-=8;
-            }
-            flush_char(outs);
         }
+            flush_char(outs);
     }
+}
 };
 #ifndef EOF
 const Integer LZWEncoder::EOF=-1; /*= -1*/
@@ -696,6 +974,8 @@ const std::array<Integer,17> LZWEncoder::masks=
     0x00007FFF,
     0x0000FFFF
 };
+
+}
 }
 
 namespace mgui {
@@ -884,9 +1164,9 @@ void QAnimatedGifEncoder::writePixels() {
 
 void QAnimatedGifEncoder::writeGraphicCtrlExt() {
     ThisData * var_thisData=thisData.get();
-    var_thisData->out->put(0x21); // extension introducer
-    var_thisData->out->put(Byte(0xf9)); // GCE label
-    var_thisData->out->put(4); // data block size
+    put_char(var_thisData->out,(0x21)); // extension introducer
+    put_char(var_thisData->out,(Byte(0xf9))); // GCE label
+    put_char(var_thisData->out,(4)); // data block size
     Integer transp,disp;
     if (var_thisData->isGivenTransparent==false) {
         transp=0;
@@ -901,10 +1181,10 @@ void QAnimatedGifEncoder::writeGraphicCtrlExt() {
     }
     disp<<=2;
     // packed fields
-    var_thisData->out->put(Byte((disp|transp)&0x00ff)); // 8   transparency flag
+    put_char(var_thisData->out,(Byte((disp|transp)&0x00ff))); // 8   transparency flag
     writeShort(var_thisData->delay); // delay x 1/100 sec
-    var_thisData->out->put(Byte(0x00ff&var_thisData->transIndex)); // transparent color index
-    var_thisData->out->put(0); // block terminator
+    put_char(var_thisData->out,(Byte(0x00ff&var_thisData->transIndex))); // transparent color index
+    put_char( var_thisData->out,(0)); // block terminator
 }
 
 void QAnimatedGifEncoder::writeLSD() {
@@ -920,7 +1200,7 @@ void QAnimatedGifEncoder::writeLSD() {
 
 void QAnimatedGifEncoder::writeImageDesc() {
     ThisData * var_thisData=thisData.get();
-    var_thisData->out->put(0x2c);
+    put_char(var_thisData->out,(0x2c));
     writeShort(0); // image position x,y = 0,0
     writeShort(0);
     writeShort(var_thisData->width); // image size
@@ -928,30 +1208,30 @@ void QAnimatedGifEncoder::writeImageDesc() {
     // packed fields
     if (var_thisData->firstFrame) {
         // no LCT  - GCT is used for first (or only) frame
-        var_thisData->out->put(0);
+        put_char(var_thisData->out,(0));
     }
     else {
         // specify normal LCT
-        var_thisData->out->put(0x80|var_thisData->palSize); // 6-8 size of color table
+        put_char(var_thisData->out,(0x80|var_thisData->palSize)); // 6-8 size of color table
     }
 }
 
 void QAnimatedGifEncoder::writeShort(Integer value) {
     ThisData * var_thisData=thisData.get();
-    var_thisData->out->put(Byte(value&0x00ff));
-    var_thisData->out->put(Byte((value>>8)&0x00ff));
+    put_char(var_thisData->out,(Byte(value&0x00ff)));
+    put_char(var_thisData->out,(Byte((value>>8)&0x00ff)));
 }
 
 void QAnimatedGifEncoder::writeNetscapeExt() {
     ThisData * var_thisData=thisData.get();
-    var_thisData->out->put(0x21); // extension introducer
+    put_char(var_thisData->out,(0x21)); // extension introducer
     writeSome(Byte(0xff),var_thisData->out); // app extension label
-    var_thisData->out->put(11); // block size
+    put_char(var_thisData->out,(11)); // block size
     writeString((const Byte *)("NETSCAPE2.0")); // app id + auth code
-    var_thisData->out->put(3); // sub-block size
-    var_thisData->out->put(1); // loop sub-block id
+    put_char(var_thisData->out,(3)); // sub-block size
+    put_char(var_thisData->out,(1)); // loop sub-block id
     writeShort(var_thisData->repeat); // loop count (extra iterations, 0=repeat forever)
-    var_thisData->out->put(0); // block terminator
+    put_char(var_thisData->out,(0)); // block terminator
 }
 
 Boolean QAnimatedGifEncoder::addFrame(const BufferedImage & im) {
@@ -978,8 +1258,7 @@ Boolean QAnimatedGifEncoder::finish() {
     if (var_thisData->out==0) { ok=false; }
     else
         try {
-        var_thisData->out->put(0x3b);
-        var_thisData->out->flush();
+        put_char(var_thisData->out,(0x3b));
         if (var_thisData->closeStream) {
             var_thisData->out->close();
         }
@@ -1059,14 +1338,14 @@ Integer QAnimatedGifEncoder::findClosest(Color c) {
     return minpos;
 }
 
-
+//TODO:analyzePixels
 void QAnimatedGifEncoder::analyzePixels() {
     ThisData * var_thisData=thisData.get();
     typedef Integer size_type;
     auto len=size_type(var_thisData->pixels.size());
     auto nPix=len/size_type(3);
     var_thisData->indexedPixels.resize(nPix);
-    QuantizationAlgorithm * nq=new NeuQuant;
+    QuantizationAlgorithm * nq=new Quantization;//new NeuQuant;
     std::unique_ptr<QuantizationAlgorithm> uptr_nq(nq);
     nq->construct(var_thisData->pixels,len,var_thisData->sample);
     var_thisData->colorTab=nq->process();
@@ -1100,7 +1379,8 @@ void QAnimatedGifEncoder::analyzePixels() {
 void QAnimatedGifEncoder::writeString(const String & s) {
     ThisData * var_thisData=thisData.get();
     if (var_thisData->out&&s.size()) {
-        var_thisData->out->write(s.c_str(),s.size());
+        auto string_=s.toUtf8();
+        var_thisData->out->write(string_.data(),string_.size());
     }
 }
 }

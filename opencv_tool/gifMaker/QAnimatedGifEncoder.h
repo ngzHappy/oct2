@@ -4,15 +4,14 @@
 #include <memory>
 #include <cstdint>
 #include <cstddef>
-#include <QImage>
-#include <fstream>
-#include <iostream>
+#include <QtGui/qimage.h>
 #include <cstdbool>
 #include <ciso646>
-#include <string>
 #include <functional>
+#include <QtCore/qstring.h>
+#include <QtCore/qiodevice.h>
 
-namespace mgui{
+namespace mgui {
 //java like
 typedef bool Boolean;
 typedef char16_t Char;
@@ -23,10 +22,10 @@ typedef std::int64_t Long;
 typedef float Float;
 typedef double Double;
 typedef class Void {} Void;
-typedef std::basic_ofstream<Byte> OutputStream;
+typedef QIODevice OutputStream;
 typedef QImage BufferedImage;//BufferedImage 应当提供隐式数据共享
 typedef QRgb Color;
-typedef std::basic_string<Byte> String;
+typedef QString String;
 
 /**
     * Class AnimatedGifEncoder - Encodes a GIF file consisting of one or
@@ -50,13 +49,12 @@ typedef std::basic_string<Byte> String;
     *
     */
 
-class QAnimatedGifEncoder
-{
+class QAnimatedGifEncoder {
     class ThisData;
     friend class ThisData;
     std::unique_ptr<ThisData,std::function<void(ThisData *)>> thisData;/**/
-    static_assert(sizeof(Double) == 8, "Double should be 64 bit");
-    static_assert(sizeof(Float) == 4, "Float should be 32 bit");
+    static_assert(sizeof(Double)==8,"Double should be 64 bit");
+    static_assert(sizeof(Float)==4,"Float should be 32 bit");
 public:
     QAnimatedGifEncoder();
     ~QAnimatedGifEncoder();
@@ -143,7 +141,7 @@ public:
         * @param w int frame width.
         * @param h int frame width.
         */
-    void setSize(const Integer w, const Integer h);
+    void setSize(const Integer w,const Integer h);
 
     /**
         * Flushes any pending data and closes output file.

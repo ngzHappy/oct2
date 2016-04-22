@@ -20,6 +20,7 @@ bool __add_qt_remove_function_=[]() {
         _STATIC_OpenCVApplicationConfigurationFile::L_.reset();
     });
     return bool(std::rand()>3);
+    (void)__add_qt_remove_function_;
 }();
 }
 
@@ -237,8 +238,8 @@ std::shared_ptr<const void> OpenCVApplicationConfigurationFile::_p_begin_read_da
     if (L__==nullptr) { throw nullptr; }
     std::shared_ptr<const void> ans_(new __private::LUAStateLock(L__));
     luaL_dostring(L__,"return application.input_data_1d");
-    if (false==lua_istable(L__,-1)) { 
-        throw nullptr; 
+    if (false==lua_istable(L__,-1)) {
+        throw nullptr;
     }
     lua_pushnil(L__);
     return std::move(ans_);
@@ -371,12 +372,12 @@ bool OpenCVApplicationConfigurationFile::_p_get_3d_data(
     return false;
 }
 
-OpenCVApplicationConfigurationFile::GifMakerData 
+OpenCVApplicationConfigurationFile::GifMakerData
 OpenCVApplicationConfigurationFile::getInputGifMaderData()const {
     if (L__==nullptr) { return{}; }
     GifMakerData ans;
     typedef OpenCVApplicationConfigurationFile::GifMakerData::Item Item;
-    auto data=std::make_shared<std::list<Item>>(); 
+    auto data=std::make_shared<std::list<Item>>();
     __private::LUAStateLock _L(L__);
 
     luaL_dostring(L__,"return application.input_gif_data");
@@ -384,7 +385,7 @@ OpenCVApplicationConfigurationFile::getInputGifMaderData()const {
     int is_num_;
     if (lua_istable(L__,-1)) {
         auto table_index=lua_gettop(L__);
-        
+
         lua_pushnil(L__);
         while (lua_next(L__,table_index)>0) {
             if (lua_isnumber(L__,-2)==false) {

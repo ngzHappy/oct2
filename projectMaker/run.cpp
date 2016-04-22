@@ -449,7 +449,8 @@ int tryMakeDir(const ArgvPack & pack) {
 #else/*linux macx*/
     for (const std::string & dir_:try_make_dirs) {
         std::string command=std::string("mkdir ")+"\""+dir_+"\"";
-        system(command.c_str());
+        auto __ans=system(command.c_str());
+        (void)__ans;
     }
 #endif
 #endif

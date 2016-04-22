@@ -28,6 +28,8 @@ extern void run(OpenCVWindow * window) try {
             gifMaker->start(file);
             for (const auto & i:*gifMakerData.data) {
                 QImage inputImage(i.fileName);
+                inputImage=
+                    inputImage.convertToFormat(QImage::Format_RGB888);
                 gifMaker->setDelay(i.time);
                 gifMaker->addFrame(inputImage);
                 window->insertImage(inputImage)

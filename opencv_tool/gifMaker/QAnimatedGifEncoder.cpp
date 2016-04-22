@@ -199,9 +199,18 @@ private:
 
                 std_x=0; std_y=0; std_z=0;
                 for (const auto & i:(data)) {
-                    std_z+=std::abs(i.count*(i.c-mean_z));
-                    std_y+=std::abs(i.count*(i.b-mean_y));
-                    std_x+=std::abs(i.count*(i.a-mean_x));
+                    
+                    z=std::abs((i.c-mean_z));
+                    y=std::abs((i.b-mean_y));
+                    x=std::abs((i.a-mean_x));
+                    
+                    if (x<0.5) { x/=2; }
+                    if (y<0.5) { y/=2; }
+                    if (z<0.5) { z/=2; }
+
+                    std_x+=x*i.count;
+                    std_y+=y*i.count;
+                    std_z+=z*i.count;
                 }
 
             }
@@ -270,8 +279,8 @@ private:
             std::shared_ptr<Pack> &l,
             std::shared_ptr<Pack> &r
             ) {
-            auto std_l=std::max(l->std_z,std::max(l->std_x,l->std_y));
-            auto std_r=std::max(r->std_x,std::max(r->std_y,r->std_z));
+            auto std_l=(l->std_z+(l->std_x+l->std_y));
+            auto std_r=(r->std_x+(r->std_y+r->std_z));
             return std_l>std_r;
         };
 
@@ -303,9 +312,9 @@ private:
         std::int32_t index=0;
         for (auto & p:packs) {
 
-            p->mean_x*=256;
-            p->mean_y*=256;
-            p->mean_z*=256;
+            p->mean_x*=256.66;
+            p->mean_y*=256.66;
+            p->mean_z*=256.66;
 
             std::int32_t a,b,c;
             a=std::int32_t(std::round(p->mean_x));

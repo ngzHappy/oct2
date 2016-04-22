@@ -6,11 +6,16 @@ application={
                 "images:000003",
         },
         input_gif_data={
-            width=512,
-            height=512,
-            {"images:000001",600},
-            {"images:000002",700},
-            {"images:000003",800},
+            width=440,
+            height=616,
+			{"images:giftest/000000",700},
+            {"images:giftest/000001",700},
+            {"images:giftest/000002",700},
+            {"images:giftest/000003",700},
+			{"images:giftest/000004",700},
+            {"images:giftest/000005",700},
+            {"images:giftest/000006",700},
+            {"images:giftest/000007",700},
         },
 }
 

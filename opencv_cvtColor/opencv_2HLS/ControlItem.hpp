@@ -40,6 +40,10 @@ inline bool operator==(
     const ControlItem::Pack & l,
     const ControlItem::Pack & r
     ) {
+    if (l.h==r.h)if (l.l==r.l)if (l.s==r.s)
+        if (l.hBase==r.hBase)
+            if (l.lBase==r.lBase)
+                if (l.sBase==r.sBase)return true;
     return false;
 }
 

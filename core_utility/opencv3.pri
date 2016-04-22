@@ -85,7 +85,7 @@ LIBS += -lopencv_highgui310
 }##~win32-msvc*
 
 linux-g++*{
-
+#https://raw.githubusercontent.com/Itseez/opencv_3rdparty/81a676001ca8075ada498583e4166079e5744668/ippicv/ippicv_linux_20151201.tgz
 CONFIG(debug,debug|release){
 LIBS += -lopencv_calib3d
 LIBS += -lopencv_core

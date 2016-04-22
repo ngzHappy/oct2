@@ -13,11 +13,13 @@ CONFIG += console
 TEMPLATE = app
 
 SOURCES += $$PWD/main.cpp
+SOURCES += $$PWD/QAnimatedGifEncoder.cpp
 SOURCES += $$PWD/MainWindow.cpp
 SOURCES += $$PWD/OpenCVWindowDetail.cpp
 SOURCES += $$PWD/gifMaker_run.cpp
 
 HEADERS += $$PWD/MainWindow.hpp
+HEADERS += $$PWD/QAnimatedGifEncoder.h
 HEADERS += $$PWD/OpenCVWindowDetail.hpp
 
 DEFINES += APP_NAME_=\\\"$$TARGET\\\"

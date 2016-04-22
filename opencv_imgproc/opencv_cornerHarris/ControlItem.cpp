@@ -10,7 +10,9 @@ ControlItem::ControlItem(OpenCVImageItem *arg_i, QWidget *parent) :
 }
 
  void ControlItem::_p_init_pack(Pack * pack){
-
+     pack->k=ui->kDoubleSpinBox->value();
+     pack->ksize=ui->ksizeSpinBox->value();
+     pack->blockSize=ui->blockSizeSpinBox->value();
  }
 
 ControlItem::~ControlItem()

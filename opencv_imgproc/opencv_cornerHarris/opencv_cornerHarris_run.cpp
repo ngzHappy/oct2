@@ -16,6 +16,16 @@ void ControlItem::on_select_image_button_clicked(){
     rootItem_->setImage(std::move(image_));
 }
 
+OpenCVImageItem * OpenCVWindowDetail::insertImage(QImage i){
+    auto ans=OpenCVWindow::insertImage(
+        i.convertToFormat(QImage::Format_Grayscale8));
+    auto item=new OpenCVVerticalItems(ans);
+    auto citem=new ControlItem(ans);
+    item->addWidget(citem,true);
+    ans->resize(512,512);
+    return ans;
+}
+
 void ControlItem::on_do_button_clicked(){
     std::shared_ptr<ControlItem::Pack> pack=
             std::make_shared<ControlItem::Pack>();
@@ -37,7 +47,20 @@ void ControlItem::on_do_button_clicked(){
 
             cv::Mat ans;
 
-            cv::cornerHarris(image,ans,pack->blockSize,pack->ksize,pack->k);
+            cv::cornerHarris(
+                image,
+                ans,
+                pack->blockSize,
+                pack->ksize,
+                pack->k);
+
+            cv::threshold(
+                ans,
+                ans,
+                0.00001,255,
+                cv::THRESH_BINARY);
+
+            ans.convertTo(ans,CV_8UC1);
 
             return OpenCVUtility::tryRead(ans);
         }
@@ -48,14 +71,6 @@ void ControlItem::on_do_button_clicked(){
     }));
 
     rootItem_->setAlgFunction(function);
-}
-
-OpenCVImageItem * OpenCVWindowDetail::insertImage(QImage i){
-    auto ans=OpenCVWindow::insertImage(
-        i.convertToFormat(QImage::Format_Grayscale8));
-    auto item=new OpenCVVerticalItems(ans);
-    item->addWidget(new ControlItem(ans),true);
-    return ans;
 }
 
 namespace opencv_cornerHarris{

@@ -11,11 +11,12 @@ class CopyOnWritePointer {
 public:
     typedef typename std::shared_ptr<_T_>::element_type element_type;
     typedef std::add_const_t<element_type> const_element_type;
+    typedef std::shared_ptr<_T_> shared_pointer_type;
     /*
     !!!you must write the function lick
     template<>
-    std::shared_ptr<int> CopyOnWritePointer<int>::clone(const std::shared_ptr<int> d) {
-    return std::shared_ptr<int>(new int(*d));
+    auto CopyOnWritePointer<double>::clone(const shared_pointer_type d)->shared_pointer_type {
+        return shared_pointer_type(new element_type(*d));
     }
     */
     static std::shared_ptr<_T_> clone(const std::shared_ptr<_T_>);

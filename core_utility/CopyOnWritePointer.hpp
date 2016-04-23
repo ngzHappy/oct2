@@ -14,11 +14,11 @@ public:
     /*
     !!!you must write the function lick
     template<>
-    std::shared_ptr<int> CopyOnWritePointer<int>::clone(const std::shared_ptr<int> & d) {
-        return std::shared_ptr<int>(new int(*d));
+    std::shared_ptr<int> CopyOnWritePointer<int>::clone(const std::shared_ptr<int> d) {
+    return std::shared_ptr<int>(new int(*d));
     }
     */
-    static std::shared_ptr<_T_> clone(const std::shared_ptr<_T_> &);
+    static std::shared_ptr<_T_> clone(const std::shared_ptr<_T_>);
 private:
     template<typename _U_>friend class CopyOnWritePointer;
     std::shared_ptr<_T_> copy_on_write_data_;
@@ -79,10 +79,9 @@ public:
     element_type* get() { return Copy<_T_,std::is_const<_T_>::value>::get(this); }
 
     std::shared_ptr<element_type> getSharedPointer() {
-        auto _ans_=copy_on_write_data_;
-        if (std::is_const<_T_>::value==false) {
-            auto _tmp_=Copy<_T_,std::is_const<_T_>::value>::get(this);(void)_tmp_;
-        }
+        std::shared_ptr<element_type> _ans_;
+        if (std::is_const<_T_>::value==false) { _ans_=clone(copy_on_write_data_); }
+        else { _ans_=copy_on_write_data_; }
         return std::move(_ans_);
     }
     std::shared_ptr<const_element_type> getSharedPointer()const { return copy_on_write_data_; }

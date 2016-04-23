@@ -1,5 +1,5 @@
 ﻿#if !defined(__COPY__ON__WRITE__POINTER_0x00_)
-#define __COPY__ON__WRITE__POINTER_0x00_
+#define __COPY__ON__WRITE__POINTER_0x00_() 1
 
 #include <memory>
 #include <cassert>

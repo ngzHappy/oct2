@@ -1,5 +1,6 @@
-#include <string>
+﻿#include <string>
 #include <iostream>
+using namespace std::literals;
 
 const char * _cpp= u8R"=!!=(/*cpp*/
 #undef MACRO_PROTECTED
@@ -30,7 +31,7 @@ TestA::~TestA() {
 
 namespace zone_private_function {
 /********************************zone_function********************************/
- 
+
 /********************************zone_function********************************/
 }
 
@@ -41,7 +42,7 @@ TestA::TestA():data_(std::make_shared<zone_data::TestA>()) {
 TestA::~TestA() {
 }
 
- 
+
 
 /*zone_namespace_end*/
 
@@ -55,19 +56,19 @@ void write_cpp(
 ) {
     if (class_name.empty()) { return; }
     std::string file(_cpp);
-    if (class_name=="TestA") {
+    if (class_name=="TestA"s) {
         out<<file;return;}
 
-    auto find_pos=file.find("TestA");
+    auto find_pos=file.find("TestA"s);
     while (find_pos!=std::string::npos) {
         file.replace(find_pos,5,class_name);
-        find_pos=file.find("TestA");
+        find_pos=file.find("TestA"s);
     }
 
-    find_pos=file.find("TESTA");
+    find_pos=file.find("TESTA"s);
     while (find_pos!=std::string::npos) {
         file.replace(find_pos,5,upper_class_name+"_0_");
-        find_pos=file.find("TESTA");
+        find_pos=file.find("TESTA"s);
     }
 
     out<<file;

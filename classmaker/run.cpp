@@ -1,4 +1,4 @@
-#include <string>
+﻿#include <string>
 #include <sstream>
 #include <memory>
 #include <iostream>
@@ -25,7 +25,7 @@ int run(int argc,char ** argv) {
     if (argc==1) { return -1; }
     std::string className=argv[1];
     std::string outDirPath;
-    if (argc>2) { 
+    if (argc>2) {
         outDirPath=argv[2];
         if (outDirPath.size()&&
             (((*outDirPath.rbegin())!='/')&&

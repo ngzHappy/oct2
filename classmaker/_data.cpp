@@ -1,5 +1,6 @@
-#include <string>
+﻿#include <string>
 #include <iostream>
+using namespace std::literals;
 
 const static char * _hpp=u8R"=!!=(/*hpp*/
 #if !defined(__PRIVATE__DATA__TESTA__0x00)
@@ -33,23 +34,23 @@ void write_data(
     const std::string & upper_class_name
 ) {
 
-    if (class_name=="TestA") {
+    if (class_name=="TestA"s) {
         out<<_hpp; return;
     }
 
     if (class_name.empty()) { return; }
 
     std::string file(_hpp);
-    auto find_pos=file.find("TestA");
+    auto find_pos=file.find("TestA"s);
     while (find_pos!=std::string::npos) {
         file.replace(find_pos,5,class_name);
-        find_pos=file.find("TestA");
+        find_pos=file.find("TestA"s);
     }
 
-    find_pos=file.find("TESTA");
+    find_pos=file.find("TESTA"s);
     while (find_pos!=std::string::npos) {
         file.replace(find_pos,5,upper_class_name+"_0_");
-        find_pos=file.find("TESTA");
+        find_pos=file.find("TESTA"s);
     }
 
     out<<file;

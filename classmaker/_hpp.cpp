@@ -24,12 +24,12 @@ _t_class_name_&operator=(_t_class_name_ &&)=delete
 /*zone_namespace_begin*/
 
 namespace zone_data{
-class TestA;
+class TestAData;
 }
 class TestA {
 /*macro_no_copy(TestA);*/
 MACRO_PROTECTED:
-    std::shared_ptr<zone_data::TestA> data_;
+    std::shared_ptr<zone_data::TestAData> data_;
 public:
     explicit TestA(decltype(nullptr)) {}
     TestA();

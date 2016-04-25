@@ -35,7 +35,7 @@ namespace zone_private_function {
 /********************************zone_function********************************/
 }
 
-TestA::TestA():data_(std::make_shared<zone_data::TestA>()) {
+TestA::TestA():data_(std::make_shared<zone_data::TestAData>()) {
 }
 
 

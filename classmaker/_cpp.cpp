@@ -20,11 +20,11 @@ const char * _cpp= u8R"=!!=(/*cpp*/
 
 namespace zone_data {
 /********************************zone_data********************************/
-TestA::TestA() {
+TestAData::TestAData() {
 }
 
 
-TestA::~TestA() {
+TestAData::~TestAData() {
 }
 /********************************zone_data********************************/
 }

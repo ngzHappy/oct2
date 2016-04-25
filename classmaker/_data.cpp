@@ -12,10 +12,10 @@ const static char * _hpp=u8R"=!!=(/*hpp*/
 
 namespace zone_data{
 
-class TestA  {
+class TestAData  {
 public:
-    TestA();
-    ~TestA();
+    TestAData();
+    ~TestAData();
 
 };
 

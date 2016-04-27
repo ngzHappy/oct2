@@ -1,4 +1,4 @@
-//  error_code support implementation file  ----------------------------------//
+﻿//  error_code support implementation file  ----------------------------------//
 
 //  Copyright Beman Dawes 2002, 2006
 

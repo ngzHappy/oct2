@@ -8,3 +8,4 @@
 #include "boost/geometry/index/rtree.hpp"
 #include "boost/geometry.hpp"
 #include "boost/ptr_container/ptr_container.hpp"
+#include "boost/filesystem.hpp"

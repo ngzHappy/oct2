@@ -15,14 +15,14 @@ QMAKE_CXXFLAGS+=-Wno-ignored-qualifiers
 QMAKE_CXXFLAGS+=-Wno-deprecated-declarations
 }
 
-SOURCES += $$PWD/libs/codecvt_error_category.cpp
-SOURCES += $$PWD/libs/error_code.cpp
-SOURCES += $$PWD/libs/operations.cpp
-SOURCES += $$PWD/libs/path.cpp
-SOURCES += $$PWD/libs/path_traits.cpp
-SOURCES += $$PWD/libs/portability.cpp
-SOURCES += $$PWD/libs/unique_path.cpp
-SOURCES += $$PWD/libs/utf8_codecvt_facet.cpp
-SOURCES += $$PWD/libs/windows_file_codecvt.cpp
+SOURCES += $$PWD/libs/boost_codecvt_error_category.cpp
+SOURCES += $$PWD/libs/boost_error_code.cpp
+SOURCES += $$PWD/libs/boost_operations.cpp
+SOURCES += $$PWD/libs/boost_path.cpp
+SOURCES += $$PWD/libs/boost_path_traits.cpp
+SOURCES += $$PWD/libs/boost_portability.cpp
+SOURCES += $$PWD/libs/boost_unique_path.cpp
+SOURCES += $$PWD/libs/boost_utf8_codecvt_facet.cpp
+SOURCES += $$PWD/libs/boost_windows_file_codecvt.cpp
 
 

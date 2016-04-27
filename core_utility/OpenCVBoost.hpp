@@ -7,7 +7,7 @@
 */
 
 /*
-//change 
+//change
 boost/smart_ptr/detail/lightweight_mutex.hpp
 
 #ifndef BOOST_SMART_PTR_DETAIL_LIGHTWEIGHT_MUTEX_HPP_INCLUDED
@@ -43,7 +43,7 @@ typedef std::unique_lock<lightweight_mutex> scoped_lock;
 */
 
 /*
-//change 
+//change
 boost/pool/detail/mutex.hpp
 
 #ifndef BOOST_POOL_MUTEX_HPP
@@ -51,8 +51,8 @@ boost/pool/detail/mutex.hpp
 
 #include <mutex>
 
-namespace boost{ 
-namespace details{ 
+namespace boost{
+namespace details{
 namespace pool{
 
 typedef std::recursive_mutex default_mutex;
@@ -68,8 +68,22 @@ typedef std::recursive_mutex default_mutex;
 */
 
 /*
-//change 
+//change
 "boost\format\alt_sstream_impl.hpp to utf8 with bom
+*/
+
+/*
+#define BOOST_ALL_NO_LIB
+#include <libs/system/src/error_code.cpp>
+#include <libs/filesystem/src/codecvt_error_category.cpp>
+#include <libs/filesystem/src/operations.cpp>
+#include <libs/filesystem/src/path_traits.cpp>
+#include <libs/filesystem/src/path.cpp>
+#include <libs/filesystem/src/portability.cpp>
+#include <libs/filesystem/src/unique_path.cpp>
+#include <libs/filesystem/src/utf8_codecvt_facet.cpp>
+#include <libs/filesystem/src/windows_file_codecvt.cpp>
+#include <boost/filesystem.hpp>
 */
 
 #include "boost/PartBoost.hpp"
@@ -86,6 +100,8 @@ dist\bin\bcp shared_ptr.hpp c:\boostX
  * demo
  * bcp "C:/Temp\ffjjj\otestnew\OpenCVTestNew\core_utility\boost\PartBoost.hpp" "C:/Temp\ffjjj\otestnew\OpenCVTestNew\core_utility\boost"
 */
+
+
 
 #endif
 

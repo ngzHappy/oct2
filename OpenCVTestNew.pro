@@ -381,3 +381,7 @@ SUBDIRS += opencv_2RGBA
 gifMaker.file = $$PWD/opencv_tool/gifMaker/gifMaker.pro
 gifMaker.depends += core_utility
 SUBDIRS += gifMaker
+
+x00001.file = $$PWD/tmp/x00001/x00001.pro
+x00001.depends += core_utility
+SUBDIRS += x00001

@@ -44,6 +44,7 @@ Rectangle {
         width: parent.width;
         anchors.fill: parent;
         model: itemModel;
+        YScroallBar{view:parent;}
     }
 
 }

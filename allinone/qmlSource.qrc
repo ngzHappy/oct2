@@ -2,5 +2,6 @@
     <qresource prefix="/MainWindowAllInOne">
         <file>qml/AllInOneMainWindow.qml</file>
         <file>qml/AllInOneItem.qml</file>
+        <file>qml/YScroallBar.qml</file>
     </qresource>
 </RCC>

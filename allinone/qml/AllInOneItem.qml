@@ -13,7 +13,11 @@ MouseArea {
     Rectangle {
         id:thisRect
         anchors.fill: parent;
-        color: Qt.rgba(0.35,0.6,0.5,1);
+        color: Qt.rgba(
+                   0.32+Math.random()/3.5,
+                   0.32+Math.random()/3.5,
+                   0.32+Math.random()/3.5,
+                   1);
         border.color: "black";
 
         states: [

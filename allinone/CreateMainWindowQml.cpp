@@ -23,24 +23,46 @@ CreateMainWindowQml::CreateMainWindowQml()
  }
 
  void  CreateMainWindowQml::createAllInOneItemQml(){
-     QString varFileName=QDir::cleanPath(qApp->applicationDirPath()+"/AllInOneItem.qml");
      {
-         QFileInfo info(varFileName);
-         if(info.exists()){return;}
+         QString varFileName=QDir::cleanPath(qApp->applicationDirPath()+"/AllInOneItem.qml");
+         {
+             QFileInfo info(varFileName);
+             if(info.exists()){return;}
+         }
+         QFile varFile(varFileName);
+         varFile.open(QIODevice::WriteOnly);
+         QResource varSource(":/MainWindowAllInOne/qml/AllInOneItem.qml");
+         if (varSource.isCompressed()) {
+             varFile.write(qUncompress(varSource.data(),varSource.size()));
+         }
+         else {
+             varFile.write(
+                         (char *)(varSource.data()),
+                         varSource.size()
+                         );
+         }
+         varFile.flush();
      }
-    QFile varFile(varFileName);
-    varFile.open(QIODevice::WriteOnly);
-    QResource varSource(":/MainWindowAllInOne/qml/AllInOneItem.qml");
-    if (varSource.isCompressed()) {
-        varFile.write(qUncompress(varSource.data(),varSource.size()));
-    }
-    else {
-        varFile.write(
-            (char *)(varSource.data()),
-            varSource.size()
-            );
-    }
-    varFile.flush();
+     {
+         QString varFileName=QDir::cleanPath(qApp->applicationDirPath()+"/YScroallBar.qml");
+         {
+             QFileInfo info(varFileName);
+             if(info.exists()){return;}
+         }
+         QFile varFile(varFileName);
+         varFile.open(QIODevice::WriteOnly);
+         QResource varSource(":/MainWindowAllInOne/qml/YScroallBar.qml");
+         if (varSource.isCompressed()) {
+             varFile.write(qUncompress(varSource.data(),varSource.size()));
+         }
+         else {
+             varFile.write(
+                         (char *)(varSource.data()),
+                         varSource.size()
+                         );
+         }
+         varFile.flush();
+     }
  }
 
  namespace __private {
@@ -214,9 +236,10 @@ Rectangle {
     ListView {
         anchors.fill: parent;
         model: itemModel;
+        YScroallBar{view:parent;}
     }
 
-         }
+}
 
 
 )_11_"_qs;

@@ -9,3 +9,4 @@
 #include "boost/geometry.hpp"
 #include "boost/ptr_container/ptr_container.hpp"
 #include "boost/filesystem.hpp"
+#include "boost/algorithm/string.hpp"

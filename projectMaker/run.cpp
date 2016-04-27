@@ -8,7 +8,10 @@
 #if defined(QT_CORE_LIB)
 #include <QtCore/qdir.h>
 #include <QtCore/qstring.h>
+#else
+#include <boost/filesystem.hpp>
 #endif
+
 
 extern const char *_lua;
 extern const char *_pro;
@@ -441,18 +444,10 @@ int tryMakeDir(const ArgvPack & pack) {
         var_dir_.mkdir(dir_name_);
     }
 #else
-#if defined(_WIN32)
     for (const std::string & dir_:try_make_dirs) {
-        std::string command=std::string("mkdir ")+"\""+dir_+"\"";
-        system(command.c_str());
+        if (boost::filesystem::exists(dir_)) { continue; }
+        boost::filesystem::create_directories(dir_);
     }
-#else/*linux macx*/
-    for (const std::string & dir_:try_make_dirs) {
-        std::string command=std::string("mkdir ")+"\""+dir_+"\"";
-        auto __ans=system(command.c_str());
-        (void)__ans;
-    }
-#endif
 #endif
 
     std::ofstream ofs(output_project_name,std::ios::out);

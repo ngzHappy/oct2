@@ -26,6 +26,7 @@ SOURCES += main.cpp \
     source/_run_exception.cpp
 
 include( $$PWD/../core_utility/core_utility.pri )
+include( $$PWD/../core_utility/boost/boost.pri )
 DESTDIR = $$OUTPWD
 
 !win32 {

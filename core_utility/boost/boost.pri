@@ -26,4 +26,8 @@ SOURCES += $$PWD/libs/boost_unique_path.cpp
 SOURCES += $$PWD/libs/boost_utf8_codecvt_facet.cpp
 SOURCES += $$PWD/libs/boost_windows_file_codecvt.cpp
 
+win32:{
+#boost filesystem
+LIBS += -lAdvapi32
+}
 

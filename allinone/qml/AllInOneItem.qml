@@ -31,10 +31,11 @@ MouseArea {
         Row {
             x:16;
             height:thisRect.height;
-            Label {
+            Text {
                 id:projectNameID;
                 width: 300;
                 height: rootMouseArea.height;
+                color: "#f5eeee"
                 text: projectName+" :";
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignRight

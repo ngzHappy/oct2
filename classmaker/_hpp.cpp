@@ -3,8 +3,8 @@
 using namespace std::literals;
 
 const static char * _hpp=u8R"=!!=(/*hpp*/
-#if !defined(__TESTA__HPP_0x00_)
-#define __TESTA__HPP_0x00_() 1
+#if !defined(____PRAGMA_ONCE_HPP_TESTA__HPP_0x00_)
+#define ____PRAGMA_ONCE_HPP_TESTA__HPP_0x00_() 1
 
 #include <memory>
 

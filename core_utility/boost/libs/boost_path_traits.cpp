@@ -1,4 +1,4 @@
-//  filesystem path_traits.cpp  --------------------------------------------------------//
+﻿//  filesystem path_traits.cpp  --------------------------------------------------------//
 
 //  Copyright Beman Dawes 2008, 2009
 
@@ -11,9 +11,15 @@
 
 // define BOOST_FILESYSTEM_SOURCE so that <boost/system/config.hpp> knows
 // the library is being built (possibly exporting rather than importing code)
-#define BOOST_FILESYSTEM_SOURCE 
+#ifndef BOOST_FILESYSTEM_SOURCE
+#define BOOST_FILESYSTEM_SOURCE
+#endif
 
-#ifndef BOOST_SYSTEM_NO_DEPRECATED 
+#ifndef BOOST_SYSTEM_SOURCE
+#define BOOST_SYSTEM_SOURCE
+#endif
+
+#ifndef BOOST_SYSTEM_NO_DEPRECATED
 # define BOOST_SYSTEM_NO_DEPRECATED
 #endif
 
@@ -80,7 +86,7 @@ namespace {
       BOOST_FILESYSTEM_THROW(bs::system_error(res, fs::codecvt_error_category(),
         "boost::filesystem::path codecvt to wstring"));
     }
-    target.append(to, to_next); 
+    target.append(to, to_next);
   }
 
 //--------------------------------------------------------------------------------------//
@@ -114,9 +120,9 @@ namespace {
       BOOST_FILESYSTEM_THROW(bs::system_error(res, fs::codecvt_error_category(),
         "boost::filesystem::path codecvt to string"));
     }
-    target.append(to, to_next); 
+    target.append(to, to_next);
   }
-  
+
 }  // unnamed namespace
 
 //--------------------------------------------------------------------------------------//

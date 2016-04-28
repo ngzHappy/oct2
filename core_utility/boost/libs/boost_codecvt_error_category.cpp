@@ -1,4 +1,4 @@
-//  codecvt_error_category implementation file  ----------------------------------------//
+﻿//  codecvt_error_category implementation file  ----------------------------------------//
 
 //  Copyright Beman Dawes 2009
 
@@ -13,9 +13,15 @@
 
 // define BOOST_FILESYSTEM_SOURCE so that <boost/filesystem/config.hpp> knows
 // the library is being built (possibly exporting rather than importing code)
+#ifndef BOOST_FILESYSTEM_SOURCE
 #define BOOST_FILESYSTEM_SOURCE
+#endif
 
-#ifndef BOOST_SYSTEM_NO_DEPRECATED 
+#ifndef BOOST_SYSTEM_SOURCE
+#define BOOST_SYSTEM_SOURCE
+#endif
+
+#ifndef BOOST_SYSTEM_NO_DEPRECATED
 #  define BOOST_SYSTEM_NO_DEPRECATED
 #endif
 

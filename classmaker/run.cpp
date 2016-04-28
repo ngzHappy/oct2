@@ -32,6 +32,7 @@ int run(int argc,char ** argv) {
     if (argc==1) { return -1; }
     std::string className=argv[1];
     std::string outDirPath;
+
     if (argc>2) {
         outDirPath=argv[2];
         if (outDirPath.size()&&
@@ -41,6 +42,11 @@ int run(int argc,char ** argv) {
             outDirPath.push_back('/');
         }
     }
+    else {
+        outDirPath=filesystem::complete(
+            filesystem::current_path()).string();
+    }
+
     std::string UClassName=className;
     for (auto &i:UClassName) {i=toUpper(i);}
 

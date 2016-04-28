@@ -9,6 +9,7 @@ const static char * _function=u8R"=!!=(/*TestA hpp*/
 #include "TestAData.hpp"
 
 /*zone_namespace_begin*/
+class TestA;
 
 namespace zone_private_function {
 

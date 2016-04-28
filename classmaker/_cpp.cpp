@@ -4,8 +4,8 @@ using namespace std::literals;
 
 const char * _cpp= u8R"=!!=(/*TestA cpp*/
 #include "TestA.hpp"
-#include "TestAData.hpp"
-#include "TestAPrivateFunction.hpp"
+#include "private/TestAData.hpp"
+#include "private/TestAPrivateFunction.hpp"
 
 /*zone_namespace_begin*/
 template<>

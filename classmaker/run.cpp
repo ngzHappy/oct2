@@ -35,16 +35,20 @@ int run(int argc,char ** argv) {
 
     if (argc>2) {
         outDirPath=argv[2];
-        if (outDirPath.size()&&
+    }
+    else {
+        outDirPath=filesystem::complete(
+            filesystem::current_path()).string();
+    }
+
+    {
+        if (outDirPath.size()<=0) { return -99; }
+        if ( 
             (((*outDirPath.rbegin())!='/')&&
             ((*outDirPath.rbegin())!='\\')
             )) {
             outDirPath.push_back('/');
         }
-    }
-    else {
-        outDirPath=filesystem::complete(
-            filesystem::current_path()).string();
     }
 
     std::string UClassName=className;

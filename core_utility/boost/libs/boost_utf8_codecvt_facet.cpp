@@ -1,4 +1,4 @@
-// Copyright Vladimir Prus 2004.
+﻿// Copyright Vladimir Prus 2004.
 // Distributed under the Boost Software License, Version 1.0.
 // (See accompanying file LICENSE_1_0.txt
 // or copy at http://www.boost.org/LICENSE_1_0.txt)
@@ -7,11 +7,17 @@
 // not casts. See ticket 5048
 #define _INCLUDE_STDCSOURCE_199901
 
-#ifndef BOOST_SYSTEM_NO_DEPRECATED 
+#ifndef BOOST_SYSTEM_NO_DEPRECATED
 # define BOOST_SYSTEM_NO_DEPRECATED
 #endif
 
+#ifndef BOOST_FILESYSTEM_SOURCE
 #define BOOST_FILESYSTEM_SOURCE
+#endif
+
+#ifndef BOOST_SYSTEM_SOURCE
+#define BOOST_SYSTEM_SOURCE
+#endif
 #include <boost/filesystem/config.hpp>
 
 #define BOOST_UTF8_BEGIN_NAMESPACE \

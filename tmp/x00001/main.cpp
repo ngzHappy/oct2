@@ -3,6 +3,7 @@
 #include <QtWidgets/qapplication.h>
 #include <QtCore/qcommandlineparser.h>
 #include <QtCore/qcommandlineoption.h>
+#include <QtGui/qicon.h>
 #include <QtCore/qtextcodec.h>
 #include <QtCore/qdir.h>
 #include <opencv_application_configuration_file.hpp>
@@ -35,6 +36,7 @@ int main(int argc,char ** argv) try{
 
     /*初始化应用程序*/
     QApplication app(argc,argv);
+    app.setWindowIcon(QIcon(":/ico/100008.jpg"));
 
     {
         /*解析命令行*/

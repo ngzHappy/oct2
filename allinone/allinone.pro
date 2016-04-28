@@ -52,6 +52,9 @@ PRECOMPILED_HEADER  += $$PWD/private/msvc_pre_build.hpp
 PRECOMPILED_HEADER  += $$PWD/private/pre_build.hpp
 }
 
-RESOURCES += \
-    qmlSource.qrc
+RESOURCES += $$PWD/qmlSource.qrc
+
+win32:{
+RC_ICONS=$$PWD/ico/100008.ico
+}
 

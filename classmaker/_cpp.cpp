@@ -2,21 +2,28 @@
 #include <iostream>
 using namespace std::literals;
 
-const char * _cpp= u8R"=!!=(/*cpp*/
-#undef MACRO_PROTECTED
-#define MACRO_PROTECTED public
-#if !defined(zone_this_data)
-#define zone_this_data(_v_) auto * var_this_data=_v_->data_.get()
-#endif
-#if !defined(const_zone_this_data)
-#define zone_const_this_data(_v_) const auto * var_this_data=_v_->data_.get()
-#endif
-
+const char * _cpp= u8R"=!!=(/*TestA cpp*/
 #include "TestA.hpp"
 #include "TestAData.hpp"
 #include "TestAPrivateFunction.hpp"
 
 /*zone_namespace_begin*/
+template<>
+inline auto getThisData<zone_data::TestAData *,0>(const TestA * arg) ->zone_data::TestAData *{
+    return const_cast<TestA *>(arg)->thisData_.get(); 
+}
+
+template<>
+inline auto getThisData<const zone_data::TestAData *,1>(const TestA * arg) ->const zone_data::TestAData *{ 
+    return arg->thisData_.get();
+}
+
+#if !defined(zone_this_data)
+#define zone_this_data(_v_) auto * var_this_data=getThisData<zone_data::TestAData *,0>(_v_)
+#endif
+#if !defined(const_zone_this_data)
+#define zone_const_this_data(_v_) const auto * var_this_data=getThisData<const zone_data::TestAData *,1>(_v_)
+#endif
 
 namespace zone_data {
 /********************************zone_data********************************/
@@ -35,14 +42,12 @@ namespace zone_private_function {
 /********************************zone_function********************************/
 }
 
-TestA::TestA():data_(std::make_shared<zone_data::TestAData>()) {
+TestA::TestA():thisData_(std::make_shared<zone_data::TestAData>()) {
 }
 
 
 TestA::~TestA() {
 }
-
-
 
 /*zone_namespace_end*/
 

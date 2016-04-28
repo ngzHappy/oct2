@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std::literals;
 
-const static char * _hpp=u8R"=!!=(/*hpp*/
+const static char * _hpp=u8R"=!!=(/*TestA hpp*/
 #if !defined(____PRAGMA_ONCE_HPP_DATA_TESTA_0x00)
 #define ____PRAGMA_ONCE_HPP_DATA_TESTA_0x00() 1
 
@@ -24,7 +24,6 @@ public:
 /*zone_namespace_end*/
 
 #endif
-
 
 )=!!=";
 

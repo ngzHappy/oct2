@@ -2,15 +2,17 @@
 #include <iostream>
 using namespace std::literals;
 
-const static char * _hpp=u8R"=!!=(/*hpp*/
+const static char * _hpp=u8R"=!!=(/*TestA hpp*/
 #if !defined(____PRAGMA_ONCE_HPP_TESTA__HPP_0x00_)
 #define ____PRAGMA_ONCE_HPP_TESTA__HPP_0x00_() 1
 
 #include <memory>
+#include <cstddef>
+#include <cstdint>
+#include <utility>
+#include <type_traits>
 
-#if !defined(MACRO_PROTECTED)
-#define MACRO_PROTECTED protected
-#endif
+/*zone_namespace_begin*/
 
 /*
 #if !defined(macro_no_copy)
@@ -21,15 +23,20 @@ _t_class_name_&operator=(_t_class_name_ &&)=delete
 #endif
 */
 
-/*zone_namespace_begin*/
-
 namespace zone_data{
 class TestAData;
 }
+class TestA;
+
+template<typename _TYPE_TAG_,unsigned int _N_>
+auto getThisData(const TestA *)->_TYPE_TAG_ ;
+
 class TestA {
 /*macro_no_copy(TestA);*/
-MACRO_PROTECTED:
-    std::shared_ptr<zone_data::TestAData> data_;
+protected:
+    std::shared_ptr<zone_data::TestAData> thisData_;
+    template<typename _TYPE_TAG_,unsigned int _N_>
+    friend auto getThisData(const TestA *)->_TYPE_TAG_ ;
 public:
     explicit TestA(decltype(nullptr)) {}
     TestA();
@@ -40,6 +47,7 @@ public:
 /*zone_namespace_end*/
 
 #endif
+
 
 
 )=!!=";

@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std::literals;
 
-const static char * _function=u8R"=!!=(/*hpp*/
+const static char * _function=u8R"=!!=(/*TestA hpp*/
 #if !defined(____PRAGMA_ONCE_HPP_TESTA_FUNCTION__)
 #define ____PRAGMA_ONCE_HPP_TESTA_FUNCTION__() 1
 
@@ -17,8 +17,6 @@ namespace zone_private_function {
 /*zone_namespace_end*/
 
 #endif
-
-
 
 )=!!=";
 

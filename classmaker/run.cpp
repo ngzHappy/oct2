@@ -24,6 +24,10 @@ char toUpper(char i) {
 }
 
 int run(int argc,char ** argv) {
+
+    using ofstream=boost::filesystem::ofstream;
+    namespace filesystem=boost::filesystem;
+
     constexpr const char bom_[]{char(0xef),char(0xbb),char(0xbf)};
     if (argc==1) { return -1; }
     std::string className=argv[1];
@@ -41,8 +45,8 @@ int run(int argc,char ** argv) {
     for (auto &i:UClassName) {i=toUpper(i);}
 
     boost::filesystem::path path(outDirPath);
-    if (false==boost::filesystem::exists(path)) {
-        boost::filesystem::create_directories(path);
+    if (false==filesystem::exists(path)) {
+        filesystem::create_directories(path);
     }
 
     {
@@ -54,20 +58,20 @@ int run(int argc,char ** argv) {
     
     path/="private"s;
     
-    if (false==boost::filesystem::exists(path)) {
-        boost::filesystem::create_directories(path);
+    if (false==filesystem::exists(path)) {
+        filesystem::create_directories(path);
     }
     
     {
         auto varPath=path/(className+"Data.hpp"s);
-        boost::filesystem::ofstream ofs(varPath,std::ios::binary);
+        ofstream ofs(varPath,std::ios::binary);
         ofs.write(bom_,3);
         write_data(ofs,className,UClassName);
     }
 
     {
         auto varPath=path/(className+"PrivateFunction.hpp"s);
-        boost::filesystem::ofstream ofs(varPath,std::ios::binary);
+        ofstream ofs(varPath,std::ios::binary);
         ofs.write(bom_,3);
         write_function(ofs,className,UClassName);
     }

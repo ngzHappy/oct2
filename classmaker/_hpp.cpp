@@ -34,7 +34,8 @@ auto getThisData(const TestA *)->_TYPE_TAG_ ;
 class TestA {
 /*macro_no_copy(TestA);*/
 protected:
-    std::shared_ptr<zone_data::TestAData> thisData_;
+    using ThisDataType=std::unique_ptr<zone_data::TestAData,void(*)(zone_data::TestAData *)>;
+    ThisDataType thisData_{nullptr,nullptr};
     template<typename _TYPE_TAG_,unsigned int _N_>
     friend auto getThisData(const TestA *)->_TYPE_TAG_ ;
 public:

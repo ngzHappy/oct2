@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std::literals;
 
-const char * _cpp= u8R"=!!=(/*TestA cpp*/
+const char * _cpp=u8R"=!!=(/*TestA cpp*/
 #include "TestA.hpp"
 #include "private/TestAData.hpp"
 #include "private/TestAPrivateFunction.hpp"
@@ -42,9 +42,10 @@ namespace zone_private_function {
 /********************************zone_function********************************/
 }
 
-TestA::TestA():thisData_(std::make_shared<zone_data::TestAData>()) {
+TestA::TestA():thisData_(ThisDataType(
+                         new zone_data::TestAData,
+                         [](zone_data::TestAData *arg){delete arg;})) {
 }
-
 
 TestA::~TestA() {
 }

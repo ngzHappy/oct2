@@ -24,6 +24,7 @@ CONFIG -= ordered
 #.target #Base string used for makefile targets related to this subproject. Available only on platforms that use makefiles.
 SUBDIRS += projectMaker
 SUBDIRS += classmaker
+SUBDIRS += qthreadmaker
 SUBDIRS += opencv_tool/image_rand_draw
 SUBDIRS += setgetutility
 

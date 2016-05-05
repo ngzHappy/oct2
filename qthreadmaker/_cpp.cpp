@@ -33,9 +33,11 @@ bool ThreadOfTestA::event(QEvent *e) {
 
 void ThreadOfTestA::run() {
 
-    {
+    try{
         auto varDelete=[var=shared_from_this()](auto * arg) {delete arg; };
         
+    }catch(...){
+        qDebug()<<"qthread run in error !!";
     }
 
     exec();

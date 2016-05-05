@@ -43,9 +43,9 @@ void ThreadOfTestA::run() {
  
 ThreadOfTestA::ThreadOfTestA(TestA *v):super_(v) {
     this->moveToThread(this);
-    connect(
+    connect(/*delete in main thread*/
         this,&ThreadOfTestA::finished,
-        QThread::currentThread(),[this]() {delete this; },
+        qApp,[this]() {delete this; },
         Qt::QueuedConnection
     );
 }

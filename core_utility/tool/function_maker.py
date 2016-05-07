@@ -45,12 +45,17 @@ def get_n(n):
     ans_string+="public:"+get_endl();
     ans_string+="    template<"+get_endl();
     for i in range(n):
-        ans_string+="    _T_"+str(i)+","+get_endl();
+        if i==(n-1):
+            ans_string+=space_string+"typename _T_"+str(i)+" "+get_endl();
+        else:
+            ans_string+=space_string+"typename _T_"+str(i)+","+get_endl();
     ans_string+="    >"+get_endl();
     ans_string+="    static void apply("+get_endl();
     for i in range(n):
-        ans_string+="    _T_"+str(i)+" && _a_"+str(i)+","+get_endl();
-        pass    
+        if i==(n-1):
+            ans_string+=space_string+"_T_"+str(i)+" && _a_"+str(i)+" "+get_endl();
+        else:
+            ans_string+=space_string+"_T_"+str(i)+" && _a_"+str(i)+","+get_endl();   
     ans_string+="    ) {";    
     ans_string+=get_endl();
     #############################################################################

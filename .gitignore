@@ -2,3 +2,4 @@
 binlib/*
 *.18
 *.pro~
+*.stackdump

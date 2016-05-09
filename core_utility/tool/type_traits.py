@@ -1,4 +1,4 @@
-
+﻿
 
 def get_type_traits():
     return"""/*type traits*/
@@ -18,21 +18,30 @@ def get_type_traits():
 class ___SSS___TypeTraits;
 class ___SSS___TypeTraits {
 public:
+    ___SSS___TypeTraits()=default;
+public:
     template<typename...>using void_t=void;
     using Size=std::size_t;
     using Integer=std::int32_t;
+public:
     template<typename __T__>
     using SharedPointer=std::shared_ptr<__T__>;
     template<typename __T__>
     using WeakPointer=std::weak_ptr<__T__>;
     template<typename __T__>
     using SharedFromThis=std::enable_shared_from_this<__T__>;
+    template<typename __T__>
+    using sp=SharedPointer<__T__>;
+    template<typename __T__>
+    using wp=WeakPointer<__T__>;
+public:
     template<typename __T__,typename ...__A__>
     static SharedPointer<__T__> make_shared(__A__&&..._a_) {
         return SharedPointer<__T__>(
             new __T__(std::forward<__A__>(_a_)...),
             [](__T__*arg) {delete arg; });}
-    ___SSS___TypeTraits()=default;
+public:
+    /*add code here*/
 protected:
     virtual ~___SSS___TypeTraits()=default;
     ___SSS___TypeTraits(const ___SSS___TypeTraits&)=delete;

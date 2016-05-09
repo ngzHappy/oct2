@@ -79,7 +79,7 @@ public:
 public:
     static void max() {}
     template<typename __T0__>
-    static decltype(auto) max(__T0__&&_v0_) { return std::forward<__T0__>(_v0_); }
+    constexpr static decltype(auto) max(__T0__&&_v0_) { return std::forward<__T0__>(_v0_); }
     template<typename __T0__>
     constexpr static decltype(auto) max(__T0__&&_v0_,__T0__&&_v1_) {
         return std::forward<__T0__>((_v0_>_v1_)?_v0_:_v1_);
@@ -96,7 +96,7 @@ public:
 public:
     static void min() {}
     template<typename __T0__>
-    static decltype(auto) min(__T0__&&_v0_) { return std::forward<__T0__>(_v0_); }
+    constexpr static decltype(auto) min(__T0__&&_v0_) { return std::forward<__T0__>(_v0_); }
     template<typename __T0__>
     constexpr static decltype(auto) min(__T0__&&_v0_,__T0__&&_v1_) {
         return std::forward<__T0__>((_v0_<_v1_)?_v0_:_v1_);

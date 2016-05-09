@@ -73,8 +73,8 @@ HEADERS += $$PWD/boost/PartBoost.hpp
 HEADERS += $$PWD/quazip/GZipCompressor.hpp
 SOURCES += $$PWD/quazip/GZipCompressor.cpp
 
-DISTFILES += $$PWD/../Images/000000.jpg \
-    tool/type_traits.py
+DISTFILES += $$PWD/../Images/000000.jpg
+DISTFILES += $$PWD/tool/type_traits.py
 DISTFILES += $$PWD/tool/ascii.py
 DISTFILES += $$PWD/tool/map_maker.py
 DISTFILES += $$PWD/../Images/030000.png

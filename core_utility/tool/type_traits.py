@@ -1,7 +1,7 @@
 ﻿
 
 def get_type_traits():
-    return"""/*type traits*/
+    return"""/*___SSS___ type traits*/
 #ifndef __PRAGMA_ONCE____SSS___HXX_0x00
 #define __PRAGMA_ONCE____SSS___HXX_0x00
 
@@ -11,6 +11,7 @@ def get_type_traits():
 #include <cstddef>
 #include <cstdint>
 #include <iterator>
+#include <functional>
 #include <type_traits>
 
 /*zone_namespace_begin*/
@@ -40,6 +41,75 @@ public:
         return SharedPointer<__T__>(
             new __T__(std::forward<__A__>(_a_)...),
             [](__T__*arg) {delete arg; });}
+public:
+    template<typename __T__>
+    using Function=std::function<__T__>;
+    template<typename __TF__>
+    class SharedPointerFunction:public SharedPointer<const Function<__TF__>> {
+    private:
+        using _F_=Function<__TF__>;
+        using _P_=SharedPointer<const _F_>;
+    public:
+        SharedPointerFunction(decltype(nullptr)) {}
+        SharedPointerFunction()=default;
+        SharedPointerFunction(_P_/**/arg):_P_(std::move(arg)) {}
+        SharedPointerFunction(_F_/**/arg):_P_(make_shared<_F_>(std::move(arg))) {}
+        SharedPointerFunction&operator=(const SharedPointerFunction&)=default;
+        SharedPointerFunction&operator=(SharedPointerFunction&&)=default;
+        template<typename __U__>
+        SharedPointerFunction&operator=(__U__&&_u_) {
+            SharedPointerFunction _t_=std::forward<__U__>(_u_);
+            return(*this=std::move(_t_));
+        }
+        operator bool()const { return (this->get())&&bool(*(this->get())); }
+
+        template<typename ...__A__>
+        decltype(auto)operator()(__A__&&..._a_) {
+            return(*(this->get()))(std::forward<__A__>(_a_)...);
+        }
+
+        template<typename ...__A__>
+        decltype(auto)operator()(__A__&&..._a_) const {
+            return(*(this->get()))(std::forward<__A__>(_a_)...);
+        }
+
+    };
+    template<typename __T__>
+    using spf=SharedPointerFunction<__T__>;
+public:
+    static void max() {}
+    template<typename __T0__>
+    static decltype(auto) max(__T0__&&_v0_) { return std::forward<__T0__>(_v0_); }
+    template<typename __T0__>
+    constexpr static decltype(auto) max(__T0__&&_v0_,__T0__&&_v1_) {
+        return std::forward<__T0__>((_v0_>_v1_)?_v0_:_v1_);
+    }
+    template<typename __T0__,typename __T1__>
+    constexpr static decltype(auto) max(__T0__&&_v0_,__T1__&&_v1_) {
+        return (_v0_>_v1_)?std::forward<__T0__>(_v0_):std::forward<__T1__>(_v1_);
+    }
+    template<typename __T0__,typename __T1__,typename ...__A__>
+    constexpr static decltype(auto) max(__T0__&&_v0_,__T1__&&_v1_,__A__&&..._a_) {
+        return max(max(std::forward<__T0__>(_v0_),std::forward<__T1__>(_v1_)),
+            std::forward<__A__>(_a_)...);
+    }
+public:
+    static void min() {}
+    template<typename __T0__>
+    static decltype(auto) min(__T0__&&_v0_) { return std::forward<__T0__>(_v0_); }
+    template<typename __T0__>
+    constexpr static decltype(auto) min(__T0__&&_v0_,__T0__&&_v1_) {
+        return std::forward<__T0__>((_v0_<_v1_)?_v0_:_v1_);
+    }
+    template<typename __T0__,typename __T1__>
+    constexpr static decltype(auto) min(__T0__&&_v0_,__T1__&&_v1_) {
+        return (_v0_<_v1_)?std::forward<__T0__>(_v0_):std::forward<__T1__>(_v1_);
+    }
+    template<typename __T0__,typename __T1__,typename ...__A__>
+    constexpr static decltype(auto) min(__T0__&&_v0_,__T1__&&_v1_,__A__&&..._a_) {
+        return min(min(std::forward<__T0__>(_v0_),std::forward<__T1__>(_v1_)),
+            std::forward<__A__>(_a_)...);
+    }
 public:
     /*add code here*/
 protected:

@@ -11,6 +11,7 @@ def get_type_traits():
 #include <cstddef>
 #include <cstdint>
 #include <iterator>
+#include <algorithm>
 #include <functional>
 #include <type_traits>
 
@@ -81,34 +82,36 @@ public:
     template<typename __T0__>
     constexpr static decltype(auto) max(__T0__&&_v0_) { return std::forward<__T0__>(_v0_); }
     template<typename __T0__>
-    constexpr static decltype(auto) max(__T0__&&_v0_,__T0__&&_v1_) {
-        return std::forward<__T0__>((_v0_>_v1_)?_v0_:_v1_);
+    constexpr static decltype(auto) max(const __T0__&_v0_,const __T0__&_v1_) {
+        return ((_v0_>_v1_)?_v0_:_v1_);
     }
     template<typename __T0__,typename __T1__>
-    constexpr static decltype(auto) max(__T0__&&_v0_,__T1__&&_v1_) {
-        return (_v0_>_v1_)?std::forward<__T0__>(_v0_):std::forward<__T1__>(_v1_);
+    constexpr static auto max(const __T0__&_v0_,const __T1__&_v1_) {
+        using __T__=std::common_type_t<__T0__,__T1__>;
+        return std::max<__T__>(_v0_,_v1_);
     }
     template<typename __T0__,typename __T1__,typename ...__A__>
-    constexpr static decltype(auto) max(__T0__&&_v0_,__T1__&&_v1_,__A__&&..._a_) {
-        return max(max(std::forward<__T0__>(_v0_),std::forward<__T1__>(_v1_)),
-            std::forward<__A__>(_a_)...);
+    constexpr static auto max(const __T0__&_v0_,const __T1__&_v1_,const __A__&..._a_) {
+        using __T__=std::common_type_t<__T0__,__T1__,__A__...>;
+        return ___SSS___TypeTraits::max<__T__,__A__...>(std::max<__T__>(_v0_,_v1_),_a_...);
     }
 public:
     static void min() {}
     template<typename __T0__>
     constexpr static decltype(auto) min(__T0__&&_v0_) { return std::forward<__T0__>(_v0_); }
     template<typename __T0__>
-    constexpr static decltype(auto) min(__T0__&&_v0_,__T0__&&_v1_) {
-        return std::forward<__T0__>((_v0_<_v1_)?_v0_:_v1_);
+    constexpr static decltype(auto) min(const __T0__&_v0_,const __T0__&_v1_) {
+        return ((_v0_<_v1_)?_v0_:_v1_);
     }
     template<typename __T0__,typename __T1__>
-    constexpr static decltype(auto) min(__T0__&&_v0_,__T1__&&_v1_) {
-        return (_v0_<_v1_)?std::forward<__T0__>(_v0_):std::forward<__T1__>(_v1_);
+    constexpr static auto min(const __T0__&_v0_,const __T1__&_v1_) {
+        using __T__=std::common_type_t<__T0__,__T1__>;
+        return std::min<__T__>(_v0_,_v1_);
     }
     template<typename __T0__,typename __T1__,typename ...__A__>
-    constexpr static decltype(auto) min(__T0__&&_v0_,__T1__&&_v1_,__A__&&..._a_) {
-        return min(min(std::forward<__T0__>(_v0_),std::forward<__T1__>(_v1_)),
-            std::forward<__A__>(_a_)...);
+    constexpr static auto min(const __T0__&_v0_,const __T1__&_v1_,const __A__&..._a_) {
+        using __T__=std::common_type_t<__T0__,__T1__,__A__...>;
+        return ___SSS___TypeTraits::min<__T__,__A__...>(std::min<__T__>(_v0_,_v1_),_a_...);
     }
 public:
     /*add code here*/

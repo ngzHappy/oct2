@@ -1,9 +1,4 @@
-﻿//_replace_first_window.lua_replace_
-//_replace_/../Images_replace_
-//_replace_project_name_run__replace_
-//_replace_project_name1_run__replace_
-
-const char *_main_cpp = u8R"=_____=(/*main.cpp "_replace_first_window.lua_replace_"  */
+﻿/*main.cpp "x000002"  */
 #include "MainWindow.hpp"
 #include <QtWidgets/qapplication.h>
 #include <QtCore/qcommandlineparser.h>
@@ -13,8 +8,12 @@ const char *_main_cpp = u8R"=_____=(/*main.cpp "_replace_first_window.lua_replac
 #include <opencv_application_configuration_file.hpp>
 #include <iostream>
 #include <OpenCVException.hpp>
+#include <lua/lua.hpp>
+#include <string>
 
-namespace _replace_project_name_run__replace_{
+using namespace std::string_literals;
+
+namespace x000002{
 extern void run(OpenCVWindow * window) ;
 }
 
@@ -58,15 +57,67 @@ int main(int argc,char ** argv) try{
     {
         QDir::addSearchPath("images",app.applicationDirPath()+"/Images");
         QDir::addSearchPath("images",BUILD_PATH_);
-        QDir::addSearchPath("images",QDir::cleanPath(BUILD_PATH_"_replace_/../Images_replace_"));
+        QDir::addSearchPath("images",QDir::cleanPath(BUILD_PATH_"/../../Images"));
     }
 
     MainWindow * window=new MainWindow;
     window->setAttribute(Qt::WA_DeleteOnClose);
     window->show();
-    _replace_project_name1_run__replace_::run(window->getOpenCVWindow());
+    x000002::run(window->getOpenCVWindow());
     std::cout.flush();
 
+    {
+        std::vector<char> buffer;
+
+        {
+            auto*L=luaL_newstate();
+            luaL_openlibs(L);
+
+            //luaL_dostring(L,u8R"(print("Hellow Word!"))");
+
+            auto writer=[](lua_State *,
+                const void* p,
+                size_t sz,
+                void* buffer)->int {
+                auto * buf=reinterpret_cast<std::vector<char>*>(buffer);
+                const char * data_=reinterpret_cast<const char *>(p);
+                for (size_t i=0; i<sz; ++i) {
+                    buf->push_back(*data_);
+                    ++data_;
+                }
+                return 0;
+            };
+
+            auto testString=u8R"( return function() print("Hellow Word!") end )"s;
+            luaL_loadbuffer(L,testString.c_str(),testString.size(),"?");
+            lua_pcall(L,0,LUA_MULTRET,-1);
+            //lua_pushvalue(L,-1);
+            //luaL_dostring(L,u8R"(foo())");
+            //luaL_dostring(L,testString.c_str());
+            //lua_getglobal(L,"foo");
+            std::cout<<std::boolalpha<<lua_isfunction(L,-1)<<std::endl;
+            lua_dump(L,writer,&buffer,true);
+
+            std::cout<<buffer.size()<<std::endl;
+            lua_close(L);
+
+        }
+
+        {
+            auto*L=luaL_newstate();
+            luaL_openlibs(L);
+
+            luaL_loadbuffer(L,buffer.data(),buffer.size(),"?");
+            //lua_pcall(L,0,LUA_MULTRET,-1);
+            //lua_pushvalue(L,-1);
+            //luaL_dostring(L,u8R"(foo())");
+            std::cout<<lua_isfunction(L,-1)<<std::endl;
+            lua_pcall(L,0,LUA_MULTRET,-1);
+
+            lua_close(L);
+        }
+
+    }
     return app.exec();
 
 }
@@ -83,4 +134,3 @@ catch (...) {
     return -99999;
 }
 
-)=_____=";

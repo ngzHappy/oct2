@@ -386,3 +386,7 @@ SUBDIRS += gifMaker
 x00001.file = $$PWD/tmp/x00001/x00001.pro
 x00001.depends += core_utility
 SUBDIRS += x00001
+
+x000002.file = $$PWD/tmp/x000002/x000002.pro
+x000002.depends += core_utility
+SUBDIRS += x000002

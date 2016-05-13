@@ -40,7 +40,7 @@ def add_utf8_bom_dir(dirName):
         for fileName in filenames:
             extName=os.path.splitext(fileName);
             if len(extName)<=1:
-                return;
+                continue;
             extName=extName[-1].lower()
             
             if extName in do_ext_name:

@@ -4,26 +4,33 @@ import codecs
 import os.path
 
 def add_utf8_bom(fileName):
-    with open(fileName,"r") as fr:
-        lines = fr.readlines();
-        if len(lines)>0:
-            line_0=lines[0];
-            if line_0.startswith(codecs.BOM_UTF8):
-                return;
-            if line_0.startswith(codecs.BOM_UTF16_BE):
-                return;
-            if line_0.startswith(codecs.BOM_UTF16_LE):
-                return;
-            if line_0.startswith(codecs.BOM_UTF32_BE):
-                return;
-            if line_0.startswith(codecs.BOM_UTF32_LE):
-                return;
-        else:
-            return
 
-        with open(fileName,"w") as fw:
-            fw.write(codecs.BOM_UTF8);
-            fw.writelines(lines);
+    line_0=None;
+    lines=None;
+
+    with open(fileName,"r") as fr:
+
+        line_0 = fr.readline();
+        
+        #check if start with bom
+        if line_0.startswith(codecs.BOM_UTF8):
+            return;
+        if line_0.startswith(codecs.BOM_UTF16_BE):
+            return;
+        if line_0.startswith(codecs.BOM_UTF16_LE):
+            return;
+        if line_0.startswith(codecs.BOM_UTF32_BE):
+            return;
+        if line_0.startswith(codecs.BOM_UTF32_LE):
+            return;
+        
+        #read all lines
+        lines=fr.readlines();
+
+    with open(fileName,"w") as fw:
+        fw.write(codecs.BOM_UTF8);
+        fw.write(line_0);
+        fw.writelines(lines);
 
 def add_utf8_bom_dir(dirName):
     count=0;

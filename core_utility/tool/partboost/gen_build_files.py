@@ -55,7 +55,7 @@ def copy_file_source(fromFileName,toFileName):
     pass
 
 def copy_file_header(fromFileName,toFileName):
-    shutil.copyfile(fromFileName,toFileName)
+    shutil.copy2(fromFileName,toFileName)
     pass
 
 def gen_build_files(rootPath):

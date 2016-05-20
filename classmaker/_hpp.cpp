@@ -14,15 +14,6 @@ const static char * _hpp=u8R"=!!=(/*TestA hpp*/
 
 /*zone_namespace_begin*/
 
-/*
-#if !defined(macro_no_copy)
-#define macro_no_copy(_t_class_name_) private:_t_class_name_(const _t_class_name_ &)=delete; \
-_t_class_name_(_t_class_name_ &&)=delete; \
-_t_class_name_&operator=(const _t_class_name_ &)=delete; \
-_t_class_name_&operator=(_t_class_name_ &&)=delete
-#endif
-*/
-
 namespace zone_data{
 class TestAData;
 }
@@ -32,7 +23,10 @@ template<typename _TYPE_TAG_,unsigned int _N_>
 auto getThisData(const TestA *)->_TYPE_TAG_ ;
 
 class TestA {
-/*macro_no_copy(TestA);*/
+    TestA(const TestA&)=delete;
+    TestA&operator=(const TestA&)=delete;
+    TestA(TestA&&)=delete;
+    TestA&operator=(TestA&&)=delete;
 protected:
     using ThisDataType=std::unique_ptr<zone_data::TestAData,void(*)(zone_data::TestAData *)>;
     ThisDataType thisData_{nullptr,nullptr};

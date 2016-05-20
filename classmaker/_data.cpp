@@ -15,8 +15,8 @@ namespace zone_data{
 class TestAData  {
 public:
     TestAData();
-    ~TestAData();
-
+    virtual ~TestAData();
+public:
 };
 
 }

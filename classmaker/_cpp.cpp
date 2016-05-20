@@ -28,6 +28,9 @@ inline auto getThisData<const zone_data::TestAData *,1>(const TestA * arg) ->con
 namespace zone_data {
 /********************************zone_data********************************/
 TestAData::TestAData() {
+    static_assert(
+        has_virtual_destructor<TestAData>::value,
+        "the class must has virtual destructor");
 }
 
 

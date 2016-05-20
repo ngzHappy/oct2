@@ -10,19 +10,19 @@ const char * _cpp=u8R"=!!=(/*TestA cpp*/
 /*zone_namespace_begin*/
 template<>
 inline auto getThisData<zone_data::TestAData *,0>(const TestA * arg) ->zone_data::TestAData *{
-    return const_cast<TestA *>(arg)->thisData_.get(); 
+    return const_cast<TestA *>(arg)->thisData(); 
 }
 
 template<>
 inline auto getThisData<const zone_data::TestAData *,1>(const TestA * arg) ->const zone_data::TestAData *{ 
-    return arg->thisData_.get();
+    return arg->thisData();
 }
 
 #if !defined(zone_this_data)
-#define zone_this_data(_v_) auto * var_this_data=getThisData<zone_data::TestAData *,0>(_v_)
+#define zone_this_data(_v_) auto * varThisData=getThisData<zone_data::TestAData *,0>(_v_)
 #endif
 #if !defined(const_zone_this_data)
-#define zone_const_this_data(_v_) const auto * var_this_data=getThisData<const zone_data::TestAData *,1>(_v_)
+#define zone_const_this_data(_v_) const auto * varThisData=getThisData<const zone_data::TestAData *,1>(_v_)
 #endif
 
 namespace zone_data {
@@ -42,12 +42,24 @@ namespace zone_private_function {
 /********************************zone_function********************************/
 }
 
-TestA::TestA():thisData_(ThisDataType(
-                         new zone_data::TestAData,
-                         [](zone_data::TestAData *arg){delete arg;})) {
+TestA::~TestA() {
 }
 
-TestA::~TestA() {
+TestA::TestA():TestA(ThisDataType(
+                         new zone_data::TestAData,
+                         [](auto *arg){delete arg;})) {
+}
+
+TestA::TestA(ThisDataType && _arg_):
+    thisData_(std::move(_arg_)){
+}
+
+auto TestA::thisData()->zone_data::TestAData *{
+    return static_cast<zone_data::TestAData *>(thisData_.get()); 
+}
+
+auto TestA::thisData() const->const zone_data::TestAData *{
+    return static_cast<const zone_data::TestAData *>(thisData_.get());
 }
 
 /*zone_namespace_end*/

@@ -36,8 +36,11 @@ class TestA {
 protected:
     using ThisDataType=std::unique_ptr<zone_data::TestAData,void(*)(zone_data::TestAData *)>;
     ThisDataType thisData_{nullptr,nullptr};
+    TestA(ThisDataType && _arg_);
     template<typename _TYPE_TAG_,unsigned int _N_>
     friend auto getThisData(const TestA *)->_TYPE_TAG_ ;
+    zone_data::TestAData * thisData();
+    const zone_data::TestAData * thisData() const;
 public:
     explicit TestA(decltype(nullptr)) {}
     TestA();

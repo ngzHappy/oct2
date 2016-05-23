@@ -1,4 +1,4 @@
-#ifndef PRAGMA_ONCE__SuperTypeTuple_HPP__
+﻿#ifndef PRAGMA_ONCE__SuperTypeTuple_HPP__
 #define PRAGMA_ONCE__SuperTypeTuple_HPP__
 
 #include <tuple>

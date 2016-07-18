@@ -26,11 +26,21 @@ QString SetGetUtility::operator()(){
         const QString space_("    ");
         QString ans_("public:\n") ;
 
+        /*const &*/
         ans_+=space_+"void set"+functionValueName_+"(const ";
         ans_+=valueType_+"&"+commentValeName_+");\n";
 
+        /*&&*/
         ans_+=space_+"void set"+functionValueName_+"(";
         ans_+=valueType_+"&&"+commentValeName_+");\n";
+
+        /*&*/
+        ans_+=space_+"void set"+functionValueName_+"(";
+        ans_+=valueType_+"&"+commentValeName_+"arg){set"+functionValueName_+"(static_cast<const "+valueType_+"&>(arg));}\n";
+
+        /*const &&*/
+        ans_+=space_+"void set"+functionValueName_+"(const ";
+        ans_+=valueType_+"&&"+commentValeName_+"arg){set"+functionValueName_+"(static_cast<const "+valueType_+"&>(arg));}\n";
 
         ans_+=space_+"const "+valueType_+" & get";
         ans_+=functionValueName_+"() const;\n";

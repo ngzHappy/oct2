@@ -33,6 +33,32 @@ public:
     }
 };
 
+class UserDataTest {
+public:
+    ~UserDataTest() { std::cout<<"gc runned"<<std::endl; }
+};
+
+int test_gc_function(lua_State* L) {
+    lua_rawgetp(L,1,reinterpret_cast<void*>(1));
+    delete reinterpret_cast<UserDataTest*>(
+        lua_touserdata(L,-1));
+    return 0;
+}
+
+int test_cfunction(lua_State* L) {
+    std::cout<<"test_cfunction"<<std::endl;
+
+    std::cout<<std::boolalpha<<bool(lua_istable(L,1))<<std::endl;
+    std::cout<<std::boolalpha<<bool(lua_isstring(L,2))<<std::endl;
+
+    lua_rawgetp(L,1,reinterpret_cast<void*>(1));
+    std::cout<<std::boolalpha<<bool(lua_islightuserdata(L,-1))<<std::endl;
+
+
+
+    return 0;
+}
+
 int main(int argc,char ** argv) try{
     /*设置本地编码*/
     QTextCodec::setCodecForLocale(QTextCodec::codecForName(LOCAL_CODEC_));
@@ -65,6 +91,45 @@ int main(int argc,char ** argv) try{
     window->show();
     x000002::run(window->getOpenCVWindow());
     std::cout.flush();
+
+    {
+        auto * L=luaL_newstate();
+        luaL_openlibs(L);
+
+        UserDataTest * test= new UserDataTest;
+
+        lua_createtable(L,1,1);
+        auto table=lua_gettop(L);
+
+        lua_pushvalue(L,-1);
+        lua_setglobal(L,"test");
+
+        lua_pushstring(L,"v")/*key*/;
+        lua_pushinteger(L,12)/*value*/;
+        lua_settable(L,table);
+
+        lua_pushlightuserdata(L,test);
+        lua_rawsetp(L,table,reinterpret_cast<void*>(1));
+
+        lua_pushstring(L,"__index");
+        lua_pushcfunction(L,&test_cfunction);
+        lua_settable(L,table);
+
+        lua_pushstring(L,"__gc");
+        lua_pushcfunction(L,&test_gc_function);
+        lua_settable(L,table);
+
+        lua_pushvalue(L,table);
+        lua_setmetatable(L,table);
+
+        luaL_dostring(L,"test.k=33");
+        luaL_dostring(L,"test[1]=303");
+        luaL_dostring(L,"print(test.v)");
+        luaL_dostring(L,"print(test.k)");
+        luaL_dostring(L,"print(test[1])");
+
+        lua_close(L);
+    }
 
     {
         std::vector<char> buffer;

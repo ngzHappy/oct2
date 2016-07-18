@@ -45,7 +45,7 @@ QString SetGetUtility::operator()(){
         ans_+=space_+"const "+valueType_+" & get";
         ans_+=functionValueName_+"() const;\n";
 
-        ans_+=space_+"const "+valueType_+" & ";
+        ans_+=space_+"decltype(auto) ";
         ans_+=valueName_+"() const{ return get" +functionValueName_+ "();}\n";
 
         ans_+="private: template<typename "+typenameValueTypeName_+">\n";

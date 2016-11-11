@@ -25,9 +25,9 @@ CreateMainWindowQml::CreateMainWindowQml()
  void  CreateMainWindowQml::createAllInOneItemQml(){
      {
          QString varFileName=QDir::cleanPath(qApp->applicationDirPath()+"/AllInOneItem.qml");
-         {
+         do{
              QFileInfo info(varFileName);
-             if(info.exists()){return;}
+             if(info.exists()){break;}
          }
          QFile varFile(varFileName);
          varFile.open(QIODevice::WriteOnly);
@@ -42,7 +42,8 @@ CreateMainWindowQml::CreateMainWindowQml()
                          );
          }
          varFile.flush();
-     }
+     }while (false);
+
      {
          QString varFileName=QDir::cleanPath(qApp->applicationDirPath()+"/YScroallBar.qml");
          {

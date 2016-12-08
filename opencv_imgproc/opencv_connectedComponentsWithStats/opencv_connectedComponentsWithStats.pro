@@ -14,14 +14,14 @@ TEMPLATE = app
 SOURCES += $$PWD/main.cpp
 SOURCES += $$PWD/MainWindow.cpp
 SOURCES += $$PWD/OpenCVWindowDetail.cpp
-SOURCES += opencv_connectedComponentsWithStats_run.cpp
+SOURCES += $$PWD/opencv_connectedComponentsWithStats_run.cpp
 
 HEADERS += $$PWD/MainWindow.hpp
 HEADERS += $$PWD/OpenCVWindowDetail.hpp
 
 DEFINES += APP_NAME_=\\\"$$TARGET\\\"
 DEFINES += BUILD_PATH_=\\\"$$PWD\\\"
-DISTFILES += $$PWD/private/opencv_connectedComponentsWithStats_run_exception.cpp
+
 
 include( $$PWD/../../core_utility/core_utility.pri )
 include( $$PWD/../../core_utility/opencv3.pri )

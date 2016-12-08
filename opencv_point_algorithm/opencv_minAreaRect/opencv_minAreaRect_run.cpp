@@ -1,4 +1,5 @@
 ﻿/*run.cpp*/
+namespace QtCharts{}
 #include <QtCharts>
 #include <OpenCVUtility.hpp>
 #include <opencv_application_configuration_file.hpp>

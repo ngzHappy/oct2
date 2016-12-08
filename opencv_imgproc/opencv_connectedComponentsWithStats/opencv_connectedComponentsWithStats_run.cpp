@@ -2,7 +2,7 @@
 #include <OpenCVUtility.hpp>
 #include <opencv_application_configuration_file.hpp>
 #include <QtCore/qdebug.h>
-#include "private/opencv_connectedComponentsWithStats_run_exception.cpp"
+#include "private/this_exception.cpp"
 //#include <QtCharts>
 namespace opencv_connectedComponentsWithStats{
 extern void run(OpenCVWindow * window) try{

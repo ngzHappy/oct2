@@ -48,7 +48,7 @@ void draw_axis_array_(
     path_.lineTo(pox1_x-dy1*array_weight,pox1_y+dx1*array_weight);
     path_.lineTo(pox1_x+dx1*array_len,pox1_y+dy1*array_len);
     path_.lineTo(pox1_x+dy1*array_weight,pox1_y-dx1*array_weight);
-    path_.lineTo(pox1_y,pox1_y);
+    path_.lineTo(pox1_x,pox1_y);
 
     path_.moveTo(0,0);
     path_.lineTo(pox2_x,pox2_y);

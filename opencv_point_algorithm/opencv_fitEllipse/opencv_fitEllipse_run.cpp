@@ -7,18 +7,18 @@
 
 namespace {
 
-QList<QPointF> genEllipse(const cv::RotatedRect & argRect) {
+QList<QPointF> genEllipse(const cv::RotatedRect & argRect,bool argNeedClose=false) {
     enum  {SIZE=100};
     typedef double eval_type;
     auto varSize= argRect.size;
     if (varSize.width<=0) { return{}; }
     if (varSize.height<=0) { return{}; }
     QList<QPointF> varAns;
-    varAns.reserve(SIZE);
+    varAns.reserve(SIZE+argNeedClose);
     const eval_type varA=varSize.width/2;
     const eval_type varB=varSize.height/2;
-    constexpr const eval_type varStep=3.141592654*2/SIZE;
-    double varAngle=0;
+    constexpr const eval_type varStep=(3.141592654/SIZE)*2;
+    eval_type varAngle=0;
     for (std::int_fast32_t i=0; i<SIZE;++i) {
         varAns.push_back({
             varA*std::cos(varAngle),
@@ -35,6 +35,9 @@ QList<QPointF> genEllipse(const cv::RotatedRect & argRect) {
         const eval_type varX=i.x()*a00+i.y()*a01+varCenter.x;
         const eval_type varY=i.x()*a10+i.y()*a11+varCenter.y;
         i.setX(varX); i.setY(varY);
+    }
+    if(argNeedClose){
+        varAns.push_back(varAns.first());
     }
     return std::move(varAns);
 }

@@ -2,7 +2,7 @@
 #include <OpenCVUtility.hpp>
 #include <opencv_application_configuration_file.hpp>
 #include <QtCore/qdebug.h>
-#include "private/opencv_intersectConvexConvex_run_exception.cpp"
+//#include "private/opencv_intersectConvexConvex_run_exception.cpp"
 #include <QtCharts>
 
 namespace  {
